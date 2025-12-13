@@ -1,173 +1,417 @@
+// index.html
 <!doctype html>
 <html lang="en-AU">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Site Companion Side Kick (SCSK)</title>
-  <meta name="description" content="Site Companion Side Kick (SCSK) is an offline-first site audit companion app for projects, jobs, photos, defects, and trade reporting." />
+
+  <title>Site Companion Side Kick (SCSK) — Beta</title>
+
+  <meta name="description" content="Site Companion Side Kick (SCSK) is an active beta, offline-first site companion app. Sync across devices, weekly improvements, and a Windows version coming." />
+
   <style>
     :root{
-      --bg:#0b0f14; --card:#0f172a; --card2:#111827; --text:#e5e7eb; --muted:#9ca3af;
-      --border:#1f2937; --link:#93c5fd; --accent: rgba(59,130,246,0.18); --shadow: 0 20px 50px rgba(0,0,0,0.25);
+      --bg0:#070A10;
+      --bg1:#0B1020;
+      --border: rgba(255,255,255,0.12);
+      --text:#EAF0FF;
+      --muted: rgba(234,240,255,0.72);
+      --accent:#5DA9FF;
+      --accent2:#8B5CF6;
+      --beta:#FBBF24;
+      --shadow: 0 24px 60px rgba(0,0,0,0.55);
+      --max: 1120px;
     }
-    @media (prefers-color-scheme: light){
-      :root{
-        --bg:#f5f7fb; --card:#ffffff; --card2:#ffffff; --text:#111827; --muted:#4b5563;
-        --border:#e5e7eb; --link:#1d4ed8; --accent: rgba(29,78,216,0.10); --shadow: 0 14px 40px rgba(2,6,23,0.08);
-      }
-    }
+
     *{box-sizing:border-box}
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:var(--bg);color:var(--text);line-height:1.6}
-    a{color:var(--link);text-decoration:none} a:hover{text-decoration:underline}
-    .wrap{max-width:1100px;margin:0 auto;padding:0 18px}
-    header{
-      padding:40px 0 18px;border-bottom:1px solid var(--border);
-      background:radial-gradient(900px 300px at 20% 0%, var(--accent), transparent 60%),
-                 radial-gradient(900px 300px at 80% 0%, var(--accent), transparent 60%);
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 520px at 20% -10%, rgba(93,169,255,0.18), transparent 55%),
+        radial-gradient(900px 520px at 85% 5%, rgba(139,92,246,0.14), transparent 55%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      line-height:1.55;
     }
-    .top{display:flex;gap:18px;align-items:center;justify-content:space-between;flex-wrap:wrap}
-    .brand{display:flex;align-items:center;gap:12px;min-width:260px}
-    .logo{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,rgba(59,130,246,0.9),rgba(16,185,129,0.7));box-shadow:var(--shadow);border:1px solid rgba(255,255,255,0.08)}
-    .brand h1{margin:0;font-size:22px;letter-spacing:-0.02em}
-    .brand p{margin:2px 0 0;color:var(--muted);font-size:13px}
-    .nav{display:flex;gap:14px;flex-wrap:wrap;align-items:center;justify-content:flex-end}
-    .pill{padding:10px 12px;border:1px solid var(--border);background:rgba(255,255,255,0.02);border-radius:999px;font-size:14px}
-    .hero{padding:26px 0 36px}
-    .hero-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:18px;align-items:stretch}
-    @media (max-width:920px){.hero-grid{grid-template-columns:1fr}}
-    .card{background:var(--card);border:1px solid var(--border);border-radius:20px;box-shadow:var(--shadow);padding:18px}
-    .card2{background:var(--card2);border:1px solid var(--border);border-radius:20px;padding:18px}
-    .headline{margin:0 0 10px;font-size:34px;letter-spacing:-0.03em;line-height:1.15}
-    .sub{margin:0 0 14px;color:var(--muted);font-size:16px}
-    .cta-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:12px 14px;border-radius:14px;border:1px solid var(--border);background:rgba(255,255,255,0.03);font-weight:600;font-size:14px;min-width:170px}
-    .btn.primary{background:linear-gradient(135deg,rgba(59,130,246,0.95),rgba(37,99,235,0.75));border-color:rgba(255,255,255,0.10);color:#fff}
-    .tiny{margin-top:10px;color:var(--muted);font-size:13px}
-    .list{margin:0;padding-left:18px;color:var(--text)}
-    .list li{margin:8px 0}
-    section{padding:0 0 34px}
-    h2{margin:0 0 10px;letter-spacing:-0.02em;font-size:18px}
-    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-    @media (max-width:920px){.grid3{grid-template-columns:1fr}}
-    .tag{display:inline-block;padding:6px 10px;border-radius:999px;border:1px solid var(--border);background:rgba(255,255,255,0.02);color:var(--muted);font-size:12px;margin-right:6px;margin-top:6px}
-    footer{border-top:1px solid var(--border);padding:22px 0 30px;color:var(--muted);font-size:13px}
-    .muted{color:var(--muted)}
-    .hr{height:1px;background:var(--border);margin:14px 0}
+
+    a{color:var(--text);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{max-width:var(--max);margin:0 auto;padding:0 18px}
+
+    /* ================= BETA BANNER ================= */
+    .betaBanner{
+      background: linear-gradient(135deg, rgba(251,191,36,0.35), rgba(251,191,36,0.15));
+      border-bottom:1px solid rgba(251,191,36,0.6);
+    }
+    .betaInner{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:12px;
+      padding:12px 14px;
+      text-align:center;
+      font-size:13px;
+      font-weight:700;
+      letter-spacing:0.02em;
+      flex-wrap:wrap;
+    }
+    .betaTag{
+      padding:6px 10px;
+      border-radius:999px;
+      background:rgba(0,0,0,0.45);
+      border:1px solid rgba(255,255,255,0.3);
+      font-size:12px;
+      letter-spacing:0.08em;
+      text-transform:uppercase;
+    }
+
+    /* ================= HEADER ================= */
+    header{
+      position:sticky;
+      top:0;
+      z-index:50;
+      backdrop-filter: blur(14px);
+      background: rgba(7,10,16,0.6);
+      border-bottom:1px solid rgba(255,255,255,0.08);
+    }
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:14px 0;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    .brand{
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+    .logo{
+      width:44px;height:44px;border-radius:16px;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      border:1px solid rgba(255,255,255,0.25);
+      box-shadow:0 18px 40px rgba(0,0,0,0.55);
+    }
+    .brand h1{
+      margin:0;
+      font-size:15px;
+      letter-spacing:0.05em;
+      text-transform:uppercase;
+    }
+    .brand p{
+      margin:2px 0 0;
+      font-size:12px;
+      color:var(--muted);
+    }
+    nav{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .navlink{
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.14);
+      background:rgba(255,255,255,0.04);
+      font-size:13px;
+    }
+
+    /* ================= HERO ================= */
+    .hero{padding:36px 0}
+    .heroCard{
+      border-radius:28px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,0.05);
+      box-shadow:var(--shadow);
+      padding:28px;
+    }
+    .kicker{
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.16);
+      background:rgba(0,0,0,0.35);
+      font-size:12px;
+      letter-spacing:0.08em;
+      text-transform:uppercase;
+      color:var(--muted);
+      flex-wrap:wrap;
+    }
+    .headline{
+      margin:18px 0 14px;
+      font-size:44px;
+      line-height:1.05;
+      letter-spacing:-0.03em;
+    }
+    @media(max-width:600px){
+      .headline{font-size:36px}
+    }
+    .subhead{
+      font-size:17px;
+      color:var(--muted);
+      max-width:75ch;
+      margin:0 0 14px;
+    }
+    .ctaRow{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:20px;
+    }
+    .btn{
+      padding:14px 18px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,0.18);
+      background:rgba(255,255,255,0.06);
+      font-weight:800;
+      font-size:14px;
+      min-width:210px;
+      text-align:center;
+    }
+    .btnPrimary{
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+    }
+    .note{
+      margin-top:16px;
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    /* ================= SECTIONS ================= */
+    section{padding:28px 0}
+    .sectionTitle{
+      font-size:20px;
+      letter-spacing:-0.02em;
+      margin:0 0 8px;
+    }
+    .sectionLead{
+      color:var(--muted);
+      max-width:80ch;
+      margin:0 0 16px;
+    }
+    .grid3{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+    }
+    @media(max-width:900px){
+      .grid3{grid-template-columns:1fr}
+    }
+    .feature{
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,0.12);
+      background:rgba(255,255,255,0.04);
+      padding:18px;
+    }
+    .feature h3{
+      margin:0 0 6px;
+      font-size:16px;
+    }
+    .feature p{
+      margin:0;
+      font-size:14px;
+      color:var(--muted);
+    }
+
+    /* ================= FOOTER ================= */
+    footer{
+      padding:34px 0 42px;
+      border-top:1px solid rgba(255,255,255,0.08);
+      background:rgba(0,0,0,0.18);
+    }
+    .footerLinks{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+    .footerLink{
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,0.14);
+      background:rgba(255,255,255,0.04);
+      font-size:13px;
+    }
+    .small{
+      font-size:12px;
+      color:var(--muted);
+      margin-top:12px;
+    }
   </style>
 </head>
+
 <body>
-  <header>
-    <div class="wrap">
-      <div class="top">
-        <div class="brand">
-          <div class="logo" aria-hidden="true"></div>
-          <div>
-            <h1>Site Companion Side Kick (SCSK)</h1>
-            <p>Offline-first site audit companion app by SAA</p>
-          </div>
+
+<!-- ================= BETA BANNER ================= -->
+<div class="betaBanner">
+  <div class="wrap betaInner">
+    <span class="betaTag">Beta</span>
+    Active beta release — weekly improvements • sync across devices • Windows version coming
+  </div>
+</div>
+
+<header>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <div class="logo"></div>
+        <div>
+          <h1>Site Companion Side Kick</h1>
+          <p>SCSK • Active Beta</p>
         </div>
-        <nav class="nav" aria-label="Primary">
-          <a class="pill" href="#features">Features</a>
-          <a class="pill" href="#privacy">Privacy</a>
-          <a class="pill" href="#support">Support</a>
-        </nav>
       </div>
 
-      <div class="hero">
-        <div class="hero-grid">
-          <div class="card">
-            <h2 class="headline">Run site audits faster.<br/>Capture issues on the spot.</h2>
-            <p class="sub">
-              Site Companion Side Kick helps supervisors and project teams manage projects, jobs, photos,
-              defects and trade reporting — designed to work offline and sync when you’re back online.
-            </p>
+      <nav>
+        <a class="navlink" href="#features">Features</a>
+        <a class="navlink" href="#sync">Sync</a>
+        <a class="navlink" href="#roadmap">Roadmap</a>
+        <a class="navlink" href="privacy.html">Privacy</a>
+      </nav>
+    </div>
+  </div>
+</header>
 
-            <div class="cta-row">
-              <a class="btn primary" href="#" aria-label="Get the app on Google Play (coming soon)">Get the app (coming soon)</a>
-              <a class="btn" href="privacy.html">Read Privacy Policy</a>
-            </div>
+<main class="wrap">
 
-            <p class="tiny">Tip: once your Play Store listing exists, paste the link into the “Get the app” button.</p>
+  <section class="hero">
+    <div class="heroCard">
+      <span class="kicker">Offline-first • multi-device sync • rapid iteration</span>
 
-            <div class="hr"></div>
+      <h2 class="headline">
+        A site companion built for real job sites.
+      </h2>
 
-            <div>
-              <span class="tag">Offline-first</span>
-              <span class="tag">Photos + annotations</span>
-              <span class="tag">PDF reporting</span>
-              <span class="tag">Geofencing prompts</span>
-              <span class="tag">Templates</span>
-              <span class="tag">Multi-language (planned)</span>
-            </div>
-          </div>
+      <p class="subhead">
+        <strong>Site Companion Side Kick (SCSK)</strong> is a production-ready beta designed for supervisors,
+        foremen and project managers who need reliability on site — even without internet.
+      </p>
 
-          <div class="card2">
-            <h2>What it’s built for</h2>
-            <ul class="list">
-              <li>Create projects and job folders</li>
-              <li>Capture photos, mark up / annotate issues</li>
-              <li>Assign defects to trades with notes</li>
-              <li>Compile PDFs and email to trades</li>
-              <li>Work offline then sync later</li>
-            </ul>
+      <p class="subhead">
+        The platform is actively developed, with <strong>weekly improvements</strong>, expanding features,
+        and continuous performance refinements.
+      </p>
 
-            <div class="hr"></div>
+      <div class="ctaRow">
+        <a class="btn btnPrimary" href="#">Get the beta (coming soon)</a>
+        <a class="btn" href="privacy.html">Privacy policy</a>
+        <a class="btn" href="mailto:saaproductionsinc@gmail.com">Contact support</a>
+      </div>
 
-            <p class="muted">Want screenshots here? Later we’ll add a simple gallery section.</p>
-          </div>
-        </div>
+      <p class="note">
+        Beta means momentum — features evolve quickly, workflows deepen, and feedback shapes each release.
+      </p>
+    </div>
+  </section>
+
+  <section id="features">
+    <h3 class="sectionTitle">What’s available in the beta</h3>
+    <p class="sectionLead">
+      Core site workflows are already live, stable, and used on active projects.
+    </p>
+
+    <div class="grid3">
+      <div class="feature">
+        <h3>Projects &amp; jobs</h3>
+        <p>Structured projects and job folders with clear timestamps.</p>
+      </div>
+      <div class="feature">
+        <h3>Photos &amp; annotations</h3>
+        <p>Capture evidence and mark up issues directly on site.</p>
+      </div>
+      <div class="feature">
+        <h3>Trade assignments</h3>
+        <p>Assign actions and defects to trades with accountability.</p>
+      </div>
+      <div class="feature">
+        <h3>PDF reporting</h3>
+        <p>Compile jobs and checklists into professional PDFs.</p>
+      </div>
+      <div class="feature">
+        <h3>Offline-first</h3>
+        <p>Work without signal — sync when internet is available.</p>
+      </div>
+      <div class="feature">
+        <h3>Geofencing (optional)</h3>
+        <p>Smart prompts when returning to known sites.</p>
       </div>
     </div>
-  </header>
+  </section>
 
-  <main>
-    <section id="features">
-      <div class="wrap">
-        <div class="grid3">
-          <div class="card2">
-            <h2>Audit &amp; compliance</h2>
-            <p class="muted">Use templates for safety, compliance and quality issues, and track audit time/date per task.</p>
-          </div>
-          <div class="card2">
-            <h2>Photos &amp; evidence</h2>
-            <p class="muted">Take photos into job folders, annotate issues, and attach plans/documents to jobs.</p>
-          </div>
-          <div class="card2">
-            <h2>Trade reporting</h2>
-            <p class="muted">Compile PDFs and email each trade what they need — clear, fast, and consistent.</p>
-          </div>
-        </div>
+  <section id="sync">
+    <h3 class="sectionTitle">Sync across devices</h3>
+    <p class="sectionLead">
+      Start on your phone, continue on a tablet, and keep work aligned across devices using a single account.
+    </p>
+
+    <div class="grid3">
+      <div class="feature">
+        <h3>Multi-device access</h3>
+        <p>Use SCSK across supported devices with consistent data.</p>
       </div>
-    </section>
-
-    <section id="privacy">
-      <div class="wrap">
-        <div class="card2">
-          <h2>Privacy</h2>
-          <p class="muted">Read our full policy here: <a href="privacy.html">Privacy Policy</a></p>
-        </div>
+      <div class="feature">
+        <h3>Offline-first syncing</h3>
+        <p>Work offline first, then sync safely when online.</p>
       </div>
-    </section>
-
-    <section id="support">
-      <div class="wrap">
-        <div class="card2">
-          <h2>Support</h2>
-          <p class="muted">Email: <a href="mailto:saaproductionsinc@gmail.com">saaproductionsinc@gmail.com</a></p>
-        </div>
+      <div class="feature">
+        <h3>Built for tablets</h3>
+        <p>Larger-screen workflows designed for site supervision.</p>
       </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="wrap">
-      <div>&copy; <span id="year"></span> SAA. All rights reserved.</div>
-      <div class="muted">Site Companion Side Kick (SCSK)</div>
     </div>
-  </footer>
+  </section>
 
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
+  <section id="roadmap">
+    <h3 class="sectionTitle">What’s coming next</h3>
+    <p class="sectionLead">
+      Development continues in weekly drops, focused on automation, depth, and speed.
+    </p>
+
+    <div class="grid3">
+      <div class="feature">
+        <h3>Expanded templates</h3>
+        <p>More safety, compliance, and quality templates.</p>
+      </div>
+      <div class="feature">
+        <h3>Windows version</h3>
+        <p>A cross-platform Windows build is planned.</p>
+      </div>
+      <div class="feature">
+        <h3>AI-assisted workflows</h3>
+        <p>Optional automation for faster insights and reporting.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="sectionTitle">Site Companion Side Kick (SCSK)</div>
+    <div class="sectionLead">
+      Active beta • Weekly improvements • Sync across devices • Windows version coming
+    </div>
+
+    <div class="footerLinks">
+      <a class="footerLink" href="#features">Features</a>
+      <a class="footerLink" href="#sync">Sync</a>
+      <a class="footerLink" href="#roadmap">Roadmap</a>
+      <a class="footerLink" href="privacy.html">Privacy</a>
+      <a class="footerLink" href="mailto:saaproductionsinc@gmail.com">Support</a>
+    </div>
+
+    <div class="small">
+      © <span id="year"></span> SAA. All rights reserved.
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
 </body>
 </html>
