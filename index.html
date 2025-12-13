@@ -14,8 +14,8 @@
       --card-bg: #ffffff;
       --text: #0f172a;
       --muted: #475569;
-      --accent: #2563eb; /* Deeper blue */
-      --accent2: #7c3aed; /* Richer purple */
+      --accent: #2563eb;
+      --accent2: #7c3aed;
       --beta: #ea580c;
       --border: rgba(0,0,0,0.06);
       --shadow-sm: 0 4px 16px rgba(0,0,0,0.08);
@@ -37,7 +37,6 @@
     a:hover{text-decoration:underline}
     .wrap{max-width:var(--max); margin:0 auto; padding:0 32px}
     
-    /* Dynamic background with more depth */
     body::before{
       content:'';
       position:fixed;
@@ -55,7 +54,6 @@
       100%{transform: translate(8%,8%) scale(1.08);}
     }
     
-    /* Beta Banner - premium amber glow */
     .betaBanner{
       background: linear-gradient(135deg, #fff7ed, #fffbeb);
       border-bottom:1px solid rgba(234,88,12,0.3);
@@ -82,7 +80,6 @@
       box-shadow: var(--shadow-sm);
     }
     
-    /* Header - glassmorphism with subtle glow */
     header{
       position:sticky;
       top:0;
@@ -133,6 +130,7 @@
       font-weight:600;
       font-size:15px;
       transition:var(--transition);
+      cursor:pointer;
     }
     .navlink:hover{
       background:linear-gradient(135deg,var(--accent),var(--accent2));
@@ -141,7 +139,6 @@
       box-shadow: var(--shadow);
     }
     
-    /* Hero - ultra premium */
     .hero{padding:100px 0 80px}
     .heroCard{
       border-radius:var(--radius);
@@ -209,7 +206,7 @@
     }
     .btnPrimary:hover{
       transform:translateY(-6px) scale(1.02);
-      box-shadow: var(--shadow-lg);
+      box-shadow:var(--shadow-lg);
     }
     .btnSecondary{
       background:var(--card-bg);
@@ -225,7 +222,6 @@
       color:var(--muted);
     }
     
-    /* Sections */
     section{padding:100px 0}
     .sectionTitle{
       font-size:42px;
@@ -282,7 +278,6 @@
       0%,100%{transform:translateY(0) rotate(0deg);}
       50%{transform:translateY(-16px) rotate(6deg);}
     }
-    /* Varied animations as before */
     .icon-pulse { animation: iconPulse 4s ease-in-out infinite; }
     .icon-spin { animation: iconSpin 22s linear infinite; }
     .icon-bounce { animation: iconBounce 3.5s ease-in-out infinite; }
@@ -304,7 +299,6 @@
       color:var(--muted);
     }
     
-    /* Footer */
     footer{
       padding:100px 0 60px;
       background:linear-gradient(to top, #f1f5f9, var(--bg));
@@ -327,6 +321,7 @@
       font-weight:700;
       font-size:15px;
       transition:var(--transition);
+      cursor:pointer;
     }
     .footerLink:hover{
       background:linear-gradient(135deg,var(--accent),var(--accent2));
@@ -335,7 +330,6 @@
     }
     .small{font-size:14px; color:var(--muted)}
     
-    /* Feedback Modal */
     .modal{
       display:none;
       position:fixed;
@@ -345,7 +339,6 @@
       align-items:center;
       justify-content:center;
       z-index:100;
-      animation: fadeIn 0.4s ease;
     }
     .modal.open{display:flex}
     .modalContent{
@@ -459,32 +452,32 @@
       Core site workflows are already live, stable, and used on active projects.
     </p>
     <div class="grid">
-      <div class="feature" style="--i:1">
+      <div class="feature">
         <div class="featureIcon icon-bounce">📁</div>
         <h3>Projects &amp; jobs</h3>
         <p>Structured projects and job folders with clear timestamps.</p>
       </div>
-      <div class="feature" style="--i:2">
+      <div class="feature">
         <div class="featureIcon icon-pulse">📸</div>
         <h3>Photos &amp; annotations</h3>
         <p>Capture evidence and mark up issues directly on site.</p>
       </div>
-      <div class="feature" style="--i:3">
+      <div class="feature">
         <div class="featureIcon icon-wiggle">👥</div>
         <h3>Trade assignments</h3>
         <p>Assign actions and defects to trades with accountability.</p>
       </div>
-      <div class="feature" style="--i:4">
+      <div class="feature">
         <div class="featureIcon icon-scale">📄</div>
         <h3>PDF reporting</h3>
         <p>Compile jobs and checklists into professional PDFs.</p>
       </div>
-      <div class="feature" style="--i:5">
+      <div class="feature">
         <div class="featureIcon icon-spin">📶</div>
         <h3>Offline-first</h3>
         <p>Work without signal — sync when internet is available.</p>
       </div>
-      <div class="feature" style="--i:6">
+      <div class="feature">
         <div class="featureIcon iconFloat">📍</div>
         <h3>Geofencing (optional)</h3>
         <p>Smart prompts when returning to known sites.</p>
@@ -498,17 +491,17 @@
       Start on your phone, continue on a tablet, and keep work aligned across devices using a single account.
     </p>
     <div class="grid">
-      <div class="feature" style="--i:1">
+      <div class="feature">
         <div class="featureIcon icon-pulse">📱</div>
         <h3>Multi-device access</h3>
         <p>Use SCSK across supported devices with consistent data.</p>
       </div>
-      <div class="feature" style="--i:2">
+      <div class="feature">
         <div class="featureIcon icon-spin">🔄</div>
         <h3>Offline-first syncing</h3>
         <p>Work offline first, then sync safely when online.</p>
       </div>
-      <div class="feature" style="--i:3">
+      <div class="feature">
         <div class="featureIcon icon-bounce">📟</div>
         <h3>Built for tablets</h3>
         <p>Larger-screen workflows designed for site supervision.</p>
@@ -522,17 +515,17 @@
       Development continues in weekly drops, focused on automation, depth, and speed.
     </p>
     <div class="grid">
-      <div class="feature" style="--i:1">
+      <div class="feature">
         <div class="featureIcon icon-wiggle">🗂️</div>
         <h3>Expanded templates</h3>
         <p>More safety, compliance, and quality templates.</p>
       </div>
-      <div class="feature" style="--i:2">
+      <div class="feature">
         <div class="featureIcon icon-scale">💻</div>
         <h3>Windows version</h3>
         <p>A cross-platform Windows build is planned.</p>
       </div>
-      <div class="feature" style="--i:3">
+      <div class="feature">
         <div class="featureIcon icon-pulse">🤖</div>
         <h3>AI-assisted workflows</h3>
         <p>Optional automation for faster insights and reporting.</p>
@@ -561,28 +554,36 @@
   </div>
 </footer>
 
-<!-- Feedback Modal -->
+<!-- Feedback Modal - Fully functional -->
 <div class="modal" id="feedbackModal">
   <div class="modalContent">
-    <span class="close" id="closeModal">&times;</span>
+    <span class="close" id="closeModal">×</span>
     <h2>Feedback / Suggestions</h2>
-    <form action="https://formspree.io/f/your-form-id" method="POST"> <!-- Replace with actual Formspree or similar endpoint -->
+    <form action="https://formsubmit.co/feedback@sc-sk.com" method="POST">
       <div class="formGroup">
         <label for="name">Name (optional)</label>
         <input type="text" id="name" name="name">
       </div>
       <div class="formGroup">
-        <label for="email">Email (optional)</label>
-        <input type="email" id="email" name="_replyto">
+        <label for="email">Email (optional - for follow-up)</label>
+        <input type="email" id="email" name="email">
       </div>
       <div class="formGroup">
         <label for="message">Your feedback or suggestion *</label>
         <textarea id="message" name="message" required></textarea>
       </div>
-      <input type="hidden" name="_subject" value="SCSK Feedback">
-      <input type="hidden" name="_to" value="feedback@sc-sk.com">
+      
+      <input type="hidden" name="_subject" value="New SCSK Feedback/Suggestion">
+      <!-- Optional: change to your own thank-you page -->
+      <input type="hidden" name="_next" value="https://yourdomain.com/thanks.html">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="text" name="_honey" style="display:none">
+      
       <button type="submit" class="submitBtn">Submit Feedback</button>
     </form>
+    <p style="text-align:center; font-size:14px; color:var(--muted); margin-top:16px;">
+      Submissions are sent directly to feedback@sc-sk.com. No account needed.
+    </p>
   </div>
 </div>
 
@@ -591,7 +592,9 @@
   const openBtns = [document.getElementById('feedbackBtn'), document.getElementById('feedbackBtnFooter')];
   const closeBtn = document.getElementById('closeModal');
 
-  openBtns.forEach(btn => btn.onclick = () => modal.classList.add('open'));
+  openBtns.forEach(btn => {
+    if (btn) btn.onclick = () => modal.classList.add('open');
+  });
   closeBtn.onclick = () => modal.classList.remove('open');
   window.onclick = (e) => { if (e.target === modal) modal.classList.remove('open'); };
 </script>
