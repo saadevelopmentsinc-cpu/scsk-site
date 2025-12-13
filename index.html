@@ -252,6 +252,8 @@
       text-align:center;
       box-shadow:var(--shadow-sm);
       transition:var(--transition);
+      position:relative;
+      overflow:hidden;
     }
     .feature:hover{
       transform:translateY(-12px);
@@ -264,7 +266,42 @@
       display:flex;align-items:center;justify-content:center;
       font-size:36px;
       color:white;
+      animation: iconFloat 6s ease-in-out infinite;
     }
+    @keyframes iconFloat{
+      0%,100%{transform:translateY(0) rotate(0deg);}
+      50%{transform:translateY(-12px) rotate(5deg);}
+    }
+    
+    /* Individual icon animations for variety */
+    .icon-pulse { animation: iconPulse 4s ease-in-out infinite; }
+    .icon-spin { animation: iconSpin 20s linear infinite; }
+    .icon-bounce { animation: iconBounce 3s ease-in-out infinite; }
+    .icon-wiggle { animation: iconWiggle 4s ease-in-out infinite; }
+    .icon-scale { animation: iconScale 5s ease-in-out infinite; }
+
+    @keyframes iconPulse {
+      0%,100%{transform:scale(1);}
+      50%{transform:scale(1.15);}
+    }
+    @keyframes iconSpin {
+      from{transform:rotate(0deg);}
+      to{transform:rotate(360deg);}
+    }
+    @keyframes iconBounce {
+      0%,100%{transform:translateY(0);}
+      50%{transform:translateY(-20px);}
+    }
+    @keyframes iconWiggle {
+      0%,100%{transform:rotate(0deg);}
+      25%{transform:rotate(-8deg);}
+      75%{transform:rotate(8deg);}
+    }
+    @keyframes iconScale {
+      0%,100%{transform:scale(1);}
+      50%{transform:scale(1.2);}
+    }
+    
     .feature h3{
       font-size:22px;
       margin-bottom:12px;
@@ -364,32 +401,32 @@
     </p>
     <div class="grid">
       <div class="feature" style="--i:1">
-        <div class="featureIcon">📁</div>
+        <div class="featureIcon icon-bounce">📁</div>
         <h3>Projects &amp; jobs</h3>
         <p>Structured projects and job folders with clear timestamps.</p>
       </div>
       <div class="feature" style="--i:2">
-        <div class="featureIcon">📸</div>
+        <div class="featureIcon icon-pulse">📸</div>
         <h3>Photos &amp; annotations</h3>
         <p>Capture evidence and mark up issues directly on site.</p>
       </div>
       <div class="feature" style="--i:3">
-        <div class="featureIcon">👥</div>
+        <div class="featureIcon icon-wiggle">👥</div>
         <h3>Trade assignments</h3>
         <p>Assign actions and defects to trades with accountability.</p>
       </div>
       <div class="feature" style="--i:4">
-        <div class="featureIcon">📄</div>
+        <div class="featureIcon icon-scale">📄</div>
         <h3>PDF reporting</h3>
         <p>Compile jobs and checklists into professional PDFs.</p>
       </div>
       <div class="feature" style="--i:5">
-        <div class="featureIcon">📶</div>
+        <div class="featureIcon icon-spin">📶</div>
         <h3>Offline-first</h3>
         <p>Work without signal — sync when internet is available.</p>
       </div>
       <div class="feature" style="--i:6">
-        <div class="featureIcon">📍</div>
+        <div class="featureIcon iconFloat">📍</div>
         <h3>Geofencing (optional)</h3>
         <p>Smart prompts when returning to known sites.</p>
       </div>
@@ -403,17 +440,17 @@
     </p>
     <div class="grid">
       <div class="feature" style="--i:1">
-        <div class="featureIcon">📱</div>
+        <div class="featureIcon icon-pulse">📱</div>
         <h3>Multi-device access</h3>
         <p>Use SCSK across supported devices with consistent data.</p>
       </div>
       <div class="feature" style="--i:2">
-        <div class="featureIcon">🔄</div>
+        <div class="featureIcon icon-spin">🔄</div>
         <h3>Offline-first syncing</h3>
         <p>Work offline first, then sync safely when online.</p>
       </div>
       <div class="feature" style="--i:3">
-        <div class="featureIcon">📟</div>
+        <div class="featureIcon icon-bounce">📟</div>
         <h3>Built for tablets</h3>
         <p>Larger-screen workflows designed for site supervision.</p>
       </div>
@@ -427,17 +464,17 @@
     </p>
     <div class="grid">
       <div class="feature" style="--i:1">
-        <div class="featureIcon">🗂️</div>
+        <div class="featureIcon icon-wiggle">🗂️</div>
         <h3>Expanded templates</h3>
         <p>More safety, compliance, and quality templates.</p>
       </div>
       <div class="feature" style="--i:2">
-        <div class="featureIcon">💻</div>
+        <div class="featureIcon icon-scale">💻</div>
         <h3>Windows version</h3>
         <p>A cross-platform Windows build is planned.</p>
       </div>
       <div class="feature" style="--i:3">
-        <div class="featureIcon">🤖</div>
+        <div class="featureIcon icon-pulse">🤖</div>
         <h3>AI-assisted workflows</h3>
         <p>Optional automation for faster insights and reporting.</p>
       </div>
@@ -459,13 +496,10 @@
       <a class="footerLink" href="mailto:saaproductionsinc@gmail.com">Support</a>
     </div>
     <div class="small">
-      © <span id="year"></span> SAA. All rights reserved.
+      © 2025 Saa Developments Inc. All rights reserved.
     </div>
   </div>
 </footer>
 
-<script>
-  document.getElementById("year").textContent = new Date().getFullYear();
-</script>
 </body>
 </html>
