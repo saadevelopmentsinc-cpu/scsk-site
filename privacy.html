@@ -3,27 +3,26 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Site Companion Side Kick (SCSK) — Beta</title>
-  <meta name="description" content="Site Companion Side Kick (SCSK) is an active beta, offline-first site companion app. Sync across devices, weekly improvements, and a Windows version coming." />
+  <title>Privacy Policy — Site Companion Side Kick (SCSK)</title>
+  <meta name="description" content="Privacy Policy for Site Companion Side Kick (SCSK), an offline-first site companion app." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg: #f9fbfd;
+      --bg: #f8fafc;
       --card-bg: #ffffff;
-      --text: #0f172a;
-      --muted: #475569;
-      --accent: #2563eb; /* Deeper blue */
-      --accent2: #7c3aed; /* Richer purple */
-      --beta: #ea580c;
-      --border: rgba(0,0,0,0.06);
-      --shadow-sm: 0 4px 16px rgba(0,0,0,0.08);
-      --shadow: 0 20px 50px rgba(0,0,0,0.12);
-      --shadow-lg: 0 32px 90px rgba(0,0,0,0.15);
-      --max: 1280px;
-      --radius: 32px;
-      --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      --text: #1e293b;
+      --muted: #64748b;
+      --accent: #3b82f6;
+      --accent2: #8b5cf6;
+      --border: rgba(0,0,0,0.08);
+      --shadow-sm: 0 4px 12px rgba(0,0,0,0.06);
+      --shadow: 0 20px 40px rgba(0,0,0,0.1);
+      --shadow-lg: 0 32px 80px rgba(0,0,0,0.12);
+      --max: 1200px;
+      --radius: 24px;
+      --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
     *{box-sizing:border-box; margin:0; padding:0}
     body{
@@ -31,384 +30,146 @@
       color: var(--text);
       background: var(--bg);
       line-height:1.6;
-      overflow-x:hidden;
     }
-    a{color: inherit; text-decoration:none}
+    a{color: var(--accent); text-decoration:none}
     a:hover{text-decoration:underline}
-    .wrap{max-width:var(--max); margin:0 auto; padding:0 32px}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 24px}
     
-    /* Dynamic background with more depth */
     body::before{
       content:'';
       position:fixed;
       inset:0;
-      background: 
-        radial-gradient(circle at 10% 90%, rgba(37,99,235,0.15), transparent 50%),
-        radial-gradient(circle at 90% 10%, rgba(124,58,237,0.15), transparent 50%),
-        radial-gradient(circle at 50% 50%, rgba(255,255,255,0.4), transparent 70%);
-      animation: bgShift 40s ease infinite alternate;
+      background: radial-gradient(circle at 20% 80%, rgba(59,130,246,0.12), transparent 50%),
+                  radial-gradient(circle at 80% 20%, rgba(139,92,246,0.12), transparent 50%);
+      animation: bgShift 30s ease infinite alternate;
       z-index:-2;
       pointer-events:none;
     }
     @keyframes bgShift{
       0%{transform: translate(0,0) scale(1);}
-      100%{transform: translate(8%,8%) scale(1.08);}
+      100%{transform: translate(5%,5%) scale(1.05);}
     }
     
-    /* Beta Banner - premium amber glow */
-    .betaBanner{
-      background: linear-gradient(135deg, #fff7ed, #fffbeb);
-      border-bottom:1px solid rgba(234,88,12,0.3);
-      box-shadow: var(--shadow-sm);
-    }
-    .betaInner{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:16px;
-      padding:16px;
-      font-size:15px;
-      font-weight:600;
-    }
-    .betaTag{
-      padding:8px 18px;
-      border-radius:999px;
-      background:#fff7ed;
-      border:1px solid #ea580c;
-      color:var(--beta);
-      font-size:13px;
-      text-transform:uppercase;
-      letter-spacing:0.1em;
-      box-shadow: var(--shadow-sm);
-    }
-    
-    /* Header - glassmorphism with subtle glow */
     header{
       position:sticky;
       top:0;
       z-index:50;
-      backdrop-filter: blur(24px);
-      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(20px);
+      background: rgba(255,255,255,0.75);
       border-bottom:1px solid var(--border);
-      box-shadow: var(--shadow-sm);
     }
     .topbar{
       display:flex;
       justify-content:space-between;
       align-items:center;
-      padding:24px 0;
-      gap:24px;
+      padding:20px 0;
+      gap:20px;
       flex-wrap:wrap;
     }
     .brand{
       display:flex;
-      gap:20px;
+      gap:16px;
       align-items:center;
     }
     .logo{
-      width:64px;height:64px;border-radius:24px;
+      width:56px;height:56px;border-radius:20px;
       background:linear-gradient(135deg,var(--accent),var(--accent2));
-      box-shadow: 0 0 40px rgba(37,99,235,0.4);
-      animation: logoGlow 8s ease-in-out infinite;
-    }
-    @keyframes logoGlow{
-      0%,100%{box-shadow: 0 0 40px rgba(37,99,235,0.4);}
-      50%{box-shadow: 0 0 60px rgba(124,58,237,0.5);}
+      box-shadow: var(--shadow-sm);
     }
     .brand h1{
-      font-size:22px;
-      font-weight:900;
+      font-size:18px;
+      font-weight:800;
       letter-spacing:0.04em;
       text-transform:uppercase;
     }
     .brand p{
-      font-size:14px;
+      font-size:13px;
       color:var(--muted);
     }
-    nav{display:flex; gap:16px; flex-wrap:wrap}
+    nav{display:flex; gap:12px; flex-wrap:wrap}
     .navlink{
-      padding:14px 28px;
+      padding:12px 20px;
       border-radius:999px;
-      background:rgba(37,99,235,0.08);
+      background:rgba(59,130,246,0.08);
       font-weight:600;
-      font-size:15px;
+      font-size:14px;
       transition:var(--transition);
     }
     .navlink:hover{
       background:linear-gradient(135deg,var(--accent),var(--accent2));
       color:white;
-      transform:translateY(-4px);
-      box-shadow: var(--shadow);
+      transform:translateY(-2px);
     }
     
-    /* Hero - ultra premium */
-    .hero{padding:100px 0 80px}
-    .heroCard{
+    .privacyHero{
+      padding:80px 0 60px;
+      text-align:center;
+    }
+    .privacyCard{
       border-radius:var(--radius);
       background:var(--card-bg);
       box-shadow:var(--shadow-lg);
-      padding:80px;
-      text-align:center;
-      position:relative;
-      overflow:hidden;
+      padding:60px;
+      max-width:900px;
+      margin:0 auto;
     }
-    .heroCard::before{
-      content:'';
-      position:absolute;
-      inset:0;
-      background:linear-gradient(135deg, rgba(37,99,235,0.1), rgba(124,58,237,0.1));
-      opacity:0.6;
-    }
-    .kicker{
-      display:inline-flex;
-      gap:12px;
-      align-items:center;
-      padding:12px 24px;
-      border-radius:999px;
-      background:rgba(37,99,235,0.12);
-      font-size:15px;
-      font-weight:700;
-      text-transform:uppercase;
-      letter-spacing:0.1em;
-      color:var(--accent);
-    }
-    .headline{
-      margin:32px 0 24px;
-      font-size:64px;
-      line-height:1.05;
-      letter-spacing:-0.03em;
-      font-weight:900;
-    }
-    @media(max-width:768px){.headline{font-size:48px}}
-    .subhead{
-      font-size:22px;
-      color:var(--muted);
-      max-width:90ch;
-      margin:0 auto 32px;
-    }
-    .ctaRow{
-      display:flex;
-      gap:20px;
-      justify-content:center;
-      flex-wrap:wrap;
-      margin-top:48px;
-    }
-    .btn{
-      padding:20px 40px;
-      border-radius:24px;
-      font-weight:800;
-      font-size:17px;
-      min-width:280px;
-      text-align:center;
-      transition:var(--transition);
-      box-shadow:var(--shadow);
-    }
-    .btnPrimary{
-      background:linear-gradient(135deg,var(--accent),var(--accent2));
-      color:white;
-    }
-    .btnPrimary:hover{
-      transform:translateY(-6px) scale(1.02);
-      box-shadow: var(--shadow-lg);
-    }
-    .btnSecondary{
-      background:var(--card-bg);
-      border:1px solid var(--border);
-    }
-    .btnSecondary:hover{
-      background:rgba(37,99,235,0.1);
-      transform:translateY(-6px);
-    }
-    .note{
-      margin-top:32px;
-      font-size:15px;
-      color:var(--muted);
-    }
-    
-    /* Sections */
-    section{padding:100px 0}
-    .sectionTitle{
-      font-size:42px;
-      text-align:center;
-      margin-bottom:20px;
+    .privacyTitle{
+      font-size:44px;
+      margin-bottom:12px;
       font-weight:800;
     }
-    .sectionLead{
-      font-size:22px;
+    .lastUpdated{
+      font-size:16px;
       color:var(--muted);
-      text-align:center;
-      max-width:90ch;
-      margin:0 auto 64px;
+      margin-bottom:40px;
     }
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit, minmax(360px,1fr));
-      gap:40px;
+    .section{
+      margin-bottom:48px;
+      text-align:left;
     }
-    .feature{
-      border-radius:var(--radius);
-      background:var(--card-bg);
-      padding:48px;
-      text-align:center;
-      box-shadow:var(--shadow);
-      transition:var(--transition);
-      position:relative;
-      overflow:hidden;
-    }
-    .feature::before{
-      content:'';
-      position:absolute;
-      inset:0;
-      background:linear-gradient(135deg, rgba(37,99,235,0.05), rgba(124,58,237,0.05));
-      opacity:0;
-      transition:opacity 0.6s;
-    }
-    .feature:hover::before{opacity:1}
-    .feature:hover{
-      transform:translateY(-16px);
-      box-shadow:var(--shadow-lg);
-    }
-    .featureIcon{
-      width:96px;height:96px;margin:0 auto 32px;
-      border-radius:32px;
-      background:linear-gradient(135deg,var(--accent),var(--accent2));
-      display:flex;align-items:center;justify-content:center;
-      font-size:48px;
-      color:white;
-      animation: iconFloat 7s ease-in-out infinite;
-      box-shadow: var(--shadow-sm);
-    }
-    @keyframes iconFloat{
-      0%,100%{transform:translateY(0) rotate(0deg);}
-      50%{transform:translateY(-16px) rotate(6deg);}
-    }
-    /* Varied animations as before */
-    .icon-pulse { animation: iconPulse 4s ease-in-out infinite; }
-    .icon-spin { animation: iconSpin 22s linear infinite; }
-    .icon-bounce { animation: iconBounce 3.5s ease-in-out infinite; }
-    .icon-wiggle { animation: iconWiggle 4.5s ease-in-out infinite; }
-    .icon-scale { animation: iconScale 5.5s ease-in-out infinite; }
-    @keyframes iconPulse {0%,100%{transform:scale(1);}50%{transform:scale(1.18);}}
-    @keyframes iconSpin {from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
-    @keyframes iconBounce {0%,100%{transform:translateY(0);}50%{transform:translateY(-24px);}}
-    @keyframes iconWiggle {0%,100%{transform:rotate(0deg);}25%{transform:rotate(-10deg);}75%{transform:rotate(10deg);}}
-    @keyframes iconScale {0%,100%{transform:scale(1);}50%{transform:scale(1.25);}}
-    
-    .feature h3{
-      font-size:26px;
+    .section h2{
+      font-size:28px;
       margin-bottom:16px;
       font-weight:700;
     }
-    .feature p{
-      font-size:18px;
-      color:var(--muted);
-    }
-    
-    /* Footer */
-    footer{
-      padding:100px 0 60px;
-      background:linear-gradient(to top, #f1f5f9, var(--bg));
-      border-top:1px solid var(--border);
-    }
-    .footerContent{text-align:center}
-    .footerTitle{font-size:28px; margin-bottom:16px; font-weight:800}
-    .footerLead{color:var(--muted); margin-bottom:48px; font-size:18px}
-    .footerLinks{
-      display:flex;
-      gap:20px;
-      justify-content:center;
-      flex-wrap:wrap;
-      margin-bottom:48px;
-    }
-    .footerLink{
-      padding:16px 32px;
-      border-radius:999px;
-      background:rgba(37,99,235,0.1);
-      font-weight:700;
-      font-size:15px;
-      transition:var(--transition);
-    }
-    .footerLink:hover{
-      background:linear-gradient(135deg,var(--accent),var(--accent2));
-      color:white;
-      transform:translateY(-4px);
-    }
-    .small{font-size:14px; color:var(--muted)}
-    
-    /* Feedback Modal */
-    .modal{
-      display:none;
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,0.6);
-      backdrop-filter:blur(12px);
-      align-items:center;
-      justify-content:center;
-      z-index:100;
-      animation: fadeIn 0.4s ease;
-    }
-    .modal.open{display:flex}
-    .modalContent{
-      background:var(--card-bg);
-      border-radius:var(--radius);
-      padding:48px;
-      max-width:600px;
-      width:90%;
-      box-shadow:var(--shadow-lg);
-      position:relative;
-    }
-    .close{
-      position:absolute;
-      top:20px;right:24px;
-      font-size:32px;
-      cursor:pointer;
-      color:var(--muted);
-    }
-    .modal h2{
-      font-size:32px;
-      margin-bottom:24px;
-      text-align:center;
-    }
-    .formGroup{
-      margin-bottom:24px;
-    }
-    .formGroup label{
-      display:block;
-      margin-bottom:8px;
+    .section h3{
+      font-size:22px;
+      margin:24px 0 12px;
       font-weight:600;
     }
-    .formGroup input, .formGroup textarea{
-      width:100%;
-      padding:16px;
-      border-radius:16px;
-      border:1px solid var(--border);
-      font-size:16px;
-      background:rgba(37,99,235,0.04);
+    .section p, .section li{
+      font-size:17px;
+      margin-bottom:16px;
     }
-    .formGroup textarea{height:160px}
-    .submitBtn{
-      width:100%;
-      padding:18px;
-      background:linear-gradient(135deg,var(--accent),var(--accent2));
-      color:white;
-      border:none;
-      border-radius:20px;
-      font-size:18px;
-      font-weight:800;
-      cursor:pointer;
-      transition:var(--transition);
+    .section ul{
+      padding-left:28px;
+      margin-bottom:16px;
     }
-    .submitBtn:hover{transform:translateY(-4px); box-shadow:var(--shadow)}
+    .section ul li{
+      margin-bottom:8px;
+    }
+    .note{
+      background:rgba(59,130,246,0.08);
+      border-left:4px solid var(--accent);
+      padding:20px;
+      border-radius:12px;
+      margin:32px 0;
+    }
+    .note strong{
+      color:var(--accent);
+    }
+    
+    footer{
+      padding:80px 0 40px;
+      background:linear-gradient(to top, #f1f5f9, var(--bg));
+      border-top:1px solid var(--border);
+      text-align:center;
+      color:var(--muted);
+    }
+    .small{font-size:13px}
   </style>
 </head>
 <body>
-
-<div class="betaBanner">
-  <div class="wrap betaInner">
-    <span class="betaTag">Beta</span>
-    Active beta release — weekly improvements • sync across devices • Windows version coming
-  </div>
-</div>
 
 <header>
   <div class="wrap">
@@ -421,180 +182,153 @@
         </div>
       </div>
       <nav>
-        <a class="navlink" href="#features">Features</a>
-        <a class="navlink" href="#sync">Sync</a>
-        <a class="navlink" href="#roadmap">Roadmap</a>
-        <a class="navlink" href="privacy.html">Privacy</a>
-        <a class="navlink" id="feedbackBtn">Feedback / Suggestions</a>
+        <a class="navlink" href="index.html">Home</a>
+        <a class="navlink" href="index.html#features">Features</a>
+        <a class="navlink" href="index.html#sync">Sync</a>
+        <a class="navlink" href="index.html#roadmap">Roadmap</a>
       </nav>
     </div>
   </div>
 </header>
 
 <main class="wrap">
-  <section class="hero">
-    <div class="heroCard">
-      <span class="kicker">Offline-first • multi-device sync • rapid iteration</span>
-      <h2 class="headline">A site companion built for real job sites.</h2>
-      <p class="subhead">
-        <strong>Site Companion Side Kick (SCSK)</strong> is a production-ready beta designed for supervisors, foremen and project managers who need reliability on site — even without internet.
-      </p>
-      <p class="subhead">
-        The platform is actively developed, with <strong>weekly improvements</strong>, expanding features, and continuous performance refinements.
-      </p>
-      <div class="ctaRow">
-        <a class="btn btnPrimary" href="#">Get the beta (coming soon)</a>
-        <a class="btn btnSecondary" href="privacy.html">Privacy policy</a>
-        <a class="btn btnSecondary" href="mailto:admin@sc-sk.com">Contact support</a>
+  <section class="privacyHero">
+    <div class="privacyCard">
+      <h1 class="privacyTitle">Privacy Policy</h1>
+      <p class="lastUpdated"><strong>Site Companion Side Kick (SCSK)</strong> • Last updated: December 14, 2025</p>
+      
+      <div class="section">
+        <h2>1. Introduction</h2>
+        <p>Site Companion Side Kick (SCSK) is an offline-first mobile application developed by <strong>Saa Developments Inc.</strong> designed for construction site supervisors, foremen, and project managers.</p>
+        <p>We prioritize your privacy and are committed to transparency. This Privacy Policy explains what information we collect, how we use and protect it, and your rights regarding your data. By using SCSK, you agree to the practices described here.</p>
+        <p>SCSK is designed to work primarily offline, with optional cloud sync for multi-device access.</p>
       </div>
-      <p class="note">
-        Beta means momentum — features evolve quickly, workflows deepen, and feedback shapes each release.
-      </p>
-    </div>
-  </section>
-
-  <section id="features">
-    <h3 class="sectionTitle">What’s available in the beta</h3>
-    <p class="sectionLead">
-      Core site workflows are already live, stable, and used on active projects.
-    </p>
-    <div class="grid">
-      <div class="feature" style="--i:1">
-        <div class="featureIcon icon-bounce">📁</div>
-        <h3>Projects &amp; jobs</h3>
-        <p>Structured projects and job folders with clear timestamps.</p>
+      
+      <div class="section">
+        <h2>2. Information We Collect</h2>
+        
+        <h3>2.1 Account Information (Required for Sync)</h3>
+        <p>If you enable cloud sync and create an account:</p>
+        <ul>
+          <li>Email address</li>
+          <li>Display name (optional)</li>
+          <li>Authentication tokens (securely managed via third-party services like Firebase Authentication)</li>
+        </ul>
+        <p>This is used solely for account authentication and data synchronization across your devices.</p>
+        
+        <h3>2.2 User-Generated Content</h3>
+        <p>All project data you create is owned by you:</p>
+        <ul>
+          <li>Projects, jobs, and folders</li>
+          <li>Notes, checklists, timestamps</li>
+          <li>Trade assignments and contact details (if entered)</li>
+          <li>Attached documents and generated PDF reports</li>
+        </ul>
+        <p>This data is stored locally on your device by default and only synced to the cloud if you enable sync.</p>
+        
+        <h3>2.3 Photos and Media</h3>
+        <p>Photos taken or annotated within the app are stored locally on your device. If sync is enabled, they are securely uploaded to your private cloud storage.</p>
+        <p>We do not access, view, or process your photos beyond app functionality.</p>
+        
+        <h3>2.4 Location Data (Optional)</h3>
+        <p>If you enable geofencing:</p>
+        <ul>
+          <li>Approximate or precise location may be used to associate jobs with sites or prompt you upon return.</li>
+        </ul>
+        <p>Location access requires explicit permission and can be disabled anytime in device settings.</p>
+        
+        <h3>2.5 Microphone (Optional, for Voice Notes)</h3>
+        <p>Voice-to-text features may temporarily process audio on-device or via secure third-party services. Audio is not stored unless you save a note.</p>
+        
+        <h3>2.6 No Other Collection</h3>
+        <p>We do not collect analytics, crash reports, advertising IDs, or any unnecessary device information.</p>
+        
+        <div class="note">
+          <strong>Important:</strong> Optional permissions (camera, location, microphone, storage) are only requested when you use related features. You control these via device settings.
+        </div>
       </div>
-      <div class="feature" style="--i:2">
-        <div class="featureIcon icon-pulse">📸</div>
-        <h3>Photos &amp; annotations</h3>
-        <p>Capture evidence and mark up issues directly on site.</p>
+      
+      <div class="section">
+        <h2>3. How We Use Your Information</h2>
+        <p>Your information is used only to:</p>
+        <ul>
+          <li>Provide core app features (projects, photos, reports, offline access)</li>
+          <li>Sync data across your devices (if enabled)</li>
+          <li>Improve app performance and fix bugs</li>
+          <li>Comply with legal obligations</li>
+        </ul>
+        <p>We do <strong>not</strong> sell, rent, or share your data for marketing. We do <strong>not</strong> use it for advertising or profiling.</p>
       </div>
-      <div class="feature" style="--i:3">
-        <div class="featureIcon icon-wiggle">👥</div>
-        <h3>Trade assignments</h3>
-        <p>Assign actions and defects to trades with accountability.</p>
+      
+      <div class="section">
+        <h2>4. Data Storage and Security</h2>
+        <ul>
+          <li>Local data remains on your device</li>
+          <li>Cloud data (if synced) is encrypted in transit and at rest using industry-standard protocols</li>
+          <li>We use trusted providers (e.g., Firebase) with strong security practices</li>
+          <li>Access is limited to your authenticated account</li>
+        </ul>
+        <p>No system is 100% secure, but we implement reasonable measures to protect your data.</p>
       </div>
-      <div class="feature" style="--i:4">
-        <div class="featureIcon icon-scale">📄</div>
-        <h3>PDF reporting</h3>
-        <p>Compile jobs and checklists into professional PDFs.</p>
+      
+      <div class="section">
+        <h2>5. Data Sharing and Third Parties</h2>
+        <p>We share data only with:</p>
+        <ul>
+          <li>Service providers for authentication and storage (acting under strict instructions)</li>
+          <li>Law enforcement if legally required</li>
+        </ul>
+        <p>Shared PDF reports contain only information you choose to include.</p>
       </div>
-      <div class="feature" style="--i:5">
-        <div class="featureIcon icon-spin">📶</div>
-        <h3>Offline-first</h3>
-        <p>Work without signal — sync when internet is available.</p>
+      
+      <div class="section">
+        <h2>6. Data Retention and Deletion</h2>
+        <p>Local data persists until you delete it in the app or uninstall.</p>
+        <p>Cloud data is retained as long as your account exists. Upon account deletion (via support request), all associated cloud data is permanently deleted within 30 days.</p>
+        <p>You can export or delete individual projects anytime.</p>
       </div>
-      <div class="feature" style="--i:6">
-        <div class="featureIcon iconFloat">📍</div>
-        <h3>Geofencing (optional)</h3>
-        <p>Smart prompts when returning to known sites.</p>
+      
+      <div class="section">
+        <h2>7. Your Rights and Choices</h2>
+        <p>You have the right to:</p>
+        <ul>
+          <li>Access, export, or delete your data</li>
+          <li>Revoke permissions (camera, location, microphone) in device settings</li>
+          <li>Disable cloud sync</li>
+          <li>Request account deletion</li>
+        </ul>
+        <p>Contact us for assistance exercising these rights.</p>
       </div>
-    </div>
-  </section>
-
-  <section id="sync">
-    <h3 class="sectionTitle">Sync across devices</h3>
-    <p class="sectionLead">
-      Start on your phone, continue on a tablet, and keep work aligned across devices using a single account.
-    </p>
-    <div class="grid">
-      <div class="feature" style="--i:1">
-        <div class="featureIcon icon-pulse">📱</div>
-        <h3>Multi-device access</h3>
-        <p>Use SCSK across supported devices with consistent data.</p>
+      
+      <div class="section">
+        <h2>8. Children's Privacy</h2>
+        <p>SCSK is a professional tool not intended for children under 16. We do not knowingly collect data from children.</p>
       </div>
-      <div class="feature" style="--i:2">
-        <div class="featureIcon icon-spin">🔄</div>
-        <h3>Offline-first syncing</h3>
-        <p>Work offline first, then sync safely when online.</p>
+      
+      <div class="section">
+        <h2>9. Changes to This Policy</h2>
+        <p>We may update this policy periodically. Significant changes will be notified in-app or via email. Continued use constitutes acceptance.</p>
       </div>
-      <div class="feature" style="--i:3">
-        <div class="featureIcon icon-bounce">📟</div>
-        <h3>Built for tablets</h3>
-        <p>Larger-screen workflows designed for site supervision.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="roadmap">
-    <h3 class="sectionTitle">What’s coming next</h3>
-    <p class="sectionLead">
-      Development continues in weekly drops, focused on automation, depth, and speed.
-    </p>
-    <div class="grid">
-      <div class="feature" style="--i:1">
-        <div class="featureIcon icon-wiggle">🗂️</div>
-        <h3>Expanded templates</h3>
-        <p>More safety, compliance, and quality templates.</p>
-      </div>
-      <div class="feature" style="--i:2">
-        <div class="featureIcon icon-scale">💻</div>
-        <h3>Windows version</h3>
-        <p>A cross-platform Windows build is planned.</p>
-      </div>
-      <div class="feature" style="--i:3">
-        <div class="featureIcon icon-pulse">🤖</div>
-        <h3>AI-assisted workflows</h3>
-        <p>Optional automation for faster insights and reporting.</p>
+      
+      <div class="section">
+        <h2>10. Contact Us</h2>
+        <p>For questions, requests, or concerns:</p>
+        <ul>
+          <li><strong>Company:</strong> Saa Developments Inc.</li>
+          <li><strong>Email:</strong> <a href="mailto:saaproductionsinc@gmail.com">saaproductionsinc@gmail.com</a></li>
+        </ul>
       </div>
     </div>
   </section>
 </main>
 
 <footer>
-  <div class="wrap footerContent">
-    <div class="footerTitle">Site Companion Side Kick (SCSK)</div>
-    <div class="footerLead">
-      Active beta • Weekly improvements • Sync across devices • Windows version coming
-    </div>
-    <div class="footerLinks">
-      <a class="footerLink" href="#features">Features</a>
-      <a class="footerLink" href="#sync">Sync</a>
-      <a class="footerLink" href="#roadmap">Roadmap</a>
-      <a class="footerLink" href="privacy.html">Privacy</a>
-      <a class="footerLink" id="feedbackBtnFooter">Feedback</a>
-    </div>
+  <div class="wrap">
     <div class="small">
-      For questions, requests, concerns, or account/data deletion: <a href="mailto:admin@sc-sk.com">admin@sc-sk.com</a><br>
       © 2025 Saa Developments Inc. All rights reserved.
     </div>
   </div>
 </footer>
-
-<!-- Feedback Modal -->
-<div class="modal" id="feedbackModal">
-  <div class="modalContent">
-    <span class="close" id="closeModal">&times;</span>
-    <h2>Feedback / Suggestions</h2>
-    <form action="https://formspree.io/f/your-form-id" method="POST"> <!-- Replace with actual Formspree or similar endpoint -->
-      <div class="formGroup">
-        <label for="name">Name (optional)</label>
-        <input type="text" id="name" name="name">
-      </div>
-      <div class="formGroup">
-        <label for="email">Email (optional)</label>
-        <input type="email" id="email" name="_replyto">
-      </div>
-      <div class="formGroup">
-        <label for="message">Your feedback or suggestion *</label>
-        <textarea id="message" name="message" required></textarea>
-      </div>
-      <input type="hidden" name="_subject" value="SCSK Feedback">
-      <input type="hidden" name="_to" value="feedback@sc-sk.com">
-      <button type="submit" class="submitBtn">Submit Feedback</button>
-    </form>
-  </div>
-</div>
-
-<script>
-  const modal = document.getElementById('feedbackModal');
-  const openBtns = [document.getElementById('feedbackBtn'), document.getElementById('feedbackBtnFooter')];
-  const closeBtn = document.getElementById('closeModal');
-
-  openBtns.forEach(btn => btn.onclick = () => modal.classList.add('open'));
-  closeBtn.onclick = () => modal.classList.remove('open');
-  window.onclick = (e) => { if (e.target === modal) modal.classList.remove('open'); };
-</script>
 
 </body>
 </html>
