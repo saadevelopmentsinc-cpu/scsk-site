@@ -4,250 +4,310 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
   <title>Site Companion Side Kick (SCSK) — Beta</title>
-
   <meta name="description" content="Site Companion Side Kick (SCSK) is an active beta, offline-first site companion app. Sync across devices, weekly improvements, and a Windows version coming." />
-
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg0:#070A10;
-      --bg1:#0B1020;
-      --border: rgba(255,255,255,0.12);
-      --text:#EAF0FF;
-      --muted: rgba(234,240,255,0.72);
-      --accent:#5DA9FF;
-      --accent2:#8B5CF6;
-      --beta:#FBBF24;
-      --shadow: 0 24px 60px rgba(0,0,0,0.55);
-      --max: 1120px;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --accent: #3b82f6; /* Blue */
+      --accent2: #8b5cf6; /* Purple */
+      --beta: #f59e0b;
+      --border: rgba(0,0,0,0.08);
+      --shadow-sm: 0 4px 12px rgba(0,0,0,0.06);
+      --shadow: 0 20px 40px rgba(0,0,0,0.1);
+      --shadow-lg: 0 32px 80px rgba(0,0,0,0.12);
+      --max: 1200px;
+      --radius: 24px;
+      --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
-
-    *{box-sizing:border-box}
+    *{box-sizing:border-box; margin:0; padding:0}
     body{
-      margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      color:var(--text);
-      background:
-        radial-gradient(1200px 520px at 20% -10%, rgba(93,169,255,0.18), transparent 55%),
-        radial-gradient(900px 520px at 85% 5%, rgba(139,92,246,0.14), transparent 55%),
-        linear-gradient(180deg, var(--bg0), var(--bg1));
-      line-height:1.55;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height:1.6;
+      overflow-x:hidden;
     }
-
-    a{color:var(--text);text-decoration:none}
+    a{color: inherit; text-decoration:none}
     a:hover{text-decoration:underline}
-
-    .wrap{max-width:var(--max);margin:0 auto;padding:0 18px}
-
-    /* ================= BETA BANNER ================= */
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 24px}
+    
+    /* Animated subtle background gradient */
+    body::before{
+      content:'';
+      position:fixed;
+      inset:0;
+      background: radial-gradient(circle at 20% 80%, rgba(59,130,246,0.12), transparent 50%),
+                  radial-gradient(circle at 80% 20%, rgba(139,92,246,0.12), transparent 50%);
+      animation: bgShift 30s ease infinite alternate;
+      z-index:-2;
+      pointer-events:none;
+    }
+    @keyframes bgShift{
+      0%{transform: translate(0,0) scale(1);}
+      100%{transform: translate(5%,5%) scale(1.05);}
+    }
+    
+    /* Beta Banner */
     .betaBanner{
-      background: linear-gradient(135deg, rgba(251,191,36,0.35), rgba(251,191,36,0.15));
-      border-bottom:1px solid rgba(251,191,36,0.6);
+      background: linear-gradient(135deg, #fffbeb, #fefce8);
+      border-bottom:1px solid rgba(245,158,11,0.3);
+      animation: fadeIn 1s ease;
     }
     .betaInner{
       display:flex;
       align-items:center;
       justify-content:center;
       gap:12px;
-      padding:12px 14px;
-      text-align:center;
-      font-size:13px;
-      font-weight:700;
-      letter-spacing:0.02em;
-      flex-wrap:wrap;
+      padding:14px;
+      font-size:14px;
+      font-weight:600;
     }
     .betaTag{
-      padding:6px 10px;
+      padding:6px 14px;
       border-radius:999px;
-      background:rgba(0,0,0,0.45);
-      border:1px solid rgba(255,255,255,0.3);
-      font-size:12px;
-      letter-spacing:0.08em;
+      background:#fffbeb;
+      border:1px solid #f59e0b;
+      color:var(--beta);
+      font-size:13px;
       text-transform:uppercase;
+      letter-spacing:0.08em;
     }
-
-    /* ================= HEADER ================= */
+    
+    /* Header */
     header{
       position:sticky;
       top:0;
       z-index:50;
-      backdrop-filter: blur(14px);
-      background: rgba(7,10,16,0.6);
-      border-bottom:1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(20px);
+      background: rgba(255,255,255,0.75);
+      border-bottom:1px solid var(--border);
+      animation: slideDown 0.8s ease;
     }
     .topbar{
       display:flex;
       justify-content:space-between;
       align-items:center;
-      padding:14px 0;
-      gap:12px;
+      padding:20px 0;
+      gap:20px;
       flex-wrap:wrap;
     }
     .brand{
       display:flex;
-      gap:12px;
+      gap:16px;
       align-items:center;
     }
     .logo{
-      width:44px;height:44px;border-radius:16px;
+      width:56px;height:56px;border-radius:20px;
       background:linear-gradient(135deg,var(--accent),var(--accent2));
-      border:1px solid rgba(255,255,255,0.25);
-      box-shadow:0 18px 40px rgba(0,0,0,0.55);
+      box-shadow: var(--shadow-sm);
+      animation: float 6s ease-in-out infinite;
+    }
+    @keyframes float{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-8px)}
     }
     .brand h1{
-      margin:0;
-      font-size:15px;
-      letter-spacing:0.05em;
+      font-size:18px;
+      font-weight:800;
+      letter-spacing:0.04em;
       text-transform:uppercase;
     }
     .brand p{
-      margin:2px 0 0;
-      font-size:12px;
+      font-size:13px;
       color:var(--muted);
     }
-    nav{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-    }
+    nav{display:flex; gap:12px; flex-wrap:wrap}
     .navlink{
-      padding:10px 12px;
+      padding:12px 20px;
       border-radius:999px;
-      border:1px solid rgba(255,255,255,0.14);
-      background:rgba(255,255,255,0.04);
-      font-size:13px;
+      background:rgba(59,130,246,0.08);
+      font-weight:600;
+      font-size:14px;
+      transition:var(--transition);
     }
-
-    /* ================= HERO ================= */
-    .hero{padding:36px 0}
+    .navlink:hover{
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      color:white;
+      transform:translateY(-2px);
+    }
+    
+    /* Hero */
+    .hero{padding:80px 0 60px}
     .heroCard{
-      border-radius:28px;
-      border:1px solid var(--border);
-      background:rgba(255,255,255,0.05);
-      box-shadow:var(--shadow);
-      padding:28px;
+      border-radius:var(--radius);
+      background:var(--card-bg);
+      box-shadow:var(--shadow-lg);
+      padding:60px;
+      text-align:center;
+      position:relative;
+      overflow:hidden;
+      animation: fadeUp 1s ease 0.2s both;
     }
+    .heroCard::before{
+      content:'';
+      position:absolute;
+      inset:0;
+      background:linear-gradient(135deg, rgba(59,130,246,0.08), rgba(139,92,246,0.08));
+      opacity:0;
+      transition:opacity 0.6s;
+    }
+    .heroCard:hover::before{opacity:1}
     .kicker{
       display:inline-flex;
-      gap:8px;
+      gap:10px;
       align-items:center;
-      padding:8px 12px;
+      padding:10px 20px;
       border-radius:999px;
-      border:1px solid rgba(255,255,255,0.16);
-      background:rgba(0,0,0,0.35);
-      font-size:12px;
-      letter-spacing:0.08em;
+      background:rgba(59,130,246,0.1);
+      font-size:14px;
+      font-weight:600;
       text-transform:uppercase;
-      color:var(--muted);
-      flex-wrap:wrap;
+      letter-spacing:0.08em;
+      color:var(--accent);
     }
     .headline{
-      margin:18px 0 14px;
-      font-size:44px;
-      line-height:1.05;
-      letter-spacing:-0.03em;
+      margin:24px 0 20px;
+      font-size:56px;
+      line-height:1.1;
+      letter-spacing:-0.02em;
+      font-weight:800;
     }
-    @media(max-width:600px){
-      .headline{font-size:36px}
-    }
+    @media(max-width:768px){.headline{font-size:42px}}
     .subhead{
-      font-size:17px;
+      font-size:20px;
       color:var(--muted);
-      max-width:75ch;
-      margin:0 0 14px;
+      max-width:80ch;
+      margin:0 auto 24px;
     }
     .ctaRow{
       display:flex;
-      gap:12px;
+      gap:16px;
+      justify-content:center;
       flex-wrap:wrap;
-      margin-top:20px;
+      margin-top:40px;
     }
     .btn{
-      padding:14px 18px;
-      border-radius:16px;
-      border:1px solid rgba(255,255,255,0.18);
-      background:rgba(255,255,255,0.06);
-      font-weight:800;
-      font-size:14px;
-      min-width:210px;
+      padding:18px 32px;
+      border-radius:20px;
+      font-weight:700;
+      font-size:16px;
+      min-width:240px;
       text-align:center;
+      transition:var(--transition);
+      box-shadow:var(--shadow-sm);
     }
     .btnPrimary{
       background:linear-gradient(135deg,var(--accent),var(--accent2));
+      color:white;
+    }
+    .btnPrimary:hover{
+      transform:translateY(-4px);
+      box-shadow:var(--shadow);
+    }
+    .btnSecondary{
+      background:var(--card-bg);
+      border:1px solid var(--border);
+    }
+    .btnSecondary:hover{
+      background:rgba(59,130,246,0.08);
+      transform:translateY(-4px);
     }
     .note{
-      margin-top:16px;
-      font-size:13px;
-      color:var(--muted);
-    }
-
-    /* ================= SECTIONS ================= */
-    section{padding:28px 0}
-    .sectionTitle{
-      font-size:20px;
-      letter-spacing:-0.02em;
-      margin:0 0 8px;
-    }
-    .sectionLead{
-      color:var(--muted);
-      max-width:80ch;
-      margin:0 0 16px;
-    }
-    .grid3{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:14px;
-    }
-    @media(max-width:900px){
-      .grid3{grid-template-columns:1fr}
-    }
-    .feature{
-      border-radius:22px;
-      border:1px solid rgba(255,255,255,0.12);
-      background:rgba(255,255,255,0.04);
-      padding:18px;
-    }
-    .feature h3{
-      margin:0 0 6px;
-      font-size:16px;
-    }
-    .feature p{
-      margin:0;
+      margin-top:24px;
       font-size:14px;
       color:var(--muted);
     }
-
-    /* ================= FOOTER ================= */
-    footer{
-      padding:34px 0 42px;
-      border-top:1px solid rgba(255,255,255,0.08);
-      background:rgba(0,0,0,0.18);
+    
+    /* Sections */
+    section{padding:80px 0}
+    .sectionTitle{
+      font-size:36px;
+      text-align:center;
+      margin-bottom:16px;
+      font-weight:700;
     }
+    .sectionLead{
+      font-size:20px;
+      color:var(--muted);
+      text-align:center;
+      max-width:80ch;
+      margin:0 auto 48px;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(320px,1fr));
+      gap:32px;
+    }
+    .feature{
+      border-radius:var(--radius);
+      background:var(--card-bg);
+      padding:40px;
+      text-align:center;
+      box-shadow:var(--shadow-sm);
+      transition:var(--transition);
+    }
+    .feature:hover{
+      transform:translateY(-12px);
+      box-shadow:var(--shadow);
+    }
+    .featureIcon{
+      width:80px;height:80px;margin:0 auto 24px;
+      border-radius:24px;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      display:flex;align-items:center;justify-content:center;
+      font-size:36px;
+      color:white;
+    }
+    .feature h3{
+      font-size:22px;
+      margin-bottom:12px;
+    }
+    .feature p{
+      color:var(--muted);
+    }
+    
+    /* Footer */
+    footer{
+      padding:80px 0 40px;
+      background:linear-gradient(to top, #f1f5f9, var(--bg));
+      border-top:1px solid var(--border);
+    }
+    .footerContent{text-align:center}
+    .footerTitle{font-size:24px; margin-bottom:12px}
+    .footerLead{color:var(--muted); margin-bottom:32px}
     .footerLinks{
       display:flex;
-      gap:12px;
+      gap:16px;
+      justify-content:center;
       flex-wrap:wrap;
-      margin-top:12px;
+      margin-bottom:32px;
     }
     .footerLink{
-      padding:10px 12px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,0.14);
-      background:rgba(255,255,255,0.04);
-      font-size:13px;
+      padding:12px 24px;
+      border-radius:999px;
+      background:rgba(59,130,246,0.08);
+      font-weight:600;
     }
-    .small{
-      font-size:12px;
-      color:var(--muted);
-      margin-top:12px;
-    }
+    .small{font-size:13px; color:var(--muted)}
+    
+    /* Animations */
+    @keyframes fadeIn{from{opacity:0} to{opacity:1}}
+    @keyframes slideDown{from{transform:translateY(-100%)} to{transform:translateY(0)}}
+    @keyframes fadeUp{from{opacity:0; transform:translateY(40px)} to{opacity:1; transform:translateY(0)}}
+    
+    section > * {animation: fadeUp 1s ease both}
+    .grid > * {animation-delay: calc(0.1s * var(--i))}
   </style>
 </head>
-
 <body>
 
-<!-- ================= BETA BANNER ================= -->
 <div class="betaBanner">
   <div class="wrap betaInner">
     <span class="betaTag">Beta</span>
@@ -265,7 +325,6 @@
           <p>SCSK • Active Beta</p>
         </div>
       </div>
-
       <nav>
         <a class="navlink" href="#features">Features</a>
         <a class="navlink" href="#sync">Sync</a>
@@ -277,31 +336,21 @@
 </header>
 
 <main class="wrap">
-
   <section class="hero">
     <div class="heroCard">
       <span class="kicker">Offline-first • multi-device sync • rapid iteration</span>
-
-      <h2 class="headline">
-        A site companion built for real job sites.
-      </h2>
-
+      <h2 class="headline">A site companion built for real job sites.</h2>
       <p class="subhead">
-        <strong>Site Companion Side Kick (SCSK)</strong> is a production-ready beta designed for supervisors,
-        foremen and project managers who need reliability on site — even without internet.
+        <strong>Site Companion Side Kick (SCSK)</strong> is a production-ready beta designed for supervisors, foremen and project managers who need reliability on site — even without internet.
       </p>
-
       <p class="subhead">
-        The platform is actively developed, with <strong>weekly improvements</strong>, expanding features,
-        and continuous performance refinements.
+        The platform is actively developed, with <strong>weekly improvements</strong>, expanding features, and continuous performance refinements.
       </p>
-
       <div class="ctaRow">
         <a class="btn btnPrimary" href="#">Get the beta (coming soon)</a>
-        <a class="btn" href="privacy.html">Privacy policy</a>
-        <a class="btn" href="mailto:saaproductionsinc@gmail.com">Contact support</a>
+        <a class="btn btnSecondary" href="privacy.html">Privacy policy</a>
+        <a class="btn btnSecondary" href="mailto:saaproductionsinc@gmail.com">Contact support</a>
       </div>
-
       <p class="note">
         Beta means momentum — features evolve quickly, workflows deepen, and feedback shapes each release.
       </p>
@@ -313,29 +362,34 @@
     <p class="sectionLead">
       Core site workflows are already live, stable, and used on active projects.
     </p>
-
-    <div class="grid3">
-      <div class="feature">
+    <div class="grid">
+      <div class="feature" style="--i:1">
+        <div class="featureIcon">📁</div>
         <h3>Projects &amp; jobs</h3>
         <p>Structured projects and job folders with clear timestamps.</p>
       </div>
-      <div class="feature">
+      <div class="feature" style="--i:2">
+        <div class="featureIcon">📸</div>
         <h3>Photos &amp; annotations</h3>
         <p>Capture evidence and mark up issues directly on site.</p>
       </div>
-      <div class="feature">
+      <div class="feature" style="--i:3">
+        <div class="featureIcon">👥</div>
         <h3>Trade assignments</h3>
         <p>Assign actions and defects to trades with accountability.</p>
       </div>
-      <div class="feature">
+      <div class="feature" style="--i:4">
+        <div class="featureIcon">📄</div>
         <h3>PDF reporting</h3>
         <p>Compile jobs and checklists into professional PDFs.</p>
       </div>
-      <div class="feature">
+      <div class="feature" style="--i:5">
+        <div class="featureIcon">📶</div>
         <h3>Offline-first</h3>
         <p>Work without signal — sync when internet is available.</p>
       </div>
-      <div class="feature">
+      <div class="feature" style="--i:6">
+        <div class="featureIcon">📍</div>
         <h3>Geofencing (optional)</h3>
         <p>Smart prompts when returning to known sites.</p>
       </div>
@@ -347,17 +401,19 @@
     <p class="sectionLead">
       Start on your phone, continue on a tablet, and keep work aligned across devices using a single account.
     </p>
-
-    <div class="grid3">
-      <div class="feature">
+    <div class="grid">
+      <div class="feature" style="--i:1">
+        <div class="featureIcon">📱</div>
         <h3>Multi-device access</h3>
         <p>Use SCSK across supported devices with consistent data.</p>
       </div>
-      <div class="feature">
+      <div class="feature" style="--i:2">
+        <div class="featureIcon">🔄</div>
         <h3>Offline-first syncing</h3>
         <p>Work offline first, then sync safely when online.</p>
       </div>
-      <div class="feature">
+      <div class="feature" style="--i:3">
+        <div class="featureIcon">📟</div>
         <h3>Built for tablets</h3>
         <p>Larger-screen workflows designed for site supervision.</p>
       </div>
@@ -369,32 +425,32 @@
     <p class="sectionLead">
       Development continues in weekly drops, focused on automation, depth, and speed.
     </p>
-
-    <div class="grid3">
-      <div class="feature">
+    <div class="grid">
+      <div class="feature" style="--i:1">
+        <div class="featureIcon">🗂️</div>
         <h3>Expanded templates</h3>
         <p>More safety, compliance, and quality templates.</p>
       </div>
-      <div class="feature">
+      <div class="feature" style="--i:2">
+        <div class="featureIcon">💻</div>
         <h3>Windows version</h3>
         <p>A cross-platform Windows build is planned.</p>
       </div>
-      <div class="feature">
+      <div class="feature" style="--i:3">
+        <div class="featureIcon">🤖</div>
         <h3>AI-assisted workflows</h3>
         <p>Optional automation for faster insights and reporting.</p>
       </div>
     </div>
   </section>
-
 </main>
 
 <footer>
-  <div class="wrap">
-    <div class="sectionTitle">Site Companion Side Kick (SCSK)</div>
-    <div class="sectionLead">
+  <div class="wrap footerContent">
+    <div class="footerTitle">Site Companion Side Kick (SCSK)</div>
+    <div class="footerLead">
       Active beta • Weekly improvements • Sync across devices • Windows version coming
     </div>
-
     <div class="footerLinks">
       <a class="footerLink" href="#features">Features</a>
       <a class="footerLink" href="#sync">Sync</a>
@@ -402,7 +458,6 @@
       <a class="footerLink" href="privacy.html">Privacy</a>
       <a class="footerLink" href="mailto:saaproductionsinc@gmail.com">Support</a>
     </div>
-
     <div class="small">
       © <span id="year"></span> SAA. All rights reserved.
     </div>
@@ -412,6 +467,5 @@
 <script>
   document.getElementById("year").textContent = new Date().getFullYear();
 </script>
-
 </body>
 </html>
