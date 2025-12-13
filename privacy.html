@@ -1,287 +1,335 @@
-<!-- redeploy -->
 <!-- privacy_policy.html -->
 <!doctype html>
 <html lang="en-AU">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="robots" content="noindex, nofollow" />
-  <title>Privacy Policy - Site Companion Side Kick (SCSK)</title>
+  <title>Privacy Policy — Site Companion Side Kick (SCSK)</title>
+  <meta name="description" content="Privacy Policy for Site Companion Side Kick (SCSK), an offline-first site companion app." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#0b0f14;
-      --card:#111827;
-      --text:#e5e7eb;
-      --muted:#9ca3af;
-      --border:#1f2937;
-      --link:#93c5fd;
-      --heading:#f9fafb;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --accent: #3b82f6;
+      --accent2: #8b5cf6;
+      --border: rgba(0,0,0,0.08);
+      --shadow-sm: 0 4px 12px rgba(0,0,0,0.06);
+      --shadow: 0 20px 40px rgba(0,0,0,0.1);
+      --shadow-lg: 0 32px 80px rgba(0,0,0,0.12);
+      --max: 1200px;
+      --radius: 24px;
+      --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    @media (prefers-color-scheme: light){
-      :root{
-        --bg:#f5f7fb;
-        --card:#ffffff;
-        --text:#111827;
-        --muted:#4b5563;
-        --border:#e5e7eb;
-        --link:#1d4ed8;
-        --heading:#0f172a;
-      }
-    }
+    *{box-sizing:border-box; margin:0; padding:0}
     body{
-      margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      background:var(--bg);
-      color:var(--text);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: var(--text);
+      background: var(--bg);
       line-height:1.6;
     }
+    a{color: var(--accent); text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 24px}
+    
+    body::before{
+      content:'';
+      position:fixed;
+      inset:0;
+      background: radial-gradient(circle at 20% 80%, rgba(59,130,246,0.12), transparent 50%),
+                  radial-gradient(circle at 80% 20%, rgba(139,92,246,0.12), transparent 50%);
+      animation: bgShift 30s ease infinite alternate;
+      z-index:-2;
+      pointer-events:none;
+    }
+    @keyframes bgShift{
+      0%{transform: translate(0,0) scale(1);}
+      100%{transform: translate(5%,5%) scale(1.05);}
+    }
+    
     header{
-      padding: 28px 18px 18px;
-      border-bottom: 1px solid var(--border);
-      background: linear-gradient(180deg, rgba(59,130,246,0.12), rgba(0,0,0,0));
+      position:sticky;
+      top:0;
+      z-index:50;
+      backdrop-filter: blur(20px);
+      background: rgba(255,255,255,0.75);
+      border-bottom:1px solid var(--border);
     }
-    header .wrap, main .wrap, footer .wrap{
-      max-width: 920px;
-      margin: 0 auto;
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:20px 0;
+      gap:20px;
+      flex-wrap:wrap;
     }
-    h1{
-      margin:0 0 8px;
-      color:var(--heading);
-      font-size: 28px;
-      letter-spacing: -0.02em;
+    .brand{
+      display:flex;
+      gap:16px;
+      align-items:center;
     }
-    .sub{
-      margin:0;
+    .logo{
+      width:56px;height:56px;border-radius:20px;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      box-shadow: var(--shadow-sm);
+    }
+    .brand h1{
+      font-size:18px;
+      font-weight:800;
+      letter-spacing:0.04em;
+      text-transform:uppercase;
+    }
+    .brand p{
+      font-size:13px;
       color:var(--muted);
+    }
+    nav{display:flex; gap:12px; flex-wrap:wrap}
+    .navlink{
+      padding:12px 20px;
+      border-radius:999px;
+      background:rgba(59,130,246,0.08);
+      font-weight:600;
       font-size:14px;
+      transition:var(--transition);
     }
-    main{
-      padding: 18px;
+    .navlink:hover{
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      color:white;
+      transform:translateY(-2px);
     }
-    .card{
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius: 16px;
-      padding: 18px 18px 6px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+    
+    .privacyHero{
+      padding:80px 0 60px;
+      text-align:center;
     }
-    h2{
-      margin: 18px 0 8px;
-      color:var(--heading);
-      font-size: 18px;
+    .privacyCard{
+      border-radius:var(--radius);
+      background:var(--card-bg);
+      box-shadow:var(--shadow-lg);
+      padding:60px;
+      max-width:900px;
+      margin:0 auto;
     }
-    h3{
-      margin: 14px 0 6px;
-      color:var(--heading);
-      font-size: 16px;
+    .privacyTitle{
+      font-size:44px;
+      margin-bottom:12px;
+      font-weight:800;
     }
-    p, li{
-      color:var(--text);
-      margin-top: 0;
+    .lastUpdated{
+      font-size:16px;
+      color:var(--muted);
+      margin-bottom:40px;
     }
-    ul{
-      margin: 8px 0 16px 20px;
-      padding: 0;
+    .section{
+      margin-bottom:48px;
+      text-align:left;
     }
-    a{
-      color: var(--link);
-      text-decoration: none;
+    .section h2{
+      font-size:28px;
+      margin-bottom:16px;
+      font-weight:700;
     }
-    a:hover{
-      text-decoration: underline;
+    .section h3{
+      font-size:22px;
+      margin:24px 0 12px;
+      font-weight:600;
+    }
+    .section p, .section li{
+      font-size:17px;
+      margin-bottom:16px;
+    }
+    .section ul{
+      padding-left:28px;
+      margin-bottom:16px;
+    }
+    .section ul li{
+      margin-bottom:8px;
     }
     .note{
-      border-left: 4px solid rgba(59,130,246,0.7);
-      padding: 10px 12px;
-      background: rgba(59,130,246,0.08);
-      border-radius: 10px;
-      margin: 14px 0 18px;
-      color: var(--text);
+      background:rgba(59,130,246,0.08);
+      border-left:4px solid var(--accent);
+      padding:20px;
+      border-radius:12px;
+      margin:32px 0;
     }
+    .note strong{
+      color:var(--accent);
+    }
+    
     footer{
-      padding: 20px 18px 28px;
-      color: var(--muted);
-      border-top: 1px solid var(--border);
+      padding:80px 0 40px;
+      background:linear-gradient(to top, #f1f5f9, var(--bg));
+      border-top:1px solid var(--border);
+      text-align:center;
+      color:var(--muted);
     }
-    .small{
-      font-size: 13px;
-      color: var(--muted);
-    }
-    code{
-      background: rgba(148,163,184,0.14);
-      padding: 2px 6px;
-      border-radius: 8px;
-      font-size: 0.95em;
-    }
+    .small{font-size:13px}
   </style>
 </head>
-
 <body>
-  <header>
-    <div class="wrap">
-      <h1>Privacy Policy</h1>
-      <p class="sub"><strong>Site Companion Side Kick (SCSK)</strong> &middot; Last updated: <time datetime="2025-12-14">14 December 2025</time></p>
-    </div>
-  </header>
 
-  <main>
-    <div class="wrap">
-      <div class="card">
-
-        <h2>1. Introduction</h2>
-        <p>
-          Site Companion Side Kick (SCSK) is a site companion and audit application developed by <strong>SAA</strong>.
-          This Privacy Policy explains how we collect, use, store, and protect your information when you use the SCSK
-          mobile application on Android (and future platforms).
-        </p>
-        <p>
-          We are committed to protecting your privacy and handling your data transparently and securely.
-        </p>
-
-        <h2>2. Information We Collect</h2>
-
-        <h3>2.1 Account Information</h3>
-        <p>When you sign in or create an account, we may collect:</p>
-        <ul>
-          <li>Name</li>
-          <li>Email address</li>
-          <li>Authentication identifiers (via Firebase or similar services)</li>
-        </ul>
-        <p>This is used solely to authenticate you and sync your data across devices.</p>
-
-        <h3>2.2 Project &amp; Job Data (User-Generated Content)</h3>
-        <p>You may voluntarily create and store:</p>
-        <ul>
-          <li>Projects and job folders</li>
-          <li>Notes and comments</li>
-          <li>Checklists (safety, compliance, quality, etc.)</li>
-          <li>Assigned trades and contact details</li>
-          <li>Dates and times of audits</li>
-          <li>Attached plans or documents</li>
-          <li>Generated reports (PDFs)</li>
-        </ul>
-        <p>This data belongs to <strong>you</strong>.</p>
-
-        <h3>2.3 Photos &amp; Media</h3>
-        <p>SCSK allows you to take photos within jobs, annotate images, and attach images to reports.</p>
-        <p>Photos are stored:</p>
-        <ul>
-          <li><strong>Locally on your device</strong>, and</li>
-          <li><strong>Synced to your account</strong> only if cloud sync is enabled</li>
-        </ul>
-        <p>We do not access your photos outside of app functionality.</p>
-
-        <h3>2.4 Location Data (Optional)</h3>
-        <p>If enabled by you, SCSK may collect approximate or precise location data and geofencing information.</p>
-        <p>Location data is used only to:</p>
-        <ul>
-          <li>Associate jobs with locations</li>
-          <li>Prompt you when you return to a known site</li>
-        </ul>
-        <p>You can disable location access at any time via device settings.</p>
-
-        <h3>2.5 Speech-to-Text &amp; Audio Notes (Optional)</h3>
-        <p>
-          If you use voice input, audio may be temporarily processed to convert speech to text.
-          Audio is not permanently stored unless you explicitly save it.
-        </p>
-        <p>Processing may rely on device or trusted third-party speech services.</p>
-
-        <h3>2.6 AI-Assisted Features (Future)</h3>
-        <p>Future versions of SCSK may include AI tools to identify potential non-compliance in photos and assist with report summaries.</p>
-        <p>If enabled:</p>
-        <ul>
-          <li>Images may be processed securely</li>
-          <li>AI analysis is limited to app functionality</li>
-          <li>Data is not used to train public AI models</li>
-        </ul>
-
-        <div class="note">
-          <strong>Note:</strong> You control optional permissions such as location, camera, microphone, and cloud sync.
-          You can change these settings at any time in your device settings.
+<header>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <div class="logo"></div>
+        <div>
+          <h1>Site Companion Side Kick</h1>
+          <p>SCSK • Active Beta</p>
         </div>
+      </div>
+      <nav>
+        <a class="navlink" href="index.html">Home</a>
+        <a class="navlink" href="index.html#features">Features</a>
+        <a class="navlink" href="index.html#sync">Sync</a>
+        <a class="navlink" href="index.html#roadmap">Roadmap</a>
+      </nav>
+    </div>
+  </div>
+</header>
 
+<main class="wrap">
+  <section class="privacyHero">
+    <div class="privacyCard">
+      <h1 class="privacyTitle">Privacy Policy</h1>
+      <p class="lastUpdated"><strong>Site Companion Side Kick (SCSK)</strong> • Last updated: December 14, 2025</p>
+      
+      <div class="section">
+        <h2>1. Introduction</h2>
+        <p>Site Companion Side Kick (SCSK) is an offline-first mobile application developed by <strong>Saa Developments Inc.</strong> designed for construction site supervisors, foremen, and project managers.</p>
+        <p>We prioritize your privacy and are committed to transparency. This Privacy Policy explains what information we collect, how we use and protect it, and your rights regarding your data. By using SCSK, you agree to the practices described here.</p>
+        <p>SCSK is designed to work primarily offline, with optional cloud sync for multi-device access.</p>
+      </div>
+      
+      <div class="section">
+        <h2>2. Information We Collect</h2>
+        
+        <h3>2.1 Account Information (Required for Sync)</h3>
+        <p>If you enable cloud sync and create an account:</p>
+        <ul>
+          <li>Email address</li>
+          <li>Display name (optional)</li>
+          <li>Authentication tokens (securely managed via third-party services like Firebase Authentication)</li>
+        </ul>
+        <p>This is used solely for account authentication and data synchronization across your devices.</p>
+        
+        <h3>2.2 User-Generated Content</h3>
+        <p>All project data you create is owned by you:</p>
+        <ul>
+          <li>Projects, jobs, and folders</li>
+          <li>Notes, checklists, timestamps</li>
+          <li>Trade assignments and contact details (if entered)</li>
+          <li>Attached documents and generated PDF reports</li>
+        </ul>
+        <p>This data is stored locally on your device by default and only synced to the cloud if you enable sync.</p>
+        
+        <h3>2.3 Photos and Media</h3>
+        <p>Photos taken or annotated within the app are stored locally on your device. If sync is enabled, they are securely uploaded to your private cloud storage.</p>
+        <p>We do not access, view, or process your photos beyond app functionality.</p>
+        
+        <h3>2.4 Location Data (Optional)</h3>
+        <p>If you enable geofencing:</p>
+        <ul>
+          <li>Approximate or precise location may be used to associate jobs with sites or prompt you upon return.</li>
+        </ul>
+        <p>Location access requires explicit permission and can be disabled anytime in device settings.</p>
+        
+        <h3>2.5 Microphone (Optional, for Voice Notes)</h3>
+        <p>Voice-to-text features may temporarily process audio on-device or via secure third-party services. Audio is not stored unless you save a note.</p>
+        
+        <h3>2.6 No Other Collection</h3>
+        <p>We do not collect analytics, crash reports, advertising IDs, or any unnecessary device information.</p>
+        
+        <div class="note">
+          <strong>Important:</strong> Optional permissions (camera, location, microphone, storage) are only requested when you use related features. You control these via device settings.
+        </div>
+      </div>
+      
+      <div class="section">
         <h2>3. How We Use Your Information</h2>
-        <p>We use your information to:</p>
+        <p>Your information is used only to:</p>
         <ul>
-          <li>Provide core app functionality</li>
-          <li>Store and sync your projects and jobs</li>
-          <li>Generate reports and PDFs</li>
-          <li>Improve app stability and performance</li>
-          <li>Support offline usage and later syncing</li>
-          <li>Comply with legal requirements</li>
+          <li>Provide core app features (projects, photos, reports, offline access)</li>
+          <li>Sync data across your devices (if enabled)</li>
+          <li>Improve app performance and fix bugs</li>
+          <li>Comply with legal obligations</li>
         </ul>
-        <p>We do <strong>not</strong> sell your personal data.</p>
-
-        <h2>4. Data Storage &amp; Security</h2>
+        <p>We do <strong>not</strong> sell, rent, or share your data for marketing. We do <strong>not</strong> use it for advertising or profiling.</p>
+      </div>
+      
+      <div class="section">
+        <h2>4. Data Storage and Security</h2>
         <ul>
-          <li>Data is stored locally on your device where possible</li>
-          <li>Cloud sync uses secure, encrypted storage</li>
-          <li>Industry-standard security practices are applied</li>
-          <li>Access is restricted to authenticated users</li>
+          <li>Local data remains on your device</li>
+          <li>Cloud data (if synced) is encrypted in transit and at rest using industry-standard protocols</li>
+          <li>We use trusted providers (e.g., Firebase) with strong security practices</li>
+          <li>Access is limited to your authenticated account</li>
         </ul>
-        <p class="small">However, no method of electronic storage is 100% secure.</p>
-
-        <h2>5. Offline Use</h2>
-        <p>SCSK is designed to work offline:</p>
+        <p>No system is 100% secure, but we implement reasonable measures to protect your data.</p>
+      </div>
+      
+      <div class="section">
+        <h2>5. Data Sharing and Third Parties</h2>
+        <p>We share data only with:</p>
         <ul>
-          <li>Data entered offline remains on your device</li>
-          <li>Sync occurs only when an internet connection is available</li>
-          <li>You control when syncing is enabled</li>
+          <li>Service providers for authentication and storage (acting under strict instructions)</li>
+          <li>Law enforcement if legally required</li>
         </ul>
-
-        <h2>6. Data Sharing</h2>
-        <p>We do not share your data with third parties except:</p>
-        <ul>
-          <li>Essential service providers (e.g. authentication, cloud storage)</li>
-          <li>When required by law</li>
-        </ul>
-        <p>Trades only receive information you intentionally include in shared reports.</p>
-
-        <h2>7. Your Rights</h2>
+        <p>Shared PDF reports contain only information you choose to include.</p>
+      </div>
+      
+      <div class="section">
+        <h2>6. Data Retention and Deletion</h2>
+        <p>Local data persists until you delete it in the app or uninstall.</p>
+        <p>Cloud data is retained as long as your account exists. Upon account deletion (via support request), all associated cloud data is permanently deleted within 30 days.</p>
+        <p>You can export or delete individual projects anytime.</p>
+      </div>
+      
+      <div class="section">
+        <h2>7. Your Rights and Choices</h2>
         <p>You have the right to:</p>
         <ul>
-          <li>Access your data</li>
-          <li>Edit or delete your projects and jobs</li>
-          <li>Disable permissions (camera, location, microphone)</li>
+          <li>Access, export, or delete your data</li>
+          <li>Revoke permissions (camera, location, microphone) in device settings</li>
+          <li>Disable cloud sync</li>
           <li>Request account deletion</li>
         </ul>
-        <p>Account deletion removes associated cloud data.</p>
-
-        <h2>8. Children’s Privacy</h2>
-        <p>SCSK is not intended for children under 13. We do not knowingly collect data from children.</p>
-
+        <p>Contact us for assistance exercising these rights.</p>
+      </div>
+      
+      <div class="section">
+        <h2>8. Children's Privacy</h2>
+        <p>SCSK is a professional tool not intended for children under 16. We do not knowingly collect data from children.</p>
+      </div>
+      
+      <div class="section">
         <h2>9. Changes to This Policy</h2>
-        <p>
-          We may update this Privacy Policy from time to time. Changes will be reflected with an updated
-          “Last updated” date.
-        </p>
-
+        <p>We may update this policy periodically. Significant changes will be notified in-app or via email. Continued use constitutes acceptance.</p>
+      </div>
+      
+      <div class="section">
         <h2>10. Contact Us</h2>
-        <p>If you have questions or concerns about this Privacy Policy, contact:</p>
+        <p>For questions, requests, or concerns:</p>
         <ul>
-          <li><strong>Company:</strong> SAA</li>
-          <li><strong>App:</strong> Site Companion Side Kick (SCSK)</li>
+          <li><strong>Company:</strong> Saa Developments Inc.</li>
           <li><strong>Email:</strong> <a href="mailto:saaproductionsinc@gmail.com">saaproductionsinc@gmail.com</a></li>
         </ul>
-
-        <p class="small">
-          Tip: If you host this file publicly (e.g., GitHub Pages), use the hosted URL in Google Play Console under
-          <code>App content → Privacy Policy</code>.
-        </p>
-
       </div>
     </div>
-  </main>
+  </section>
+</main>
 
-  <footer>
-    <div class="wrap small">
-      &copy; <span id="year"></span> SAA. All rights reserved.
+<footer>
+  <div class="wrap">
+    <div class="small">
+      © 2025 Saa Developments Inc. All rights reserved.
     </div>
-  </footer>
+  </div>
+</footer>
 
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
 </body>
 </html>
