@@ -7,23 +7,23 @@
   <meta name="description" content="Site Companion Side Kick (SCSK) is an active beta, offline-first site companion app. Sync across devices, weekly improvements, and a Windows version coming." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg: #f8fafc;
+      --bg: #f9fbfd;
       --card-bg: #ffffff;
-      --text: #1e293b;
-      --muted: #64748b;
-      --accent: #3b82f6; /* Blue */
-      --accent2: #8b5cf6; /* Purple */
-      --beta: #f59e0b;
-      --border: rgba(0,0,0,0.08);
-      --shadow-sm: 0 4px 12px rgba(0,0,0,0.06);
-      --shadow: 0 20px 40px rgba(0,0,0,0.1);
-      --shadow-lg: 0 32px 80px rgba(0,0,0,0.12);
-      --max: 1200px;
-      --radius: 24px;
-      --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      --text: #0f172a;
+      --muted: #475569;
+      --accent: #2563eb; /* Deeper blue */
+      --accent2: #7c3aed; /* Richer purple */
+      --beta: #ea580c;
+      --border: rgba(0,0,0,0.06);
+      --shadow-sm: 0 4px 16px rgba(0,0,0,0.08);
+      --shadow: 0 20px 50px rgba(0,0,0,0.12);
+      --shadow-lg: 0 32px 90px rgba(0,0,0,0.15);
+      --max: 1280px;
+      --radius: 32px;
+      --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
     *{box-sizing:border-box; margin:0; padding:0}
     body{
@@ -35,311 +35,370 @@
     }
     a{color: inherit; text-decoration:none}
     a:hover{text-decoration:underline}
-    .wrap{max-width:var(--max); margin:0 auto; padding:0 24px}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 32px}
     
-    /* Animated subtle background gradient */
+    /* Dynamic background with more depth */
     body::before{
       content:'';
       position:fixed;
       inset:0;
-      background: radial-gradient(circle at 20% 80%, rgba(59,130,246,0.12), transparent 50%),
-                  radial-gradient(circle at 80% 20%, rgba(139,92,246,0.12), transparent 50%);
-      animation: bgShift 30s ease infinite alternate;
+      background: 
+        radial-gradient(circle at 10% 90%, rgba(37,99,235,0.15), transparent 50%),
+        radial-gradient(circle at 90% 10%, rgba(124,58,237,0.15), transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(255,255,255,0.4), transparent 70%);
+      animation: bgShift 40s ease infinite alternate;
       z-index:-2;
       pointer-events:none;
     }
     @keyframes bgShift{
       0%{transform: translate(0,0) scale(1);}
-      100%{transform: translate(5%,5%) scale(1.05);}
+      100%{transform: translate(8%,8%) scale(1.08);}
     }
     
-    /* Beta Banner */
+    /* Beta Banner - premium amber glow */
     .betaBanner{
-      background: linear-gradient(135deg, #fffbeb, #fefce8);
-      border-bottom:1px solid rgba(245,158,11,0.3);
-      animation: fadeIn 1s ease;
+      background: linear-gradient(135deg, #fff7ed, #fffbeb);
+      border-bottom:1px solid rgba(234,88,12,0.3);
+      box-shadow: var(--shadow-sm);
     }
     .betaInner{
       display:flex;
       align-items:center;
       justify-content:center;
-      gap:12px;
-      padding:14px;
-      font-size:14px;
+      gap:16px;
+      padding:16px;
+      font-size:15px;
       font-weight:600;
     }
     .betaTag{
-      padding:6px 14px;
+      padding:8px 18px;
       border-radius:999px;
-      background:#fffbeb;
-      border:1px solid #f59e0b;
+      background:#fff7ed;
+      border:1px solid #ea580c;
       color:var(--beta);
       font-size:13px;
       text-transform:uppercase;
-      letter-spacing:0.08em;
+      letter-spacing:0.1em;
+      box-shadow: var(--shadow-sm);
     }
     
-    /* Header */
+    /* Header - glassmorphism with subtle glow */
     header{
       position:sticky;
       top:0;
       z-index:50;
-      backdrop-filter: blur(20px);
-      background: rgba(255,255,255,0.75);
+      backdrop-filter: blur(24px);
+      background: rgba(255,255,255,0.85);
       border-bottom:1px solid var(--border);
-      animation: slideDown 0.8s ease;
+      box-shadow: var(--shadow-sm);
     }
     .topbar{
       display:flex;
       justify-content:space-between;
       align-items:center;
-      padding:20px 0;
-      gap:20px;
+      padding:24px 0;
+      gap:24px;
       flex-wrap:wrap;
     }
     .brand{
       display:flex;
-      gap:16px;
+      gap:20px;
       align-items:center;
     }
     .logo{
-      width:56px;height:56px;border-radius:20px;
+      width:64px;height:64px;border-radius:24px;
       background:linear-gradient(135deg,var(--accent),var(--accent2));
-      box-shadow: var(--shadow-sm);
-      animation: float 6s ease-in-out infinite;
+      box-shadow: 0 0 40px rgba(37,99,235,0.4);
+      animation: logoGlow 8s ease-in-out infinite;
     }
-    @keyframes float{
-      0%,100%{transform:translateY(0)}
-      50%{transform:translateY(-8px)}
+    @keyframes logoGlow{
+      0%,100%{box-shadow: 0 0 40px rgba(37,99,235,0.4);}
+      50%{box-shadow: 0 0 60px rgba(124,58,237,0.5);}
     }
     .brand h1{
-      font-size:18px;
-      font-weight:800;
+      font-size:22px;
+      font-weight:900;
       letter-spacing:0.04em;
       text-transform:uppercase;
     }
     .brand p{
-      font-size:13px;
+      font-size:14px;
       color:var(--muted);
     }
-    nav{display:flex; gap:12px; flex-wrap:wrap}
+    nav{display:flex; gap:16px; flex-wrap:wrap}
     .navlink{
-      padding:12px 20px;
+      padding:14px 28px;
       border-radius:999px;
-      background:rgba(59,130,246,0.08);
+      background:rgba(37,99,235,0.08);
       font-weight:600;
-      font-size:14px;
+      font-size:15px;
       transition:var(--transition);
     }
     .navlink:hover{
       background:linear-gradient(135deg,var(--accent),var(--accent2));
       color:white;
-      transform:translateY(-2px);
+      transform:translateY(-4px);
+      box-shadow: var(--shadow);
     }
     
-    /* Hero */
-    .hero{padding:80px 0 60px}
+    /* Hero - ultra premium */
+    .hero{padding:100px 0 80px}
     .heroCard{
       border-radius:var(--radius);
       background:var(--card-bg);
       box-shadow:var(--shadow-lg);
-      padding:60px;
+      padding:80px;
       text-align:center;
       position:relative;
       overflow:hidden;
-      animation: fadeUp 1s ease 0.2s both;
     }
     .heroCard::before{
       content:'';
       position:absolute;
       inset:0;
-      background:linear-gradient(135deg, rgba(59,130,246,0.08), rgba(139,92,246,0.08));
-      opacity:0;
-      transition:opacity 0.6s;
+      background:linear-gradient(135deg, rgba(37,99,235,0.1), rgba(124,58,237,0.1));
+      opacity:0.6;
     }
-    .heroCard:hover::before{opacity:1}
     .kicker{
       display:inline-flex;
-      gap:10px;
+      gap:12px;
       align-items:center;
-      padding:10px 20px;
+      padding:12px 24px;
       border-radius:999px;
-      background:rgba(59,130,246,0.1);
-      font-size:14px;
-      font-weight:600;
+      background:rgba(37,99,235,0.12);
+      font-size:15px;
+      font-weight:700;
       text-transform:uppercase;
-      letter-spacing:0.08em;
+      letter-spacing:0.1em;
       color:var(--accent);
     }
     .headline{
-      margin:24px 0 20px;
-      font-size:56px;
-      line-height:1.1;
-      letter-spacing:-0.02em;
-      font-weight:800;
+      margin:32px 0 24px;
+      font-size:64px;
+      line-height:1.05;
+      letter-spacing:-0.03em;
+      font-weight:900;
     }
-    @media(max-width:768px){.headline{font-size:42px}}
+    @media(max-width:768px){.headline{font-size:48px}}
     .subhead{
-      font-size:20px;
+      font-size:22px;
       color:var(--muted);
-      max-width:80ch;
-      margin:0 auto 24px;
+      max-width:90ch;
+      margin:0 auto 32px;
     }
     .ctaRow{
       display:flex;
-      gap:16px;
+      gap:20px;
       justify-content:center;
       flex-wrap:wrap;
-      margin-top:40px;
+      margin-top:48px;
     }
     .btn{
-      padding:18px 32px;
-      border-radius:20px;
-      font-weight:700;
-      font-size:16px;
-      min-width:240px;
+      padding:20px 40px;
+      border-radius:24px;
+      font-weight:800;
+      font-size:17px;
+      min-width:280px;
       text-align:center;
       transition:var(--transition);
-      box-shadow:var(--shadow-sm);
+      box-shadow:var(--shadow);
     }
     .btnPrimary{
       background:linear-gradient(135deg,var(--accent),var(--accent2));
       color:white;
     }
     .btnPrimary:hover{
-      transform:translateY(-4px);
-      box-shadow:var(--shadow);
+      transform:translateY(-6px) scale(1.02);
+      box-shadow: var(--shadow-lg);
     }
     .btnSecondary{
       background:var(--card-bg);
       border:1px solid var(--border);
     }
     .btnSecondary:hover{
-      background:rgba(59,130,246,0.08);
-      transform:translateY(-4px);
+      background:rgba(37,99,235,0.1);
+      transform:translateY(-6px);
     }
     .note{
-      margin-top:24px;
-      font-size:14px;
+      margin-top:32px;
+      font-size:15px;
       color:var(--muted);
     }
     
     /* Sections */
-    section{padding:80px 0}
+    section{padding:100px 0}
     .sectionTitle{
-      font-size:36px;
+      font-size:42px;
       text-align:center;
-      margin-bottom:16px;
-      font-weight:700;
+      margin-bottom:20px;
+      font-weight:800;
     }
     .sectionLead{
-      font-size:20px;
+      font-size:22px;
       color:var(--muted);
       text-align:center;
-      max-width:80ch;
-      margin:0 auto 48px;
+      max-width:90ch;
+      margin:0 auto 64px;
     }
     .grid{
       display:grid;
-      grid-template-columns:repeat(auto-fit, minmax(320px,1fr));
-      gap:32px;
+      grid-template-columns:repeat(auto-fit, minmax(360px,1fr));
+      gap:40px;
     }
     .feature{
       border-radius:var(--radius);
       background:var(--card-bg);
-      padding:40px;
+      padding:48px;
       text-align:center;
-      box-shadow:var(--shadow-sm);
+      box-shadow:var(--shadow);
       transition:var(--transition);
       position:relative;
       overflow:hidden;
     }
+    .feature::before{
+      content:'';
+      position:absolute;
+      inset:0;
+      background:linear-gradient(135deg, rgba(37,99,235,0.05), rgba(124,58,237,0.05));
+      opacity:0;
+      transition:opacity 0.6s;
+    }
+    .feature:hover::before{opacity:1}
     .feature:hover{
-      transform:translateY(-12px);
-      box-shadow:var(--shadow);
+      transform:translateY(-16px);
+      box-shadow:var(--shadow-lg);
     }
     .featureIcon{
-      width:80px;height:80px;margin:0 auto 24px;
-      border-radius:24px;
+      width:96px;height:96px;margin:0 auto 32px;
+      border-radius:32px;
       background:linear-gradient(135deg,var(--accent),var(--accent2));
       display:flex;align-items:center;justify-content:center;
-      font-size:36px;
+      font-size:48px;
       color:white;
-      animation: iconFloat 6s ease-in-out infinite;
+      animation: iconFloat 7s ease-in-out infinite;
+      box-shadow: var(--shadow-sm);
     }
     @keyframes iconFloat{
       0%,100%{transform:translateY(0) rotate(0deg);}
-      50%{transform:translateY(-12px) rotate(5deg);}
+      50%{transform:translateY(-16px) rotate(6deg);}
     }
-    
-    /* Individual icon animations for variety */
+    /* Varied animations as before */
     .icon-pulse { animation: iconPulse 4s ease-in-out infinite; }
-    .icon-spin { animation: iconSpin 20s linear infinite; }
-    .icon-bounce { animation: iconBounce 3s ease-in-out infinite; }
-    .icon-wiggle { animation: iconWiggle 4s ease-in-out infinite; }
-    .icon-scale { animation: iconScale 5s ease-in-out infinite; }
-
-    @keyframes iconPulse {
-      0%,100%{transform:scale(1);}
-      50%{transform:scale(1.15);}
-    }
-    @keyframes iconSpin {
-      from{transform:rotate(0deg);}
-      to{transform:rotate(360deg);}
-    }
-    @keyframes iconBounce {
-      0%,100%{transform:translateY(0);}
-      50%{transform:translateY(-20px);}
-    }
-    @keyframes iconWiggle {
-      0%,100%{transform:rotate(0deg);}
-      25%{transform:rotate(-8deg);}
-      75%{transform:rotate(8deg);}
-    }
-    @keyframes iconScale {
-      0%,100%{transform:scale(1);}
-      50%{transform:scale(1.2);}
-    }
+    .icon-spin { animation: iconSpin 22s linear infinite; }
+    .icon-bounce { animation: iconBounce 3.5s ease-in-out infinite; }
+    .icon-wiggle { animation: iconWiggle 4.5s ease-in-out infinite; }
+    .icon-scale { animation: iconScale 5.5s ease-in-out infinite; }
+    @keyframes iconPulse {0%,100%{transform:scale(1);}50%{transform:scale(1.18);}}
+    @keyframes iconSpin {from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+    @keyframes iconBounce {0%,100%{transform:translateY(0);}50%{transform:translateY(-24px);}}
+    @keyframes iconWiggle {0%,100%{transform:rotate(0deg);}25%{transform:rotate(-10deg);}75%{transform:rotate(10deg);}}
+    @keyframes iconScale {0%,100%{transform:scale(1);}50%{transform:scale(1.25);}}
     
     .feature h3{
-      font-size:22px;
-      margin-bottom:12px;
+      font-size:26px;
+      margin-bottom:16px;
+      font-weight:700;
     }
     .feature p{
+      font-size:18px;
       color:var(--muted);
     }
     
     /* Footer */
     footer{
-      padding:80px 0 40px;
+      padding:100px 0 60px;
       background:linear-gradient(to top, #f1f5f9, var(--bg));
       border-top:1px solid var(--border);
     }
     .footerContent{text-align:center}
-    .footerTitle{font-size:24px; margin-bottom:12px}
-    .footerLead{color:var(--muted); margin-bottom:32px}
+    .footerTitle{font-size:28px; margin-bottom:16px; font-weight:800}
+    .footerLead{color:var(--muted); margin-bottom:48px; font-size:18px}
     .footerLinks{
       display:flex;
-      gap:16px;
+      gap:20px;
       justify-content:center;
       flex-wrap:wrap;
-      margin-bottom:32px;
+      margin-bottom:48px;
     }
     .footerLink{
-      padding:12px 24px;
+      padding:16px 32px;
       border-radius:999px;
-      background:rgba(59,130,246,0.08);
+      background:rgba(37,99,235,0.1);
+      font-weight:700;
+      font-size:15px;
+      transition:var(--transition);
+    }
+    .footerLink:hover{
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      color:white;
+      transform:translateY(-4px);
+    }
+    .small{font-size:14px; color:var(--muted)}
+    
+    /* Feedback Modal */
+    .modal{
+      display:none;
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.6);
+      backdrop-filter:blur(12px);
+      align-items:center;
+      justify-content:center;
+      z-index:100;
+      animation: fadeIn 0.4s ease;
+    }
+    .modal.open{display:flex}
+    .modalContent{
+      background:var(--card-bg);
+      border-radius:var(--radius);
+      padding:48px;
+      max-width:600px;
+      width:90%;
+      box-shadow:var(--shadow-lg);
+      position:relative;
+    }
+    .close{
+      position:absolute;
+      top:20px;right:24px;
+      font-size:32px;
+      cursor:pointer;
+      color:var(--muted);
+    }
+    .modal h2{
+      font-size:32px;
+      margin-bottom:24px;
+      text-align:center;
+    }
+    .formGroup{
+      margin-bottom:24px;
+    }
+    .formGroup label{
+      display:block;
+      margin-bottom:8px;
       font-weight:600;
     }
-    .small{font-size:13px; color:var(--muted)}
-    
-    /* Animations */
-    @keyframes fadeIn{from{opacity:0} to{opacity:1}}
-    @keyframes slideDown{from{transform:translateY(-100%)} to{transform:translateY(0)}}
-    @keyframes fadeUp{from{opacity:0; transform:translateY(40px)} to{opacity:1; transform:translateY(0)}}
-    
-    section > * {animation: fadeUp 1s ease both}
-    .grid > * {animation-delay: calc(0.1s * var(--i))}
+    .formGroup input, .formGroup textarea{
+      width:100%;
+      padding:16px;
+      border-radius:16px;
+      border:1px solid var(--border);
+      font-size:16px;
+      background:rgba(37,99,235,0.04);
+    }
+    .formGroup textarea{height:160px}
+    .submitBtn{
+      width:100%;
+      padding:18px;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      color:white;
+      border:none;
+      border-radius:20px;
+      font-size:18px;
+      font-weight:800;
+      cursor:pointer;
+      transition:var(--transition);
+    }
+    .submitBtn:hover{transform:translateY(-4px); box-shadow:var(--shadow)}
   </style>
 </head>
 <body>
@@ -366,6 +425,7 @@
         <a class="navlink" href="#sync">Sync</a>
         <a class="navlink" href="#roadmap">Roadmap</a>
         <a class="navlink" href="privacy.html">Privacy</a>
+        <a class="navlink" id="feedbackBtn">Feedback / Suggestions</a>
       </nav>
     </div>
   </div>
@@ -385,7 +445,7 @@
       <div class="ctaRow">
         <a class="btn btnPrimary" href="#">Get the beta (coming soon)</a>
         <a class="btn btnSecondary" href="privacy.html">Privacy policy</a>
-        <a class="btn btnSecondary" href="mailto:feedback@scsk.com">Contact support</a>
+        <a class="btn btnSecondary" href="mailto:admin@sc-sk.com">Contact support</a>
       </div>
       <p class="note">
         Beta means momentum — features evolve quickly, workflows deepen, and feedback shapes each release.
@@ -492,13 +552,49 @@
       <a class="footerLink" href="#sync">Sync</a>
       <a class="footerLink" href="#roadmap">Roadmap</a>
       <a class="footerLink" href="privacy.html">Privacy</a>
-      <a class="footerLink" href="mailto:feedback@scsk.com">Support</a>
+      <a class="footerLink" id="feedbackBtnFooter">Feedback</a>
     </div>
     <div class="small">
+      For questions, requests, concerns, or account/data deletion: <a href="mailto:admin@sc-sk.com">admin@sc-sk.com</a><br>
       © 2025 Saa Developments Inc. All rights reserved.
     </div>
   </div>
 </footer>
+
+<!-- Feedback Modal -->
+<div class="modal" id="feedbackModal">
+  <div class="modalContent">
+    <span class="close" id="closeModal">&times;</span>
+    <h2>Feedback / Suggestions</h2>
+    <form action="https://formspree.io/f/your-form-id" method="POST"> <!-- Replace with actual Formspree or similar endpoint -->
+      <div class="formGroup">
+        <label for="name">Name (optional)</label>
+        <input type="text" id="name" name="name">
+      </div>
+      <div class="formGroup">
+        <label for="email">Email (optional)</label>
+        <input type="email" id="email" name="_replyto">
+      </div>
+      <div class="formGroup">
+        <label for="message">Your feedback or suggestion *</label>
+        <textarea id="message" name="message" required></textarea>
+      </div>
+      <input type="hidden" name="_subject" value="SCSK Feedback">
+      <input type="hidden" name="_to" value="feedback@sc-sk.com">
+      <button type="submit" class="submitBtn">Submit Feedback</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  const modal = document.getElementById('feedbackModal');
+  const openBtns = [document.getElementById('feedbackBtn'), document.getElementById('feedbackBtnFooter')];
+  const closeBtn = document.getElementById('closeModal');
+
+  openBtns.forEach(btn => btn.onclick = () => modal.classList.add('open'));
+  closeBtn.onclick = () => modal.classList.remove('open');
+  window.onclick = (e) => { if (e.target === modal) modal.classList.remove('open'); };
+</script>
 
 </body>
 </html>
