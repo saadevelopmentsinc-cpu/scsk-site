@@ -24,15 +24,32 @@
       --radius: 20px;
     }
 
-    html { scroll-behavior: smooth; }
+    html { 
+      scroll-behavior: smooth;
+      background: var(--bg1);
+    }
     
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       color: var(--text);
-      background: linear-gradient(180deg, var(--bg0) 0%, var(--bg1) 100%);
-      background-attachment: fixed;
+      background: var(--bg0);
       line-height: 1.6;
       overflow-x: hidden;
+      min-height: 100vh;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: none;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(180deg, var(--bg0) 0%, var(--bg1) 100%);
+      z-index: -1;
+      pointer-events: none;
     }
 
     a { color: inherit; text-decoration: none; }
@@ -947,7 +964,7 @@
             <input type="hidden" name="_subject" value="SCSK Beta Application">
             <input type="text" name="_gotcha" style="display:none">
             <div id="statusOk" class="status ok">🎉 Application received! We'll review and send access details soon.</div>
-            <div id="statusErr" class="status err">⚠️ Something went wrong — please email <a href="mailto:admin@sc-sk.com">admin@sc-sk.com</a></div>
+            <div id="statusErr" class="status err">⚠️ Something went wrong — please email <a href="/cdn-cgi/l/email-protection#7e1f1a1317103e0d1d530d15501d1113"><span class="__cf_email__" data-cfemail="68090c050106281b0b451b03460b0705">[email&#160;protected]</span></a></div>
           </form>
         </div>
       </div>
@@ -962,14 +979,14 @@
           <p>The offline-first construction management app built for real job sites.</p>
         </div>
         <div class="footer-col"><h4>Product</h4><a href="#features">Features</a><a href="#platforms">Platforms</a><a href="#roadmap">Roadmap</a><a href="#beta">Join Beta</a></div>
-        <div class="footer-col"><h4>Resources</h4><a href="#faq">FAQ</a><a href="support.html">Support</a><a href="mailto:admin@sc-sk.com">Contact</a></div>
+        <div class="footer-col"><h4>Resources</h4><a href="#faq">FAQ</a><a href="support.html">Support</a><a href="/cdn-cgi/l/email-protection#0263666f6b6c4271612f71692c616d6f">Contact</a></div>
         <div class="footer-col"><h4>Legal</h4><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Service</a><a href="delete-account.html">Delete Account</a></div>
       </div>
       <div class="footer-bottom"><small>&copy; 2025 SAA. All rights reserved. Built for construction professionals.</small></div>
     </div>
   </footer>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     const form = document.getElementById('betaForm');
     const optional = document.getElementById('optional');
     const inputs = form.querySelectorAll('input, textarea, select');
@@ -1003,10 +1020,4 @@
       document.querySelectorAll('.status').forEach(s => s.classList.remove('show'));
       try {
         const res = await fetch(form.action, {method: 'POST', body: new FormData(form), headers: {'Accept': 'application/json'}});
-        if (res.ok) { form.reset(); inputs.forEach(f => f.parentElement.classList.remove('filled')); optional.classList.remove('show'); document.getElementById('statusOk').classList.add('show'); launchConfetti(); }
-        else { document.getElementById('statusErr').classList.add('show'); }
-      } catch (err) { document.getElementById('statusErr').classList.add('show'); }
-    });
-  </script>
-</body>
-</html>
+        if (res.ok) { form.reset(); inputs.forEach(f => f.parentElement.classList.remove('filled')); optional.classList.remove('show'); doc
