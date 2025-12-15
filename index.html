@@ -1,3 +1,4 @@
+// index.html
 <!doctype html>
 <html lang="en-AU">
 <head>
@@ -5,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <title>Site Companion Side Kick (SCSK) — Active Beta</title>
-  <meta name="description" content="Site Companion Side Kick (SCSK) is an offline-first site companion app for construction professionals. Join the active beta." />
+  <meta name="description" content="Site Companion Side Kick (SCSK) is an offline-first site companion app for construction professionals. Apply to join the active beta." />
 
   <style>
     :root{
@@ -102,6 +103,7 @@
       border:1px solid rgba(255,255,255,0.14);
       background:rgba(255,255,255,0.04);
       font-size:13px;
+      white-space:nowrap;
     }
 
     /* ================= HERO ================= */
@@ -151,6 +153,9 @@
       font-size:14px;
       text-align:center;
       min-width:220px;
+      background:rgba(255,255,255,0.06);
+      color:var(--text);
+      cursor:pointer;
     }
     .btnPrimary{
       background:linear-gradient(135deg,var(--accent),var(--accent2));
@@ -219,8 +224,22 @@
       color:var(--text);
       font-size:14px;
       margin-bottom:14px;
+      outline:none;
     }
     textarea{ resize:vertical; min-height:90px; }
+
+    .status{
+      margin-top:12px;
+      padding:12px 14px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,0.12);
+      background:rgba(0,0,0,0.18);
+      color:var(--muted);
+      font-size:13px;
+      display:none;
+    }
+    .status.ok{ display:block; border-color: rgba(93,169,255,0.35); }
+    .status.err{ display:block; border-color: rgba(251,191,36,0.55); }
 
     /* ================= FOOTER ================= */
     footer{
@@ -253,7 +272,7 @@
     }
     @media (max-width:640px){
       .headline{ font-size:34px; }
-      .btn{ width:100%; }
+      .btn{ width:100%; min-width:unset; }
     }
   </style>
 </head>
@@ -279,6 +298,8 @@
           <a class="navlink" href="#sync">Sync</a>
           <a class="navlink" href="#beta">Join Beta</a>
           <a class="navlink" href="privacy.html">Privacy</a>
+          <a class="navlink" href="delete-account.html">Delete account</a>
+          <a class="navlink" href="mailto:admin@sc-sk.com">Support</a>
         </nav>
       </div>
     </div>
@@ -336,7 +357,7 @@
         </div>
         <div class="card">
           <h3>Built for tablets</h3>
-          <p>Larger-screen workflows designed for supervision and audits.</p>
+          <p>Larger-screen workflows designed for supervision.</p>
         </div>
       </div>
     </section>
@@ -369,17 +390,31 @@
         <div class="formCard">
           <h2 class="sectionTitle">Apply to join the beta</h2>
           <p class="sectionLead">
-            Beta access is reviewed manually. Enter your details below.
+            Submit your details below. We review beta applications manually and send access instructions by email.
           </p>
 
-          <form action="mailto:admin@sc-sk.com" method="post" enctype="text/plain">
+          <!-- IMPORTANT:
+               Replace the action URL with your Formspree endpoint.
+               Example: https://formspree.io/f/abcdwxyz
+          -->
+          <form id="betaForm" action="https://formspree.io/f/xnnerkde" method="POST">
             <label for="email">Email address</label>
-            <input id="email" name="Email" type="email" required placeholder="you@example.com" />
+            <input id="email" name="email" type="email" required placeholder="you@example.com" />
+
+            <label for="role">Your role (optional)</label>
+            <input id="role" name="role" type="text" placeholder="Supervisor, Foreman, Project Manager..." />
 
             <label for="message">How will you use SCSK? (optional)</label>
-            <textarea id="message" name="Message" placeholder="Your role, site type, team size…"></textarea>
+            <textarea id="message" name="message" placeholder="Your site type, team size, workflow needs…"></textarea>
+
+            <!-- Helps Formspree route + reduces spam -->
+            <input type="hidden" name="_subject" value="SCSK Beta Application" />
+            <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
 
             <button class="btn btnPrimary" type="submit">Submit beta application</button>
+
+            <div id="statusOk" class="status ok">✅ Thanks — your application was sent. We’ll be in touch soon.</div>
+            <div id="statusErr" class="status err">⚠️ Sorry — something went wrong. Please email admin@sc-sk.com.</div>
           </form>
         </div>
       </div>
@@ -406,6 +441,34 @@
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    // AJAX submit so it sends in the background and shows a success message
+    const form = document.getElementById("betaForm");
+    const ok = document.getElementById("statusOk");
+    const err = document.getElementById("statusErr");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      ok.style.display = "none";
+      err.style.display = "none";
+
+      try {
+        const res = await fetch(form.action, {
+          method: "POST",
+          body: new FormData(form),
+          headers: { "Accept": "application/json" }
+        });
+
+        if (res.ok) {
+          form.reset();
+          ok.style.display = "block";
+        } else {
+          err.style.display = "block";
+        }
+      } catch {
+        err.style.display = "block";
+      }
+    });
   </script>
 
 </body>
