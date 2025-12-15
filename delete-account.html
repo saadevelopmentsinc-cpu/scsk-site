@@ -1,231 +1,584 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en-AU">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
   <title>Delete Account — Site Companion Side Kick (SCSK)</title>
-  <meta name="description" content="How to request account deletion for Site Companion Side Kick (SCSK)." />
-
+  <meta name="description" content="Request account and data deletion for Site Companion Side Kick (SCSK). Learn what data is deleted and how to submit your request.">
   <style>
-    :root{
-      --bg0:#070A10;
-      --bg1:#0B1020;
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    :root {
+      --bg0: #070A10;
+      --bg1: #0B1020;
       --glass: rgba(255,255,255,0.08);
       --glass-border: rgba(255,255,255,0.15);
-      --text:#EAF0FF;
+      --text: #EAF0FF;
       --muted: rgba(234,240,255,0.75);
-      --accent:#5DA9FF;
-      --accent2:#8B5CF6;
-      --warn:#FBBF24;
-      --shadow: 0 20px 50px rgba(0,0,0,0.6);
-      --max: 980px;
-      --radius: 28px;
-      --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      --accent: #5DA9FF;
+      --accent2: #8B5CF6;
+      --warning: #FBBF24;
+      --danger: #EF4444;
+      --max: 900px;
+      --radius: 20px;
     }
 
-    *{ box-sizing:border-box; margin:0; padding:0; }
-    html{ scroll-behavior:smooth; }
-    body{
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      color:var(--text);
-      background: 
-        radial-gradient(1400px 600px at 20% -20%, rgba(93,169,255,0.22), transparent 60%),
-        radial-gradient(1100px 600px at 80% 10%, rgba(139,92,246,0.18), transparent 60%),
-        linear-gradient(180deg, var(--bg0) 0%, var(--bg1) 100%);
-      background-attachment: fixed;
-      line-height:1.6;
-      overflow-x:hidden;
+    html { 
+      scroll-behavior: smooth;
+      background: var(--bg1);
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      color: var(--text);
+      background: var(--bg0);
+      line-height: 1.7;
+      min-height: 100vh;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: none;
     }
 
-    a{ color:var(--text); text-decoration:none; }
-    a:hover{ text-decoration:underline; }
-
-    .wrap{ max-width:var(--max); margin:0 auto; padding:0 24px; }
-
-    /* Header */
-    header{
-      position:sticky; top:0; z-index:100;
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      background: rgba(7,10,16,0.75);
-      border-bottom:1px solid var(--glass-border);
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(180deg, var(--bg0) 0%, var(--bg1) 100%);
+      z-index: -1;
+      pointer-events: none;
     }
-    .topbar{ display:flex; justify-content:space-between; align-items:center; padding:16px 0; flex-wrap:wrap; gap:16px; }
-    .brand{ display:flex; align-items:center; gap:16px; }
-    .logo{
-      width:48px; height:48px; border-radius:18px;
-      background:linear-gradient(135deg,var(--accent),var(--accent2));
-      box-shadow:0 16px 40px rgba(0,0,0,0.6);
-    }
-    .chip{
-      padding:12px 18px; border-radius:999px; background:rgba(255,255,255,0.05);
-      border:1px solid var(--glass-border); font-size:14px; transition:var(--transition);
-    }
-    .chip:hover{ background:rgba(255,255,255,0.12); }
 
-    /* Main Page */
-    .page{ padding:60px 0; }
-    .glass-card{
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 16px; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7,10,16,0.95);
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text);
+    }
+    .brand:hover { text-decoration: none; }
+
+    .logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .logo svg { width: 22px; height: 22px; fill: #fff; }
+
+    .brand-text strong { display: block; font-size: 14px; }
+    .brand-text span { font-size: 11px; color: var(--muted); }
+
+    .nav-links { display: flex; gap: 6px; flex-wrap: wrap; }
+
+    .chip {
+      padding: 8px 14px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--glass-border);
+      font-size: 13px;
+      color: var(--text);
+    }
+    .chip:hover { background: rgba(255,255,255,0.1); text-decoration: none; }
+
+    main { padding: 32px 0 60px; }
+
+    .card {
       background: var(--glass);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border:1px solid var(--glass-border);
+      border: 1px solid var(--glass-border);
       border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-    }
-    .cardHead{
-      padding:40px 40px 24px;
-      background:rgba(0,0,0,0.14);
-    }
-    .kicker{
-      display:inline-block; padding:10px 16px; border-radius:999px; background:rgba(0,0,0,0.35);
-      border:1px solid var(--glass-border); font-size:13px; letter-spacing:0.08em; color:var(--muted);
-    }
-    .headline{ font-size:40px; margin:20px 0 12px; letter-spacing:-0.03em; line-height:1.1; }
-    .meta{ color:var(--muted); font-size:15px; }
-
-    .content{ padding:0 40px 40px; }
-    .callout{
-      margin:32px 0; padding:24px; border-radius:20px; background:rgba(251,191,36,0.15);
-      border:1px solid rgba(251,191,36,0.4);
-    }
-    .callout strong{ color:var(--text); }
-
-    .formCard{
-      margin:32px 0; padding:32px; border-radius:20px; background:rgba(0,0,0,0.18);
-      border:1px solid var(--glass-border);
-    }
-    label{
-      display:block; margin:16px 0 8px; color:var(--muted); font-size:14px;
-    }
-    input, textarea{
-      width:100%; padding:16px; border-radius:16px; background:rgba(0,0,0,0.25);
-      border:1px solid var(--glass-border); color:var(--text); font-size:15px;
-    }
-    textarea{ min-height:120px; resize:vertical; }
-
-    .btnRow{ display:flex; gap:16px; flex-wrap:wrap; margin-top:24px; }
-    .btn{
-      padding:16px 28px; border-radius:20px; font-weight:900; font-size:15px;
-      border:1px solid var(--glass-border); cursor:pointer; transition:var(--transition);
-    }
-    .btn:hover{ transform:scale(1.05); }
-    .btnPrimary{ background:linear-gradient(135deg,var(--accent),var(--accent2)); }
-    .btnWarn{
-      background:linear-gradient(135deg,rgba(251,191,36,0.35),rgba(251,191,36,0.15));
-      border-color:rgba(251,191,36,0.55);
+      overflow: hidden;
     }
 
-    h2{ font-size:22px; margin:32px 0 12px; letter-spacing:-0.01em; }
-    p, li{ color:var(--muted); font-size:16px; }
-    ul{ margin:16px 0 0 24px; }
-
-    .footer{
-      padding:40px 0; text-align:center; color:var(--muted); font-size:13px;
+    .card-header {
+      padding: 28px 24px 20px;
+      background: rgba(0,0,0,0.2);
+      border-bottom: 1px solid var(--glass-border);
     }
 
-    .fade-in{ opacity:0; transform:translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
-    .fade-in.visible{ opacity:1; transform:translateY(0); }
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 10px;
+      border-radius: 6px;
+      background: rgba(239,68,68,0.15);
+      border: 1px solid rgba(239,68,68,0.3);
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--danger);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+    }
+    .kicker svg { width: 12px; height: 12px; fill: currentColor; }
 
-    @media (max-width:640px){
-      .headline{ font-size:32px; }
-      .cardHead, .content{ padding:24px; }
-      .btn{ width:100%; }
+    .headline {
+      font-size: clamp(24px, 6vw, 36px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+
+    .meta { color: var(--muted); font-size: 13px; }
+    .meta strong { color: var(--text); }
+
+    .card-body { padding: 24px; }
+
+    .callout {
+      margin-bottom: 28px;
+      padding: 20px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(239,68,68,0.12), rgba(239,68,68,0.06));
+      border: 1px solid rgba(239,68,68,0.3);
+    }
+
+    .callout-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--danger);
+    }
+    .callout-title svg { width: 18px; height: 18px; fill: currentColor; flex-shrink: 0; }
+    .callout p { font-size: 14px; color: var(--muted); margin: 0; }
+
+    h2 {
+      font-size: clamp(18px, 4vw, 22px);
+      font-weight: 600;
+      margin: 36px 0 14px;
+      padding-top: 20px;
+      border-top: 1px solid var(--glass-border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    h2:first-of-type { border-top: none; margin-top: 0; padding-top: 0; }
+    h2 svg { width: 22px; height: 22px; fill: var(--accent); flex-shrink: 0; }
+
+    p { color: var(--muted); font-size: 14px; margin: 10px 0; line-height: 1.7; }
+    p strong { color: var(--text); }
+
+    ul { margin: 14px 0; padding-left: 20px; }
+    li { color: var(--muted); font-size: 14px; margin: 8px 0; line-height: 1.6; }
+    li strong { color: var(--text); }
+
+    .form-card {
+      margin: 24px 0;
+      padding: 24px;
+      border-radius: 14px;
+      background: rgba(0,0,0,0.2);
+      border: 1px solid var(--glass-border);
+    }
+
+    .form-card h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+
+    .field { margin-bottom: 16px; }
+    .field label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 8px;
+    }
+    .field input,
+    .field textarea {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 10px;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid var(--glass-border);
+      color: var(--text);
+      font-size: 14px;
+      font-family: inherit;
+      transition: all 0.2s;
+    }
+    .field input::placeholder,
+    .field textarea::placeholder { color: rgba(234,240,255,0.4); }
+    .field input:focus,
+    .field textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      background: rgba(93,169,255,0.08);
+    }
+    .field textarea { min-height: 100px; resize: vertical; }
+
+    .btn-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 24px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 14px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      color: var(--text);
+    }
+    .btn:hover { transform: translateY(-2px); text-decoration: none; }
+    .btn svg { width: 16px; height: 16px; fill: currentColor; }
+
+    .btn-danger {
+      background: linear-gradient(135deg, var(--danger), #DC2626);
+      color: white;
+    }
+    .btn-danger:hover { box-shadow: 0 8px 24px rgba(239,68,68,0.3); }
+
+    .btn-secondary {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.1); }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin: 20px 0;
+    }
+
+    .info-card {
+      padding: 20px;
+      border-radius: 12px;
+      background: rgba(0,0,0,0.2);
+      border: 1px solid var(--glass-border);
+    }
+    .info-card.deleted {
+      border-color: rgba(239,68,68,0.3);
+      background: rgba(239,68,68,0.05);
+    }
+    .info-card.retained {
+      border-color: rgba(251,191,36,0.3);
+      background: rgba(251,191,36,0.05);
+    }
+
+    .info-card h4 {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .info-card.deleted h4 { color: var(--danger); }
+    .info-card.retained h4 { color: var(--warning); }
+    .info-card h4 svg { width: 16px; height: 16px; fill: currentColor; }
+
+    .info-card ul { margin: 0; padding-left: 16px; }
+    .info-card li { font-size: 13px; margin: 6px 0; }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin: 20px 0;
+    }
+
+    .contact-card {
+      padding: 16px;
+      border-radius: 10px;
+      background: rgba(0,0,0,0.2);
+      border: 1px solid var(--glass-border);
+    }
+    .contact-card strong {
+      display: block;
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+    }
+    .contact-card a, .contact-card span { font-size: 14px; color: var(--text); word-break: break-all; }
+
+    .timeline {
+      margin: 20px 0;
+      padding: 20px;
+      border-radius: 12px;
+      background: rgba(93,169,255,0.08);
+      border: 1px solid rgba(93,169,255,0.2);
+    }
+    .timeline-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .timeline-title svg { width: 18px; height: 18px; fill: currentColor; }
+    .timeline-steps {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .timeline-step {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .timeline-step .num {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: var(--bg0);
+      font-weight: 700;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    footer {
+      padding: 32px 0;
+      text-align: center;
+      border-top: 1px solid var(--glass-border);
+      margin-top: 32px;
+    }
+
+    .footer-links {
+      margin-bottom: 14px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 6px 20px;
+    }
+    .footer-links a { color: var(--muted); font-size: 13px; }
+    .footer-links a:hover { color: var(--accent); text-decoration: none; }
+
+    footer p { color: var(--muted); font-size: 12px; }
+
+    @media (max-width: 600px) {
+      .topbar { justify-content: center; text-align: center; flex-direction: column; }
+      .nav-links { justify-content: center; width: 100%; }
+      .card-header { padding: 20px 16px 16px; }
+      .card-body { padding: 16px; }
+      .form-card { padding: 16px; }
+      .info-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .btn-row { flex-direction: column; }
+      .btn { width: 100%; }
+      .timeline-steps { flex-direction: column; gap: 10px; }
+      h2 { margin: 28px 0 12px; padding-top: 16px; }
     }
   </style>
 </head>
 <body>
-
   <header>
     <div class="wrap topbar">
-      <div class="brand">
-        <div class="logo"></div>
-        <div>
-          <strong style="display:block; font-size:16px; letter-spacing:0.06em;">Site Companion Side Kick</strong>
-          <span style="font-size:13px; color:var(--muted);">SCSK • Delete account</span>
+      <a href="index.html" class="brand">
+        <div class="logo">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.18l6.9 3.45L12 11.09 5.1 7.63 12 4.18zM4 8.82l7 3.5v7.36l-7-3.5V8.82zm9 10.86v-7.36l7-3.5v7.36l-7 3.5z"/></svg>
         </div>
-      </div>
-      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <div class="brand-text">
+          <strong>Site Companion Side Kick</strong>
+          <span>SCSK</span>
+        </div>
+      </a>
+      <nav class="nav-links">
         <a class="chip" href="index.html">Home</a>
         <a class="chip" href="privacy.html">Privacy</a>
-        <a class="chip" href="mailto:admin@sc-sk.com">Support</a>
-      </div>
+        <a class="chip" href="support.html">Support</a>
+      </nav>
     </div>
   </header>
 
-  <main class="wrap page">
-    <div class="glass-card fade-in">
-      <div class="cardHead">
-        <span class="kicker">Account deletion</span>
-        <h1 class="headline">Delete your SCSK account</h1>
+  <main class="wrap">
+    <article class="card">
+      <div class="card-header">
+        <span class="kicker">
+          <svg viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+          Account Deletion
+        </span>
+        <h1 class="headline">Delete Your SCSK Account</h1>
         <p class="meta">Last updated: <strong>15 December 2025</strong></p>
       </div>
 
-      <div class="content">
+      <div class="card-body">
         <div class="callout">
-          <strong>Important:</strong> Account deletion is permanent. You will lose access to any synced data and content stored in your account.
+          <div class="callout-title">
+            <svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
+            Permanent Action
+          </div>
+          <p>Account deletion is <strong>permanent and cannot be undone</strong>. You will lose access to all synced projects, jobs, photos, and data stored in your account. Local data on your device will remain unless you uninstall the app.</p>
         </div>
 
-        <h2>How to request deletion</h2>
-        <p>Submit the form below or email us directly. We may verify ownership before processing.</p>
+        <h2>
+          <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+          Request Deletion
+        </h2>
+        <p>You can request account deletion using the form below or by emailing us directly. We may need to verify account ownership before processing your request.</p>
 
-        <div class="formCard">
-          <form action="mailto:admin@sc-sk.com" method="post" enctype="text/plain">
-            <label for="email">Email address used in SCSK</label>
-            <input id="email" name="SCSK account email" type="email" required placeholder="you@example.com" />
-
-            <label for="reason">Reason (optional)</label>
-            <textarea id="reason" name="Reason" placeholder="Optional: tell us why you're leaving so we can improve."></textarea>
-
-            <div class="btnRow">
-              <button class="btn btnPrimary" type="submit">Submit deletion request</button>
-              <a class="btn btnWarn" href="mailto:admin@sc-sk.com?subject=SCSK%20Account%20Deletion%20Request&body=Please%20delete%20my%20SCSK%20account.%0A%0AAccount%20email%3A%20%0A%0AReason%20(optional)%3A%20">
-                Email request directly
+        <div class="form-card">
+          <h3>Deletion Request Form</h3>
+          <form action="https://formspree.io/f/xnnerkde" method="POST">
+            <div class="field">
+              <label for="email">Email address used in SCSK *</label>
+              <input type="email" id="email" name="email" required placeholder="you@example.com">
+            </div>
+            <div class="field">
+              <label for="reason">Reason for leaving (optional)</label>
+              <textarea id="reason" name="reason" placeholder="Help us improve — tell us why you're deleting your account."></textarea>
+            </div>
+            <input type="hidden" name="_subject" value="SCSK Account Deletion Request">
+            <input type="text" name="_gotcha" style="display:none">
+            <div class="btn-row">
+              <button type="submit" class="btn btn-danger">
+                <svg viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+                Submit Deletion Request
+              </button>
+              <a href="mailto:admin@sc-sk.com?subject=SCSK%20Account%20Deletion%20Request&body=Please%20delete%20my%20SCSK%20account.%0A%0AAccount%20email%3A%20%0A%0AReason%20(optional)%3A%20" class="btn btn-secondary">
+                <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                Email Request Instead
               </a>
             </div>
           </form>
         </div>
 
-        <h2>What data is deleted</h2>
-        <p>We aim to permanently delete:</p>
-        <ul>
-          <li>Your account profile and sign-in identifiers</li>
-          <li>Synced project, job, and photo data (where applicable)</li>
-          <li>Any attachments stored in your account</li>
-        </ul>
+        <h2>
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+          What Happens to Your Data
+        </h2>
 
-        <h2>What data may be retained</h2>
-        <p>Limited data may be kept only when required for legal, security, or fraud-prevention reasons (e.g., basic logs).</p>
+        <div class="info-grid">
+          <div class="info-card deleted">
+            <h4>
+              <svg viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+              Permanently Deleted
+            </h4>
+            <ul>
+              <li>Account profile & credentials</li>
+              <li>Synced projects & jobs</li>
+              <li>Cloud-stored photos</li>
+              <li>Contacts & notes</li>
+              <li>Calendar events</li>
+              <li>App preferences & settings</li>
+            </ul>
+          </div>
+          <div class="info-card retained">
+            <h4>
+              <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+              May Be Retained
+            </h4>
+            <ul>
+              <li>Basic server logs (security)</li>
+              <li>Anonymised analytics</li>
+              <li>Legal compliance records</li>
+              <li>Fraud prevention data</li>
+            </ul>
+            <p style="font-size:12px;margin-top:10px;color:var(--muted);">Retained only when legally required</p>
+          </div>
+        </div>
 
-        <h2>Timing</h2>
-        <p>We process requests as quickly as possible — usually within a few days after verification.</p>
+        <h2>
+          <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+          Processing Timeline
+        </h2>
 
-        <h2>Contact</h2>
-        <ul>
-          <li><strong>Email:</strong> <a href="mailto:admin@sc-sk.com">admin@sc-sk.com</a></li>
-          <li><strong>Website:</strong> <a href="https://sc-sk.com">https://sc-sk.com</a></li>
-        </ul>
+        <div class="timeline">
+          <div class="timeline-title">
+            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            Typical deletion process
+          </div>
+          <div class="timeline-steps">
+            <div class="timeline-step"><span class="num">1</span> Request received</div>
+            <div class="timeline-step"><span class="num">2</span> Ownership verified (1-2 days)</div>
+            <div class="timeline-step"><span class="num">3</span> Data deleted (within 7 days)</div>
+            <div class="timeline-step"><span class="num">4</span> Confirmation email sent</div>
+          </div>
+        </div>
+
+        <p>Most requests are processed within <strong>7 business days</strong>. You'll receive an email confirmation once your account and data have been permanently deleted.</p>
+
+        <h2>
+          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          Contact Us
+        </h2>
+        <p>Questions about account deletion? Get in touch:</p>
+
+        <div class="contact-grid">
+          <div class="contact-card">
+            <strong>General Support</strong>
+            <a href="mailto:admin@sc-sk.com">admin@sc-sk.com</a>
+          </div>
+          <div class="contact-card">
+            <strong>Privacy Inquiries</strong>
+            <a href="mailto:privacy@sc-sk.com">privacy@sc-sk.com</a>
+          </div>
+          <div class="contact-card">
+            <strong>Website</strong>
+            <a href="https://sc-sk.com">sc-sk.com</a>
+          </div>
+          <div class="contact-card">
+            <strong>Response Time</strong>
+            <span>1-2 business days</span>
+          </div>
+        </div>
       </div>
-    </div>
-
-    <div class="footer">
-      © <span id="year"></span> SAA. All rights reserved.
-    </div>
+    </article>
   </main>
 
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('visible');
-      });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-  </script>
-
+  <footer>
+    <div class="wrap">
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+        <a href="support.html">Support</a>
+        <a href="mailto:admin@sc-sk.com">Contact</a>
+      </div>
+      <p>&copy; 2025 SAA. All rights reserved.</p>
+      <p style="margin-top:6px;">Site Companion Side Kick (SCSK) — Built for construction professionals.</p>
+    </div>
+  </footer>
 </body>
 </html>
