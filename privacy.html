@@ -18,7 +18,6 @@
       --muted2: rgba(234,240,255,0.55);
       --accent:#5DA9FF;
       --accent2:#8B5CF6;
-      --beta:#FBBF24;
       --shadow: 0 24px 60px rgba(0,0,0,0.55);
       --max: 980px;
       --radius: 22px;
@@ -26,6 +25,7 @@
 
     *{ box-sizing:border-box; }
     html{ scroll-behavior:smooth; }
+
     body{
       margin:0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
@@ -43,9 +43,9 @@
 
     .wrap{ max-width:var(--max); margin:0 auto; padding:0 18px; }
 
-    /* Top banner (optional) */
+    /* Top bar */
     .topBanner{
-      background: linear-gradient(135deg, rgba(93,169,255,0.18), rgba(139,92,246,0.14));
+      background: rgba(0,0,0,0.22);
       border-bottom:1px solid rgba(255,255,255,0.10);
     }
     .topBannerInner{
@@ -67,7 +67,6 @@
       background:linear-gradient(135deg,var(--accent),var(--accent2));
       border:1px solid rgba(255,255,255,0.25);
       box-shadow:0 18px 40px rgba(0,0,0,0.45);
-      flex:0 0 auto;
     }
     .brandTitle{
       margin:0;
@@ -84,7 +83,6 @@
       display:flex;
       gap:10px;
       flex-wrap:wrap;
-      justify-content:flex-end;
     }
     .chip{
       padding:10px 12px;
@@ -94,26 +92,20 @@
       font-size:13px;
       white-space:nowrap;
     }
-    @media (max-width: 640px){
-      .topLinks{ width:100%; justify-content:flex-start; }
-      .chip{ width:auto; }
-    }
 
-    /* Main card */
-    .page{
-      padding: 22px 0 42px;
-    }
+    /* Page card */
+    .page{ padding:22px 0 42px; }
     .card{
-      border-radius: 28px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,0.05);
-      box-shadow: var(--shadow);
+      border-radius:28px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,0.05);
+      box-shadow:var(--shadow);
       overflow:hidden;
     }
     .cardHead{
-      padding: 22px 22px 14px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      background: rgba(0,0,0,0.12);
+      padding:22px 22px 14px;
+      border-bottom:1px solid rgba(255,255,255,0.08);
+      background:rgba(0,0,0,0.14);
     }
     .kicker{
       display:inline-flex;
@@ -127,81 +119,59 @@
       letter-spacing:0.08em;
       text-transform:uppercase;
       color:var(--muted);
-      flex-wrap:wrap;
     }
     .headline{
-      margin: 14px 0 6px;
-      font-size: 34px;
-      line-height: 1.1;
+      margin:14px 0 6px;
+      font-size:34px;
+      line-height:1.1;
       letter-spacing:-0.02em;
     }
     .meta{
       margin:0;
-      color: var(--muted);
-      font-size: 14px;
+      color:var(--muted);
+      font-size:14px;
     }
 
-    .content{
-      padding: 18px 22px 22px;
-    }
-
-    .toc{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin: 10px 0 6px;
-    }
+    .content{ padding:18px 22px 22px; }
 
     h2{
-      font-size: 18px;
+      font-size:18px;
       letter-spacing:-0.01em;
-      margin: 22px 0 8px;
+      margin:22px 0 8px;
     }
     p, li{
-      color: var(--muted);
-      font-size: 15px;
+      color:var(--muted);
+      font-size:15px;
     }
-    ul{
-      margin: 10px 0 0 18px;
-      padding:0;
-    }
+    ul{ margin:10px 0 0 18px; }
 
     .callout{
-      margin: 14px 0;
-      padding: 14px 14px;
-      border-radius: var(--radius);
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(0,0,0,0.18);
+      margin:14px 0;
+      padding:14px;
+      border-radius:var(--radius);
+      border:1px solid rgba(255,255,255,0.12);
+      background:rgba(0,0,0,0.18);
     }
-    .callout strong{ color: var(--text); }
+    .callout strong{ color:var(--text); }
 
     .divider{
       height:1px;
-      background: rgba(255,255,255,0.08);
-      margin: 18px 0;
+      background:rgba(255,255,255,0.08);
+      margin:18px 0;
     }
 
     .footer{
-      padding: 20px 0 34px;
-      color: var(--muted2);
-      font-size: 12px;
+      padding:20px 0 34px;
+      color:var(--muted2);
+      font-size:12px;
     }
 
-    /* Mobile spacing */
-    @media (max-width: 640px){
-      .headline{ font-size: 28px; }
-      .cardHead{ padding: 18px 16px 12px; }
-      .content{ padding: 14px 16px 18px; }
-      p, li{ font-size: 14.5px; }
-    }
-
-    /* Print-friendly */
-    @media print{
-      body{ background:#fff; color:#000; }
-      .topBanner, .toc, .footer { display:none; }
-      .card{ box-shadow:none; border: 1px solid #ddd; background:#fff; }
-      p, li{ color:#222; }
-      a{ color:#000; text-decoration:underline; }
+    /* Mobile tweaks */
+    @media (max-width:640px){
+      .headline{ font-size:28px; }
+      .cardHead{ padding:18px 16px 12px; }
+      .content{ padding:14px 16px 18px; }
+      p, li{ font-size:14.5px; }
     }
   </style>
 </head>
@@ -212,17 +182,16 @@
     <div class="wrap">
       <div class="topBannerInner">
         <div class="brand">
-          <div class="logo" aria-hidden="true"></div>
+          <div class="logo"></div>
           <div>
             <p class="brandTitle">Site Companion Side Kick</p>
-            <p class="brandSub">SCSK • Privacy &amp; Trust</p>
+            <p class="brandSub">SCSK • Privacy</p>
           </div>
         </div>
 
-        <div class="topLinks" aria-label="Quick links">
+        <div class="topLinks">
           <a class="chip" href="index.html">Home</a>
-          <a class="chip" href="mailto:feedback@scsk.com">Support</a>
-          <a class="chip" href="#contact">Contact</a>
+          <a class="chip" href="mailto:feedback@sc-sk.com">Support</a>
         </div>
       </div>
     </div>
@@ -233,128 +202,67 @@
       <div class="cardHead">
         <span class="kicker">Privacy Policy</span>
         <h1 class="headline">Privacy Policy — Site Companion Side Kick (SCSK)</h1>
-        <p class="meta">
-          Last updated: <strong><span id="lastUpdated">15 December 2025</span></strong>
-        </p>
-
-        <div class="toc" aria-label="Table of contents">
-          <a class="chip" href="#summary">Summary</a>
-          <a class="chip" href="#data-we-collect">Data we collect</a>
-          <a class="chip" href="#how-we-use">How we use data</a>
-          <a class="chip" href="#sharing">Sharing</a>
-          <a class="chip" href="#security">Security</a>
-          <a class="chip" href="#your-choices">Your choices</a>
-          <a class="chip" href="#contact">Contact</a>
-        </div>
+        <p class="meta">Last updated: <strong>15 December 2025</strong></p>
       </div>
 
       <div class="content">
-        <section id="summary">
-          <div class="callout">
-            <strong>Plain-English summary:</strong>
-            <ul>
-              <li>SCSK is built for professional site workflows and is designed with privacy in mind.</li>
-              <li>We only use device permissions (camera, storage, location, microphone) when you enable features that need them.</li>
-              <li>We do not sell your personal information.</li>
-              <li>If syncing is enabled, your data may be stored and processed to provide cross-device access.</li>
-            </ul>
-          </div>
-
-          <p>
-            This Privacy Policy explains how <strong>Site Companion Side Kick (SCSK)</strong> (“we”, “us”, “our”) collects,
-            uses, and protects information when you use the SCSK mobile application and related services (the “Service”).
-          </p>
-        </section>
-
-        <section id="data-we-collect">
-          <h2>1) Information we collect</h2>
-          <p>Depending on what features you use, the Service may collect or process the following categories of information:</p>
-
+        <div class="callout">
+          <strong>Plain-English summary:</strong>
           <ul>
-            <li><strong>Account information:</strong> if you sign in, we may collect identifiers needed to authenticate you (for example, an email address or user ID provided by your sign-in method).</li>
-            <li><strong>Project and job content you create:</strong> project names, job details, notes, checklists, defect items, timestamps, and trade assignments you enter.</li>
-            <li><strong>Photos and files:</strong> photos you take inside the app, images you import, and documents you attach to jobs/projects (such as plans/SWMS where applicable).</li>
-            <li><strong>Audio (optional):</strong> if you use voice notes or speech-to-text features, audio or transcripts may be processed to provide that functionality.</li>
-            <li><strong>Location (optional):</strong> if you enable geofencing/location features, location data may be used to trigger prompts when you are near a saved site.</li>
-            <li><strong>Device and diagnostics data:</strong> basic technical information (e.g., app version, device model, crash logs) to help improve stability and performance.</li>
+            <li>SCSK is designed for professional site workflows.</li>
+            <li>Permissions are only used when you enable features that require them.</li>
+            <li>Your data is not sold.</li>
+            <li>Syncing across devices is optional.</li>
           </ul>
+        </div>
 
-          <div class="callout">
-            <strong>Beta note:</strong> SCSK is an active beta. We may add features over time that require new permissions or data processing.
-            When this happens, we aim to update this policy and/or present in-app permission prompts so you can choose what you enable.
-          </div>
-        </section>
+        <h2>1) Information we collect</h2>
+        <p>Depending on the features you use, SCSK may process:</p>
+        <ul>
+          <li>Account identifiers (for sign-in and syncing)</li>
+          <li>Project, job, checklist, and defect data you enter</li>
+          <li>Photos, documents, and annotations you create</li>
+          <li>Optional audio notes or transcripts</li>
+          <li>Optional location data for geofencing prompts</li>
+          <li>Basic diagnostics to improve stability</li>
+        </ul>
 
-        <section id="how-we-use">
-          <h2>2) How we use information</h2>
-          <p>We use information to:</p>
-          <ul>
-            <li>Provide core app functionality (projects, jobs, photos, annotations, reporting).</li>
-            <li>Enable cross-device access and syncing when you choose to use syncing.</li>
-            <li>Generate documents and reports you request (including PDF exports).</li>
-            <li>Improve performance, reliability, and user experience (including bug fixes and feature improvements).</li>
-            <li>Provide support and respond to feedback requests.</li>
-          </ul>
-        </section>
+        <h2>2) How information is used</h2>
+        <ul>
+          <li>Provide core app functionality</li>
+          <li>Enable syncing across devices when turned on</li>
+          <li>Generate reports and exports you request</li>
+          <li>Improve performance and reliability</li>
+        </ul>
 
-        <section id="sharing">
-          <h2>3) Sharing of information</h2>
-          <p>We may share information only in limited circumstances, such as:</p>
-          <ul>
-            <li><strong>With service providers:</strong> hosting, syncing, analytics, or crash reporting providers used to operate the Service.</li>
-            <li><strong>When you choose to share:</strong> when you export or email reports, share PDFs, or send content to contacts/trades.</li>
-            <li><strong>Legal requirements:</strong> if required to comply with applicable law or valid legal process.</li>
-          </ul>
-          <p><strong>We do not sell your personal information.</strong></p>
-        </section>
+        <h2>3) Sharing</h2>
+        <p>
+          Information may be shared only with infrastructure providers required to operate the service,
+          or when you choose to export or share content. We do not sell personal data.
+        </p>
 
-        <section id="security">
-          <h2>4) Security</h2>
-          <p>
-            We take reasonable measures to protect information. However, no system can be guaranteed 100% secure.
-            You are responsible for maintaining the confidentiality of your device access and any sign-in credentials.
-          </p>
-        </section>
+        <h2>4) Security</h2>
+        <p>
+          Reasonable safeguards are used to protect information, but no system is completely secure.
+        </p>
 
-        <section id="your-choices">
-          <h2>5) Your choices and controls</h2>
-          <p>You can control your data and permissions in a few ways:</p>
-          <ul>
-            <li><strong>Permissions:</strong> you can enable/disable permissions (camera, microphone, location) in your device settings.</li>
-            <li><strong>Exporting:</strong> you can export reports and store/share them as you choose.</li>
-            <li><strong>Account/data requests:</strong> you may request assistance with account access or data questions by contacting us (see below).</li>
-          </ul>
+        <h2>5) Your choices</h2>
+        <ul>
+          <li>Manage permissions in device settings</li>
+          <li>Export or delete content you create</li>
+          <li>Contact support for data or access requests</li>
+        </ul>
 
-          <div class="divider"></div>
+        <h2>6) Children’s privacy</h2>
+        <p>
+          SCSK is intended for professional use and is not directed at children.
+        </p>
 
-          <h2>6) Children’s privacy</h2>
-          <p>
-            SCSK is intended for professional, workplace use and is not directed to children. We do not knowingly collect
-            personal information from children.
-          </p>
-        </section>
-
-        <section id="changes">
-          <h2>7) Changes to this policy</h2>
-          <p>
-            We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated “Last updated” date.
-          </p>
-        </section>
-
-        <section id="contact">
-          <h2>8) Contact</h2>
-          <p>
-            If you have questions about this Privacy Policy or the Service, contact us:
-          </p>
-          <ul>
-            <li><strong>Email:</strong> <a href="mailto:feedback@scsk.com">feedback@scsk.com</a></li>
-            <li><strong>Website:</strong> <a href="https://sc-sk.com">https://sc-sk.com</a></li>
-          </ul>
-
-          <div class="callout">
-            <strong>Tip:</strong> If you’re contacting support about an issue, include your device model, Android version, and what you were doing when the issue happened.
-          </div>
-        </section>
+        <h2>7) Contact</h2>
+        <ul>
+          <li><strong>Email:</strong> <a href="mailto:feedback@sc-sk.com">feedback@sc-sk.com</a></li>
+          <li><strong>Website:</strong> <a href="https://sc-sk.com">https://sc-sk.com</a></li>
+        </ul>
       </div>
     </div>
 
@@ -366,5 +274,6 @@
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
+
 </body>
 </html>
