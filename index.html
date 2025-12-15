@@ -3,355 +3,1895 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Site Companion Side Kick (SCSK) — Active Beta</title>
-  <meta name="description" content="SCSK: Offline-first Android app for construction foremen, supervisors, and project managers. Job tracking, photos, trade assignments, reports. Windows cross-platform coming soon." />
+  <title>Site Companion Side Kick (SCSK) — Construction Site Management App</title>
+  <meta name="description" content="SCSK: The offline-first construction management app for foremen, supervisors, and project managers. Job tracking, photo documentation, trade assignments, PDF reports. Android & Windows." />
+  <meta name="keywords" content="construction app, site management, job tracking, construction software, foreman app, project management, offline construction app" />
+  <meta property="og:title" content="SCSK — Your Construction Site Companion" />
+  <meta property="og:description" content="Offline-first app for construction professionals. Track jobs, capture evidence, assign trades, generate reports." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
   <style>
-    :root{
-      --bg0:#070A10;
-      --bg1:#0B1020;
-      --glass: rgba(255,255,255,0.08);
-      --glass-border: rgba(255,255,255,0.15);
-      --text:#EAF0FF;
-      --muted: rgba(234,240,255,0.75);
-      --accent:#5DA9FF;
-      --accent2:#8B5CF6;
-      --beta:#FBBF24;
-      --shadow: 0 20px 50px rgba(0,0,0,0.6);
-      --max: 1200px;
-      --radius: 28px;
+    :root {
+      --bg0: #050608;
+      --bg1: #0a0d14;
+      --bg2: #0f1219;
+      --glass: rgba(255,255,255,0.06);
+      --glass-hover: rgba(255,255,255,0.10);
+      --glass-border: rgba(255,255,255,0.12);
+      --glass-border-hover: rgba(255,255,255,0.22);
+      --text: #f0f4ff;
+      --text-secondary: #b8c4e0;
+      --muted: rgba(184,196,224,0.7);
+      --accent: #5DA9FF;
+      --accent-glow: rgba(93,169,255,0.4);
+      --accent2: #8B5CF6;
+      --accent2-glow: rgba(139,92,246,0.4);
+      --success: #10B981;
+      --warning: #FBBF24;
+      --warning-glow: rgba(251,191,36,0.3);
+      --max: 1280px;
+      --radius: 24px;
+      --radius-sm: 16px;
+      --radius-xs: 12px;
       --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      --shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+      --shadow-lg: 0 40px 80px -20px rgba(0,0,0,0.6);
+      --shadow-glow: 0 0 60px -15px var(--accent-glow);
     }
-    *{ box-sizing:border-box; margin:0; padding:0; }
-    html{ scroll-behavior:smooth; }
-    body{
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      color:var(--text);
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: var(--text);
+      background: var(--bg0);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Animated background */
+    .bg-pattern {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
       background:
-        radial-gradient(1400px 600px at 20% -20%, rgba(93,169,255,0.22), transparent 60%),
-        radial-gradient(1100px 600px at 80% 10%, rgba(139,92,246,0.18), transparent 60%),
-        linear-gradient(180deg, var(--bg0) 0%, var(--bg1) 100%);
-      background-attachment: fixed;
-      line-height:1.6;
-      overflow-x:hidden;
+        radial-gradient(ellipse 1200px 600px at 15% 0%, rgba(93,169,255,0.15), transparent 50%),
+        radial-gradient(ellipse 1000px 500px at 85% 5%, rgba(139,92,246,0.12), transparent 50%),
+        radial-gradient(ellipse 800px 400px at 50% 100%, rgba(93,169,255,0.08), transparent 50%),
+        linear-gradient(180deg, var(--bg0) 0%, var(--bg1) 50%, var(--bg2) 100%);
     }
-    a{ color:var(--text); text-decoration:none; }
-    a:hover{ text-decoration:underline; }
-    .wrap{ max-width:var(--max); margin:0 auto; padding:0 24px; }
-    .glass-card{
+
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background-image: 
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+    }
+
+    a { color: inherit; text-decoration: none; transition: var(--transition-fast); }
+    a:hover { color: var(--accent); }
+
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+    /* Beta announcement bar */
+    .announcement {
+      background: linear-gradient(135deg, rgba(251,191,36,0.2), rgba(251,191,36,0.08));
+      border-bottom: 1px solid rgba(251,191,36,0.3);
+      padding: 14px 24px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .announcement-badge {
+      background: var(--warning);
+      color: var(--bg0);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .announcement-text { color: var(--text-secondary); }
+    .announcement-highlight { color: var(--warning); }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: rgba(5,6,8,0.8);
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .logo {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 8px 32px var(--accent-glow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .logo::before {
+      content: '';
+      position: absolute;
+      inset: 2px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
+    }
+    .logo svg { width: 26px; height: 26px; fill: white; position: relative; z-index: 1; }
+
+    .brand-text strong {
+      display: block;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+    .brand-text span {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    nav { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    .navlink {
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: var(--transition-fast);
+      border: 1px solid transparent;
+    }
+    .navlink:hover {
       background: var(--glass);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border:1px solid var(--glass-border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
+      color: var(--text);
+      border-color: var(--glass-border);
+    }
+
+    .nav-cta {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: white !important;
+      font-weight: 600;
+    }
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px var(--accent-glow);
+    }
+
+    /* Mobile menu */
+    .menu-toggle {
+      display: none;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 10px;
+      padding: 10px;
+      cursor: pointer;
+      color: var(--text);
+    }
+    .menu-toggle svg { width: 24px; height: 24px; fill: currentColor; }
+
+    /* Hero Section */
+    .hero {
+      padding: 100px 0 120px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+      opacity: 0.12;
+      transform: scale(1.1);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .hero-text { max-width: 600px; }
+
+    .hero-badges {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .badge-beta {
+      background: rgba(251,191,36,0.15);
+      border: 1px solid rgba(251,191,36,0.3);
+      color: var(--warning);
+    }
+    .badge-android {
+      background: rgba(16,185,129,0.15);
+      border: 1px solid rgba(16,185,129,0.3);
+      color: var(--success);
+    }
+    .badge svg { width: 14px; height: 14px; fill: currentColor; }
+
+    .headline {
+      font-size: 56px;
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
+      background: linear-gradient(135deg, var(--text) 0%, var(--text-secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .headline-accent {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
+    .subhead {
+      font-size: 18px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .hero-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin: 32px 0;
+    }
+    .hero-feature {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+    .hero-feature svg {
+      width: 20px;
+      height: 20px;
+      fill: var(--success);
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 40px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 16px 32px;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      font-size: 15px;
+      border: 1px solid var(--glass-border);
+      background: var(--glass);
+      cursor: pointer;
       transition: var(--transition);
     }
-    .glass-card:hover{ transform: translateY(-12px); box-shadow: 0 32px 80px rgba(0,0,0,0.7); }
-    header{
-      position:sticky; top:0; z-index:100;
+    .btn:hover {
+      background: var(--glass-hover);
+      border-color: var(--glass-border-hover);
+      transform: translateY(-3px);
+    }
+    .btn svg { width: 20px; height: 20px; fill: currentColor; }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border: none;
+      color: white;
+      box-shadow: 0 8px 32px var(--accent-glow);
+    }
+    .btn-primary:hover {
+      box-shadow: 0 16px 48px var(--accent-glow);
+    }
+
+    /* Hero Visual */
+    .hero-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+
+    .phone-mockup {
+      position: relative;
+      width: 320px;
+      height: 650px;
+      background: linear-gradient(145deg, #1a1d24, #0d0f14);
+      border-radius: 48px;
+      padding: 12px;
+      box-shadow: 
+        0 60px 100px -30px rgba(0,0,0,0.7),
+        inset 0 1px 0 rgba(255,255,255,0.1),
+        0 0 0 1px rgba(255,255,255,0.05);
+    }
+    .phone-mockup::before {
+      content: '';
+      position: absolute;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 28px;
+      background: #000;
+      border-radius: 20px;
+      z-index: 10;
+    }
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      background: #000;
+      border-radius: 38px;
+      overflow: hidden;
+    }
+    .phone-screen img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .floating-card {
+      position: absolute;
+      background: var(--glass);
       backdrop-filter: blur(20px);
-      background: rgba(7,10,16,0.75);
-      border-bottom:1px solid var(--glass-border);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-sm);
+      padding: 16px 20px;
+      box-shadow: var(--shadow);
+      animation: float 6s ease-in-out infinite;
     }
-    .topbar{ display:flex; justify-content:space-between; align-items:center; padding:16px 0; flex-wrap:wrap; gap:16px; }
-    .brand{ display:flex; align-items:center; gap:16px; }
-    .logo{
-      width:48px; height:48px; border-radius:18px;
-      background:linear-gradient(135deg,var(--accent),var(--accent2));
-      box-shadow:0 16px 40px rgba(0,0,0,0.6);
+    .floating-card-1 {
+      top: 10%;
+      left: -60px;
+      animation-delay: 0s;
     }
-    .navlink{
-      padding:12px 18px; border-radius:999px; background:rgba(255,255,255,0.05);
-      border:1px solid var(--glass-border); font-size:14px; transition:var(--transition);
+    .floating-card-2 {
+      bottom: 20%;
+      right: -80px;
+      animation-delay: 2s;
     }
-    .navlink:hover{ background:rgba(255,255,255,0.12); }
-    .hero{ padding:60px 0 80px; position:relative; overflow:hidden; }
-    .hero-bg{ position:absolute; inset:0; background:url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover no-repeat; opacity:0.25; transform: translateY(0); transition: transform 0.8s ease-out; }
-    .badge{ display:inline-block; padding:10px 16px; border-radius:999px; background:rgba(0,0,0,0.4); border:1px solid var(--glass-border); color:var(--beta); font-weight:800; font-size:13px; letter-spacing:0.1em; }
-    .headline{ font-size:52px; line-height:1.05; margin:16px 0 20px; letter-spacing:-0.04em; }
-    .subhead{ font-size:20px; color:var(--muted); max-width:80ch; margin-bottom:24px; }
-    .ctaRow{ display:flex; gap:16px; flex-wrap:wrap; margin-top:32px; }
-    .btn{ padding:16px 28px; border-radius:20px; font-weight:900; font-size:15px; min-width:240px; text-align:center; background:rgba(255,255,255,0.08); border:1px solid var(--glass-border); cursor:pointer; transition:var(--transition); }
-    .btn:hover{ transform:scale(1.05); }
-    .btnPrimary{ background:linear-gradient(135deg,var(--accent),var(--accent2)); }
-    section{ padding:80px 0; }
-    .sectionTitle{ font-size:36px; margin-bottom:16px; letter-spacing:-0.03em; text-align:center; }
-    .sectionLead{ color:var(--muted); max-width:80ch; margin:0 auto 40px; font-size:18px; text-align:center; }
-    .grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(340px,1fr)); gap:32px; }
-    .feature-card{
-      background: var(--glass); backdrop-filter: blur(16px); border:1px solid var(--glass-border);
-      border-radius: var(--radius); padding:32px; box-shadow: var(--shadow);
+    .floating-card-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10px;
     }
-    .feature-card img{ width:100%; height:480px; object-fit:contain; background:#000; border-radius:16px; margin-bottom:24px; box-shadow:0 12px 30px rgba(0,0,0,0.6); }
-    .feature-card h3{ font-size:22px; margin-bottom:16px; }
-    .feature-card ul{ margin:16px 0; padding-left:24px; color:var(--muted); }
-    .feature-card li{ margin-bottom:8px; }
-    #beta{ padding:100px 0; position:relative; overflow:hidden; }
-    #beta::before{ content:''; position:absolute; inset:0; background:radial-gradient(circle at 50% 50%, rgba(93,169,255,0.15), transparent 70%); pointer-events:none; }
-    .formCard{ position:relative; max-width:780px; margin:0 auto; padding:48px; border-radius:32px; background: rgba(255,255,255,0.09); backdrop-filter: blur(20px); border:1px solid rgba(255,255,255,0.2); box-shadow: 0 32px 80px rgba(0,0,0,0.7); transform: translateY(20px); opacity:0; transition: all 1s ease; }
-    .formCard.visible{ transform:translateY(0); opacity:1; }
-    .formGrid{ display:grid; gap:24px; }
-    .field{ position:relative; }
-    .field input, .field textarea, .field select{ width:100%; padding:20px 20px 20px 4px; border-radius:16px; border:none; background:rgba(0,0,0,0.3); color:var(--text); font-size:16px; transition: all 0.4s ease; }
-    .field label{ position:absolute; left:20px; top:20px; color:var(--muted); pointer-events:none; transition: all 0.3s ease; transform-origin: left; }
-    .field:focus-within label, .field.filled label{ transform: translateY(-30px) scale(0.85); color:var(--accent); }
-    .field:focus-within input, .field:focus-within textarea, .field:focus-within select{ background:rgba(93,169,255,0.15); box-shadow:0 0 0 3px rgba(93,169,255,0.3); }
-    .optionalFields{ display:grid; gap:24px; max-height:0; overflow:hidden; transition:max-height 0.6s ease; }
-    .optionalFields.show{ max-height:800px; }
-    .submitBtn{ padding:18px 40px; border-radius:20px; font-weight:900; font-size:17px; background:linear-gradient(135deg,var(--accent),var(--accent2)); border:none; color:white; cursor:pointer; box-shadow:0 12px 30px rgba(93,169,255,0.4); transition: all 0.4s ease; }
-    .submitBtn:hover{ transform:scale(1.08) translateY(-4px); box-shadow:0 20px 40px rgba(93,169,255,0.5); }
-    .status{ margin-top:24px; padding:20px; border-radius:20px; text-align:center; font-size:16px; opacity:0; transform:translateY(20px); transition:all 0.6s ease; }
-    .status.show{ opacity:1; transform:translateY(0); }
-    .status.ok{ background:rgba(93,169,255,0.2); border:1px solid rgba(93,169,255,0.4); }
-    #confetti{ position:absolute; inset:0; pointer-events:none; }
-    footer{ padding:60px 0; border-top:1px solid var(--glass-border); background:rgba(0,0,0,0.2); text-align:center; }
-    .fade-in{ opacity:0; transform:translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
-    .fade-in.visible{ opacity:1; transform:translateY(0); }
-    @media (max-width:900px){ .headline{ font-size:40px; } .grid{ grid-template-columns:1fr; } }
-    @media (max-width:640px){ .headline{ font-size:36px; } .btn{ min-width:100%; } .topbar{ flex-direction:column; text-align:center; } .sectionTitle{ font-size:32px; } }
+    .floating-card-icon svg { width: 22px; height: 22px; fill: white; }
+    .floating-card strong { display: block; font-size: 14px; margin-bottom: 2px; }
+    .floating-card span { font-size: 12px; color: var(--muted); }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
+    /* Stats Section */
+    .stats {
+      padding: 60px 0;
+      border-top: 1px solid var(--glass-border);
+      border-bottom: 1px solid var(--glass-border);
+      background: rgba(0,0,0,0.3);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+    .stat-value {
+      font-size: 48px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.1;
+    }
+    .stat-label {
+      font-size: 14px;
+      color: var(--muted);
+      margin-top: 8px;
+      font-weight: 500;
+    }
+
+    /* Section styling */
+    section { padding: 120px 0; position: relative; }
+
+    .section-header {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 64px;
+    }
+
+    .section-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .section-kicker svg { width: 16px; height: 16px; fill: currentColor; }
+
+    .section-title {
+      font-size: 44px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 20px;
+      line-height: 1.15;
+    }
+
+    .section-lead {
+      font-size: 18px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    /* Features Grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .feature-card {
+      background: var(--glass);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: var(--transition);
+    }
+    .feature-card:hover {
+      border-color: var(--glass-border-hover);
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .feature-image {
+      position: relative;
+      height: 420px;
+      background: linear-gradient(180deg, #0a0d14 0%, #000 100%);
+      overflow: hidden;
+    }
+    .feature-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: var(--transition);
+    }
+    .feature-card:hover .feature-image img {
+      transform: scale(1.03);
+    }
+    .feature-image-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.8) 100%);
+    }
+
+    .feature-content {
+      padding: 28px;
+    }
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 24px var(--accent-glow);
+    }
+    .feature-icon svg { width: 24px; height: 24px; fill: white; }
+
+    .feature-card h3 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .feature-card p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* Highlight cards (larger) */
+    .feature-card.highlight {
+      grid-column: span 2;
+    }
+    .feature-card.highlight .feature-image {
+      height: 320px;
+    }
+
+    /* Platform Section */
+    .platforms {
+      background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, transparent 100%);
+    }
+
+    .platform-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .platform-card {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      padding: 40px 32px;
+      text-align: center;
+      transition: var(--transition);
+    }
+    .platform-card:hover {
+      border-color: var(--glass-border-hover);
+      transform: translateY(-4px);
+    }
+    .platform-card.active {
+      border-color: var(--accent);
+      box-shadow: 0 0 40px -10px var(--accent-glow);
+    }
+
+    .platform-icon {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 20px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .platform-icon svg { width: 36px; height: 36px; }
+    .platform-card.active .platform-icon {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+    }
+    .platform-card.active .platform-icon svg { fill: white; }
+    .platform-card:not(.active) .platform-icon {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+    }
+    .platform-card:not(.active) .platform-icon svg { fill: var(--muted); }
+
+    .platform-card h3 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .platform-status {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    .status-available {
+      background: rgba(16,185,129,0.15);
+      color: var(--success);
+    }
+    .status-soon {
+      background: rgba(251,191,36,0.15);
+      color: var(--warning);
+    }
+    .platform-card p {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    /* Roadmap Section */
+    .roadmap {
+      background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.2) 50%, transparent 100%);
+    }
+
+    .roadmap-timeline {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .roadmap-timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, var(--accent), var(--accent2));
+      transform: translateX(-50%);
+    }
+
+    .roadmap-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 48px;
+      position: relative;
+    }
+    .roadmap-item:nth-child(odd) { flex-direction: row; }
+    .roadmap-item:nth-child(even) { flex-direction: row-reverse; }
+
+    .roadmap-content {
+      width: calc(50% - 40px);
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      padding: 28px;
+      transition: var(--transition);
+    }
+    .roadmap-content:hover {
+      border-color: var(--glass-border-hover);
+      transform: translateY(-4px);
+    }
+
+    .roadmap-marker {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--bg1);
+      border: 3px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      z-index: 1;
+    }
+    .roadmap-item.active .roadmap-marker {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border-color: var(--accent);
+      box-shadow: 0 0 30px var(--accent-glow);
+    }
+
+    .roadmap-phase {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .roadmap-content h3 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .roadmap-content p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    .roadmap-features {
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .roadmap-tag {
+      padding: 6px 12px;
+      background: rgba(0,0,0,0.3);
+      border-radius: 8px;
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    /* Beta Form Section */
+    #beta {
+      padding: 140px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    #beta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: 
+        radial-gradient(800px 400px at 30% 50%, rgba(93,169,255,0.12), transparent),
+        radial-gradient(600px 300px at 70% 50%, rgba(139,92,246,0.10), transparent);
+    }
+
+    .formCard {
+      position: relative;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 56px;
+      border-radius: 32px;
+      background: rgba(255,255,255,0.04);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow-lg);
+      transform: translateY(30px);
+      opacity: 0;
+      transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .formCard.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .form-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .form-header h2 {
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+    .form-header p {
+      color: var(--text-secondary);
+      font-size: 16px;
+    }
+
+    .formGrid {
+      display: grid;
+      gap: 20px;
+    }
+
+    .field {
+      position: relative;
+    }
+    .field input,
+    .field textarea,
+    .field select {
+      width: 100%;
+      padding: 20px 20px;
+      border-radius: var(--radius-xs);
+      border: 1px solid var(--glass-border);
+      background: rgba(0,0,0,0.3);
+      color: var(--text);
+      font-size: 16px;
+      font-family: inherit;
+      transition: var(--transition-fast);
+    }
+    .field input::placeholder,
+    .field textarea::placeholder {
+      color: var(--muted);
+    }
+    .field input:focus,
+    .field textarea:focus,
+    .field select:focus {
+      outline: none;
+      border-color: var(--accent);
+      background: rgba(93,169,255,0.08);
+      box-shadow: 0 0 0 4px rgba(93,169,255,0.15);
+    }
+    .field label {
+      position: absolute;
+      left: 20px;
+      top: 20px;
+      color: var(--muted);
+      pointer-events: none;
+      transition: var(--transition-fast);
+      transform-origin: left;
+    }
+    .field:focus-within label,
+    .field.filled label {
+      transform: translateY(-32px) scale(0.85);
+      color: var(--accent);
+      background: var(--bg1);
+      padding: 0 8px;
+    }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .optionalFields {
+      display: grid;
+      gap: 20px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.6s ease;
+    }
+    .optionalFields.show {
+      max-height: 400px;
+    }
+
+    .submitBtn {
+      width: 100%;
+      padding: 20px 40px;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      font-size: 16px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border: none;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 12px 40px var(--accent-glow);
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .submitBtn:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px var(--accent-glow);
+    }
+    .submitBtn svg { width: 20px; height: 20px; fill: currentColor; }
+
+    .status {
+      margin-top: 24px;
+      padding: 20px 24px;
+      border-radius: var(--radius-sm);
+      text-align: center;
+      font-size: 15px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: var(--transition);
+    }
+    .status.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .status.ok {
+      background: rgba(16,185,129,0.15);
+      border: 1px solid rgba(16,185,129,0.3);
+      color: var(--success);
+    }
+    .status.err {
+      background: rgba(251,191,36,0.15);
+      border: 1px solid rgba(251,191,36,0.3);
+      color: var(--warning);
+    }
+
+    #confetti {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    /* Testimonials placeholder */
+    .testimonials {
+      background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.2) 100%);
+    }
+
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .testimonial-card {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      padding: 32px;
+      transition: var(--transition);
+    }
+    .testimonial-card:hover {
+      border-color: var(--glass-border-hover);
+    }
+    
+    .testimonial-stars {
+      color: var(--warning);
+      font-size: 18px;
+      margin-bottom: 16px;
+      letter-spacing: 2px;
+    }
+    .testimonial-card blockquote {
+      font-size: 16px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      font-style: italic;
+      margin-bottom: 20px;
+    }
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .testimonial-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 16px;
+    }
+    .testimonial-info strong {
+      display: block;
+      font-size: 15px;
+    }
+    .testimonial-info span {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* FAQ Section */
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      padding: 28px;
+      transition: var(--transition);
+    }
+    .faq-item:hover {
+      border-color: var(--glass-border-hover);
+    }
+    .faq-item h3 {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .faq-item h3::before {
+      content: '?';
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+    .faq-item p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      padding-left: 40px;
+    }
+
+    /* Footer */
+    footer {
+      padding: 80px 0 40px;
+      border-top: 1px solid var(--glass-border);
+      background: rgba(0,0,0,0.4);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 60px;
+    }
+
+    .footer-brand p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-top: 16px;
+      line-height: 1.7;
+      max-width: 320px;
+    }
+
+    .footer-col h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 20px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .footer-col a {
+      display: block;
+      font-size: 14px;
+      color: var(--text-secondary);
+      padding: 8px 0;
+    }
+    .footer-col a:hover {
+      color: var(--accent);
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 32px;
+      border-top: 1px solid var(--glass-border);
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-bottom small {
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .footer-socials {
+      display: flex;
+      gap: 12px;
+    }
+    .footer-socials a {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition-fast);
+    }
+    .footer-socials a:hover {
+      background: var(--glass-hover);
+      border-color: var(--accent);
+    }
+    .footer-socials svg { width: 18px; height: 18px; fill: var(--text-secondary); }
+
+    /* Animations */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 1100px) {
+      .hero-content { grid-template-columns: 1fr; gap: 60px; }
+      .hero-visual { order: -1; }
+      .hero-text { max-width: 100%; text-align: center; }
+      .hero-badges, .hero-features, .cta-row { justify-content: center; }
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
+      .feature-card.highlight { grid-column: span 1; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 900px) {
+      .headline { font-size: 44px; }
+      .section-title { font-size: 36px; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+      .platform-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+      .testimonial-grid { grid-template-columns: 1fr; max-width: 500px; margin: 0 auto; }
+      .faq-grid { grid-template-columns: 1fr; }
+      .roadmap-timeline::before { left: 24px; }
+      .roadmap-item { flex-direction: column !important; padding-left: 70px; }
+      .roadmap-content { width: 100%; }
+      .roadmap-marker { left: 24px; transform: none; }
+      .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+    }
+
+    @media (max-width: 640px) {
+      .headline { font-size: 36px; }
+      .section-title { font-size: 30px; }
+      .topbar { flex-direction: column; gap: 16px; }
+      nav { justify-content: center; }
+      .features-grid { grid-template-columns: 1fr; }
+      .phone-mockup { width: 280px; height: 570px; }
+      .floating-card { display: none; }
+      .formCard { padding: 32px 24px; }
+      .field-row { grid-template-columns: 1fr; }
+      .btn { width: 100%; }
+      .stat-value { font-size: 36px; }
+    }
   </style>
 </head>
 <body>
-  <div style="background:linear-gradient(135deg,rgba(251,191,36,0.4),rgba(251,191,36,0.2)); padding:14px; text-align:center; font-weight:800; border-bottom:1px solid rgba(251,191,36,0.6);">
-    ACTIVE BETA — Weekly updates • Offline-first • Multi-device sync rolling out
+  <div class="bg-pattern"></div>
+  <div class="bg-grid"></div>
+
+  <!-- Announcement Bar -->
+  <div class="announcement">
+    <span class="announcement-badge">Active Beta</span>
+    <span class="announcement-text">Weekly updates • Offline-first architecture • <span class="announcement-highlight">Multi-device sync rolling out now</span></span>
   </div>
+
+  <!-- Header -->
   <header>
     <div class="wrap topbar">
-      <div class="brand">
-        <div class="logo"></div>
-        <div>
-          <strong style="display:block; font-size:16px; letter-spacing:0.06em;">Site Companion Side Kick</strong>
-          <span style="font-size:13px; color:var(--muted);">SCSK</span>
+      <a href="#" class="brand">
+        <div class="logo">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.18l6.9 3.45L12 11.09 5.1 7.63 12 4.18zM4 8.82l7 3.5v7.36l-7-3.5V8.82zm9 10.86v-7.36l7-3.5v7.36l-7 3.5z"/></svg>
         </div>
-      </div>
+        <div class="brand-text">
+          <strong>Site Companion Side Kick</strong>
+          <span>SCSK</span>
+        </div>
+      </a>
       <nav>
         <a class="navlink" href="#features">Features</a>
+        <a class="navlink" href="#platforms">Platforms</a>
         <a class="navlink" href="#roadmap">Roadmap</a>
-        <a class="navlink" href="#beta">Join Beta</a>
+        <a class="navlink" href="#faq">FAQ</a>
         <a class="navlink" href="privacy.html">Privacy</a>
-        <a class="navlink" href="delete-account.html">Delete account</a>
         <a class="navlink" href="support.html">Support</a>
+        <a class="navlink nav-cta" href="#beta">Join Beta</a>
       </nav>
     </div>
   </header>
-  <main class="wrap">
-    <section class="hero fade-in">
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
       <div class="hero-bg"></div>
-      <div class="hero-content glass-card">
-        <span class="badge">Active Beta</span>
-        <h1 class="headline">Your daily sidekick on real job sites</h1>
-        <p class="subhead">SCSK is the offline-first companion for supervisors, foremen, and project managers. Track jobs, capture site evidence, assign trades, generate reports — reliably, anywhere on site.</p>
-        <p class="subhead">Android-first app • Built for phones, tablets & foldables • Windows cross-platform version coming soon</p>
-        <p class="subhead">Syncs across devices. Weekly improvements from real site feedback.</p>
-        <div class="ctaRow">
-          <a class="btn btnPrimary" href="#beta">Join the beta</a>
-          <a class="btn" href="privacy.html">Privacy policy</a>
+      <div class="wrap">
+        <div class="hero-content fade-in">
+          <div class="hero-text">
+            <div class="hero-badges">
+              <span class="badge badge-beta">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                Active Beta
+              </span>
+              <span class="badge badge-android">
+                <svg viewBox="0 0 24 24"><path d="M6 18c0 .55.45 1 1 1h1v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h2v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h1c.55 0 1-.45 1-1V8H6v10zM3.5 8C2.67 8 2 8.67 2 9.5v7c0 .83.67 1.5 1.5 1.5S5 17.33 5 16.5v-7C5 8.67 4.33 8 3.5 8zm17 0c-.83 0-1.5.67-1.5 1.5v7c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5zm-4.97-5.84l1.3-1.3c.2-.2.2-.51 0-.71-.2-.2-.51-.2-.71 0l-1.48 1.48C13.85 1.23 12.95 1 12 1c-.96 0-1.86.23-2.66.63L7.85.15c-.2-.2-.51-.2-.71 0-.2.2-.2.51 0 .71l1.31 1.31C6.97 3.26 6 5.01 6 7h12c0-1.99-.97-3.75-2.47-4.84zM10 5H9V4h1v1zm5 0h-1V4h1v1z"/></svg>
+                Android Ready
+              </span>
+            </div>
+            <h1 class="headline">Your daily sidekick on <span class="headline-accent">real job sites</span></h1>
+            <p class="subhead">SCSK is the offline-first companion built for construction supervisors, foremen, and project managers. Track jobs, capture site evidence, assign trades, and generate professional reports — reliably, anywhere on site.</p>
+            <div class="hero-features">
+              <div class="hero-feature">
+                <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Works offline
+              </div>
+              <div class="hero-feature">
+                <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Multi-device sync
+              </div>
+              <div class="hero-feature">
+                <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                PDF reports
+              </div>
+              <div class="hero-feature">
+                <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Trade calculators
+              </div>
+            </div>
+            <div class="cta-row">
+              <a class="btn btn-primary" href="#beta">
+                <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                Join the Beta
+              </a>
+              <a class="btn" href="#features">
+                <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+                Explore Features
+              </a>
+            </div>
+          </div>
+          <div class="hero-visual">
+            <div class="phone-mockup">
+              <div class="phone-screen">
+                <img src="Screenshot1.jpg" alt="SCSK Dashboard">
+              </div>
+            </div>
+            <div class="floating-card floating-card-1">
+              <div class="floating-card-icon">
+                <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+              </div>
+              <strong>12 Jobs Today</strong>
+              <span>3 high priority</span>
+            </div>
+            <div class="floating-card floating-card-2">
+              <div class="floating-card-icon">
+                <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+              </div>
+              <strong>Photos Synced</strong>
+              <span>Last: 2 min ago</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
+
+    <!-- Stats Section -->
+    <section class="stats fade-in">
+      <div class="wrap">
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-value">100%</div>
+            <div class="stat-label">Offline Capable</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">15+</div>
+            <div class="stat-label">Trade Calculators</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">Weekly</div>
+            <div class="stat-label">Feature Updates</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">0</div>
+            <div class="stat-label">Data Sold</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
     <section id="features" class="fade-in">
-      <h2 class="sectionTitle">In-Depth Core Features</h2>
-      <p class="sectionLead">Practical tools built for day-to-day site management — current MVP + in-progress (Android-first, Windows coming).</p>
-      <div class="grid">
-        <div class="feature-card">
-          <img src="Screenshot1.jpg" alt="SCSK Dashboard & Overview">
-          <h3>Dashboard & Quick Actions</h3>
-          <p>Home screen with project/job stats and fast access to core functions.</p>
+      <div class="wrap">
+        <div class="section-header">
+          <div class="section-kicker">
+            <svg viewBox="0 0 24 24"><path d="M22 9.24l-7.19-.62L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.63-7.03L22 9.24zM12 15.4l-3.76 2.27 1-4.28-3.32-2.88 4.38-.38L12 6.1l1.71 4.04 4.38.38-3.32 2.88 1 4.28L12 15.4z"/></svg>
+            Core Features
+          </div>
+          <h2 class="section-title">Built for Real Job Sites</h2>
+          <p class="section-lead">Practical tools designed for day-to-day construction site management. Every feature tested in real-world conditions.</p>
         </div>
-        <div class="feature-card">
-          <img src="Screenshot2.jpg" alt="SCSK Project Detail">
-          <h3>Project Detail View</h3>
-          <p>Jobs, photos, quick actions, and status for a single project.</p>
-        </div>
-        <div class="feature-card">
-          <img src="Screenshot3.jpg" alt="SCSK Projects List">
-          <h3>Projects Overview</h3>
-          <p>All projects with status, progress tracking, and filters.</p>
-        </div>
-        <div class="feature-card">
-          <img src="Screenshot4.jpg" alt="SCSK Calendar Day View">
-          <h3>Calendar – Day View</h3>
-          <p>Detailed daily schedule with jobs, locations, and trades.</p>
-        </div>
-        <div class="feature-card">
-          <img src="Screenshot5.jpg" alt="SCSK Construction Tools">
-          <h3>Construction Calculators</h3>
-          <p>Built-in tools for tile, paint, brick, concrete, and more.</p>
-        </div>
-        <div class="feature-card">
-          <img src="Screenshot6.jpg" alt="SCSK Calendar Week View">
-          <h3>Calendar – Week View</h3>
-          <p>Plan site visits and see outstanding jobs across the week.</p>
-        </div>
-        <div class="feature-card">
-          <img src="Screenshot7.jpg" alt="SCSK Calendar Month View">
-          <h3>Calendar – Month View</h3>
-          <p>Full month overview for long-term planning and follow-ups.</p>
+
+        <div class="features-grid">
+          <div class="feature-card highlight">
+            <div class="feature-image">
+              <img src="Screenshot1.jpg" alt="SCSK Dashboard">
+              <div class="feature-image-overlay"></div>
+            </div>
+            <div class="feature-content">
+              <div class="feature-icon">
+                <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+              </div>
+              <h3>Smart Dashboard</h3>
+              <p>Your command center. See project stats, pending jobs, and quick actions at a glance. Designed for on-site speed.</p>
+            </div>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-image">
+              <img src="Screenshot2.jpg" alt="Project Details">
+              <div class="feature-image-overlay"></div>
+            </div>
+            <div class="feature-content">
+              <div class="feature-icon">
+                <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+              </div>
+              <h3>Project Details</h3>
+              <p>Complete project overview with jobs, photos, contacts, and status tracking in one place.</p>
+            </div>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-image">
+              <img src="Screenshot3.jpg" alt="Projects List">
+              <div class="feature-image-overlay"></div>
+            </div>
+            <div class="feature-content">
+              <div class="feature-icon">
+                <svg viewBox="0 0 24 24"><path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z"/></svg>
+              </div>
+              <h3>Projects Overview</h3>
+              <p>All your projects with progress tracking, filters, and instant search. Stay organised across sites.</p>
+            </div>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-image">
+              <img src="Screenshot4.jpg" alt="Calendar Day View">
+              <div class="feature-image-overlay"></div>
+            </div>
+            <div class="feature-content">
+              <div class="feature-icon">
+                <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11zM9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z"/></svg>
+              </div>
+              <h3>Calendar - Day View</h3>
+              <p>Detailed daily schedule with jobs, locations, and assigned trades. Plan your day efficiently.</p>
+            </div>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-image">
+              <img src="Screenshot5.jpg" alt="Construction Tools">
+              <div class="feature-image-overlay"></div>
+            </div>
+            <div class="feature-content">
+              <div class="feature-icon">
+                <svg viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg>
+              </div>
+              <h3>Trade Calculators</h3>
+              <p>Built-in tools for tile, paint, brick, concrete, grout, and more. Accurate estimates on-site.</p>
+            </div>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-image">
+              <img src="Screenshot6.jpg" alt="Calendar Week View">
+              <div class="feature-image-overlay"></div>
+            </div>
+            <div class="feature-content">
+              <div class="feature-icon">
+                <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10z"/></svg>
+              </div>
+              <h3>Calendar - Week View</h3>
+              <p>Plan site visits and track outstanding jobs across the week. Never miss a deadline.</p>
+            </div>
+          </div>
+
+          <div class="feature-card highlight">
+            <div class="feature-image">
+              <img src="Screenshot7.jpg" alt="Calendar Month View">
+              <div class="feature-image-overlay"></div>
+            </div>
+            <div class="feature-content">
+              <div class="feature-icon">
+                <svg viewBox="0 0 24 24"><path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/></svg>
+              </div>
+              <h3>Calendar - Month View</h3>
+              <p>Full month overview for long-term planning, follow-ups, and resource allocation across all your sites.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
-    <section id="roadmap" class="fade-in" style="background:rgba(0,0,0,0.15);">
-      <h2 class="sectionTitle">Realistic Roadmap</h2>
-      <p class="sectionLead">Phased and driven by real site feedback.</p>
-      <div class="grid">
-        <div class="feature-card">
-          <h3>🚀 Phase 1 — MVP (Current)</h3>
-          <p>Stable site companion: Projects, Jobs, Photos, Contacts, PDF reports, Offline mode, Auth.</p>
+
+    <!-- Platforms Section -->
+    <section id="platforms" class="platforms fade-in">
+      <div class="wrap">
+        <div class="section-header">
+          <div class="section-kicker">
+            <svg viewBox="0 0 24 24"><path d="M4 6h18V4H4c-1.1 0-2 .9-2 2v11H0v3h14v-3H4V6zm19 2h-6c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h6c.55 0 1-.45 1-1V9c0-.55-.45-1-1-1zm-1 9h-4v-7h4v7z"/></svg>
+            Platform Availability
+          </div>
+          <h2 class="section-title">Where You Can Use SCSK</h2>
+          <p class="section-lead">Android-first development ensures rock-solid mobile performance. Windows desktop version in active development.</p>
         </div>
-        <div class="feature-card">
-          <h3>🚧 Phase 2 — Productivity & Sync</h3>
-          <p>Cloud sync, multi-device, calendar, geofencing, better PDFs.</p>
-        </div>
-        <div class="feature-card">
-          <h3>🌍 Phase 3 — Enterprise-Ready</h3>
-          <p>Multi-user, roles, company accounts, versioning, branding.</p>
-        </div>
-        <div class="feature-card">
-          <h3>🤖 Phase 4 — AI & Automation</h3>
-          <p>AI photo analysis, smart suggestions, voice workflow.</p>
-        </div>
-        <div class="feature-card">
-          <h3>📊 Phase 5 — Insights</h3>
-          <p>Dashboards, trends, recurring defect analysis.</p>
+
+        <div class="platform-grid">
+          <div class="platform-card active">
+            <div class="platform-icon">
+              <svg viewBox="0 0 24 24"><path d="M6 18c0 .55.45 1 1 1h1v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h2v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h1c.55 0 1-.45 1-1V8H6v10zM3.5 8C2.67 8 2 8.67 2 9.5v7c0 .83.67 1.5 1.5 1.5S5 17.33 5 16.5v-7C5 8.67 4.33 8 3.5 8zm17 0c-.83 0-1.5.67-1.5 1.5v7c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5zm-4.97-5.84l1.3-1.3c.2-.2.2-.51 0-.71-.2-.2-.51-.2-.71 0l-1.48 1.48C13.85 1.23 12.95 1 12 1c-.96 0-1.86.23-2.66.63L7.85.15c-.2-.2-.51-.2-.71 0-.2.2-.2.51 0 .71l1.31 1.31C6.97 3.26 6 5.01 6 7h12c0-1.99-.97-3.75-2.47-4.84z"/></svg>
+            </div>
+            <span class="platform-status status-available">Available Now</span>
+            <h3>Android</h3>
+            <p>Phones, tablets, and foldables. Optimised for one-handed use on site. Available through beta program.</p>
+          </div>
+
+          <div class="platform-card">
+            <div class="platform-icon">
+              <svg viewBox="0 0 24 24"><path d="M20 18c1.1 0 1.99-.9 1.99-2L22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg>
+            </div>
+            <span class="platform-status status-soon">Coming Soon</span>
+            <h3>Windows</h3>
+            <p>Full desktop experience for office work. Sync seamlessly between your phone and PC.</p>
+          </div>
+
+          <div class="platform-card">
+            <div class="platform-icon">
+              <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            </div>
+            <span class="platform-status status-soon">Planned</span>
+            <h3>iOS & macOS</h3>
+            <p>Apple ecosystem support planned for future development. Join beta to vote on priorities.</p>
+          </div>
         </div>
       </div>
     </section>
+
+    <!-- Roadmap Section -->
+    <section id="roadmap" class="roadmap fade-in">
+      <div class="wrap">
+        <div class="section-header">
+          <div class="section-kicker">
+            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l4.59-4.58L18 11l-6 6z"/></svg>
+            Development Roadmap
+          </div>
+          <h2 class="section-title">Where We're Headed</h2>
+          <p class="section-lead">Phased development driven by real feedback from construction professionals. Your input shapes our priorities.</p>
+        </div>
+
+        <div class="roadmap-timeline">
+          <div class="roadmap-item active">
+            <div class="roadmap-content">
+              <div class="roadmap-phase">Phase 1 — Current</div>
+              <h3>🚀 MVP Release</h3>
+              <p>Stable site companion with core functionality: Projects, Jobs, Photo documentation, Contacts, PDF reports, Offline mode, and Authentication.</p>
+              <div class="roadmap-features">
+                <span class="roadmap-tag">Projects</span>
+                <span class="roadmap-tag">Jobs</span>
+                <span class="roadmap-tag">Photos</span>
+                <span class="roadmap-tag">Contacts</span>
+                <span class="roadmap-tag">PDF Reports</span>
+                <span class="roadmap-tag">Offline Mode</span>
+              </div>
+            </div>
+            <div class="roadmap-marker">🚀</div>
+          </div>
+
+          <div class="roadmap-item">
+            <div class="roadmap-content">
+              <div class="roadmap-phase">Phase 2 — In Progress</div>
+              <h3>🚧 Productivity & Sync</h3>
+              <p>Cloud synchronisation, multi-device support, enhanced calendar integration, geofencing prompts, and improved PDF generation.</p>
+              <div class="roadmap-features">
+                <span class="roadmap-tag">Cloud Sync</span>
+                <span class="roadmap-tag">Multi-Device</span>
+                <span class="roadmap-tag">Calendar</span>
+                <span class="roadmap-tag">Geofencing</span>
+              </div>
+            </div>
+            <div class="roadmap-marker">🚧</div>
+          </div>
+
+          <div class="roadmap-item">
+            <div class="roadmap-content">
+              <div class="roadmap-phase">Phase 3 — Planned</div>
+              <h3>🌍 Enterprise Ready</h3>
+              <p>Multi-user support, role-based permissions, company accounts, document versioning, and custom branding options.</p>
+              <div class="roadmap-features">
+                <span class="roadmap-tag">Teams</span>
+                <span class="roadmap-tag">Roles</span>
+                <span class="roadmap-tag">Versioning</span>
+                <span class="roadmap-tag">Branding</span>
+              </div>
+            </div>
+            <div class="roadmap-marker">🌍</div>
+          </div>
+
+          <div class="roadmap-item">
+            <div class="roadmap-content">
+              <div class="roadmap-phase">Phase 4 — Future</div>
+              <h3>🤖 AI & Automation</h3>
+              <p>AI-powered photo analysis, smart suggestions, voice-controlled workflows, and automated defect detection.</p>
+              <div class="roadmap-features">
+                <span class="roadmap-tag">AI Analysis</span>
+                <span class="roadmap-tag">Voice Control</span>
+                <span class="roadmap-tag">Smart Suggestions</span>
+              </div>
+            </div>
+            <div class="roadmap-marker">🤖</div>
+          </div>
+
+          <div class="roadmap-item">
+            <div class="roadmap-content">
+              <div class="roadmap-phase">Phase 5 — Vision</div>
+              <h3>📊 Analytics & Insights</h3>
+              <p>Comprehensive dashboards, trend analysis, recurring defect patterns, and predictive insights for better project management.</p>
+              <div class="roadmap-features">
+                <span class="roadmap-tag">Dashboards</span>
+                <span class="roadmap-tag">Trends</span>
+                <span class="roadmap-tag">Predictions</span>
+              </div>
+            </div>
+            <div class="roadmap-marker">📊</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials fade-in">
+      <div class="wrap">
+        <div class="section-header">
+          <div class="section-kicker">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+            Beta Feedback
+          </div>
+          <h2 class="section-title">What Testers Are Saying</h2>
+          <p class="section-lead">Real feedback from construction professionals using SCSK on their sites.</p>
+        </div>
+
+        <div class="testimonial-grid">
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <blockquote>"Finally an app that actually works when I'm in a basement with no signal. The offline mode is a game changer."</blockquote>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">MK</div>
+              <div class="testimonial-info">
+                <strong>Site Supervisor</strong>
+                <span>Commercial Construction</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <blockquote>"The trade calculators save me so much time. No more carrying around notebooks and doing mental math."</blockquote>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">JR</div>
+              <div class="testimonial-info">
+                <strong>Project Manager</strong>
+                <span>Residential Builds</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★☆</div>
+            <blockquote>"Photo documentation is excellent. Being able to tag and annotate on the spot keeps everything organised."</blockquote>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">TS</div>
+              <div class="testimonial-info">
+                <strong>Foreman</strong>
+                <span>Civil Engineering</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="fade-in">
+      <div class="wrap">
+        <div class="section-header">
+          <div class="section-kicker">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg>
+            FAQ
+          </div>
+          <h2 class="section-title">Common Questions</h2>
+          <p class="section-lead">Everything you need to know about SCSK and the beta program.</p>
+        </div>
+
+        <div class="faq-grid">
+          <div class="faq-item">
+            <h3>How does offline mode work?</h3>
+            <p>SCSK stores all your data locally on your device. Create projects, add jobs, take photos — everything works without internet. When you're back online, changes sync automatically.</p>
+          </div>
+
+          <div class="faq-item">
+            <h3>Is my data secure?</h3>
+            <p>Yes. Data is encrypted both on your device and during sync. We never sell your information. You control what syncs to the cloud and can export or delete your data anytime.</p>
+          </div>
+
+          <div class="faq-item">
+            <h3>What's included in the beta?</h3>
+            <p>Full access to all current features including projects, jobs, photo documentation, contacts, PDF reports, and trade calculators. Beta users also get early access to new features.</p>
+          </div>
+
+          <div class="faq-item">
+            <h3>Will it work on my phone?</h3>
+            <p>SCSK runs on Android 8.0 (Oreo) and newer. Optimised for phones, tablets, and foldable devices. Designed to work smoothly on mid-range devices common on job sites.</p>
+          </div>
+
+          <div class="faq-item">
+            <h3>How much does it cost?</h3>
+            <p>The beta is free for approved testers. We're gathering feedback before finalising pricing. Beta testers will receive special consideration when we launch commercially.</p>
+          </div>
+
+          <div class="faq-item">
+            <h3>When is iOS coming?</h3>
+            <p>We're focused on perfecting Android first, with Windows desktop next. iOS is planned but not yet scheduled. Join the beta to vote on platform priorities.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Beta Application Section -->
     <section id="beta" class="fade-in">
       <div class="wrap" style="text-align:center;">
-        <h2 class="sectionTitle">Apply to Join the Active Beta</h2>
-        <p class="sectionLead">Manual review for construction pros — approved users get immediate access (Android only for now).</p>
+        <div class="section-kicker" style="margin-bottom:16px;">
+          <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+          Apply Now
+        </div>
+        <h2 class="section-title">Join the Active Beta</h2>
+        <p class="section-lead" style="margin-bottom:48px;">Manual review for construction professionals. Approved users get immediate Android access.</p>
       </div>
+
       <div class="formCard">
+        <canvas id="confetti"></canvas>
         <form id="betaForm" action="https://formspree.io/f/xnnerkde" method="POST">
           <div class="formGrid">
             <div class="field">
-              <input type="email" name="email" required id="email">
+              <input type="email" name="email" required id="email" placeholder=" ">
               <label for="email">Email Address *</label>
             </div>
-            <div class="field">
-              <input type="text" name="name" id="name">
-              <label for="name">Your name (optional)</label>
-            </div>
-            <div class="field">
-              <select name="role" id="role">
-                <option value=""></option>
-                <option>Foreman</option>
-                <option>Supervisor</option>
-                <option>Project Manager</option>
-                <option>Site Inspector</option>
-                <option>Other</option>
-              </select>
-              <label for="role">Your role</label>
-            </div>
-            <div class="optionalFields" id="optional">
+
+            <div class="field-row">
               <div class="field">
-                <select name="company_size">
+                <input type="text" name="name" id="name" placeholder=" ">
+                <label for="name">Your Name</label>
+              </div>
+              <div class="field">
+                <select name="role" id="role">
                   <option value=""></option>
-                  <option>1–10 people</option>
-                  <option>11–50</option>
-                  <option>51–200</option>
-                  <option>200+</option>
+                  <option>Foreman</option>
+                  <option>Supervisor</option>
+                  <option>Project Manager</option>
+                  <option>Site Inspector</option>
+                  <option>Tradesperson</option>
+                  <option>Other</option>
                 </select>
-                <label>Team/company size</label>
-              </div>
-              <div class="field">
-                <textarea name="usage" rows="4"></textarea>
-                <label>How will you use SCSK? (site type, pain points...)</label>
+                <label for="role">Your Role</label>
               </div>
             </div>
-            <button type="submit" class="submitBtn">Submit application</button>
+
+            <div class="optionalFields" id="optional">
+              <div class="field-row">
+                <div class="field">
+                  <select name="company_size">
+                    <option value=""></option>
+                    <option>1–10 people</option>
+                    <option>11–50</option>
+                    <option>51–200</option>
+                    <option>200+</option>
+                  </select>
+                  <label>Team Size</label>
+                </div>
+                <div class="field">
+                  <select name="trade">
+                    <option value=""></option>
+                    <option>General Construction</option>
+                    <option>Residential</option>
+                    <option>Commercial</option>
+                    <option>Civil/Infrastructure</option>
+                    <option>Renovation</option>
+                    <option>Specialised Trade</option>
+                  </select>
+                  <label>Primary Trade</label>
+                </div>
+              </div>
+              <div class="field">
+                <textarea name="usage" rows="4" placeholder=" "></textarea>
+                <label>How will you use SCSK? (site type, current pain points...)</label>
+              </div>
+            </div>
+
+            <button type="submit" class="submitBtn">
+              <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+              Submit Application
+            </button>
           </div>
+
           <input type="hidden" name="_subject" value="SCSK Beta Application" />
           <input type="text" name="_gotcha" style="display:none" />
-          <div id="statusOk" class="status ok">🎉 Thanks! Your application is in. We'll review and email access soon.</div>
-          <div id="statusErr" class="status" style="background:rgba(251,191,36,0.2);">⚠️ Something went wrong — email admin@sc-sk.com</div>
+          
+          <div id="statusOk" class="status ok">
+            🎉 Application received! We'll review and send access details to your email soon.
+          </div>
+          <div id="statusErr" class="status err">
+            ⚠️ Something went wrong — please try again or email <a href="mailto:admin@sc-sk.com">admin@sc-sk.com</a>
+          </div>
         </form>
-        <canvas id="confetti"></canvas>
       </div>
     </section>
   </main>
+
+  <!-- Footer -->
   <footer>
     <div class="wrap">
-      <strong>Site Companion Side Kick (SCSK)</strong><br><br>
-      <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin:20px 0;">
-        <a class="navlink" href="#features">Features</a>
-        <a class="navlink" href="#roadmap">Roadmap</a>
-        <a class="navlink" href="#beta">Join Beta</a>
-        <a class="navlink" href="privacy.html">Privacy</a>
-        <a class="navlink" href="delete-account.html">Delete account</a>
-        <a class="navlink" href="support.html">Support</a>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="brand" style="margin-bottom:8px;">
+            <div class="logo">
+              <svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.18l6.9 3.45L12 11.09 5.1 7.63 12 4.18zM4 8.82l7 3.5v7.36l-7-3.5V8.82zm9 10.86v-7.36l7-3.5v7.36l-7 3.5z"/></svg>
+            </div>
+            <div class="brand-text">
+              <strong>Site Companion Side Kick</strong>
+              <span>SCSK</span>
+            </div>
+          </a>
+          <p>The offline-first construction management app built for real job sites. Track projects, document progress, and stay organised anywhere.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Product</h4>
+          <a href="#features">Features</a>
+          <a href="#platforms">Platforms</a>
+          <a href="#roadmap">Roadmap</a>
+          <a href="#beta">Join Beta</a>
+        </div>
+
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <a href="#faq">FAQ</a>
+          <a href="support.html">Support</a>
+          <a href="mailto:admin@sc-sk.com">Contact</a>
+        </div>
+
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms of Service</a>
+          <a href="delete-account.html">Delete Account</a>
+        </div>
       </div>
-      <small style="color:var(--muted);">© <span id="year"></span> SAA. All rights reserved.</small>
+
+      <div class="footer-bottom">
+        <small>© <span id="year"></span> SAA. All rights reserved. Built for construction professionals.</small>
+        <div class="footer-socials">
+          <a href="mailto:admin@sc-sk.com" aria-label="Email">
+            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          </a>
+        </div>
+      </div>
     </div>
   </footer>
+
   <script>
+    // Year
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Parallax hero background
     window.addEventListener('scroll', () => {
       const scrolled = window.pageYOffset;
-      document.querySelector('.hero-bg').style.transform = `translateY(${scrolled * 0.5}px)`;
+      const heroBg = document.querySelector('.hero-bg');
+      if (heroBg) {
+        heroBg.style.transform = `scale(1.1) translateY(${scrolled * 0.3}px)`;
+      }
     });
+
+    // Intersection Observer for fade-in animations
     const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
     }, { threshold: 0.1 });
+
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    document.querySelectorAll('.formCard').forEach(el => observer.observe(el));
+
+    // Form handling
     const form = document.getElementById('betaForm');
     const optional = document.getElementById('optional');
     const inputs = form.querySelectorAll('input, textarea, select');
+
     inputs.forEach(field => {
       field.addEventListener('input', () => {
         const parent = field.parentElement;
-        if(field.value) parent.classList.add('filled');
+        if (field.value) parent.classList.add('filled');
         else parent.classList.remove('filled');
-        if(form.querySelector('#email').value.trim()) optional.classList.add('show');
+        
+        if (form.querySelector('#email').value.trim()) {
+          optional.classList.add('show');
+        }
       });
-      if(field.value) field.parentElement.classList.add('filled');
+      if (field.value) field.parentElement.classList.add('filled');
     });
-    function launchConfetti(){
+
+    // Confetti animation
+    function launchConfetti() {
       const canvas = document.getElementById('confetti');
       const ctx = canvas.getContext('2d');
       canvas.width = canvas.offsetWidth;
       canvas.height = canvas.offsetHeight;
+      
       let particles = [];
-      for(let i = 0; i < 120; i++){
+      for (let i = 0; i < 150; i++) {
         particles.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height - canvas.height,
           vx: Math.random() * 6 - 3,
           vy: Math.random() * 5 + 3,
-          color: ['#5DA9FF','#8B5CF6','#FBBF24'][Math.floor(Math.random()*3)],
-          size: Math.random() * 5 + 3
+          color: ['#5DA9FF', '#8B5CF6', '#FBBF24', '#10B981'][Math.floor(Math.random() * 4)],
+          size: Math.random() * 6 + 3,
+          rotation: Math.random() * 360,
+          rotationSpeed: Math.random() * 10 - 5
         });
       }
-      function animate(){
-        ctx.clearRect(0,0,canvas.width,canvas.height);
+
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         particles.forEach(p => {
-          p.x += p.vx; p.y += p.vy; p.vy += 0.15;
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy += 0.12;
+          p.rotation += p.rotationSpeed;
+          
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate(p.rotation * Math.PI / 180);
           ctx.fillStyle = p.color;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
-          ctx.fill();
+          ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
+          ctx.restore();
         });
-        if(particles.some(p => p.y < canvas.height)) requestAnimationFrame(animate);
+        
+        if (particles.some(p => p.y < canvas.height)) {
+          requestAnimationFrame(animate);
+        }
       }
       animate();
     }
+
+    // Form submission
     form.addEventListener('submit', async e => {
       e.preventDefault();
       document.querySelectorAll('.status').forEach(s => s.classList.remove('show'));
-      try{
-        const res = await fetch(form.action, {method:'POST', body:new FormData(form), headers:{'Accept':'application/json'}});
-        if(res.ok){
+
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (res.ok) {
           form.reset();
           inputs.forEach(f => f.parentElement.classList.remove('filled'));
           optional.classList.remove('show');
           document.getElementById('statusOk').classList.add('show');
           launchConfetti();
-        } else throw new Error();
-      } catch {
+        } else {
+          document.getElementById('statusErr').classList.add('show');
+        }
+      } catch (err) {
         document.getElementById('statusErr').classList.add('show');
       }
     });
-    observer.observe(document.querySelector('.formCard'));
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
   </script>
 </body>
 </html>
