@@ -1,11 +1,12 @@
+// index.html
 <!doctype html>
 <html lang="en-AU">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>Site Companion Side Kick (SCSK) — Beta</title>
-  <meta name="description" content="Site Companion Side Kick (SCSK) is an active beta site companion app. Apply to join the beta and help shape upcoming features." />
+  <title>Site Companion Side Kick (SCSK) — Active Beta</title>
+  <meta name="description" content="Site Companion Side Kick (SCSK) is an offline-first site companion app for construction professionals. Join the active beta." />
 
   <style>
     :root{
@@ -14,11 +15,13 @@
       --border: rgba(255,255,255,0.12);
       --text:#EAF0FF;
       --muted: rgba(234,240,255,0.72);
+      --muted2: rgba(234,240,255,0.55);
       --accent:#5DA9FF;
       --accent2:#8B5CF6;
       --beta:#FBBF24;
       --shadow: 0 24px 60px rgba(0,0,0,0.55);
       --max: 1120px;
+      --radius: 24px;
     }
 
     *{ box-sizing:border-box; }
@@ -33,6 +36,7 @@
         radial-gradient(900px 520px at 85% 5%, rgba(139,92,246,0.14), transparent 55%),
         linear-gradient(180deg, var(--bg0), var(--bg1));
       line-height:1.55;
+      overflow-x:hidden;
     }
 
     a{ color:var(--text); text-decoration:none; }
@@ -40,12 +44,10 @@
 
     .wrap{ max-width:var(--max); margin:0 auto; padding:0 18px; }
 
-    /* ================= BETA BANNER ================= */
-    .betaBanner{
+    /* ================= BETA STRIP ================= */
+    .betaStrip{
       background: linear-gradient(135deg, rgba(251,191,36,0.35), rgba(251,191,36,0.15));
       border-bottom:1px solid rgba(251,191,36,0.6);
-    }
-    .betaInner{
       text-align:center;
       padding:12px;
       font-size:13px;
@@ -59,7 +61,7 @@
       top:0;
       z-index:50;
       backdrop-filter: blur(14px);
-      background: rgba(7,10,16,0.6);
+      background: rgba(7,10,16,0.65);
       border-bottom:1px solid rgba(255,255,255,0.08);
     }
     .topbar{
@@ -67,8 +69,8 @@
       justify-content:space-between;
       align-items:center;
       padding:14px 0;
-      flex-wrap:wrap;
       gap:12px;
+      flex-wrap:wrap;
     }
     .brand{
       display:flex;
@@ -78,6 +80,17 @@
     .logo{
       width:44px;height:44px;border-radius:16px;
       background:linear-gradient(135deg,var(--accent),var(--accent2));
+      box-shadow:0 16px 40px rgba(0,0,0,0.55);
+    }
+    .brandText strong{
+      display:block;
+      font-size:14px;
+      letter-spacing:0.06em;
+      text-transform:uppercase;
+    }
+    .brandText span{
+      font-size:12px;
+      color:var(--muted);
     }
     nav{
       display:flex;
@@ -85,7 +98,7 @@
       flex-wrap:wrap;
     }
     .navlink{
-      padding:10px 12px;
+      padding:10px 14px;
       border-radius:999px;
       border:1px solid rgba(255,255,255,0.14);
       background:rgba(255,255,255,0.04);
@@ -93,33 +106,47 @@
     }
 
     /* ================= HERO ================= */
-    .hero{ padding:22px 0; }
+    .hero{ padding:26px 0; }
     .heroCard{
-      border-radius:28px;
+      border-radius:32px;
       border:1px solid var(--border);
       background:rgba(255,255,255,0.05);
       box-shadow:var(--shadow);
-      padding:28px;
+      padding:32px;
+    }
+    .badge{
+      display:inline-block;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(0,0,0,0.4);
+      border:1px solid rgba(255,255,255,0.2);
+      font-size:12px;
+      letter-spacing:0.08em;
+      text-transform:uppercase;
+      color:var(--beta);
+      margin-bottom:12px;
     }
     .headline{
-      font-size:44px;
+      font-size:46px;
       line-height:1.05;
-      margin:10px 0;
+      margin:8px 0 14px;
+      letter-spacing:-0.03em;
     }
     .subhead{
-      font-size:17px;
+      font-size:18px;
       color:var(--muted);
-      max-width:75ch;
+      max-width:80ch;
+      margin-bottom:14px;
     }
     .ctaRow{
       display:flex;
       gap:12px;
       flex-wrap:wrap;
-      margin-top:20px;
+      margin-top:18px;
     }
     .btn{
-      padding:14px 18px;
-      border-radius:16px;
+      padding:14px 20px;
+      border-radius:18px;
       border:1px solid rgba(255,255,255,0.18);
       font-weight:900;
       font-size:14px;
@@ -130,59 +157,112 @@
       background:linear-gradient(135deg,var(--accent),var(--accent2));
     }
 
-    @media (max-width:640px){
-      .headline{ font-size:34px; }
-      .btn{ width:100%; }
+    /* ================= SECTIONS ================= */
+    section{ padding:32px 0; }
+    .sectionTitle{
+      font-size:22px;
+      margin-bottom:8px;
+      letter-spacing:-0.02em;
+    }
+    .sectionLead{
+      color:var(--muted);
+      max-width:80ch;
+      margin-bottom:20px;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:16px;
+    }
+    .card{
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,0.12);
+      background:rgba(255,255,255,0.04);
+      padding:20px;
+    }
+    .card h3{
+      margin:0 0 6px;
+      font-size:16px;
+    }
+    .card p{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
     }
 
     /* ================= BETA FORM ================= */
     .betaSection{
-      padding:24px 0 40px;
+      padding:40px 0 60px;
+    }
+    .formWrap{
+      max-width:680px;
+      margin:0 auto;
     }
     .formCard{
-      max-width:640px;
-      margin:0 auto;
-      border-radius:24px;
+      border-radius:28px;
       border:1px solid var(--border);
       background:rgba(255,255,255,0.05);
       box-shadow:var(--shadow);
-      padding:22px;
-    }
-    .formCard h3{
-      margin:0 0 8px;
-      font-size:22px;
-    }
-    .formCard p{
-      margin:0 0 14px;
-      color:var(--muted);
-      font-size:14px;
+      padding:26px;
     }
     label{
       display:block;
       font-size:13px;
       margin-bottom:6px;
+      color:var(--muted);
     }
     input, textarea{
       width:100%;
       padding:12px;
-      border-radius:12px;
+      border-radius:14px;
       border:1px solid rgba(255,255,255,0.18);
       background:rgba(0,0,0,0.25);
       color:var(--text);
-      margin-bottom:14px;
       font-size:14px;
+      margin-bottom:14px;
     }
     textarea{ resize:vertical; min-height:90px; }
 
+    /* ================= FOOTER ================= */
+    footer{
+      border-top:1px solid rgba(255,255,255,0.08);
+      padding:36px 0 44px;
+      background:rgba(0,0,0,0.18);
+    }
+    .footerLinks{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+    .footerLink{
+      padding:10px 14px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,0.14);
+      background:rgba(255,255,255,0.04);
+      font-size:13px;
+    }
+    .small{
+      margin-top:14px;
+      font-size:12px;
+      color:var(--muted2);
+    }
+
+    /* ================= RESPONSIVE ================= */
+    @media (max-width:900px){
+      .grid{ grid-template-columns:1fr; }
+    }
+    @media (max-width:640px){
+      .headline{ font-size:34px; }
+      .btn{ width:100%; }
+    }
   </style>
 </head>
 
 <body>
 
-  <div class="betaBanner">
-    <div class="wrap betaInner">
-      Active beta • Weekly improvements • Sync across devices • Windows version coming
-    </div>
+  <div class="betaStrip">
+    ACTIVE BETA — Weekly improvements • Sync across devices • Windows version coming
   </div>
 
   <header>
@@ -190,10 +270,14 @@
       <div class="topbar">
         <div class="brand">
           <div class="logo"></div>
-          <strong>Site Companion Side Kick</strong>
+          <div class="brandText">
+            <strong>Site Companion Side Kick</strong>
+            <span>SCSK</span>
+          </div>
         </div>
         <nav>
           <a class="navlink" href="#features">Features</a>
+          <a class="navlink" href="#sync">Sync</a>
           <a class="navlink" href="#beta">Join Beta</a>
           <a class="navlink" href="privacy.html">Privacy</a>
         </nav>
@@ -203,14 +287,20 @@
 
   <main class="wrap">
 
+    <!-- HERO -->
     <section class="hero">
       <div class="heroCard">
+        <span class="badge">Active Beta</span>
         <h1 class="headline">A site companion built for real job sites.</h1>
         <p class="subhead">
-          Site Companion Side Kick (SCSK) is an active beta designed for supervisors,
-          foremen, and project managers working on live construction sites.
+          <strong>Site Companion Side Kick (SCSK)</strong> is an offline-first companion app
+          for supervisors, foremen, and project managers who need reliable workflows
+          on active construction sites — even without internet access.
         </p>
-
+        <p class="subhead">
+          Designed for phones and tablets, SCSK syncs across devices when online and
+          continues to evolve with weekly improvements driven by real site feedback.
+        </p>
         <div class="ctaRow">
           <a class="btn btnPrimary" href="#beta">Join the beta</a>
           <a class="btn" href="privacy.html">Privacy policy</a>
@@ -218,27 +308,106 @@
       </div>
     </section>
 
-    <!-- ================= BETA APPLICATION FORM ================= -->
+    <!-- FEATURES -->
+    <section id="features">
+      <h2 class="sectionTitle">What SCSK helps you do</h2>
+      <p class="sectionLead">
+        Core functionality is already live in the beta and designed for practical, on-site use.
+      </p>
+      <div class="grid">
+        <div class="card">
+          <h3>Projects & jobs</h3>
+          <p>Organise work into structured projects and job folders with timestamps.</p>
+        </div>
+        <div class="card">
+          <h3>Photos & annotations</h3>
+          <p>Capture photos on site and annotate issues directly.</p>
+        </div>
+        <div class="card">
+          <h3>Trade assignments</h3>
+          <p>Assign jobs and defects to trades with notes and accountability.</p>
+        </div>
+        <div class="card">
+          <h3>PDF reporting</h3>
+          <p>Compile checklists and jobs into professional PDF reports.</p>
+        </div>
+        <div class="card">
+          <h3>Offline-first</h3>
+          <p>Work without signal and sync safely when online.</p>
+        </div>
+        <div class="card">
+          <h3>Built for tablets</h3>
+          <p>Larger-screen workflows designed for supervision and audits.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SYNC -->
+    <section id="sync">
+      <h2 class="sectionTitle">Sync across devices</h2>
+      <p class="sectionLead">
+        Start work on one device and continue on another using a single account.
+      </p>
+      <div class="grid">
+        <div class="card">
+          <h3>Multi-device access</h3>
+          <p>Use SCSK on supported phones and tablets.</p>
+        </div>
+        <div class="card">
+          <h3>Controlled syncing</h3>
+          <p>Offline-first with sync when internet is available.</p>
+        </div>
+        <div class="card">
+          <h3>Windows version planned</h3>
+          <p>A desktop Windows build is planned for future releases.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- BETA FORM -->
     <section id="beta" class="betaSection">
-      <div class="formCard">
-        <h3>Apply to join the SCSK beta</h3>
-        <p>
-          Enter your details below. We review beta applications manually.
-        </p>
+      <div class="formWrap">
+        <div class="formCard">
+          <h2 class="sectionTitle">Apply to join the beta</h2>
+          <p class="sectionLead">
+            Beta access is reviewed manually. Enter your details below.
+          </p>
 
-        <form action="mailto:admin@sc-sk.com" method="post" enctype="text/plain">
-          <label for="email">Your email address</label>
-          <input id="email" name="Email" type="email" required placeholder="you@example.com" />
+          <form action="mailto:admin@sc-sk.com" method="post" enctype="text/plain">
+            <label for="email">Email address</label>
+            <input id="email" name="Email" type="email" required placeholder="you@example.com" />
 
-          <label for="message">How do you plan to use SCSK? (optional)</label>
-          <textarea id="message" name="Message" placeholder="Site type, role, team size…"></textarea>
+            <label for="message">How will you use SCSK? (optional)</label>
+            <textarea id="message" name="Message" placeholder="Your role, site type, team size…"></textarea>
 
-          <button class="btn btnPrimary" type="submit">Submit beta request</button>
-        </form>
+            <button class="btn btnPrimary" type="submit">Submit beta application</button>
+          </form>
+        </div>
       </div>
     </section>
 
   </main>
+
+  <footer>
+    <div class="wrap">
+      <strong>Site Companion Side Kick (SCSK)</strong>
+      <div class="footerLinks">
+        <a class="footerLink" href="#features">Features</a>
+        <a class="footerLink" href="#sync">Sync</a>
+        <a class="footerLink" href="#beta">Join Beta</a>
+        <a class="footerLink" href="privacy.html">Privacy</a>
+        <a class="footerLink" href="delete-account.html">Delete account</a>
+        <a class="footerLink" href="mailto:admin@sc-sk.com">Support</a>
+      </div>
+      <div class="small">
+        © <span id="year"></span> SAA. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 
 </body>
 </html>
