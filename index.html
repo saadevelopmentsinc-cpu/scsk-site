@@ -91,129 +91,330 @@
       background: var(--glass); backdrop-filter: blur(16px); border:1px solid var(--glass-border);
       border-radius: var(--radius); padding:32px; box-shadow: var(--shadow);
     }
-    .feature-card img{ width:100%; height:220px; object-fit:cover; border-radius:16px; margin-bottom:24px; }
+    .feature-card img{ width:100%; height:220px; object-fit:cover; border-radius:16px; margin-bottom:24px; box-shadow:0 12px 30px rgba(0,0,0,0.4); }
     .feature-card h3{ font-size:22px; margin-bottom:16px; }
-    .feature-card ul{ margin:16px 0; padding-left:20px; }
+    .feature-card ul{ margin:16px 0; padding-left:24px; color:var(--muted); }
     .feature-card li{ margin-bottom:8px; }
 
     #beta{ padding:100px 0; position:relative; overflow:hidden; }
     #beta::before{ content:''; position:absolute; inset:0; background:radial-gradient(circle at 50% 50%, rgba(93,169,255,0.15), transparent 70%); pointer-events:none; }
     .formCard{ position:relative; max-width:780px; margin:0 auto; padding:48px; border-radius:32px; background: rgba(255,255,255,0.09); backdrop-filter: blur(20px); border:1px solid rgba(255,255,255,0.2); box-shadow: 0 32px 80px rgba(0,0,0,0.7); transform: translateY(20px); opacity:0; transition: all 1s ease; }
     .formCard.visible{ transform:translateY(0); opacity:1; }
-    /* ... (keep all beta form styles from previous version) ... */
+    .formGrid{ display:grid; gap:24px; }
+    .field{ position:relative; }
+    .field input, .field textarea, .field select{ width:100%; padding:20px 20px 20px 4px; border-radius:16px; border:none; background:rgba(0,0,0,0.3); color:var(--text); font-size:16px; transition: all 0.4s ease; }
+    .field label{ position:absolute; left:20px; top:20px; color:var(--muted); pointer-events:none; transition: all 0.3s ease; transform-origin: left; }
+    .field:focus-within label, .field.filled label{ transform: translateY(-30px) scale(0.85); color:var(--accent); }
+    .field:focus-within input, .field:focus-within textarea, .field:focus-within select{ background:rgba(93,169,255,0.15); box-shadow:0 0 0 3px rgba(93,169,255,0.3); }
+    .optionalFields{ display:grid; gap:24px; max-height:0; overflow:hidden; transition:max-height 0.6s ease; }
+    .optionalFields.show{ max-height:800px; }
+    .submitBtn{ padding:18px 40px; border-radius:20px; font-weight:900; font-size:17px; background:linear-gradient(135deg,var(--accent),var(--accent2)); border:none; color:white; cursor:pointer; box-shadow:0 12px 30px rgba(93,169,255,0.4); transition: all 0.4s ease; }
+    .submitBtn:hover{ transform:scale(1.08) translateY(-4px); box-shadow:0 20px 40px rgba(93,169,255,0.5); }
+    .status{ margin-top:24px; padding:20px; border-radius:20px; text-align:center; font-size:16px; opacity:0; transform:translateY(20px); transition:all 0.6s ease; }
+    .status.show{ opacity:1; transform:translateY(0); }
+    .status.ok{ background:rgba(93,169,255,0.2); border:1px solid rgba(93,169,255,0.4); }
+    #confetti{ position:absolute; inset:0; pointer-events:none; }
 
     footer{ padding:60px 0; border-top:1px solid var(--glass-border); background:rgba(0,0,0,0.2); text-align:center; }
 
     .fade-in{ opacity:0; transform:translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
     .fade-in.visible{ opacity:1; transform:translateY(0); }
 
-    @media (max-width:900px){ .headline{ font-size:40px; } }
-    @media (max-width:640px){ .headline{ font-size:36px; } .btn{ min-width:100%; } .topbar{ flex-direction:column; text-align:center; } }
+    @media (max-width:900px){ .headline{ font-size:40px; } .grid{ grid-template-columns:1fr; } }
+    @media (max-width:640px){ .headline{ font-size:36px; } .btn{ min-width:100%; } .topbar{ flex-direction:column; text-align:center; } .sectionTitle{ font-size:32px; } }
   </style>
 </head>
 <body>
 
-  <!-- Beta strip, header same as before -->
+  <div style="background:linear-gradient(135deg,rgba(251,191,36,0.4),rgba(251,191,36,0.2)); padding:14px; text-align:center; font-weight:800; border-bottom:1px solid rgba(251,191,36,0.6);">
+    ACTIVE BETA — Weekly updates • Offline-first • Multi-device sync rolling out
+  </div>
+
+  <header>
+    <div class="wrap topbar">
+      <div class="brand">
+        <div class="logo"></div>
+        <div>
+          <strong style="display:block; font-size:16px; letter-spacing:0.06em;">Site Companion Side Kick</strong>
+          <span style="font-size:13px; color:var(--muted);">SCSK</span>
+        </div>
+      </div>
+      <nav>
+        <a class="navlink" href="#features">Features</a>
+        <a class="navlink" href="#roadmap">Roadmap</a>
+        <a class="navlink" href="#beta">Join Beta</a>
+        <a class="navlink" href="privacy.html">Privacy</a>
+        <a class="navlink" href="delete-account.html">Delete account</a>
+        <a class="navlink" href="support.html">Support</a>
+      </nav>
+    </div>
+  </header>
 
   <main class="wrap">
 
-    <!-- Hero same as before -->
+    <section class="hero fade-in">
+      <div class="hero-bg"></div>
+      <div class="hero-content glass-card">
+        <span class="badge">Active Beta</span>
+        <h1 class="headline">Your daily sidekick on real job sites</h1>
+        <p class="subhead">SCSK is the offline-first companion for supervisors, foremen, and project managers. Track jobs, capture site evidence, assign trades, generate reports — reliably, anywhere on site.</p>
+        <p class="subhead">Built for phones & tablets. Syncs across devices. Weekly improvements from real site feedback.</p>
+        <div class="ctaRow">
+          <a class="btn btnPrimary" href="#beta">Join the beta</a>
+          <a class="btn" href="privacy.html">Privacy policy</a>
+        </div>
+      </div>
+    </section>
 
     <section id="features" class="fade-in">
       <h2 class="sectionTitle">In-Depth Core Features</h2>
-      <p class="sectionLead">Everything you need for practical day-to-day site management — offline-first and built for real job sites.</p>
+      <p class="sectionLead">Practical tools built for day-to-day site management — current MVP + in-progress.</p>
       <div class="grid">
-
         <div class="feature-card">
-          <img src="https://c8.alamy.com/comp/F7KJ9G/foreman-with-digital-tablet-using-walkie-talkie-at-construction-site-F7KJ9G.jpg" alt="Foreman using tablet on site">
+          <img src="https://images.unsplash.com/photo-1581093450021-4a7360e9a6b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Managing projects on tablet">
           <h3>📁 Projects</h3>
-          <p>Create and manage multiple projects. Each acts as a container for jobs, photos, plans, and reports.</p>
+          <p>Create and manage multiple construction projects as containers for everything.</p>
           <ul>
             <li>Project name, site address, client details</li>
             <li>Start & end dates</li>
-            <li>Offline-first — no internet needed on site</li>
+            <li>Stores all jobs, photos, plans, reports</li>
+            <li>Offline-first — no internet required on site</li>
           </ul>
         </div>
 
         <div class="feature-card">
-          <img src="https://media.istockphoto.com/id/1277749962/photo/engineer-architect-construction-worker-on-construction-site-with-tablet-computer.jpg?s=612x612&w=0&k=20&c=JmgymixH3yJeq_I0qymtkkRmVpWOa_QqRiSd0kpWPN4=" alt="Supervisor managing jobs">
+          <img src="https://images.unsplash.com/photo-1581092160562-39e6b1e1e930?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Creating jobs and defects">
           <h3>🧰 Jobs (Tasks / Defects / Issues)</h3>
-          <p>Create jobs for safety issues, quality defects, general tasks, or anything else.</p>
+          <p>Create jobs for safety, quality, compliance, or general tasks.</p>
           <ul>
-            <li>Title, description, category (Safety / Quality / Custom)</li>
+            <li>Title & description</li>
+            <li>Category (Safety / Quality / Custom)</li>
             <li>Auto date/time stamped</li>
-            <li>Status: Open / In Progress / Complete</li>
-            <li>Fully offline with safe sync</li>
+            <li>Status tracking (Open / In Progress / Complete)</li>
+            <li>Accessible offline, sync when online</li>
           </ul>
         </div>
 
         <div class="feature-card">
-          <img src="https://play-lh.googleusercontent.com/rKiYZcAlfNQ_jLskjCTToWu6U-UE3SvxcpwATuH6oymwukR65QRZWKcmU4JjuGf89Q=w526-h296-rw" alt="Annotating photo on app">
+          <img src="https://images.unsplash.com/photo-1581093577422-764bb424ca7d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Annotating photos on site">
           <h3>📸 Photos & Annotations</h3>
-          <p>Capture evidence directly in the app and mark it up on the spot.</p>
+          <p>Capture and mark up site evidence instantly.</p>
           <ul>
-            <li>Take photos & attach to projects/jobs</li>
-            <li>Draw, highlight, add text notes</li>
-            <li>Grouped by project or job</li>
+            <li>Take photos in-app</li>
+            <li>Attach to projects or jobs</li>
+            <li>Draw, highlight, add text</li>
+            <li>Grouped for easy access</li>
           </ul>
         </div>
 
         <div class="feature-card">
-          <img src="https://images.ctfassets.net/3q1a0w8cwuwf/3rrJx9L2sZHL2crA4HxGcE/6d0db9b877a8f4c75bbbc9dec3bec67e/construction-project-management-app.png" alt="Assigning job to trade">
+          <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Assigning to trades">
           <h3>👷 Trade Assignments & Contacts</h3>
-          <p>Clear accountability and communication with trades.</p>
+          <p>Assign work and communicate clearly.</p>
           <ul>
-            <li>Manage contacts (trades, contractors)</li>
-            <li>Assign jobs with text or voice-to-text notes</li>
-            <li>Trade-specific views and reports</li>
+            <li>Manage trades/contractors contacts</li>
+            <li>Assign jobs with notes (text or voice-to-text)</li>
+            <li>Trade-specific reports</li>
           </ul>
         </div>
 
         <div class="feature-card">
-          <img src="https://www.projectlens.io/_next/image?url=%2Fapi%2Fmedia%2Fcontent%2Fmedia%2F68cc52c77b5c01ae36892ed5-1758223902172.jpg&w=3840&q=75" alt="PDF report on tablet">
+          <img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Generating PDF reports">
           <h3>📄 PDF Reporting</h3>
-          <p>Professional reports generated instantly.</p>
+          <p>Auto-generate professional PDFs.</p>
           <ul>
-            <li>Per job, trade, or full project</li>
-            <li>Includes details, photos, annotations, notes</li>
-            <li>Email directly from site</li>
+            <li>Per job, trade, or project</li>
+            <li>Includes photos, annotations, notes, timestamps</li>
+            <li>Email directly from the app</li>
           </ul>
         </div>
 
         <div class="feature-card">
-          <img src="https://cdn.prod.website-files.com/67a323e323a50df7f24f0a94/692841acc76b52e5e525712a_offline-first-apps.webp" alt="Offline mode on remote site">
-          <h3>🌐 Offline-First</h3>
-          <p>Reliable even with no signal.</p>
+          <img src="https://images.unsplash.com/photo-1518709268810-8bd6d68068e5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Working offline">
+          <h3>🌐 Offline-First Sync</h3>
+          <p>Everything works without internet.</p>
           <ul>
-            <li>All features work offline</li>
-            <li>Automatic safe sync when connected</li>
-            <li>Built for remote/large sites</li>
+            <li>Full functionality offline</li>
+            <li>Automatic sync when connected</li>
+            <li>Conflict-safe (planned)</li>
           </ul>
         </div>
-
-        <!-- Add more cards for Vaults, Geofencing, etc. if space allows -->
-
       </div>
     </section>
 
-    <section id="roadmap" class="fade-in">
+    <section id="roadmap" class="fade-in" style="background:rgba(0,0,0,0.15);">
       <h2 class="sectionTitle">Realistic Roadmap</h2>
-      <p class="sectionLead">Phase 1 MVP live • Phase 2 sync/productivity rolling out • Enterprise & AI coming.</p>
+      <p class="sectionLead">Phased and driven by real site feedback.</p>
       <div class="grid">
-        <div class="feature-card">🚀 Phase 1: Stable companion (live now)</div>
-        <div class="feature-card">🚧 Phase 2: Productivity & Sync</div>
-        <div class="feature-card">🌍 Phase 3: Enterprise-Ready</div>
-        <div class="feature-card">🤖 Phase 4: AI & Automation</div>
-        <div class="feature-card">📊 Phase 5: Insights & Analytics</div>
+        <div class="feature-card">
+          <h3>🚀 Phase 1 — MVP (Current)</h3>
+          <p>Stable site companion: Projects, Jobs, Photos, Contacts, PDF reports, Offline mode, Auth.</p>
+        </div>
+        <div class="feature-card">
+          <h3>🚧 Phase 2 — Productivity & Sync</h3>
+          <p>Cloud sync, multi-device, calendar, geofencing, better PDFs.</p>
+        </div>
+        <div class="feature-card">
+          <h3>🌍 Phase 3 — Enterprise-Ready</h3>
+          <p>Multi-user, roles, company accounts, versioning, branding.</p>
+        </div>
+        <div class="feature-card">
+          <h3>🤖 Phase 4 — AI & Automation</h3>
+          <p>AI photo analysis, smart suggestions, voice workflow.</p>
+        </div>
+        <div class="feature-card">
+          <h3>📊 Phase 5 — Insights</h3>
+          <p>Dashboards, trends, recurring defect analysis.</p>
+        </div>
       </div>
     </section>
 
-    <!-- Keep the epic #beta section from previous version -->
+    <section id="beta" class="fade-in">
+      <div class="wrap" style="text-align:center;">
+        <h2 class="sectionTitle">Apply to Join the Active Beta</h2>
+        <p class="sectionLead">Manual review for construction pros — approved users get immediate access.</p>
+      </div>
+
+      <div class="formCard">
+        <form id="betaForm" action="https://formspree.io/f/xnnerkde" method="POST">
+          <div class="formGrid">
+            <div class="field">
+              <input type="email" name="email" required id="email">
+              <label for="email">Work email *</label>
+            </div>
+            <div class="field">
+              <input type="text" name="name" id="name">
+              <label for="name">Your name (optional)</label>
+            </div>
+            <div class="field">
+              <select name="role" id="role">
+                <option value=""></option>
+                <option>Foreman</option>
+                <option>Supervisor</option>
+                <option>Project Manager</option>
+                <option>Site Inspector</option>
+                <option>Other</option>
+              </select>
+              <label for="role">Your role</label>
+            </div>
+            <div class="optionalFields" id="optional">
+              <div class="field">
+                <select name="company_size">
+                  <option value=""></option>
+                  <option>1–10 people</option>
+                  <option>11–50</option>
+                  <option>51–200</option>
+                  <option>200+</option>
+                </select>
+                <label>Team/company size</label>
+              </div>
+              <div class="field">
+                <textarea name="usage" rows="4"></textarea>
+                <label>How will you use SCSK? (site type, pain points...)</label>
+              </div>
+            </div>
+            <button type="submit" class="submitBtn">Submit application</button>
+          </div>
+          <input type="hidden" name="_subject" value="SCSK Beta Application" />
+          <input type="text" name="_gotcha" style="display:none" />
+          <div id="statusOk" class="status ok">🎉 Thanks! Your application is in. We'll review and email access soon.</div>
+          <div id="statusErr" class="status" style="background:rgba(251,191,36,0.2);">⚠️ Something went wrong — email admin@sc-sk.com</div>
+        </form>
+        <canvas id="confetti"></canvas>
+      </div>
+    </section>
 
   </main>
 
-  <!-- Footer same -->
+  <footer>
+    <div class="wrap">
+      <strong>Site Companion Side Kick (SCSK)</strong><br><br>
+      <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin:20px 0;">
+        <a class="navlink" href="#features">Features</a>
+        <a class="navlink" href="#roadmap">Roadmap</a>
+        <a class="navlink" href="#beta">Join Beta</a>
+        <a class="navlink" href="privacy.html">Privacy</a>
+        <a class="navlink" href="delete-account.html">Delete account</a>
+        <a class="navlink" href="support.html">Support</a>
+      </div>
+      <small style="color:var(--muted);">© <span id="year"></span> SAA. All rights reserved.</small>
+    </div>
+  </footer>
 
-  <!-- Scripts same (parallax, fade-ins, form, confetti) -->
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      document.querySelector('.hero-bg').style.transform = `translateY(${scrolled * 0.5}px)`;
+    });
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    const form = document.getElementById('betaForm');
+    const optional = document.getElementById('optional');
+    const inputs = form.querySelectorAll('input, textarea, select');
+    inputs.forEach(field => {
+      field.addEventListener('input', () => {
+        const parent = field.parentElement;
+        if(field.value) parent.classList.add('filled');
+        else parent.classList.remove('filled');
+        if(form.querySelector('#email').value.trim()) optional.classList.add('show');
+      });
+      if(field.value) field.parentElement.classList.add('filled');
+    });
+
+    function launchConfetti(){
+      const canvas = document.getElementById('confetti');
+      const ctx = canvas.getContext('2d');
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+      let particles = [];
+      for(let i = 0; i < 120; i++){
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height - canvas.height,
+          vx: Math.random() * 6 - 3,
+          vy: Math.random() * 5 + 3,
+          color: ['#5DA9FF','#8B5CF6','#FBBF24'][Math.floor(Math.random()*3)],
+          size: Math.random() * 5 + 3
+        });
+      }
+      function animate(){
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        particles.forEach(p => {
+          p.x += p.vx; p.y += p.vy; p.vy += 0.15;
+          ctx.fillStyle = p.color;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
+          ctx.fill();
+        });
+        if(particles.some(p => p.y < canvas.height)) requestAnimationFrame(animate);
+      }
+      animate();
+    }
+
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      document.querySelectorAll('.status').forEach(s => s.classList.remove('show'));
+      try{
+        const res = await fetch(form.action, {method:'POST', body:new FormData(form), headers:{'Accept':'application/json'}});
+        if(res.ok){
+          form.reset();
+          inputs.forEach(f => f.parentElement.classList.remove('filled'));
+          optional.classList.remove('show');
+          document.getElementById('statusOk').classList.add('show');
+          launchConfetti();
+        } else throw new Error();
+      } catch {
+        document.getElementById('statusErr').classList.add('show');
+      }
+    });
+
+    observer.observe(document.querySelector('.formCard'));
+  </script>
 </body>
 </html>
