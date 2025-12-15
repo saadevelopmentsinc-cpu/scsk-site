@@ -1,203 +1,294 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en-AU">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
   <title>Privacy Policy — Site Companion Side Kick (SCSK)</title>
-  <meta name="description" content="Privacy Policy for Site Companion Side Kick (SCSK). Learn what data we collect, how it's used, your rights, and your choices." />
-
+  <meta name="description" content="Privacy Policy for Site Companion Side Kick (SCSK). Learn what data we collect, how it's used, your rights, and your choices.">
   <style>
-    :root{
-      --bg0:#070A10;
-      --bg1:#0B1020;
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    :root {
+      --bg0: #070A10;
+      --bg1: #0B1020;
       --glass: rgba(255,255,255,0.08);
       --glass-border: rgba(255,255,255,0.15);
-      --text:#EAF0FF;
+      --text: #EAF0FF;
       --muted: rgba(234,240,255,0.75);
-      --accent:#5DA9FF;
-      --accent2:#8B5CF6;
-      --shadow: 0 20px 50px rgba(0,0,0,0.6);
-      --max: 980px;
-      --radius: 28px;
-      --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      --accent: #5DA9FF;
+      --accent2: #8B5CF6;
+      --max: 900px;
+      --radius: 20px;
     }
 
-    *{ box-sizing:border-box; margin:0; padding:0; }
-    body{
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      color:var(--text);
-      background: 
-        radial-gradient(1400px 600px at 20% -20%, rgba(93,169,255,0.22), transparent 60%),
-        radial-gradient(1100px 600px at 80% 10%, rgba(139,92,246,0.18), transparent 60%),
-        linear-gradient(180deg, var(--bg0) 0%, var(--bg1) 100%);
+    html { scroll-behavior: smooth; }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, var(--bg0) 0%, var(--bg1) 100%);
       background-attachment: fixed;
-      line-height:1.7;
+      line-height: 1.7;
+      min-height: 100vh;
     }
 
-    a{ color:var(--accent); text-decoration:none; transition: var(--transition); }
-    a:hover{ color:var(--text); text-decoration:underline; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
 
-    .wrap{ max-width:var(--max); margin:0 auto; padding:0 24px; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 16px; }
 
-    header{
-      position:sticky; top:0; z-index:100;
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      background: rgba(7,10,16,0.75);
-      border-bottom:1px solid var(--glass-border);
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7,10,16,0.95);
+      border-bottom: 1px solid var(--glass-border);
     }
-    .topbar{ display:flex; justify-content:space-between; align-items:center; padding:16px 0; flex-wrap:wrap; gap:16px; }
-    .brand{ display:flex; align-items:center; gap:16px; }
-    .logo{
-      width:48px; height:48px; border-radius:18px;
-      background:linear-gradient(135deg,var(--accent),var(--accent2));
-      box-shadow:0 16px 40px rgba(0,0,0,0.6);
-      display:flex; align-items:center; justify-content:center;
-    }
-    .logo svg{ width:28px; height:28px; fill:#fff; }
-    .chip{
-      padding:12px 18px; border-radius:999px; background:rgba(255,255,255,0.05);
-      border:1px solid var(--glass-border); font-size:14px; transition:var(--transition);
-      color:var(--text);
-    }
-    .chip:hover{ background:rgba(255,255,255,0.12); text-decoration:none; }
 
-    .page{ padding:60px 0 80px; }
-    .glass-card{
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .logo svg { width: 22px; height: 22px; fill: #fff; }
+
+    .brand-text strong { display: block; font-size: 14px; }
+    .brand-text span { font-size: 11px; color: var(--muted); }
+
+    .nav-links { display: flex; gap: 6px; flex-wrap: wrap; }
+
+    .chip {
+      padding: 8px 14px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--glass-border);
+      font-size: 13px;
+      color: var(--text);
+    }
+    .chip:hover { background: rgba(255,255,255,0.1); text-decoration: none; }
+
+    main { padding: 32px 0 60px; }
+
+    .card {
       background: var(--glass);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border:1px solid var(--glass-border);
+      border: 1px solid var(--glass-border);
       border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow:hidden;
+      overflow: hidden;
     }
-    .cardHead{
-      padding:48px 48px 32px;
-      background:rgba(0,0,0,0.14);
-      border-bottom:1px solid var(--glass-border);
-    }
-    .kicker{
-      display:inline-block; padding:10px 16px; border-radius:999px; background:rgba(0,0,0,0.35);
-      border:1px solid var(--glass-border); font-size:12px; letter-spacing:0.12em; color:var(--muted);
-      text-transform:uppercase; font-weight:500;
-    }
-    .headline{ font-size:42px; margin:24px 0 16px; letter-spacing:-0.03em; font-weight:700; }
-    .meta{ color:var(--muted); font-size:15px; }
-    .meta strong{ color:var(--text); }
 
-    .content{ padding:8px 48px 48px; }
-    
-    .callout{
-      margin:32px 0; padding:28px 32px; border-radius:20px; 
-      background: linear-gradient(135deg, rgba(93,169,255,0.12), rgba(139,92,246,0.08));
-      border:1px solid var(--glass-border);
+    .card-header {
+      padding: 28px 24px 20px;
+      background: rgba(0,0,0,0.2);
+      border-bottom: 1px solid var(--glass-border);
     }
-    .callout-title{
-      font-size:16px; font-weight:600; color:var(--text); margin-bottom:16px;
-      display:flex; align-items:center; gap:10px;
-    }
-    .callout-title svg{ width:20px; height:20px; fill:var(--accent); }
-    .callout ul{ margin:0 0 0 20px; }
-    .callout li{ margin:8px 0; color:var(--text); font-size:15px; }
 
-    .toc{
-      margin:32px 0; padding:28px 32px; border-radius:20px;
-      background:rgba(0,0,0,0.18); border:1px solid var(--glass-border);
+    .kicker {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 6px;
+      background: rgba(93,169,255,0.15);
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
     }
-    .toc-title{ font-size:14px; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:16px; }
-    .toc-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:8px 24px; }
-    .toc a{ font-size:14px; color:var(--muted); display:block; padding:6px 0; }
-    .toc a:hover{ color:var(--accent); }
-    .toc-num{ color:var(--accent); margin-right:8px; font-weight:500; }
 
-    h2{ 
-      font-size:24px; margin:48px 0 16px; font-weight:600; 
-      padding-top:24px; border-top:1px solid var(--glass-border);
-      scroll-margin-top:100px;
+    .headline {
+      font-size: clamp(24px, 6vw, 36px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
     }
-    h2:first-of-type{ border-top:none; margin-top:32px; padding-top:0; }
-    
-    h3{ font-size:18px; margin:28px 0 12px; font-weight:600; color:var(--text); }
-    
-    p{ color:var(--muted); font-size:16px; margin:12px 0; }
-    p strong{ color:var(--text); }
-    
-    ul, ol{ margin:16px 0 16px 24px; }
-    li{ color:var(--muted); font-size:16px; margin:10px 0; }
-    li strong{ color:var(--text); }
 
-    .highlight-box{
-      margin:24px 0; padding:20px 24px; border-radius:16px;
-      background:rgba(93,169,255,0.08); border-left:3px solid var(--accent);
+    .meta { color: var(--muted); font-size: 13px; }
+    .meta strong { color: var(--text); }
+
+    .card-body { padding: 24px; }
+
+    .callout {
+      margin-bottom: 28px;
+      padding: 20px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(93,169,255,0.1), rgba(139,92,246,0.08));
+      border: 1px solid var(--glass-border);
     }
-    .highlight-box p{ margin:0; font-size:15px; }
 
-    .contact-grid{
-      display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:16px; margin:24px 0;
+    .callout-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
-    .contact-card{
-      padding:24px; border-radius:16px; background:rgba(0,0,0,0.18);
-      border:1px solid var(--glass-border); transition:var(--transition);
+    .callout-title svg { width: 18px; height: 18px; fill: var(--accent); flex-shrink: 0; }
+
+    .callout ul { margin: 0; padding-left: 18px; }
+    .callout li { margin: 8px 0; font-size: 14px; color: var(--text); }
+    .callout li strong { color: var(--accent); }
+
+    .toc {
+      margin-bottom: 28px;
+      padding: 20px;
+      border-radius: 14px;
+      background: rgba(0,0,0,0.2);
+      border: 1px solid var(--glass-border);
     }
-    .contact-card:hover{ background:rgba(0,0,0,0.25); border-color:var(--accent); }
-    .contact-card strong{ display:block; font-size:13px; color:var(--muted); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px; }
-    .contact-card a, .contact-card span{ font-size:16px; color:var(--text); }
 
-    .footer{ 
-      padding:48px 0; text-align:center; color:var(--muted); font-size:13px; 
-      border-top:1px solid var(--glass-border); margin-top:40px;
+    .toc-title {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 14px;
     }
-    .footer-links{ margin-bottom:16px; }
-    .footer-links a{ margin:0 16px; color:var(--muted); }
-    .footer-links a:hover{ color:var(--accent); }
 
-    .fade-in{ opacity:0; transform:translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
-    .fade-in.visible{ opacity:1; transform:translateY(0); }
+    .toc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 6px 16px;
+    }
 
-    @media (max-width:640px){
-      .headline{ font-size:28px; }
-      .cardHead{ padding:32px 24px 24px; }
-      .content{ padding:8px 24px 32px; }
-      h2{ font-size:20px; }
-      .toc-grid{ grid-template-columns:1fr; }
+    .toc a { font-size: 13px; color: var(--muted); padding: 4px 0; display: block; }
+    .toc a:hover { color: var(--accent); text-decoration: none; }
+    .toc-num { color: var(--accent); margin-right: 5px; font-weight: 500; }
+
+    h2 {
+      font-size: clamp(18px, 4vw, 22px);
+      font-weight: 600;
+      margin: 36px 0 14px;
+      padding-top: 20px;
+      border-top: 1px solid var(--glass-border);
+      scroll-margin-top: 70px;
+    }
+    h2:first-of-type { border-top: none; margin-top: 0; padding-top: 0; }
+
+    h3 { font-size: 16px; font-weight: 600; margin: 20px 0 10px; color: var(--text); }
+
+    p { color: var(--muted); font-size: 14px; margin: 10px 0; line-height: 1.7; }
+    p strong { color: var(--text); }
+
+    ul, ol { margin: 14px 0; padding-left: 20px; }
+    li { color: var(--muted); font-size: 14px; margin: 8px 0; line-height: 1.6; }
+    li strong { color: var(--text); }
+
+    .highlight {
+      margin: 20px 0;
+      padding: 16px;
+      border-radius: 10px;
+      background: rgba(93,169,255,0.08);
+      border-left: 3px solid var(--accent);
+    }
+    .highlight p { margin: 0; }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin: 20px 0;
+    }
+
+    .contact-card {
+      padding: 16px;
+      border-radius: 10px;
+      background: rgba(0,0,0,0.2);
+      border: 1px solid var(--glass-border);
+    }
+    .contact-card strong {
+      display: block;
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+    }
+    .contact-card a, .contact-card span { font-size: 14px; color: var(--text); word-break: break-all; }
+
+    footer {
+      padding: 32px 0;
+      text-align: center;
+      border-top: 1px solid var(--glass-border);
+      margin-top: 32px;
+    }
+
+    .footer-links {
+      margin-bottom: 14px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 6px 20px;
+    }
+    .footer-links a { color: var(--muted); font-size: 13px; }
+
+    footer p { color: var(--muted); font-size: 12px; }
+
+    @media (max-width: 600px) {
+      .topbar { justify-content: center; text-align: center; }
+      .brand { justify-content: center; }
+      .nav-links { justify-content: center; width: 100%; }
+      .card-header { padding: 20px 16px 16px; }
+      .card-body { padding: 16px; }
+      .callout, .toc { padding: 16px; }
+      .toc-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      h2 { margin: 28px 0 12px; padding-top: 16px; }
     }
   </style>
 </head>
 <body>
-
   <header>
     <div class="wrap topbar">
-      <div class="brand">
+      <a href="index.html" class="brand">
         <div class="logo">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.18l6.9 3.45L12 11.09 5.1 7.63 12 4.18zM4 8.82l7 3.5v7.36l-7-3.5V8.82zm9 10.86v-7.36l7-3.5v7.36l-7 3.5z"/>
-          </svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.18l6.9 3.45L12 11.09 5.1 7.63 12 4.18zM4 8.82l7 3.5v7.36l-7-3.5V8.82zm9 10.86v-7.36l7-3.5v7.36l-7 3.5z"/></svg>
         </div>
-        <div>
-          <strong style="display:block; font-size:16px; letter-spacing:0.04em;">Site Companion Side Kick</strong>
-          <span style="font-size:13px; color:var(--muted);">SCSK • Privacy Policy</span>
+        <div class="brand-text">
+          <strong>Site Companion Side Kick</strong>
+          <span>SCSK</span>
         </div>
-      </div>
-      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+      </a>
+      <nav class="nav-links">
         <a class="chip" href="index.html">Home</a>
         <a class="chip" href="terms.html">Terms</a>
         <a class="chip" href="mailto:admin@sc-sk.com">Support</a>
-      </div>
+      </nav>
     </div>
   </header>
 
-  <main class="wrap page">
-    <article class="glass-card fade-in">
-      <div class="cardHead">
+  <main class="wrap">
+    <article class="card">
+      <div class="card-header">
         <span class="kicker">Legal Document</span>
         <h1 class="headline">Privacy Policy</h1>
-        <p class="meta">Effective Date: <strong>15 December 2025</strong> &nbsp;•&nbsp; Version <strong>1.0</strong></p>
+        <p class="meta">Effective Date: <strong>15 December 2025</strong> · Version <strong>1.0</strong></p>
       </div>
 
-      <div class="content">
-        
+      <div class="card-body">
         <div class="callout">
           <div class="callout-title">
             <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
@@ -259,8 +350,8 @@
 
         <h3>2.3 Information Collected with Your Permission</h3>
         <ul>
-          <li><strong>Location Data:</strong> With your explicit consent, we may collect precise or approximate location data to enable features such as geofencing reminders, site-based task prompts, and location tagging for photos. You can enable or disable location access at any time through your device settings.</li>
-          <li><strong>Camera & Microphone Access:</strong> Required only when you choose to capture photos, record voice notes, or use related documentation features. Access is requested at the point of use.</li>
+          <li><strong>Location Data:</strong> With your explicit consent, we may collect precise or approximate location data to enable features such as geofencing reminders, site-based task prompts, and location tagging for photos.</li>
+          <li><strong>Camera & Microphone Access:</strong> Required only when you choose to capture photos, record voice notes, or use related documentation features.</li>
           <li><strong>Calendar Integration:</strong> If you choose to sync with your device calendar, we access calendar data solely to display and coordinate scheduling information within the App.</li>
           <li><strong>Sensor Data:</strong> Compass and accelerometer data when using our level and orientation tools, processed locally on your device.</li>
         </ul>
@@ -298,14 +389,13 @@
           <li>Protecting against fraud, abuse, and unauthorised access</li>
           <li>Enforcing our Terms of Service and other policies</li>
           <li>Complying with applicable legal obligations</li>
-          <li>Preserving evidence for potential legal proceedings when required</li>
         </ul>
 
         <h2 id="legal">4. Legal Basis for Processing</h2>
         <p>We process your personal information based on the following legal grounds:</p>
         <ul>
           <li><strong>Contractual Necessity:</strong> Processing required to provide you with SCSK's services as outlined in our Terms of Service.</li>
-          <li><strong>Legitimate Interests:</strong> Processing necessary for our legitimate business interests, such as improving our services, ensuring security, and preventing fraud, balanced against your privacy rights.</li>
+          <li><strong>Legitimate Interests:</strong> Processing necessary for our legitimate business interests, such as improving our services, ensuring security, and preventing fraud.</li>
           <li><strong>Consent:</strong> Where required by law, we obtain your explicit consent before collecting or processing certain types of information, such as precise location data.</li>
           <li><strong>Legal Obligations:</strong> Processing necessary to comply with applicable laws, regulations, or legal processes.</li>
         </ul>
@@ -319,35 +409,26 @@
           <li><strong>Cloud Infrastructure:</strong> Secure data storage and synchronisation services</li>
           <li><strong>Authentication Services:</strong> Account verification and security</li>
           <li><strong>Analytics Providers:</strong> Anonymised usage analysis to improve the App</li>
-          <li><strong>Customer Support Platforms:</strong> Tools to help us respond to your inquiries</li>
         </ul>
-        <p>These providers are contractually obligated to protect your information and may only use it to perform services on our behalf.</p>
 
         <h3>5.2 Your Explicit Sharing</h3>
         <p>When you choose to export, share, or transmit data from the App (such as generating a report to send to a client), you control that sharing and the recipients you select.</p>
 
         <h3>5.3 Legal Requirements</h3>
-        <p>We may disclose information when we believe in good faith that disclosure is necessary to:</p>
-        <ul>
-          <li>Comply with applicable law, regulation, or legal process</li>
-          <li>Protect the rights, property, or safety of SAA, our users, or the public</li>
-          <li>Detect, prevent, or address fraud, security, or technical issues</li>
-          <li>Respond to lawful requests from public authorities</li>
-        </ul>
+        <p>We may disclose information when we believe in good faith that disclosure is necessary to comply with applicable law, protect our rights, or respond to lawful requests from public authorities.</p>
 
         <h3>5.4 Business Transfers</h3>
-        <p>In the event of a merger, acquisition, reorganisation, or sale of assets, your information may be transferred as part of that transaction. We will notify you of any such change and any choices you may have regarding your information.</p>
+        <p>In the event of a merger, acquisition, or sale of assets, your information may be transferred as part of that transaction. We will notify you of any such change.</p>
 
         <h2 id="retention">6. Data Retention</h2>
         <p>We retain your information for as long as necessary to provide our services and fulfil the purposes described in this Policy. Specific retention periods include:</p>
         <ul>
           <li><strong>Active Account Data:</strong> Retained while your account remains active and for a reasonable period thereafter to allow for reactivation.</li>
-          <li><strong>Project & Job Data:</strong> Retained until you delete it or close your account, plus any legally required retention period.</li>
+          <li><strong>Project & Job Data:</strong> Retained until you delete it or close your account.</li>
           <li><strong>Usage Analytics:</strong> Retained in aggregate, anonymised form indefinitely for service improvement purposes.</li>
           <li><strong>Backup Data:</strong> May persist in backup systems for up to 90 days after deletion from active systems.</li>
-          <li><strong>Legal Compliance:</strong> Certain information may be retained longer if required by law or to protect our legal interests.</li>
         </ul>
-        <p>You may request deletion of your data at any time, subject to legal retention requirements and our legitimate business interests.</p>
+        <p>You may request deletion of your data at any time, subject to legal retention requirements.</p>
 
         <h2 id="security">7. Security Measures</h2>
         <p>We implement comprehensive security measures to protect your information:</p>
@@ -356,79 +437,64 @@
         <ul>
           <li><strong>Encryption:</strong> Data is encrypted in transit using TLS/SSL protocols and at rest using industry-standard encryption algorithms.</li>
           <li><strong>Access Controls:</strong> Strict authentication and authorisation mechanisms limit access to your data.</li>
-          <li><strong>Secure Infrastructure:</strong> We utilise reputable cloud providers with robust security certifications and practices.</li>
-          <li><strong>Regular Audits:</strong> Periodic security assessments and vulnerability testing of our systems.</li>
+          <li><strong>Secure Infrastructure:</strong> We utilise reputable cloud providers with robust security certifications.</li>
         </ul>
 
         <h3>7.2 Operational Safeguards</h3>
         <ul>
-          <li>Employee access to personal data is limited to those who require it for their job functions</li>
+          <li>Employee access to personal data is limited to those who require it</li>
           <li>Staff are trained on privacy and security best practices</li>
           <li>Incident response procedures are in place to address potential breaches</li>
         </ul>
 
-        <div class="highlight-box">
-          <p><strong>Important:</strong> While we strive to protect your information, no method of transmission or storage is 100% secure. We cannot guarantee absolute security, and you use our services at your own risk. We encourage you to use strong passwords and keep your account credentials confidential.</p>
+        <div class="highlight">
+          <p><strong>Important:</strong> While we strive to protect your information, no method of transmission or storage is 100% secure. We cannot guarantee absolute security. We encourage you to use strong passwords and keep your account credentials confidential.</p>
         </div>
 
         <h2 id="rights">8. Your Rights & Choices</h2>
-        <p>You have several rights and options regarding your personal information:</p>
+        <p>You have several rights regarding your personal information:</p>
 
         <h3>8.1 Access & Portability</h3>
-        <p>You may request a copy of the personal information we hold about you. Where technically feasible, we can provide this in a structured, commonly used, machine-readable format.</p>
+        <p>You may request a copy of the personal information we hold about you in a structured, machine-readable format.</p>
 
         <h3>8.2 Correction</h3>
-        <p>You can update or correct your account information directly within the App, or contact us to request corrections to other personal data.</p>
+        <p>You can update or correct your account information directly within the App, or contact us to request corrections.</p>
 
         <h3>8.3 Deletion</h3>
-        <p>You may request deletion of your personal information. We will comply with such requests unless we have a legitimate reason or legal obligation to retain certain data. You can also delete individual projects, jobs, photos, and other content directly within the App.</p>
+        <p>You may request deletion of your personal information. We will comply unless we have a legitimate reason or legal obligation to retain certain data.</p>
 
-        <h3>8.4 Restrict Processing</h3>
-        <p>In certain circumstances, you may request that we restrict the processing of your personal information.</p>
+        <h3>8.4 Withdraw Consent</h3>
+        <p>Where we rely on your consent for processing, you may withdraw that consent at any time.</p>
 
-        <h3>8.5 Withdraw Consent</h3>
-        <p>Where we rely on your consent for processing, you may withdraw that consent at any time. This will not affect the lawfulness of processing conducted prior to withdrawal.</p>
+        <h3>8.5 Device Permissions</h3>
+        <p>You can control app permissions (camera, location, microphone, etc.) through your device's settings at any time.</p>
 
-        <h3>8.6 Device Permissions</h3>
-        <p>You can control app permissions (camera, location, microphone, etc.) through your device's settings at any time. Disabling certain permissions may limit corresponding features.</p>
-
-        <h3>8.7 Communications Preferences</h3>
-        <p>You can opt out of promotional communications by following the unsubscribe instructions in those messages or adjusting your notification settings within the App.</p>
-
-        <h3>8.8 Exercising Your Rights</h3>
-        <p>To exercise any of these rights, please contact us using the details provided in Section 13. We will respond to your request within the timeframe required by applicable law.</p>
+        <h3>8.6 Exercising Your Rights</h3>
+        <p>To exercise any of these rights, please contact us using the details provided in Section 13.</p>
 
         <h2 id="international">9. International Data Transfers</h2>
         <p>SCSK is operated from Australia. If you access our services from outside Australia, please be aware that your information may be transferred to, stored, and processed in Australia or other countries where our service providers operate.</p>
-        <p>When transferring data internationally, we implement appropriate safeguards to ensure your information receives an adequate level of protection, including:</p>
-        <ul>
-          <li>Standard contractual clauses approved by relevant authorities</li>
-          <li>Data processing agreements with service providers</li>
-          <li>Compliance with applicable cross-border data transfer frameworks</li>
-        </ul>
+        <p>When transferring data internationally, we implement appropriate safeguards including standard contractual clauses and data processing agreements.</p>
 
         <h2 id="children">10. Children's Privacy</h2>
         <p>SCSK is designed for professional construction use and is not intended for use by individuals under the age of 18. We do not knowingly collect personal information from children.</p>
-        <p>If we become aware that we have inadvertently collected personal information from a child, we will take steps to delete such information promptly. If you believe we may have collected information from a child, please contact us immediately.</p>
+        <p>If we become aware that we have collected personal information from a child, we will delete such information promptly.</p>
 
         <h2 id="thirdparty">11. Third-Party Services & Links</h2>
-        <p>SCSK may integrate with or contain links to third-party services, websites, or applications. This Privacy Policy applies only to SCSK and does not govern third-party services.</p>
-        <p>We encourage you to review the privacy policies of any third-party services you access through or in connection with SCSK. We are not responsible for the privacy practices or content of third-party services.</p>
-
-        <h3>11.1 Third-Party Integrations</h3>
-        <p>When you choose to connect SCSK with third-party services (such as cloud storage or calendar applications), information may be shared between SCSK and those services according to their respective privacy policies and your authorisation.</p>
+        <p>SCSK may integrate with or contain links to third-party services. This Privacy Policy applies only to SCSK and does not govern third-party services.</p>
+        <p>We encourage you to review the privacy policies of any third-party services you access through SCSK.</p>
 
         <h2 id="changes">12. Changes to This Policy</h2>
-        <p>We may update this Privacy Policy from time to time to reflect changes in our practices, technologies, legal requirements, or other factors. When we make material changes:</p>
+        <p>We may update this Privacy Policy from time to time. When we make material changes:</p>
         <ul>
           <li>We will update the "Effective Date" at the top of this Policy</li>
           <li>We will notify you through the App, by email, or other appropriate means</li>
-          <li>For significant changes affecting your rights, we may request your acknowledgment or consent</li>
+          <li>For significant changes affecting your rights, we may request your acknowledgment</li>
         </ul>
-        <p>We encourage you to review this Policy periodically to stay informed about our privacy practices. Your continued use of SCSK after any changes indicates your acceptance of the updated Policy.</p>
+        <p>Your continued use of SCSK after any changes indicates your acceptance of the updated Policy.</p>
 
         <h2 id="contact">13. Contact Us</h2>
-        <p>If you have any questions, concerns, or requests regarding this Privacy Policy or our privacy practices, please contact us:</p>
+        <p>If you have any questions, concerns, or requests regarding this Privacy Policy, please contact us:</p>
 
         <div class="contact-grid">
           <div class="contact-card">
@@ -441,55 +507,34 @@
           </div>
           <div class="contact-card">
             <strong>Website</strong>
-            <a href="https://sc-sk.com" target="_blank" rel="noopener">https://sc-sk.com</a>
+            <a href="https://sc-sk.com">sc-sk.com</a>
           </div>
           <div class="contact-card">
             <strong>Response Time</strong>
-            <span>Within 30 days</span>
+            <span>Within 5 days</span>
           </div>
         </div>
 
-        <p>We take your privacy concerns seriously and will endeavour to respond to all inquiries in a timely manner. For data protection matters, we aim to respond within 30 days, or sooner if required by applicable law.</p>
+        <p>We take your privacy concerns seriously and will respond to all inquiries in a timely manner.</p>
 
-        <div class="highlight-box">
-          <p><strong>Complaints:</strong> If you are not satisfied with our response to your privacy concern, you may have the right to lodge a complaint with your local data protection authority. In Australia, this is the Office of the Australian Information Commissioner (OAIC) at <a href="https://www.oaic.gov.au" target="_blank" rel="noopener">www.oaic.gov.au</a>.</p>
+        <div class="highlight">
+          <p><strong>Complaints:</strong> If you are not satisfied with our response, you may lodge a complaint with your local data protection authority. In Australia, this is the Office of the Australian Information Commissioner (OAIC) at <a href="https://www.oaic.gov.au">www.oaic.gov.au</a>.</p>
         </div>
-
       </div>
     </article>
+  </main>
 
-    <footer class="footer">
+  <footer>
+    <div class="wrap">
       <div class="footer-links">
         <a href="index.html">Home</a>
         <a href="terms.html">Terms of Service</a>
         <a href="privacy.html">Privacy Policy</a>
         <a href="mailto:admin@sc-sk.com">Contact</a>
       </div>
-      <p>© <span id="year"></span> SAA. All rights reserved.</p>
-      <p style="margin-top:8px; font-size:12px;">Site Companion Side Kick (SCSK) — Built for construction professionals.</p>
-    </footer>
-  </main>
-
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => { 
-        if (entry.isIntersecting) entry.target.classList.add('visible'); 
-      });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-    });
-  </script>
+      <p>&copy; 2025 SAA. All rights reserved.</p>
+      <p style="margin-top:6px;">Site Companion Side Kick (SCSK) — Built for construction professionals.</p>
+    </div>
+  </footer>
 </body>
 </html>
