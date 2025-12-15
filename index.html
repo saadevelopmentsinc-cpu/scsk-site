@@ -3,10 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
   <title>Site Companion Side Kick (SCSK) — Active Beta</title>
   <meta name="description" content="SCSK: Offline-first daily companion app for construction foremen, supervisors, and project managers. In-depth job tracking, photos, trade assignments, reports, and more." />
-
   <style>
     :root{
       --bg0:#070A10;
@@ -23,13 +21,12 @@
       --radius: 28px;
       --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
-
     *{ box-sizing:border-box; margin:0; padding:0; }
     html{ scroll-behavior:smooth; }
     body{
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
       color:var(--text);
-      background: 
+      background:
         radial-gradient(1400px 600px at 20% -20%, rgba(93,169,255,0.22), transparent 60%),
         radial-gradient(1100px 600px at 80% 10%, rgba(139,92,246,0.18), transparent 60%),
         linear-gradient(180deg, var(--bg0) 0%, var(--bg1) 100%);
@@ -37,12 +34,9 @@
       line-height:1.6;
       overflow-x:hidden;
     }
-
     a{ color:var(--text); text-decoration:none; }
     a:hover{ text-decoration:underline; }
-
     .wrap{ max-width:var(--max); margin:0 auto; padding:0 24px; }
-
     .glass-card{
       background: var(--glass);
       backdrop-filter: blur(16px);
@@ -53,7 +47,6 @@
       transition: var(--transition);
     }
     .glass-card:hover{ transform: translateY(-12px); box-shadow: 0 32px 80px rgba(0,0,0,0.7); }
-
     header{
       position:sticky; top:0; z-index:100;
       backdrop-filter: blur(20px);
@@ -72,7 +65,6 @@
       border:1px solid var(--glass-border); font-size:14px; transition:var(--transition);
     }
     .navlink:hover{ background:rgba(255,255,255,0.12); }
-
     .hero{ padding:60px 0 80px; position:relative; overflow:hidden; }
     .hero-bg{ position:absolute; inset:0; background:url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover no-repeat; opacity:0.25; transform: translateY(0); transition: transform 0.8s ease-out; }
     .badge{ display:inline-block; padding:10px 16px; border-radius:999px; background:rgba(0,0,0,0.4); border:1px solid var(--glass-border); color:var(--beta); font-weight:800; font-size:13px; letter-spacing:0.1em; }
@@ -82,7 +74,6 @@
     .btn{ padding:16px 28px; border-radius:20px; font-weight:900; font-size:15px; min-width:240px; text-align:center; background:rgba(255,255,255,0.08); border:1px solid var(--glass-border); cursor:pointer; transition:var(--transition); }
     .btn:hover{ transform:scale(1.05); }
     .btnPrimary{ background:linear-gradient(135deg,var(--accent),var(--accent2)); }
-
     section{ padding:80px 0; }
     .sectionTitle{ font-size:36px; margin-bottom:16px; letter-spacing:-0.03em; text-align:center; }
     .sectionLead{ color:var(--muted); max-width:80ch; margin:0 auto 40px; font-size:18px; text-align:center; }
@@ -91,11 +82,10 @@
       background: var(--glass); backdrop-filter: blur(16px); border:1px solid var(--glass-border);
       border-radius: var(--radius); padding:32px; box-shadow: var(--shadow);
     }
-    .feature-card img{ width:100%; height:220px; object-fit:cover; border-radius:16px; margin-bottom:24px; box-shadow:0 12px 30px rgba(0,0,0,0.4); }
+    .feature-card img{ width:100%; height:480px; object-fit:contain; background:#000; border-radius:16px; margin-bottom:24px; box-shadow:0 12px 30px rgba(0,0,0,0.6); }
     .feature-card h3{ font-size:22px; margin-bottom:16px; }
     .feature-card ul{ margin:16px 0; padding-left:24px; color:var(--muted); }
     .feature-card li{ margin-bottom:8px; }
-
     #beta{ padding:100px 0; position:relative; overflow:hidden; }
     #beta::before{ content:''; position:absolute; inset:0; background:radial-gradient(circle at 50% 50%, rgba(93,169,255,0.15), transparent 70%); pointer-events:none; }
     .formCard{ position:relative; max-width:780px; margin:0 auto; padding:48px; border-radius:32px; background: rgba(255,255,255,0.09); backdrop-filter: blur(20px); border:1px solid rgba(255,255,255,0.2); box-shadow: 0 32px 80px rgba(0,0,0,0.7); transform: translateY(20px); opacity:0; transition: all 1s ease; }
@@ -114,22 +104,17 @@
     .status.show{ opacity:1; transform:translateY(0); }
     .status.ok{ background:rgba(93,169,255,0.2); border:1px solid rgba(93,169,255,0.4); }
     #confetti{ position:absolute; inset:0; pointer-events:none; }
-
     footer{ padding:60px 0; border-top:1px solid var(--glass-border); background:rgba(0,0,0,0.2); text-align:center; }
-
     .fade-in{ opacity:0; transform:translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
     .fade-in.visible{ opacity:1; transform:translateY(0); }
-
     @media (max-width:900px){ .headline{ font-size:40px; } .grid{ grid-template-columns:1fr; } }
     @media (max-width:640px){ .headline{ font-size:36px; } .btn{ min-width:100%; } .topbar{ flex-direction:column; text-align:center; } .sectionTitle{ font-size:32px; } }
   </style>
 </head>
 <body>
-
   <div style="background:linear-gradient(135deg,rgba(251,191,36,0.4),rgba(251,191,36,0.2)); padding:14px; text-align:center; font-weight:800; border-bottom:1px solid rgba(251,191,36,0.6);">
     ACTIVE BETA — Weekly updates • Offline-first • Multi-device sync rolling out
   </div>
-
   <header>
     <div class="wrap topbar">
       <div class="brand">
@@ -149,9 +134,7 @@
       </nav>
     </div>
   </header>
-
   <main class="wrap">
-
     <section class="hero fade-in">
       <div class="hero-bg"></div>
       <div class="hero-content glass-card">
@@ -165,83 +148,47 @@
         </div>
       </div>
     </section>
-
     <section id="features" class="fade-in">
       <h2 class="sectionTitle">In-Depth Core Features</h2>
       <p class="sectionLead">Practical tools built for day-to-day site management — current MVP + in-progress.</p>
       <div class="grid">
         <div class="feature-card">
-          <img src="https://images.unsplash.com/photo-1581093450021-4a7360e9a6b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Managing projects on tablet">
-          <h3>📁 Projects</h3>
-          <p>Create and manage multiple construction projects as containers for everything.</p>
-          <ul>
-            <li>Project name, site address, client details</li>
-            <li>Start & end dates</li>
-            <li>Stores all jobs, photos, plans, reports</li>
-            <li>Offline-first — no internet required on site</li>
-          </ul>
+          <img src="Screenshot1.jpg" alt="SCSK Dashboard & Overview">
+          <h3>Dashboard & Quick Actions</h3>
+          <p>Home screen with project/job stats and fast access to core functions.</p>
         </div>
-
         <div class="feature-card">
-          <img src="https://images.unsplash.com/photo-1581092160562-39e6b1e1e930?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Creating jobs and defects">
-          <h3>🧰 Jobs (Tasks / Defects / Issues)</h3>
-          <p>Create jobs for safety, quality, compliance, or general tasks.</p>
-          <ul>
-            <li>Title & description</li>
-            <li>Category (Safety / Quality / Custom)</li>
-            <li>Auto date/time stamped</li>
-            <li>Status tracking (Open / In Progress / Complete)</li>
-            <li>Accessible offline, sync when online</li>
-          </ul>
+          <img src="Screenshot2.jpg" alt="SCSK Project Detail">
+          <h3>Project Detail View</h3>
+          <p>Jobs, photos, quick actions, and status for a single project.</p>
         </div>
-
         <div class="feature-card">
-          <img src="https://images.unsplash.com/photo-1581093577422-764bb424ca7d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Annotating photos on site">
-          <h3>📸 Photos & Annotations</h3>
-          <p>Capture and mark up site evidence instantly.</p>
-          <ul>
-            <li>Take photos in-app</li>
-            <li>Attach to projects or jobs</li>
-            <li>Draw, highlight, add text</li>
-            <li>Grouped for easy access</li>
-          </ul>
+          <img src="Screenshot3.jpg" alt="SCSK Projects List">
+          <h3>Projects Overview</h3>
+          <p>All projects with status, progress tracking, and filters.</p>
         </div>
-
         <div class="feature-card">
-          <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Assigning to trades">
-          <h3>👷 Trade Assignments & Contacts</h3>
-          <p>Assign work and communicate clearly.</p>
-          <ul>
-            <li>Manage trades/contractors contacts</li>
-            <li>Assign jobs with notes (text or voice-to-text)</li>
-            <li>Trade-specific reports</li>
-          </ul>
+          <img src="Screenshot4.jpg" alt="SCSK Calendar Day View">
+          <h3>Calendar – Day View</h3>
+          <p>Detailed daily schedule with jobs, locations, and trades.</p>
         </div>
-
         <div class="feature-card">
-          <img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Generating PDF reports">
-          <h3>📄 PDF Reporting</h3>
-          <p>Auto-generate professional PDFs.</p>
-          <ul>
-            <li>Per job, trade, or project</li>
-            <li>Includes photos, annotations, notes, timestamps</li>
-            <li>Email directly from the app</li>
-          </ul>
+          <img src="Screenshot5.jpg" alt="SCSK Construction Tools">
+          <h3>Construction Calculators</h3>
+          <p>Built-in tools for tile, paint, brick, concrete, and more.</p>
         </div>
-
         <div class="feature-card">
-          <img src="https://images.unsplash.com/photo-1518709268810-8bd6d68068e5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Working offline">
-          <h3>🌐 Offline-First Sync</h3>
-          <p>Everything works without internet.</p>
-          <ul>
-            <li>Full functionality offline</li>
-            <li>Automatic sync when connected</li>
-            <li>Conflict-safe (planned)</li>
-          </ul>
+          <img src="Screenshot6.jpg" alt="SCSK Calendar Week View">
+          <h3>Calendar – Week View</h3>
+          <p>Plan site visits and see outstanding jobs across the week.</p>
+        </div>
+        <div class="feature-card">
+          <img src="Screenshot7.jpg" alt="SCSK Calendar Month View">
+          <h3>Calendar – Month View</h3>
+          <p>Full month overview for long-term planning and follow-ups.</p>
         </div>
       </div>
     </section>
-
     <section id="roadmap" class="fade-in" style="background:rgba(0,0,0,0.15);">
       <h2 class="sectionTitle">Realistic Roadmap</h2>
       <p class="sectionLead">Phased and driven by real site feedback.</p>
@@ -268,13 +215,11 @@
         </div>
       </div>
     </section>
-
     <section id="beta" class="fade-in">
       <div class="wrap" style="text-align:center;">
         <h2 class="sectionTitle">Apply to Join the Active Beta</h2>
         <p class="sectionLead">Manual review for construction pros — approved users get immediate access.</p>
       </div>
-
       <div class="formCard">
         <form id="betaForm" action="https://formspree.io/f/xnnerkde" method="POST">
           <div class="formGrid">
@@ -323,9 +268,7 @@
         <canvas id="confetti"></canvas>
       </div>
     </section>
-
   </main>
-
   <footer>
     <div class="wrap">
       <strong>Site Companion Side Kick (SCSK)</strong><br><br>
@@ -340,20 +283,16 @@
       <small style="color:var(--muted);">© <span id="year"></span> SAA. All rights reserved.</small>
     </div>
   </footer>
-
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
-
     window.addEventListener('scroll', () => {
       const scrolled = window.pageYOffset;
       document.querySelector('.hero-bg').style.transform = `translateY(${scrolled * 0.5}px)`;
     });
-
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
     }, { threshold: 0.1 });
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
     const form = document.getElementById('betaForm');
     const optional = document.getElementById('optional');
     const inputs = form.querySelectorAll('input, textarea, select');
@@ -366,7 +305,6 @@
       });
       if(field.value) field.parentElement.classList.add('filled');
     });
-
     function launchConfetti(){
       const canvas = document.getElementById('confetti');
       const ctx = canvas.getContext('2d');
@@ -396,7 +334,6 @@
       }
       animate();
     }
-
     form.addEventListener('submit', async e => {
       e.preventDefault();
       document.querySelectorAll('.status').forEach(s => s.classList.remove('show'));
@@ -413,7 +350,6 @@
         document.getElementById('statusErr').classList.add('show');
       }
     });
-
     observer.observe(document.querySelector('.formCard'));
   </script>
 </body>
