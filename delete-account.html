@@ -1,0 +1,324 @@
+// delete-account.html
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Delete Account — Site Companion Side Kick (SCSK)</title>
+  <meta name="description" content="How to request account deletion for Site Companion Side Kick (SCSK), including what data is deleted and what may be retained." />
+
+  <style>
+    :root{
+      --bg0:#070A10;
+      --bg1:#0B1020;
+      --border: rgba(255,255,255,0.12);
+      --text:#EAF0FF;
+      --muted: rgba(234,240,255,0.72);
+      --muted2: rgba(234,240,255,0.55);
+      --accent:#5DA9FF;
+      --accent2:#8B5CF6;
+      --warn:#FBBF24;
+      --shadow: 0 24px 60px rgba(0,0,0,0.55);
+      --max: 980px;
+      --radius: 22px;
+    }
+
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 520px at 20% -10%, rgba(93,169,255,0.18), transparent 55%),
+        radial-gradient(900px 520px at 85% 5%, rgba(139,92,246,0.14), transparent 55%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      line-height:1.6;
+      overflow-x:hidden;
+    }
+
+    a{ color:var(--text); text-decoration:none; }
+    a:hover{ text-decoration:underline; }
+
+    .wrap{ max-width:var(--max); margin:0 auto; padding:0 18px; }
+
+    /* Top bar */
+    .topBanner{
+      background: rgba(0,0,0,0.22);
+      border-bottom:1px solid rgba(255,255,255,0.10);
+    }
+    .topBannerInner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:12px 0;
+      flex-wrap:wrap;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:260px;
+    }
+    .logo{
+      width:42px;height:42px;border-radius:16px;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      border:1px solid rgba(255,255,255,0.25);
+      box-shadow:0 18px 40px rgba(0,0,0,0.45);
+      flex:0 0 auto;
+    }
+    .brandTitle{
+      margin:0;
+      font-size:14px;
+      letter-spacing:0.05em;
+      text-transform:uppercase;
+    }
+    .brandSub{
+      margin:2px 0 0;
+      font-size:12px;
+      color:var(--muted);
+    }
+    .topLinks{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .chip{
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.14);
+      background:rgba(0,0,0,0.18);
+      font-size:13px;
+      white-space:nowrap;
+    }
+
+    /* Page card */
+    .page{ padding:22px 0 42px; }
+    .card{
+      border-radius:28px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,0.05);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .cardHead{
+      padding:22px 22px 14px;
+      border-bottom:1px solid rgba(255,255,255,0.08);
+      background:rgba(0,0,0,0.14);
+    }
+    .kicker{
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.16);
+      background:rgba(0,0,0,0.35);
+      font-size:12px;
+      letter-spacing:0.08em;
+      text-transform:uppercase;
+      color:var(--muted);
+      flex-wrap:wrap;
+    }
+    .headline{
+      margin:14px 0 6px;
+      font-size:34px;
+      line-height:1.1;
+      letter-spacing:-0.02em;
+    }
+    .meta{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .content{ padding:18px 22px 22px; }
+
+    h2{
+      font-size:18px;
+      letter-spacing:-0.01em;
+      margin:22px 0 8px;
+    }
+    p, li{
+      color:var(--muted);
+      font-size:15px;
+    }
+    ul{ margin:10px 0 0 18px; }
+
+    .callout{
+      margin:14px 0;
+      padding:14px;
+      border-radius:var(--radius);
+      border:1px solid rgba(255,255,255,0.12);
+      background:rgba(0,0,0,0.18);
+    }
+    .callout strong{ color:var(--text); }
+
+    .formCard{
+      margin-top:14px;
+      padding:16px;
+      border-radius:var(--radius);
+      border:1px solid rgba(255,255,255,0.12);
+      background:rgba(0,0,0,0.18);
+    }
+    label{
+      display:block;
+      font-size:13px;
+      margin: 10px 0 6px;
+      color: var(--muted);
+    }
+    input, textarea{
+      width:100%;
+      padding:12px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,0.18);
+      background:rgba(0,0,0,0.25);
+      color:var(--text);
+      font-size:14px;
+    }
+    textarea{ resize:vertical; min-height:90px; }
+
+    .btnRow{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+    .btn{
+      padding:14px 18px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,0.18);
+      font-weight:900;
+      font-size:14px;
+      text-align:center;
+      cursor:pointer;
+      background:rgba(255,255,255,0.06);
+      color:var(--text);
+      width:auto;
+    }
+    .btnPrimary{
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      border-color: rgba(255,255,255,0.20);
+    }
+    .btnWarn{
+      background: linear-gradient(135deg, rgba(251,191,36,0.35), rgba(251,191,36,0.15));
+      border-color: rgba(251,191,36,0.55);
+    }
+
+    .footer{
+      padding:20px 0 34px;
+      color:var(--muted2);
+      font-size:12px;
+    }
+
+    @media (max-width:640px){
+      .headline{ font-size:28px; }
+      .cardHead{ padding:18px 16px 12px; }
+      .content{ padding:14px 16px 18px; }
+      p, li{ font-size:14.5px; }
+      .btn{ width:100%; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="topBanner">
+    <div class="wrap">
+      <div class="topBannerInner">
+        <div class="brand">
+          <div class="logo" aria-hidden="true"></div>
+          <div>
+            <p class="brandTitle">Site Companion Side Kick</p>
+            <p class="brandSub">SCSK • Delete account</p>
+          </div>
+        </div>
+
+        <div class="topLinks" aria-label="Quick links">
+          <a class="chip" href="index.html">Home</a>
+          <a class="chip" href="privacy.html">Privacy</a>
+          <a class="chip" href="mailto:admin@sc-sk.com">Support</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="wrap page">
+    <div class="card">
+      <div class="cardHead">
+        <span class="kicker">Account deletion</span>
+        <h1 class="headline">Delete your SCSK account</h1>
+        <p class="meta">Last updated: <strong>15 December 2025</strong></p>
+      </div>
+
+      <div class="content">
+        <div class="callout">
+          <strong>Important:</strong> Account deletion is permanent. After deletion, you may lose access to synced data and any content stored in your account.
+        </div>
+
+        <h2>How to request deletion</h2>
+        <p>
+          To request deletion of your <strong>Site Companion Side Kick (SCSK)</strong> account, submit the form below or email us directly.
+          We may ask you to verify ownership of the account before completing the request.
+        </p>
+
+        <div class="formCard">
+          <form action="mailto:admin@sc-sk.com" method="post" enctype="text/plain">
+            <label for="email">Email address used in SCSK</label>
+            <input id="email" name="SCSK account email" type="email" required placeholder="you@example.com" />
+
+            <label for="reason">Reason (optional)</label>
+            <textarea id="reason" name="Reason" placeholder="Optional: tell us why you want to delete your account."></textarea>
+
+            <div class="btnRow">
+              <button class="btn btnPrimary" type="submit">Submit deletion request</button>
+              <a class="btn btnWarn" href="mailto:admin@sc-sk.com?subject=SCSK%20Account%20Deletion%20Request&body=Please%20delete%20my%20SCSK%20account.%0A%0AAccount%20email%3A%20%0A%0AReason%20(optional)%3A%20">
+                Email deletion request
+              </a>
+            </div>
+          </form>
+        </div>
+
+        <h2>What data is deleted</h2>
+        <p>When we complete an account deletion request, we aim to delete:</p>
+        <ul>
+          <li>Your account profile and identifiers used for sign-in (where applicable)</li>
+          <li>Synced project/job data stored in your account (where applicable)</li>
+          <li>Synced photos/attachments stored in your account (where applicable)</li>
+        </ul>
+
+        <h2>What data may be retained</h2>
+        <p>We may retain limited information only when necessary, such as:</p>
+        <ul>
+          <li>Records required for legal, security, or fraud-prevention purposes</li>
+          <li>Technical logs (e.g., crash/diagnostic logs) for a limited period</li>
+          <li>Information you have already exported, shared, or emailed outside the app (you control those copies)</li>
+        </ul>
+
+        <h2>Timing</h2>
+        <p>
+          We aim to process deletion requests as soon as possible. In some cases, deletion may take time to complete depending on verification and system processing.
+        </p>
+
+        <h2>Contact</h2>
+        <ul>
+          <li><strong>Email:</strong> <a href="mailto:admin@sc-sk.com">admin@sc-sk.com</a></li>
+          <li><strong>Website:</strong> <a href="https://sc-sk.com">https://sc-sk.com</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer">
+      © <span id="year"></span> SAA. All rights reserved.
+    </div>
+  </main>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
