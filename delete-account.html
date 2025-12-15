@@ -25,6 +25,7 @@
     }
 
     *{ box-sizing:border-box; margin:0; padding:0; }
+    html{ scroll-behavior:smooth; }
     body{
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
       color:var(--text);
@@ -34,6 +35,7 @@
         linear-gradient(180deg, var(--bg0) 0%, var(--bg1) 100%);
       background-attachment: fixed;
       line-height:1.6;
+      overflow-x:hidden;
     }
 
     a{ color:var(--text); text-decoration:none; }
@@ -41,9 +43,11 @@
 
     .wrap{ max-width:var(--max); margin:0 auto; padding:0 24px; }
 
+    /* Header */
     header{
       position:sticky; top:0; z-index:100;
       backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       background: rgba(7,10,16,0.75);
       border-bottom:1px solid var(--glass-border);
     }
@@ -60,6 +64,7 @@
     }
     .chip:hover{ background:rgba(255,255,255,0.12); }
 
+    /* Main Page */
     .page{ padding:60px 0; }
     .glass-card{
       background: var(--glass);
@@ -78,7 +83,7 @@
       display:inline-block; padding:10px 16px; border-radius:999px; background:rgba(0,0,0,0.35);
       border:1px solid var(--glass-border); font-size:13px; letter-spacing:0.08em; color:var(--muted);
     }
-    .headline{ font-size:40px; margin:20px 0 12px; letter-spacing:-0.03em; }
+    .headline{ font-size:40px; margin:20px 0 12px; letter-spacing:-0.03em; line-height:1.1; }
     .meta{ color:var(--muted); font-size:15px; }
 
     .content{ padding:0 40px 40px; }
@@ -86,16 +91,21 @@
       margin:32px 0; padding:24px; border-radius:20px; background:rgba(251,191,36,0.15);
       border:1px solid rgba(251,191,36,0.4);
     }
+    .callout strong{ color:var(--text); }
+
     .formCard{
       margin:32px 0; padding:32px; border-radius:20px; background:rgba(0,0,0,0.18);
       border:1px solid var(--glass-border);
     }
-    label{ display:block; margin:16px 0 8px; color:var(--muted); font-size:14px; }
+    label{
+      display:block; margin:16px 0 8px; color:var(--muted); font-size:14px;
+    }
     input, textarea{
       width:100%; padding:16px; border-radius:16px; background:rgba(0,0,0,0.25);
       border:1px solid var(--glass-border); color:var(--text); font-size:15px;
     }
     textarea{ min-height:120px; resize:vertical; }
+
     .btnRow{ display:flex; gap:16px; flex-wrap:wrap; margin-top:24px; }
     .btn{
       padding:16px 28px; border-radius:20px; font-weight:900; font-size:15px;
@@ -103,13 +113,18 @@
     }
     .btn:hover{ transform:scale(1.05); }
     .btnPrimary{ background:linear-gradient(135deg,var(--accent),var(--accent2)); }
-    .btnWarn{ background:linear-gradient(135deg,rgba(251,191,36,0.35),rgba(251,191,36,0.15)); border-color:rgba(251,191,36,0.55); }
+    .btnWarn{
+      background:linear-gradient(135deg,rgba(251,191,36,0.35),rgba(251,191,36,0.15));
+      border-color:rgba(251,191,36,0.55);
+    }
 
-    h2{ font-size:22px; margin:32px 0 12px; }
+    h2{ font-size:22px; margin:32px 0 12px; letter-spacing:-0.01em; }
     p, li{ color:var(--muted); font-size:16px; }
     ul{ margin:16px 0 0 24px; }
 
-    .footer{ padding:40px 0; text-align:center; color:var(--muted); font-size:13px; }
+    .footer{
+      padding:40px 0; text-align:center; color:var(--muted); font-size:13px;
+    }
 
     .fade-in{ opacity:0; transform:translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
     .fade-in.visible{ opacity:1; transform:translateY(0); }
@@ -204,9 +219,13 @@
     document.getElementById("year").textContent = new Date().getFullYear();
 
     const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
     }, { threshold: 0.1 });
+
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
   </script>
+
 </body>
 </html>
