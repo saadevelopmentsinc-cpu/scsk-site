@@ -4,8 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>Site Companion Side Kick (SCSK) — Active Beta</title>
-  <meta name="description" content="SCSK is your offline-first daily companion for supervisors, foremen, and project managers on construction sites. Join the active beta." />
+  <title>Delete Account — Site Companion Side Kick (SCSK)</title>
+  <meta name="description" content="How to request account deletion for Site Companion Side Kick (SCSK)." />
 
   <style>
     :root{
@@ -17,9 +17,9 @@
       --muted: rgba(234,240,255,0.75);
       --accent:#5DA9FF;
       --accent2:#8B5CF6;
-      --beta:#FBBF24;
+      --warn:#FBBF24;
       --shadow: 0 20px 50px rgba(0,0,0,0.6);
-      --max: 1200px;
+      --max: 980px;
       --radius: 28px;
       --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
@@ -43,21 +43,6 @@
 
     .wrap{ max-width:var(--max); margin:0 auto; padding:0 24px; }
 
-    /* Glassmorphism Cards */
-    .glass-card{
-      background: var(--glass);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border:1px solid var(--glass-border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      transition: var(--transition);
-    }
-    .glass-card:hover{
-      transform: translateY(-12px);
-      box-shadow: 0 32px 80px rgba(0,0,0,0.7);
-    }
-
     /* Header */
     header{
       position:sticky; top:0; z-index:100;
@@ -73,71 +58,85 @@
       background:linear-gradient(135deg,var(--accent),var(--accent2));
       box-shadow:0 16px 40px rgba(0,0,0,0.6);
     }
-    .navlink{
+    .chip{
       padding:12px 18px; border-radius:999px; background:rgba(255,255,255,0.05);
       border:1px solid var(--glass-border); font-size:14px; transition:var(--transition);
     }
-    .navlink:hover{ background:rgba(255,255,255,0.12); }
+    .chip:hover{ background:rgba(255,255,255,0.12); }
 
-    /* Hero with Parallax Feel */
-    .hero{
-      padding:60px 0 80px; position:relative; overflow:hidden;
+    /* Main Page */
+    .page{ padding:60px 0; }
+    .glass-card{
+      background: var(--glass);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border:1px solid var(--glass-border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
     }
-    .hero-bg{
-      position:absolute; inset:0; background:url('https://www.autodesk.com/blogs/construction/wp-content/uploads/2021/06/construction-management-software-autodesk-1920x1080-1.jpg') center/cover; opacity:0.3;
-      transform: translateY(0); transition: transform 0.8s ease-out;
+    .cardHead{
+      padding:40px 40px 24px;
+      background:rgba(0,0,0,0.14);
     }
-    .hero-content{ position:relative; z-index:2; }
-    .badge{ display:inline-block; padding:10px 16px; border-radius:999px; background:rgba(0,0,0,0.4); border:1px solid var(--glass-border); color:var(--beta); font-weight:800; font-size:13px; letter-spacing:0.1em; }
-    .headline{ font-size:52px; line-height:1.05; margin:16px 0 20px; letter-spacing:-0.04em; }
-    .subhead{ font-size:20px; color:var(--muted); max-width:80ch; margin-bottom:24px; }
-    .ctaRow{ display:flex; gap:16px; flex-wrap:wrap; margin-top:32px; }
+    .kicker{
+      display:inline-block; padding:10px 16px; border-radius:999px; background:rgba(0,0,0,0.35);
+      border:1px solid var(--glass-border); font-size:13px; letter-spacing:0.08em; color:var(--muted);
+    }
+    .headline{ font-size:40px; margin:20px 0 12px; letter-spacing:-0.03em; line-height:1.1; }
+    .meta{ color:var(--muted); font-size:15px; }
+
+    .content{ padding:0 40px 40px; }
+    .callout{
+      margin:32px 0; padding:24px; border-radius:20px; background:rgba(251,191,36,0.15);
+      border:1px solid rgba(251,191,36,0.4);
+    }
+    .callout strong{ color:var(--text); }
+
+    .formCard{
+      margin:32px 0; padding:32px; border-radius:20px; background:rgba(0,0,0,0.18);
+      border:1px solid var(--glass-border);
+    }
+    label{
+      display:block; margin:16px 0 8px; color:var(--muted); font-size:14px;
+    }
+    input, textarea{
+      width:100%; padding:16px; border-radius:16px; background:rgba(0,0,0,0.25);
+      border:1px solid var(--glass-border); color:var(--text); font-size:15px;
+    }
+    textarea{ min-height:120px; resize:vertical; }
+
+    .btnRow{ display:flex; gap:16px; flex-wrap:wrap; margin-top:24px; }
     .btn{
-      padding:16px 28px; border-radius:20px; font-weight:900; font-size:15px; min-width:240px; text-align:center;
-      background:rgba(255,255,255,0.08); border:1px solid var(--glass-border); cursor:pointer; transition:var(--transition);
+      padding:16px 28px; border-radius:20px; font-weight:900; font-size:15px;
+      border:1px solid var(--glass-border); cursor:pointer; transition:var(--transition);
     }
     .btn:hover{ transform:scale(1.05); }
     .btnPrimary{ background:linear-gradient(135deg,var(--accent),var(--accent2)); }
-
-    /* Sections */
-    section{ padding:80px 0; }
-    .sectionTitle{ font-size:36px; margin-bottom:16px; letter-spacing:-0.03em; }
-    .sectionLead{ color:var(--muted); max-width:80ch; margin-bottom:40px; font-size:18px; }
-    .grid{
-      display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:24px;
+    .btnWarn{
+      background:linear-gradient(135deg,rgba(251,191,36,0.35),rgba(251,191,36,0.15));
+      border-color:rgba(251,191,36,0.55);
     }
-    .feature-card{
-      @extend .glass-card; padding:32px; text-align:center;
+
+    h2{ font-size:22px; margin:32px 0 12px; letter-spacing:-0.01em; }
+    p, li{ color:var(--muted); font-size:16px; }
+    ul{ margin:16px 0 0 24px; }
+
+    .footer{
+      padding:40px 0; text-align:center; color:var(--muted); font-size:13px;
     }
-    .feature-card img{ width:100%; border-radius:16px; margin-bottom:20px; box-shadow:0 12px 30px rgba(0,0,0,0.4); }
-    .feature-card h3{ font-size:20px; margin-bottom:12px; }
 
-    /* Beta Form */
-    .formCard{ @extend .glass-card; padding:40px; max-width:720px; margin:0 auto; }
-
-    /* Footer */
-    footer{ padding:60px 0; border-top:1px solid var(--glass-border); background:rgba(0,0,0,0.2); text-align:center; }
-
-    /* Animations */
     .fade-in{ opacity:0; transform:translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
     .fade-in.visible{ opacity:1; transform:translateY(0); }
 
-    @media (max-width:900px){
-      .headline{ font-size:40px; }
-      .grid{ grid-template-columns:1fr; }
-    }
     @media (max-width:640px){
-      .headline{ font-size:36px; }
-      .btn{ min-width:100%; }
-      .topbar{ flex-direction:column; text-align:center; }
+      .headline{ font-size:32px; }
+      .cardHead, .content{ padding:24px; }
+      .btn{ width:100%; }
     }
   </style>
 </head>
 <body>
-
-  <div class="betaStrip" style="background:linear-gradient(135deg,rgba(251,191,36,0.4),rgba(251,191,36,0.2)); padding:14px; text-align:center; font-weight:800; border-bottom:1px solid rgba(251,191,36,0.6);">
-    ACTIVE BETA — Weekly updates • Offline-first • Multi-device sync rolling out
-  </div>
 
   <header>
     <div class="wrap topbar">
@@ -145,158 +144,88 @@
         <div class="logo"></div>
         <div>
           <strong style="display:block; font-size:16px; letter-spacing:0.06em;">Site Companion Side Kick</strong>
-          <span style="font-size:13px; color:var(--muted);">SCSK</span>
+          <span style="font-size:13px; color:var(--muted);">SCSK • Delete account</span>
         </div>
       </div>
-      <nav>
-        <a class="navlink" href="#features">Features</a>
-        <a class="navlink" href="#how">How it works</a>
-        <a class="navlink" href="#roadmap">Roadmap</a>
-        <a class="navlink" href="#beta">Join Beta</a>
-        <a class="navlink" href="privacy.html">Privacy</a>
-        <a class="navlink" href="mailto:admin@sc-sk.com">Support</a>
-      </nav>
+      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <a class="chip" href="index.html">Home</a>
+        <a class="chip" href="privacy.html">Privacy</a>
+        <a class="chip" href="mailto:admin@sc-sk.com">Support</a>
+      </div>
     </div>
   </header>
 
-  <main class="wrap">
-
-    <section class="hero">
-      <div class="hero-bg"></div>
-      <div class="hero-content glass-card fade-in">
-        <span class="badge">Active Beta</span>
-        <h1 class="headline">Your daily sidekick on real job sites</h1>
-        <p class="subhead">SCSK is the offline-first companion for supervisors, foremen, and project managers. Track jobs, capture site evidence, assign trades, generate reports — reliably, anywhere on site.</p>
-        <p class="subhead">Built for phones & tablets. Syncs across devices. Weekly improvements from real site feedback.</p>
-        <div class="ctaRow">
-          <a class="btn btnPrimary" href="#beta">Join the beta</a>
-          <a class="btn" href="privacy.html">Privacy policy</a>
-        </div>
+  <main class="wrap page">
+    <div class="glass-card fade-in">
+      <div class="cardHead">
+        <span class="kicker">Account deletion</span>
+        <h1 class="headline">Delete your SCSK account</h1>
+        <p class="meta">Last updated: <strong>15 December 2025</strong></p>
       </div>
-    </section>
 
-    <section id="features" class="fade-in">
-      <h2 class="sectionTitle">Everyday tools for running sites better</h2>
-      <p class="sectionLead">Core features live now — practical, reliable, offline-first.</p>
-      <div class="grid">
-        <div class="feature-card">
-          <img src="https://www.aurigo.com/wp-content/uploads/2021/12/19.png" alt="Project dashboard on tablet">
-          <h3>Projects & Jobs</h3>
-          <p>Organise projects and track tasks, defects, or issues with automatic timestamps.</p>
+      <div class="content">
+        <div class="callout">
+          <strong>Important:</strong> Account deletion is permanent. You will lose access to any synced data and content stored in your account.
         </div>
-        <div class="feature-card">
-          <img src="https://keymakr.com/blog/content/images/2024/06/KMmain--5-.jpg" alt="Annotated defect photo on mobile">
-          <h3>Photos & Annotations</h3>
-          <p>Capture site photos and mark up progress or issues directly.</p>
+
+        <h2>How to request deletion</h2>
+        <p>Submit the form below or email us directly. We may verify ownership before processing.</p>
+
+        <div class="formCard">
+          <form action="mailto:admin@sc-sk.com" method="post" enctype="text/plain">
+            <label for="email">Email address used in SCSK</label>
+            <input id="email" name="SCSK account email" type="email" required placeholder="you@example.com" />
+
+            <label for="reason">Reason (optional)</label>
+            <textarea id="reason" name="Reason" placeholder="Optional: tell us why you're leaving so we can improve."></textarea>
+
+            <div class="btnRow">
+              <button class="btn btnPrimary" type="submit">Submit deletion request</button>
+              <a class="btn btnWarn" href="mailto:admin@sc-sk.com?subject=SCSK%20Account%20Deletion%20Request&body=Please%20delete%20my%20SCSK%20account.%0A%0AAccount%20email%3A%20%0A%0AReason%20(optional)%3A%20">
+                Email request directly
+              </a>
+            </div>
+          </form>
         </div>
-        <div class="feature-card">
-          <img src="https://hubble-website-uploads-prod.s3.ap-southeast-1.amazonaws.com/construction_management_app_update_task_manager_1d518837e4.jpg" alt="Foreman assigning task on phone">
-          <h3>Trade Assignments</h3>
-          <p>Assign jobs to trades with notes and clear accountability.</p>
-        </div>
-        <div class="feature-card">
-          <img src="https://www.mindinventory.com/casestudies-assets/construction-project-management-software/img/webp/banner-hero.webp" alt="PDF report example">
-          <h3>PDF Reports</h3>
-          <p>Auto-generate professional reports per job, trade, or project.</p>
-        </div>
-        <div class="feature-card">
-          <img src="https://timly.com/wp-content/uploads/2025/02/Employee-using-an-equipment-management-app-on-a-tablet.jpeg" alt="Offline mode on site">
-          <h3>Offline-First</h3>
-          <p>Work without signal — everything syncs when online.</p>
-        </div>
-        <div class="feature-card">
-          <img src="https://readylogic.co/wp-content/uploads/2025/04/28-02.jpg" alt="Tablet optimised UI">
-          <h3>Built for Tablets</h3>
-          <p>Larger-screen workflows perfect for supervision.</p>
-        </div>
+
+        <h2>What data is deleted</h2>
+        <p>We aim to permanently delete:</p>
+        <ul>
+          <li>Your account profile and sign-in identifiers</li>
+          <li>Synced project, job, and photo data (where applicable)</li>
+          <li>Any attachments stored in your account</li>
+        </ul>
+
+        <h2>What data may be retained</h2>
+        <p>Limited data may be kept only when required for legal, security, or fraud-prevention reasons (e.g., basic logs).</p>
+
+        <h2>Timing</h2>
+        <p>We process requests as quickly as possible — usually within a few days after verification.</p>
+
+        <h2>Contact</h2>
+        <ul>
+          <li><strong>Email:</strong> <a href="mailto:admin@sc-sk.com">admin@sc-sk.com</a></li>
+          <li><strong>Website:</strong> <a href="https://sc-sk.com">https://sc-sk.com</a></li>
+        </ul>
       </div>
-    </section>
-
-    <section id="how" class="fade-in" style="background:rgba(0,0,0,0.15);">
-      <h2 class="sectionTitle">How SCSK works on site</h2>
-      <p class="sectionLead">Simple, reliable workflow — even offline.</p>
-      <div class="grid">
-        <div class="feature-card">1. Create project & jobs on site</div>
-        <div class="feature-card">2. Snap photos & annotate instantly</div>
-        <div class="feature-card">3. Assign to trades with notes</div>
-        <div class="feature-card">4. Generate & email PDF reports</div>
-      </div>
-    </section>
-
-    <section id="roadmap" class="fade-in">
-      <h2 class="sectionTitle">Realistic roadmap ahead</h2>
-      <p class="sectionLead">Phase 1 MVP live • Phase 2 sync/productivity rolling out • Enterprise & AI features planned.</p>
-      <!-- Add simple timeline cards if desired -->
-    </section>
-
-    <section id="beta" class="fade-in">
-      <div class="formCard">
-        <h2 class="sectionTitle">Apply to join the beta</h2>
-        <p class="sectionLead">We review applications manually and send access instructions by email.</p>
-
-        <form id="betaForm" action="https://formspree.io/f/xnnerkde" method="POST">
-          <label for="email">Email address</label>
-          <input id="email" name="email" type="email" required placeholder="you@example.com" />
-
-          <label for="role">Your role (optional)</label>
-          <input id="role" name="role" type="text" placeholder="Supervisor, Foreman, Project Manager..." />
-
-          <label for="message">How will you use SCSK? (optional)</label>
-          <textarea id="message" name="message" placeholder="Site type, team size, workflow needs…"></textarea>
-
-          <input type="hidden" name="_subject" value="SCSK Beta Application" />
-          <input type="text" name="_gotcha" style="display:none" />
-
-          <button class="btn btnPrimary" type="submit">Submit application</button>
-
-          <div id="statusOk" class="status" style="display:none; margin-top:16px; padding:16px; background:rgba(93,169,255,0.2); border-radius:16px;">✅ Thanks — your application was sent. We’ll be in touch soon.</div>
-          <div id="statusErr" class="status" style="display:none; margin-top:16px; padding:16px; background:rgba(251,191,36,0.3); border-radius:16px;">⚠️ Something went wrong. Email admin@sc-sk.com.</div>
-        </form>
-      </div>
-    </section>
-
-  </main>
-
-  <footer>
-    <div class="wrap">
-      <strong>Site Companion Side Kick (SCSK)</strong><br><br>
-      <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin:20px 0;">
-        <a class="navlink" href="#features">Features</a>
-        <a class="navlink" href="#beta">Join Beta</a>
-        <a class="navlink" href="privacy.html">Privacy</a>
-        <a class="navlink" href="mailto:admin@sc-sk.com">Support</a>
-      </div>
-      <small style="color:var(--muted);">© <span id="year"></span> SAA. All rights reserved.</small>
     </div>
-  </footer>
+
+    <div class="footer">
+      © <span id="year"></span> SAA. All rights reserved.
+    </div>
+  </main>
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Form submit
-    const form = document.getElementById("betaForm");
-    const ok = document.getElementById("statusOk");
-    const err = document.getElementById("statusErr");
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      ok.style.display = "none"; err.style.display = "none";
-      try {
-        const res = await fetch(form.action, { method: "POST", body: new FormData(form), headers: { "Accept": "application/json" } });
-        if (res.ok) { form.reset(); ok.style.display = "block"; } else { err.style.display = "block"; }
-      } catch { err.style.display = "block"; }
-    });
-
-    // Scroll animations
     const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
     }, { threshold: 0.1 });
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-    // Parallax hero
-    window.addEventListener('scroll', () => {
-      const scrolled = window.pageYOffset;
-      document.querySelector('.hero-bg').style.transform = `translateY(${scrolled * 0.5}px)`;
-    });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
   </script>
+
 </body>
 </html>
