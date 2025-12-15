@@ -1,4 +1,3 @@
-// index.html
 <!doctype html>
 <html lang="en-AU">
 <head>
@@ -6,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <title>Site Companion Side Kick (SCSK) — Beta</title>
-  <meta name="description" content="Site Companion Side Kick (SCSK) is an active beta, offline-first site companion app. Sync across devices, weekly improvements, and a Windows version coming." />
+  <meta name="description" content="Site Companion Side Kick (SCSK) is an active beta site companion app. Apply to join the beta and help shape upcoming features." />
 
   <style>
     :root{
@@ -24,6 +23,7 @@
 
     *{ box-sizing:border-box; }
     html{ scroll-behavior:smooth; }
+
     body{
       margin:0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
@@ -33,7 +33,6 @@
         radial-gradient(900px 520px at 85% 5%, rgba(139,92,246,0.14), transparent 55%),
         linear-gradient(180deg, var(--bg0), var(--bg1));
       line-height:1.55;
-      overflow-x:hidden;
     }
 
     a{ color:var(--text); text-decoration:none; }
@@ -47,25 +46,11 @@
       border-bottom:1px solid rgba(251,191,36,0.6);
     }
     .betaInner{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      padding:12px 14px;
       text-align:center;
+      padding:12px;
       font-size:13px;
       font-weight:800;
       letter-spacing:0.02em;
-      flex-wrap:wrap;
-    }
-    .betaTag{
-      padding:6px 10px;
-      border-radius:999px;
-      background:rgba(0,0,0,0.45);
-      border:1px solid rgba(255,255,255,0.3);
-      font-size:12px;
-      letter-spacing:0.08em;
-      text-transform:uppercase;
     }
 
     /* ================= HEADER ================= */
@@ -82,40 +67,22 @@
       justify-content:space-between;
       align-items:center;
       padding:14px 0;
-      gap:12px;
       flex-wrap:wrap;
+      gap:12px;
     }
     .brand{
       display:flex;
-      gap:12px;
       align-items:center;
-      min-width: 260px;
+      gap:12px;
     }
     .logo{
       width:44px;height:44px;border-radius:16px;
       background:linear-gradient(135deg,var(--accent),var(--accent2));
-      border:1px solid rgba(255,255,255,0.25);
-      box-shadow:0 18px 40px rgba(0,0,0,0.55);
-      flex:0 0 auto;
     }
-    .brand h1{
-      margin:0;
-      font-size:15px;
-      letter-spacing:0.05em;
-      text-transform:uppercase;
-    }
-    .brand p{
-      margin:2px 0 0;
-      font-size:12px;
-      color:var(--muted);
-    }
-
     nav{
       display:flex;
       gap:10px;
       flex-wrap:wrap;
-      justify-content:flex-end;
-      width:auto;
     }
     .navlink{
       padding:10px 12px;
@@ -123,23 +90,10 @@
       border:1px solid rgba(255,255,255,0.14);
       background:rgba(255,255,255,0.04);
       font-size:13px;
-      white-space:nowrap;
-    }
-
-    /* Mobile nav: stack and full width so it never squishes */
-    @media (max-width: 640px){
-      .topbar{ align-items:flex-start; }
-      nav{
-        width:100%;
-        justify-content:flex-start;
-      }
-      .navlink{
-        width:auto;
-      }
     }
 
     /* ================= HERO ================= */
-    .hero{ padding: 22px 0 18px; }
+    .hero{ padding:22px 0; }
     .heroCard{
       border-radius:28px;
       border:1px solid var(--border);
@@ -147,33 +101,16 @@
       box-shadow:var(--shadow);
       padding:28px;
     }
-    .kicker{
-      display:inline-flex;
-      gap:8px;
-      align-items:center;
-      padding:8px 12px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,0.16);
-      background:rgba(0,0,0,0.35);
-      font-size:12px;
-      letter-spacing:0.08em;
-      text-transform:uppercase;
-      color:var(--muted);
-      flex-wrap:wrap;
-    }
     .headline{
-      margin:18px 0 14px;
       font-size:44px;
       line-height:1.05;
-      letter-spacing:-0.03em;
+      margin:10px 0;
     }
     .subhead{
       font-size:17px;
       color:var(--muted);
-      max-width:78ch;
-      margin:0 0 14px;
+      max-width:75ch;
     }
-
     .ctaRow{
       display:flex;
       gap:12px;
@@ -184,83 +121,59 @@
       padding:14px 18px;
       border-radius:16px;
       border:1px solid rgba(255,255,255,0.18);
-      background:rgba(255,255,255,0.06);
       font-weight:900;
       font-size:14px;
-      min-width:210px;
       text-align:center;
+      min-width:220px;
     }
-    .btnPrimary{ background:linear-gradient(135deg,var(--accent),var(--accent2)); }
-    .note{ margin-top:16px; font-size:13px; color:var(--muted); }
+    .btnPrimary{
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+    }
 
-    /* Mobile hero scaling + buttons full width */
-    @media (max-width: 640px){
-      .heroCard{ padding:20px; border-radius:24px; }
+    @media (max-width:640px){
       .headline{ font-size:34px; }
-      .subhead{ font-size:16px; }
-      .btn{ width:100%; min-width:unset; }
+      .btn{ width:100%; }
     }
 
-    /* ================= SECTIONS ================= */
-    section{ padding: 24px 0; }
-    .sectionTitle{
-      font-size:20px;
-      letter-spacing:-0.02em;
+    /* ================= BETA FORM ================= */
+    .betaSection{
+      padding:24px 0 40px;
+    }
+    .formCard{
+      max-width:640px;
+      margin:0 auto;
+      border-radius:24px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,0.05);
+      box-shadow:var(--shadow);
+      padding:22px;
+    }
+    .formCard h3{
       margin:0 0 8px;
+      font-size:22px;
     }
-    .sectionLead{
+    .formCard p{
+      margin:0 0 14px;
       color:var(--muted);
-      max-width:80ch;
-      margin:0 0 16px;
+      font-size:14px;
     }
-
-    .grid3{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:14px;
-    }
-    .feature{
-      border-radius:22px;
-      border:1px solid rgba(255,255,255,0.12);
-      background:rgba(255,255,255,0.04);
-      padding:18px;
-    }
-    .feature h3{ margin:0 0 6px; font-size:16px; }
-    .feature p{ margin:0; font-size:14px; color:var(--muted); }
-
-    @media (max-width: 900px){
-      .grid3{ grid-template-columns:1fr; }
-      .feature{ padding:16px; }
-    }
-
-    /* ================= FOOTER ================= */
-    footer{
-      padding:34px 0 42px;
-      border-top:1px solid rgba(255,255,255,0.08);
-      background:rgba(0,0,0,0.18);
-    }
-    .footerLinks{
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-      margin-top:12px;
-    }
-    .footerLink{
-      padding:10px 12px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,0.14);
-      background:rgba(255,255,255,0.04);
+    label{
+      display:block;
       font-size:13px;
+      margin-bottom:6px;
     }
-    .small{
-      font-size:12px;
-      color:var(--muted);
-      margin-top:12px;
+    input, textarea{
+      width:100%;
+      padding:12px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,0.18);
+      background:rgba(0,0,0,0.25);
+      color:var(--text);
+      margin-bottom:14px;
+      font-size:14px;
     }
+    textarea{ resize:vertical; min-height:90px; }
 
-    @media (max-width: 640px){
-      .footerLink{ width:100%; text-align:center; }
-    }
   </style>
 </head>
 
@@ -268,8 +181,7 @@
 
   <div class="betaBanner">
     <div class="wrap betaInner">
-      <span class="betaTag">Beta</span>
-      Active beta release — weekly improvements • sync across devices • Windows version coming
+      Active beta • Weekly improvements • Sync across devices • Windows version coming
     </div>
   </div>
 
@@ -277,17 +189,12 @@
     <div class="wrap">
       <div class="topbar">
         <div class="brand">
-          <div class="logo" aria-hidden="true"></div>
-          <div>
-            <h1>Site Companion Side Kick</h1>
-            <p>SCSK • Active Beta</p>
-          </div>
+          <div class="logo"></div>
+          <strong>Site Companion Side Kick</strong>
         </div>
-
-        <nav aria-label="Primary">
+        <nav>
           <a class="navlink" href="#features">Features</a>
-          <a class="navlink" href="#sync">Sync</a>
-          <a class="navlink" href="#roadmap">Roadmap</a>
+          <a class="navlink" href="#beta">Join Beta</a>
           <a class="navlink" href="privacy.html">Privacy</a>
         </nav>
       </div>
@@ -298,136 +205,40 @@
 
     <section class="hero">
       <div class="heroCard">
-        <span class="kicker">Offline-first • multi-device sync • rapid iteration</span>
-
-        <h2 class="headline">A site companion built for real job sites.</h2>
-
+        <h1 class="headline">A site companion built for real job sites.</h1>
         <p class="subhead">
-          <strong>Site Companion Side Kick (SCSK)</strong> is a production-ready beta designed for supervisors,
-          foremen and project managers who need reliability on site — even without internet.
-        </p>
-
-        <p class="subhead">
-          The platform is actively developed, with <strong>weekly improvements</strong>, expanding features,
-          and continuous performance refinements.
+          Site Companion Side Kick (SCSK) is an active beta designed for supervisors,
+          foremen, and project managers working on live construction sites.
         </p>
 
         <div class="ctaRow">
-          <a class="btn btnPrimary" href="#" aria-label="Get Site Companion Side Kick beta (coming soon)">Get the beta (coming soon)</a>
+          <a class="btn btnPrimary" href="#beta">Join the beta</a>
           <a class="btn" href="privacy.html">Privacy policy</a>
-          <a class="btn" href="mailto:feedback@scsk.com">Contact support</a>
         </div>
+      </div>
+    </section>
 
-        <p class="note">
-          Beta means momentum — features evolve quickly, workflows deepen, and feedback shapes each release.
+    <!-- ================= BETA APPLICATION FORM ================= -->
+    <section id="beta" class="betaSection">
+      <div class="formCard">
+        <h3>Apply to join the SCSK beta</h3>
+        <p>
+          Enter your details below. We review beta applications manually.
         </p>
-      </div>
-    </section>
 
-    <section id="features">
-      <h3 class="sectionTitle">What’s available in the beta</h3>
-      <p class="sectionLead">
-        Core site workflows are already live, stable, and used on active projects.
-      </p>
+        <form action="mailto:admin@sc-sk.com" method="post" enctype="text/plain">
+          <label for="email">Your email address</label>
+          <input id="email" name="Email" type="email" required placeholder="you@example.com" />
 
-      <div class="grid3">
-        <div class="feature">
-          <h3>Projects &amp; jobs</h3>
-          <p>Structured projects and job folders with clear timestamps.</p>
-        </div>
-        <div class="feature">
-          <h3>Photos &amp; annotations</h3>
-          <p>Capture evidence and mark up issues directly on site.</p>
-        </div>
-        <div class="feature">
-          <h3>Trade assignments</h3>
-          <p>Assign actions and defects to trades with accountability.</p>
-        </div>
-        <div class="feature">
-          <h3>PDF reporting</h3>
-          <p>Compile jobs and checklists into professional PDFs.</p>
-        </div>
-        <div class="feature">
-          <h3>Offline-first</h3>
-          <p>Work without signal — sync when internet is available.</p>
-        </div>
-        <div class="feature">
-          <h3>Geofencing (optional)</h3>
-          <p>Smart prompts when returning to known sites (user-controlled).</p>
-        </div>
-      </div>
-    </section>
+          <label for="message">How do you plan to use SCSK? (optional)</label>
+          <textarea id="message" name="Message" placeholder="Site type, role, team size…"></textarea>
 
-    <section id="sync">
-      <h3 class="sectionTitle">Sync across devices</h3>
-      <p class="sectionLead">
-        Start on your phone, continue on a tablet, and keep work aligned across devices using a single account.
-      </p>
-
-      <div class="grid3">
-        <div class="feature">
-          <h3>Multi-device access</h3>
-          <p>Use SCSK across supported devices with consistent data.</p>
-        </div>
-        <div class="feature">
-          <h3>Offline-first syncing</h3>
-          <p>Work offline first, then sync safely when online.</p>
-        </div>
-        <div class="feature">
-          <h3>Built for tablets</h3>
-          <p>Larger-screen workflows designed for site supervision.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="roadmap">
-      <h3 class="sectionTitle">What’s coming next</h3>
-      <p class="sectionLead">
-        Development continues in weekly drops, focused on automation, depth, and speed.
-      </p>
-
-      <div class="grid3">
-        <div class="feature">
-          <h3>Expanded templates</h3>
-          <p>More safety, compliance, and quality templates.</p>
-        </div>
-        <div class="feature">
-          <h3>Windows version</h3>
-          <p>A cross-platform Windows build is planned.</p>
-        </div>
-        <div class="feature">
-          <h3>AI-assisted workflows</h3>
-          <p>Optional automation for faster insights and reporting.</p>
-        </div>
+          <button class="btn btnPrimary" type="submit">Submit beta request</button>
+        </form>
       </div>
     </section>
 
   </main>
-
-  <footer>
-    <div class="wrap">
-      <div class="sectionTitle">Site Companion Side Kick (SCSK)</div>
-      <div class="sectionLead">
-        Active beta • Weekly improvements • Sync across devices • Windows version coming
-      </div>
-
-      <div class="footerLinks">
-        <a class="footerLink" href="#features">Features</a>
-        <a class="footerLink" href="#sync">Sync</a>
-        <a class="footerLink" href="#roadmap">Roadmap</a>
-        <a class="footerLink" href="privacy.html">Privacy</a>
-        <a class="footerLink" href="mailto:feedback@scsk.com">Support</a>
-      </div>
-
-      <div class="small">
-        © <span id="year"></span> SAA. All rights reserved.
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
 
 </body>
 </html>
