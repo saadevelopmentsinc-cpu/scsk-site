@@ -23,15 +23,31 @@
       --radius: 20px;
     }
 
-    html { scroll-behavior: smooth; }
+    html { 
+      scroll-behavior: smooth;
+      background: var(--bg1);
+    }
     
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       color: var(--text);
-      background: linear-gradient(180deg, var(--bg0) 0%, var(--bg1) 100%);
-      background-attachment: fixed;
+      background: var(--bg0);
       line-height: 1.6;
       min-height: 100vh;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: none;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(180deg, var(--bg0) 0%, var(--bg1) 100%);
+      z-index: -1;
+      pointer-events: none;
     }
 
     a { color: var(--accent); text-decoration: none; }
@@ -459,9 +475,9 @@
             </div>
             <h3>Feedback & Suggestions</h3>
             <p>Have an idea to make SCSK better? We'd love to hear your thoughts and feature requests.</p>
-            <a href="mailto:feedback@sc-sk.com" class="contact-email">
+            <a href="/cdn-cgi/l/email-protection#91f7f4f4f5f3f0f2fad1e2f2bce2fabff2fefc" class="contact-email">
               <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-              feedback@sc-sk.com
+              <span class="__cf_email__" data-cfemail="07616262636566646c4774642a746c2964686a">[email&#160;protected]</span>
             </a>
           </div>
 
@@ -471,9 +487,9 @@
             </div>
             <h3>Technical Support</h3>
             <p>Having issues with the app, your account, or need help getting started? We're here to help.</p>
-            <a href="mailto:admin@sc-sk.com" class="contact-email">
+            <a href="/cdn-cgi/l/email-protection#28494c454146685b4b055b43064b4745" class="contact-email">
               <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-              admin@sc-sk.com
+              <span class="__cf_email__" data-cfemail="a3c2c7cecacde3d0c08ed0c88dc0ccce">[email&#160;protected]</span>
             </a>
           </div>
 
@@ -483,9 +499,9 @@
             </div>
             <h3>Privacy & Data</h3>
             <p>Questions about your data, privacy, or want to request data deletion? Reach out to our privacy team.</p>
-            <a href="mailto:privacy@sc-sk.com" class="contact-email">
+            <a href="/cdn-cgi/l/email-protection#4a3a38233c2b29330a392967392164292527" class="contact-email">
               <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-              privacy@sc-sk.com
+              <span class="__cf_email__" data-cfemail="3b4b49524d5a58427b485816485015585456">[email&#160;protected]</span>
             </a>
           </div>
         </div>
@@ -678,14 +694,4 @@
     <div class="wrap">
       <div class="footer-links">
         <a href="index.html">Home</a>
-        <a href="index.html#features">Features</a>
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="terms.html">Terms of Service</a>
-        <a href="delete-account.html">Delete Account</a>
-      </div>
-      <p>&copy; 2025 SAA. All rights reserved.</p>
-      <p style="margin-top:6px;">Site Companion Side Kick (SCSK) — Built for construction professionals.</p>
-    </div>
-  </footer>
-</body>
-</html>
+        <a href="index.html#fea
