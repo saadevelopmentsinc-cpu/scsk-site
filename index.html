@@ -8,6 +8,79 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(0,0,0,0.95);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
+      cursor: zoom-out;
+    }
+    .lightbox.active { opacity: 1; visibility: visible; }
+    .lightbox img {
+      max-width: 95%;
+      max-height: 95%;
+      object-fit: contain;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      transform: scale(0.9);
+      transition: transform 0.3s;
+    }
+    .lightbox.active img { transform: scale(1); }
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .lightbox-close:hover { background: rgba(255,255,255,0.2); }
+    .lightbox-close svg { width: 24px; height: 24px; fill: white; }
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .lightbox-nav:hover { background: rgba(255,255,255,0.2); }
+    .lightbox-nav svg { width: 28px; height: 28px; fill: white; }
+    .lightbox-prev { left: 20px; }
+    .lightbox-next { right: 20px; }
+    .lightbox-counter {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 14px;
+      color: rgba(255,255,255,0.7);
+      background: rgba(0,0,0,0.5);
+      padding: 8px 16px;
+      border-radius: 20px;
+    }
+
     :root {
       --bg0: #050608;
       --bg1: #0a0d14;
@@ -378,12 +451,15 @@
       height: 280px;
       background: #000;
       overflow: hidden;
+      cursor: zoom-in;
     }
     .feature-image img {
       width: 100%;
       height: 100%;
       object-fit: contain;
+      transition: transform 0.3s;
     }
+    .feature-image:hover img { transform: scale(1.05); }
 
     .feature-content { padding: 24px; }
 
@@ -765,6 +841,21 @@
   </style>
 </head>
 <body>
+  <!-- Lightbox Modal -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" aria-label="Close">
+      <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+    </button>
+    <button class="lightbox-nav lightbox-prev" aria-label="Previous">
+      <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+    </button>
+    <img id="lightbox-img" src="" alt="">
+    <button class="lightbox-nav lightbox-next" aria-label="Next">
+      <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+    </button>
+    <div class="lightbox-counter"><span id="lightbox-current">1</span> / <span id="lightbox-total">7</span></div>
+  </div>
+
   <div class="announcement">
     <span class="announcement-badge">ACTIVE BETA</span>
     <span>Weekly updates · Offline-first · Multi-device sync rolling out</span>
@@ -861,13 +952,13 @@
           <p class="section-lead">Practical tools designed for day-to-day construction site management.</p>
         </div>
         <div class="features-grid">
-          <div class="feature-card"><div class="feature-image"><img src="Screenshot1.jpg" alt="Dashboard"></div><div class="feature-content"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg></div><h3>Smart Dashboard</h3><p>Your command center. See project stats, pending jobs, and quick actions.</p></div></div>
-          <div class="feature-card"><div class="feature-image"><img src="Screenshot2.jpg" alt="Project Details"></div><div class="feature-content"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg></div><h3>Project Details</h3><p>Complete overview with jobs, photos, contacts, and status tracking.</p></div></div>
-          <div class="feature-card"><div class="feature-image"><img src="Screenshot3.jpg" alt="Projects List"></div><div class="feature-content"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2z"/></svg></div><h3>Projects Overview</h3><p>All projects with progress tracking, filters, and instant search.</p></div></div>
-          <div class="feature-card"><div class="feature-image"><img src="Screenshot4.jpg" alt="Calendar"></div><div class="feature-content"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/></svg></div><h3>Calendar - Day View</h3><p>Detailed daily schedule with jobs, locations, and assigned trades.</p></div></div>
-          <div class="feature-card"><div class="feature-image"><img src="Screenshot5.jpg" alt="Tools"></div><div class="feature-content"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg></div><h3>Trade Calculators</h3><p>Built-in tools for tile, paint, brick, concrete, grout, and more.</p></div></div>
-          <div class="feature-card"><div class="feature-image"><img src="Screenshot6.jpg" alt="Week View"></div><div class="feature-content"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10z"/></svg></div><h3>Calendar - Week View</h3><p>Plan site visits and track outstanding jobs across the week.</p></div></div>
-          <div class="feature-card"><div class="feature-image"><img src="Screenshot7.jpg" alt="Month View"></div><div class="feature-content"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/></svg></div><h3>Calendar - Month View</h3><p>Full month overview for long-term planning and follow-ups.</p></div></div>
+          <div class="feature-card"><div class="feature-image" data-img="Screenshot1.jpg" data-title="Smart Dashboard"><img src="Screenshot1.jpg" alt="Dashboard"></div><div class="feature-content"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg></div><h3>Smart Dashboard</h3><p>Your command center. See project stats, pending jobs, and quick actions.</p></div></div>
+          <div class="feature-card"><div class="feature-image" data-img="Screenshot2.jpg" data-title="Project Details"><img src="Screenshot2.jpg" alt="Project Details"></div><div class="feature-content"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg></div><h3>Project Details</h3><p>Complete overview with jobs, photos, contacts, and status tracking.</p></div></div>
+          <div class="feature-card"><div class="feature-image" data-img="Screenshot3.jpg" data-title="Projects Overview"><img src="Screenshot3.jpg" alt="Projects List"></div><div class="feature-content"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2z"/></svg></div><h3>Projects Overview</h3><p>All projects with progress tracking, filters, and instant search.</p></div></div>
+          <div class="feature-card"><div class="feature-image" data-img="Screenshot4.jpg" data-title="Calendar - Day View"><img src="Screenshot4.jpg" alt="Calendar"></div><div class="feature-content"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/></svg></div><h3>Calendar - Day View</h3><p>Detailed daily schedule with jobs, locations, and assigned trades.</p></div></div>
+          <div class="feature-card"><div class="feature-image" data-img="Screenshot5.jpg" data-title="Trade Calculators"><img src="Screenshot5.jpg" alt="Tools"></div><div class="feature-content"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg></div><h3>Trade Calculators</h3><p>Built-in tools for tile, paint, brick, concrete, grout, and more.</p></div></div>
+          <div class="feature-card"><div class="feature-image" data-img="Screenshot6.jpg" data-title="Calendar - Week View"><img src="Screenshot6.jpg" alt="Week View"></div><div class="feature-content"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10z"/></svg></div><h3>Calendar - Week View</h3><p>Plan site visits and track outstanding jobs across the week.</p></div></div>
+          <div class="feature-card"><div class="feature-image" data-img="Screenshot7.jpg" data-title="Calendar - Month View"><img src="Screenshot7.jpg" alt="Month View"></div><div class="feature-content"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/></svg></div><h3>Calendar - Month View</h3><p>Full month overview for long-term planning and follow-ups.</p></div></div>
         </div>
       </div>
     </section>
@@ -964,7 +1055,7 @@
             <input type="hidden" name="_subject" value="SCSK Beta Application">
             <input type="text" name="_gotcha" style="display:none">
             <div id="statusOk" class="status ok">🎉 Application received! We'll review and send access details soon.</div>
-            <div id="statusErr" class="status err">⚠️ Something went wrong — please email <a href="/cdn-cgi/l/email-protection#7e1f1a1317103e0d1d530d15501d1113"><span class="__cf_email__" data-cfemail="68090c050106281b0b451b03460b0705">[email&#160;protected]</span></a></div>
+            <div id="statusErr" class="status err">⚠️ Something went wrong — please email <a href="mailto:admin@sc-sk.com">admin@sc-sk.com</a></div>
           </form>
         </div>
       </div>
@@ -979,14 +1070,75 @@
           <p>The offline-first construction management app built for real job sites.</p>
         </div>
         <div class="footer-col"><h4>Product</h4><a href="#features">Features</a><a href="#platforms">Platforms</a><a href="#roadmap">Roadmap</a><a href="#beta">Join Beta</a></div>
-        <div class="footer-col"><h4>Resources</h4><a href="#faq">FAQ</a><a href="support.html">Support</a><a href="/cdn-cgi/l/email-protection#0263666f6b6c4271612f71692c616d6f">Contact</a></div>
+        <div class="footer-col"><h4>Resources</h4><a href="#faq">FAQ</a><a href="support.html">Support</a><a href="mailto:admin@sc-sk.com">Contact</a></div>
         <div class="footer-col"><h4>Legal</h4><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Service</a><a href="delete-account.html">Delete Account</a></div>
       </div>
       <div class="footer-bottom"><small>&copy; 2025 SAA. All rights reserved. Built for construction professionals.</small></div>
     </div>
   </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script>
+    // Lightbox functionality
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCurrent = document.getElementById('lightbox-current');
+    const lightboxTotal = document.getElementById('lightbox-total');
+    const featureImages = document.querySelectorAll('.feature-image[data-img]');
+    let currentIndex = 0;
+    const images = Array.from(featureImages).map(el => ({ src: el.dataset.img, title: el.dataset.title }));
+    
+    lightboxTotal.textContent = images.length;
+
+    featureImages.forEach((el, index) => {
+      el.addEventListener('click', () => {
+        currentIndex = index;
+        openLightbox();
+      });
+    });
+
+    function openLightbox() {
+      lightboxImg.src = images[currentIndex].src;
+      lightboxImg.alt = images[currentIndex].title;
+      lightboxCurrent.textContent = currentIndex + 1;
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function nextImage() {
+      currentIndex = (currentIndex + 1) % images.length;
+      lightboxImg.src = images[currentIndex].src;
+      lightboxImg.alt = images[currentIndex].title;
+      lightboxCurrent.textContent = currentIndex + 1;
+    }
+
+    function prevImage() {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      lightboxImg.src = images[currentIndex].src;
+      lightboxImg.alt = images[currentIndex].title;
+      lightboxCurrent.textContent = currentIndex + 1;
+    }
+
+    document.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+    document.querySelector('.lightbox-next').addEventListener('click', (e) => { e.stopPropagation(); nextImage(); });
+    document.querySelector('.lightbox-prev').addEventListener('click', (e) => { e.stopPropagation(); prevImage(); });
+    
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('active')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') nextImage();
+      if (e.key === 'ArrowLeft') prevImage();
+    });
+
+    // Form handling
     const form = document.getElementById('betaForm');
     const optional = document.getElementById('optional');
     const inputs = form.querySelectorAll('input, textarea, select');
@@ -1020,4 +1172,10 @@
       document.querySelectorAll('.status').forEach(s => s.classList.remove('show'));
       try {
         const res = await fetch(form.action, {method: 'POST', body: new FormData(form), headers: {'Accept': 'application/json'}});
-        if (res.ok) { form.reset(); inputs.forEach(f => f.parentElement.classList.remove('filled')); optional.classList.remove('show'); doc
+        if (res.ok) { form.reset(); inputs.forEach(f => f.parentElement.classList.remove('filled')); optional.classList.remove('show'); document.getElementById('statusOk').classList.add('show'); launchConfetti(); }
+        else { document.getElementById('statusErr').classList.add('show'); }
+      } catch (err) { document.getElementById('statusErr').classList.add('show'); }
+    });
+  </script>
+</body>
+</html>
