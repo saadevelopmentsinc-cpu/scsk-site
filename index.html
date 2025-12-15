@@ -4,8 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>Delete Account — Site Companion Side Kick (SCSK)</title>
-  <meta name="description" content="How to request account deletion for Site Companion Side Kick (SCSK)." />
+  <title>Site Companion Side Kick (SCSK) — Active Beta</title>
+  <meta name="description" content="SCSK is your offline-first daily companion for supervisors, foremen, and project managers on construction sites. Join the active beta." />
 
   <style>
     :root{
@@ -17,9 +17,9 @@
       --muted: rgba(234,240,255,0.75);
       --accent:#5DA9FF;
       --accent2:#8B5CF6;
-      --warn:#FBBF24;
+      --beta:#FBBF24;
       --shadow: 0 20px 50px rgba(0,0,0,0.6);
-      --max: 980px;
+      --max: 1200px;
       --radius: 28px;
       --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
@@ -43,6 +43,21 @@
 
     .wrap{ max-width:var(--max); margin:0 auto; padding:0 24px; }
 
+    /* Glassmorphism Cards */
+    .glass-card{
+      background: var(--glass);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border:1px solid var(--glass-border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+    .glass-card:hover{
+      transform: translateY(-12px);
+      box-shadow: 0 32px 80px rgba(0,0,0,0.7);
+    }
+
     /* Header */
     header{
       position:sticky; top:0; z-index:100;
@@ -58,85 +73,114 @@
       background:linear-gradient(135deg,var(--accent),var(--accent2));
       box-shadow:0 16px 40px rgba(0,0,0,0.6);
     }
-    .chip{
+    .navlink{
       padding:12px 18px; border-radius:999px; background:rgba(255,255,255,0.05);
       border:1px solid var(--glass-border); font-size:14px; transition:var(--transition);
     }
-    .chip:hover{ background:rgba(255,255,255,0.12); }
+    .navlink:hover{ background:rgba(255,255,255,0.12); }
 
-    /* Main Page */
-    .page{ padding:60px 0; }
-    .glass-card{
-      background: var(--glass);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border:1px solid var(--glass-border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow:hidden;
+    /* Hero */
+    .hero{
+      padding:60px 0 80px; position:relative; overflow:hidden;
     }
-    .cardHead{
-      padding:40px 40px 24px;
-      background:rgba(0,0,0,0.14);
+    .hero-bg{
+      position:absolute; inset:0; background:url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover no-repeat; opacity:0.25;
+      transform: translateY(0); transition: transform 0.8s ease-out;
     }
-    .kicker{
-      display:inline-block; padding:10px 16px; border-radius:999px; background:rgba(0,0,0,0.35);
-      border:1px solid var(--glass-border); font-size:13px; letter-spacing:0.08em; color:var(--muted);
-    }
-    .headline{ font-size:40px; margin:20px 0 12px; letter-spacing:-0.03em; line-height:1.1; }
-    .meta{ color:var(--muted); font-size:15px; }
-
-    .content{ padding:0 40px 40px; }
-    .callout{
-      margin:32px 0; padding:24px; border-radius:20px; background:rgba(251,191,36,0.15);
-      border:1px solid rgba(251,191,36,0.4);
-    }
-    .callout strong{ color:var(--text); }
-
-    .formCard{
-      margin:32px 0; padding:32px; border-radius:20px; background:rgba(0,0,0,0.18);
-      border:1px solid var(--glass-border);
-    }
-    label{
-      display:block; margin:16px 0 8px; color:var(--muted); font-size:14px;
-    }
-    input, textarea{
-      width:100%; padding:16px; border-radius:16px; background:rgba(0,0,0,0.25);
-      border:1px solid var(--glass-border); color:var(--text); font-size:15px;
-    }
-    textarea{ min-height:120px; resize:vertical; }
-
-    .btnRow{ display:flex; gap:16px; flex-wrap:wrap; margin-top:24px; }
+    .hero-content{ position:relative; z-index:2; }
+    .badge{ display:inline-block; padding:10px 16px; border-radius:999px; background:rgba(0,0,0,0.4); border:1px solid var(--glass-border); color:var(--beta); font-weight:800; font-size:13px; letter-spacing:0.1em; }
+    .headline{ font-size:52px; line-height:1.05; margin:16px 0 20px; letter-spacing:-0.04em; }
+    .subhead{ font-size:20px; color:var(--muted); max-width:80ch; margin-bottom:24px; }
+    .ctaRow{ display:flex; gap:16px; flex-wrap:wrap; margin-top:32px; }
     .btn{
-      padding:16px 28px; border-radius:20px; font-weight:900; font-size:15px;
-      border:1px solid var(--glass-border); cursor:pointer; transition:var(--transition);
+      padding:16px 28px; border-radius:20px; font-weight:900; font-size:15px; min-width:240px; text-align:center;
+      background:rgba(255,255,255,0.08); border:1px solid var(--glass-border); cursor:pointer; transition:var(--transition);
     }
     .btn:hover{ transform:scale(1.05); }
     .btnPrimary{ background:linear-gradient(135deg,var(--accent),var(--accent2)); }
-    .btnWarn{
-      background:linear-gradient(135deg,rgba(251,191,36,0.35),rgba(251,191,36,0.15));
-      border-color:rgba(251,191,36,0.55);
+
+    /* Sections */
+    section{ padding:80px 0; }
+    .sectionTitle{ font-size:36px; margin-bottom:16px; letter-spacing:-0.03em; text-align:center; }
+    .sectionLead{ color:var(--muted); max-width:80ch; margin:0 auto 40px; font-size:18px; text-align:center; }
+    .grid{
+      display:grid; grid-template-columns:repeat(auto-fit, minmax(320px,1fr)); gap:32px;
     }
-
-    h2{ font-size:22px; margin:32px 0 12px; letter-spacing:-0.01em; }
-    p, li{ color:var(--muted); font-size:16px; }
-    ul{ margin:16px 0 0 24px; }
-
-    .footer{
-      padding:40px 0; text-align:center; color:var(--muted); font-size:13px;
+    .feature-card{
+      background: var(--glass);
+      backdrop-filter: blur(16px);
+      border:1px solid var(--glass-border);
+      border-radius: var(--radius);
+      padding:32px; text-align:center; box-shadow: var(--shadow);
     }
+    .feature-card img{ width:100%; height:200px; object-fit:cover; border-radius:16px; margin-bottom:24px; }
+    .feature-card h3{ font-size:22px; margin-bottom:12px; }
 
+    /* Beta Section */
+    #beta{ padding:100px 0; position:relative; overflow:hidden; }
+    #beta::before{ content:''; position:absolute; inset:0; background:radial-gradient(circle at 50% 50%, rgba(93,169,255,0.15), transparent 70%); pointer-events:none; }
+    .formCard{
+      position:relative; max-width:780px; margin:0 auto; padding:48px; border-radius:32px;
+      background: rgba(255,255,255,0.09); backdrop-filter: blur(20px); border:1px solid rgba(255,255,255,0.2);
+      box-shadow: 0 32px 80px rgba(0,0,0,0.7); transform: translateY(20px); opacity:0; transition: all 1s ease;
+    }
+    .formCard.visible{ transform:translateY(0); opacity:1; }
+    .formGrid{ display:grid; gap:24px; }
+    .field{ position:relative; }
+    .field input, .field textarea, .field select{
+      width:100%; padding:20px 20px 20px 4px; border-radius:16px; border:none; background:rgba(0,0,0,0.3);
+      color:var(--text); font-size:16px; transition: all 0.4s ease;
+    }
+    .field label{
+      position:absolute; left:20px; top:20px; color:var(--muted); pointer-events:none;
+      transition: all 0.3s ease; transform-origin: left;
+    }
+    .field:focus-within label, .field.filled label{
+      transform: translateY(-30px) scale(0.85); color:var(--accent);
+    }
+    .field:focus-within input, .field:focus-within textarea, .field:focus-within select{
+      background:rgba(93,169,255,0.15); box-shadow:0 0 0 3px rgba(93,169,255,0.3);
+    }
+    .optionalFields{ display:grid; gap:24px; max-height:0; overflow:hidden; transition:max-height 0.6s ease; }
+    .optionalFields.show{ max-height:800px; }
+    .submitBtn{
+      padding:18px 40px; border-radius:20px; font-weight:900; font-size:17px;
+      background:linear-gradient(135deg,var(--accent),var(--accent2)); border:none; color:white; cursor:pointer;
+      box-shadow:0 12px 30px rgba(93,169,255,0.4); transition: all 0.4s ease;
+    }
+    .submitBtn:hover{ transform:scale(1.08) translateY(-4px); box-shadow:0 20px 40px rgba(93,169,255,0.5); }
+    .status{
+      margin-top:24px; padding:20px; border-radius:20px; text-align:center; font-size:16px;
+      opacity:0; transform:translateY(20px); transition:all 0.6s ease;
+    }
+    .status.show{ opacity:1; transform:translateY(0); }
+    .status.ok{ background:rgba(93,169,255,0.2); border:1px solid rgba(93,169,255,0.4); }
+    #confetti{ position:absolute; inset:0; pointer-events:none; }
+
+    /* Footer */
+    footer{ padding:60px 0; border-top:1px solid var(--glass-border); background:rgba(0,0,0,0.2); text-align:center; }
+
+    /* Animations */
     .fade-in{ opacity:0; transform:translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
     .fade-in.visible{ opacity:1; transform:translateY(0); }
 
+    @media (max-width:900px){
+      .headline{ font-size:40px; }
+      .grid{ grid-template-columns:1fr; }
+    }
     @media (max-width:640px){
-      .headline{ font-size:32px; }
-      .cardHead, .content{ padding:24px; }
-      .btn{ width:100%; }
+      .headline{ font-size:36px; }
+      .btn{ min-width:100%; }
+      .topbar{ flex-direction:column; text-align:center; }
+      .sectionTitle{ font-size:32px; }
     }
   </style>
 </head>
 <body>
+
+  <div style="background:linear-gradient(135deg,rgba(251,191,36,0.4),rgba(251,191,36,0.2)); padding:14px; text-align:center; font-weight:800; border-bottom:1px solid rgba(251,191,36,0.6); color:var(--text);">
+    ACTIVE BETA — Weekly updates • Offline-first • Multi-device sync rolling out
+  </div>
 
   <header>
     <div class="wrap topbar">
@@ -144,88 +188,250 @@
         <div class="logo"></div>
         <div>
           <strong style="display:block; font-size:16px; letter-spacing:0.06em;">Site Companion Side Kick</strong>
-          <span style="font-size:13px; color:var(--muted);">SCSK • Delete account</span>
+          <span style="font-size:13px; color:var(--muted);">SCSK</span>
         </div>
       </div>
-      <div style="display:flex; gap:12px; flex-wrap:wrap;">
-        <a class="chip" href="index.html">Home</a>
-        <a class="chip" href="privacy.html">Privacy</a>
-        <a class="chip" href="mailto:admin@sc-sk.com">Support</a>
-      </div>
+      <nav>
+        <a class="navlink" href="#features">Features</a>
+        <a class="navlink" href="#how">How it works</a>
+        <a class="navlink" href="#roadmap">Roadmap</a>
+        <a class="navlink" href="#beta">Join Beta</a>
+        <a class="navlink" href="privacy.html">Privacy</a>
+        <a class="navlink" href="delete-account.html">Delete account</a>
+        <a class="navlink" href="mailto:admin@sc-sk.com">Support</a>
+      </nav>
     </div>
   </header>
 
-  <main class="wrap page">
-    <div class="glass-card fade-in">
-      <div class="cardHead">
-        <span class="kicker">Account deletion</span>
-        <h1 class="headline">Delete your SCSK account</h1>
-        <p class="meta">Last updated: <strong>15 December 2025</strong></p>
+  <main class="wrap">
+
+    <section class="hero fade-in">
+      <div class="hero-bg"></div>
+      <div class="hero-content glass-card">
+        <span class="badge">Active Beta</span>
+        <h1 class="headline">Your daily sidekick on real job sites</h1>
+        <p class="subhead">SCSK is the offline-first companion for supervisors, foremen, and project managers. Track jobs, capture site evidence, assign trades, generate reports — reliably, anywhere on site.</p>
+        <p class="subhead">Built for phones & tablets. Syncs across devices. Weekly improvements from real site feedback.</p>
+        <div class="ctaRow">
+          <a class="btn btnPrimary" href="#beta">Join the beta</a>
+          <a class="btn" href="privacy.html">Privacy policy</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="fade-in">
+      <h2 class="sectionTitle">Everyday tools for running sites better</h2>
+      <p class="sectionLead">Core features live now — practical, reliable, offline-first.</p>
+      <div class="grid">
+        <div class="feature-card">
+          <img src="https://images.unsplash.com/photo-1581093450021-4a7360e9a6b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Project dashboard on tablet">
+          <h3>Projects & Jobs</h3>
+          <p>Organise projects and track tasks, defects, or issues with automatic timestamps.</p>
+        </div>
+        <div class="feature-card">
+          <img src="https://images.unsplash.com/photo-1581092160562-39e6b1e1e930?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Annotated photo on mobile">
+          <h3>Photos & Annotations</h3>
+          <p>Capture site photos and mark up progress or issues directly.</p>
+        </div>
+        <div class="feature-card">
+          <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Assigning task to trade">
+          <h3>Trade Assignments</h3>
+          <p>Assign jobs to trades with notes and clear accountability.</p>
+        </div>
+        <div class="feature-card">
+          <img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="PDF report generation">
+          <h3>PDF Reports</h3>
+          <p>Auto-generate professional reports per job, trade, or project.</p>
+        </div>
+        <div class="feature-card">
+          <img src="https://images.unsplash.com/photo-1518709268810-8bd6d68068e5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Offline mode on construction site">
+          <h3>Offline-First</h3>
+          <p>Work without signal — everything syncs when online.</p>
+        </div>
+        <div class="feature-card">
+          <img src="https://images.unsplash.com/photo-1581093577422-764bb424ca7d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Tablet optimised UI">
+          <h3>Built for Tablets</h3>
+          <p>Larger-screen workflows perfect for supervision.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="fade-in" style="background:rgba(0,0,0,0.15);">
+      <h2 class="sectionTitle">How SCSK works on site</h2>
+      <p class="sectionLead">Simple, reliable workflow — even offline.</p>
+      <div class="grid">
+        <div class="feature-card">1. Open or create a project on arrival</div>
+        <div class="feature-card">2. Snap photos & annotate issues instantly</div>
+        <div class="feature-card">3. Assign jobs to trades with voice/text notes</div>
+        <div class="feature-card">4. Generate & email PDF reports before leaving site</div>
+      </div>
+    </section>
+
+    <section id="roadmap" class="fade-in">
+      <h2 class="sectionTitle">Realistic roadmap ahead</h2>
+      <p class="sectionLead">Phase 1 MVP live now • Phase 2 sync & productivity rolling out weekly • Enterprise features & AI planned next.</p>
+    </section>
+
+    <section id="beta" class="fade-in">
+      <div class="wrap" style="text-align:center;">
+        <h2 class="sectionTitle">Join the Active Beta</h2>
+        <p class="sectionLead">We manually review applications from real construction pros. Approved users get instant access + weekly updates.</p>
       </div>
 
-      <div class="content">
-        <div class="callout">
-          <strong>Important:</strong> Account deletion is permanent. You will lose access to any synced data and content stored in your account.
-        </div>
-
-        <h2>How to request deletion</h2>
-        <p>Submit the form below or email us directly. We may verify ownership before processing.</p>
-
-        <div class="formCard">
-          <form action="mailto:admin@sc-sk.com" method="post" enctype="text/plain">
-            <label for="email">Email address used in SCSK</label>
-            <input id="email" name="SCSK account email" type="email" required placeholder="you@example.com" />
-
-            <label for="reason">Reason (optional)</label>
-            <textarea id="reason" name="Reason" placeholder="Optional: tell us why you're leaving so we can improve."></textarea>
-
-            <div class="btnRow">
-              <button class="btn btnPrimary" type="submit">Submit deletion request</button>
-              <a class="btn btnWarn" href="mailto:admin@sc-sk.com?subject=SCSK%20Account%20Deletion%20Request&body=Please%20delete%20my%20SCSK%20account.%0A%0AAccount%20email%3A%20%0A%0AReason%20(optional)%3A%20">
-                Email request directly
-              </a>
+      <div class="formCard">
+        <form id="betaForm" action="https://formspree.io/f/xnnerkde" method="POST">
+          <div class="formGrid">
+            <div class="field">
+              <input type="email" name="email" required id="email" autocomplete="email">
+              <label for="email">Work email *</label>
             </div>
-          </form>
-        </div>
 
-        <h2>What data is deleted</h2>
-        <p>We aim to permanently delete:</p>
-        <ul>
-          <li>Your account profile and sign-in identifiers</li>
-          <li>Synced project, job, and photo data (where applicable)</li>
-          <li>Any attachments stored in your account</li>
-        </ul>
+            <div class="field">
+              <input type="text" name="name" id="name">
+              <label for="name">Your name (optional)</label>
+            </div>
 
-        <h2>What data may be retained</h2>
-        <p>Limited data may be kept only when required for legal, security, or fraud-prevention reasons (e.g., basic logs).</p>
+            <div class="field">
+              <select name="role" id="role">
+                <option value=""></option>
+                <option>Foreman</option>
+                <option>Supervisor</option>
+                <option>Project Manager</option>
+                <option>Site Inspector</option>
+                <option>Other</option>
+              </select>
+              <label for="role">Your role</label>
+            </div>
 
-        <h2>Timing</h2>
-        <p>We process requests as quickly as possible — usually within a few days after verification.</p>
+            <div class="optionalFields" id="optional">
+              <div class="field">
+                <select name="company_size">
+                  <option value=""></option>
+                  <option>1–10 people</option>
+                  <option>11–50</option>
+                  <option>51–200</option>
+                  <option>200+</option>
+                </select>
+                <label>Team / company size</label>
+              </div>
 
-        <h2>Contact</h2>
-        <ul>
-          <li><strong>Email:</strong> <a href="mailto:admin@sc-sk.com">admin@sc-sk.com</a></li>
-          <li><strong>Website:</strong> <a href="https://sc-sk.com">https://sc-sk.com</a></li>
-        </ul>
+              <div class="field">
+                <textarea name="usage" rows="4"></textarea>
+                <label>How will you use SCSK? (site type, biggest pain points...)</label>
+              </div>
+            </div>
+
+            <button type="submit" class="submitBtn">Submit application</button>
+          </div>
+
+          <input type="hidden" name="_subject" value="SCSK Beta Application" />
+          <input type="text" name="_gotcha" style="display:none" />
+
+          <div id="statusOk" class="status ok">🎉 Thanks! Your application is in. We'll review it and email access details soon.</div>
+          <div id="statusErr" class="status" style="background:rgba(251,191,36,0.2); border:1px solid rgba(251,191,36,0.4);">⚠️ Something went wrong — please email admin@sc-sk.com</div>
+        </form>
+
+        <canvas id="confetti"></canvas>
       </div>
-    </div>
+    </section>
 
-    <div class="footer">
-      © <span id="year"></span> SAA. All rights reserved.
-    </div>
   </main>
+
+  <footer>
+    <div class="wrap">
+      <strong>Site Companion Side Kick (SCSK)</strong><br><br>
+      <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin:20px 0;">
+        <a class="navlink" href="#features">Features</a>
+        <a class="navlink" href="#how">How it works</a>
+        <a class="navlink" href="#beta">Join Beta</a>
+        <a class="navlink" href="privacy.html">Privacy</a>
+        <a class="navlink" href="delete-account.html">Delete account</a>
+        <a class="navlink" href="mailto:admin@sc-sk.com">Support</a>
+      </div>
+      <small style="color:var(--muted);">© <span id="year"></span> SAA. All rights reserved.</small>
+    </div>
+  </footer>
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 
+    // Scroll parallax
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      document.querySelector('.hero-bg').style.transform = `translateY(${scrolled * 0.5}px)`;
+    });
+
+    // Fade-in observer
     const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('visible');
-      });
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
     }, { threshold: 0.1 });
-
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-  </script>
 
+    // Beta form enhancements
+    const form = document.getElementById('betaForm');
+    const optional = document.getElementById('optional');
+    const inputs = form.querySelectorAll('input, textarea, select');
+    inputs.forEach(field => {
+      field.addEventListener('input', () => {
+        const parent = field.parentElement;
+        if(field.value) parent.classList.add('filled');
+        else parent.classList.remove('filled');
+
+        if(form.querySelector('#email').value.trim()) optional.classList.add('show');
+      });
+      if(field.value) field.parentElement.classList.add('filled');
+    });
+
+    // Confetti on success
+    function launchConfetti(){
+      const canvas = document.getElementById('confetti');
+      const ctx = canvas.getContext('2d');
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+      let particles = [];
+      for(let i = 0; i < 120; i++){
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height - canvas.height,
+          vx: Math.random() * 6 - 3,
+          vy: Math.random() * 5 + 3,
+          color: ['#5DA9FF','#8B5CF6','#FBBF24'][Math.floor(Math.random()*3)],
+          size: Math.random() * 5 + 3
+        });
+      }
+      function animate(){
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        particles.forEach(p => {
+          p.x += p.vx; p.y += p.vy; p.vy += 0.15;
+          ctx.fillStyle = p.color;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
+          ctx.fill();
+        });
+        if(particles.some(p => p.y < canvas.height)) requestAnimationFrame(animate);
+      }
+      animate();
+    }
+
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      document.querySelectorAll('.status').forEach(s => s.classList.remove('show'));
+      try{
+        const res = await fetch(form.action, {method:'POST', body:new FormData(form), headers:{'Accept':'application/json'}});
+        if(res.ok){
+          form.reset();
+          inputs.forEach(f => f.parentElement.classList.remove('filled'));
+          optional.classList.remove('show');
+          document.getElementById('statusOk').classList.add('show');
+          launchConfetti();
+        } else throw new Error();
+      } catch {
+        document.getElementById('statusErr').classList.add('show');
+      }
+    });
+
+    // Form card reveal
+    observer.observe(document.querySelector('.formCard'));
+  </script>
 </body>
 </html>
