@@ -5,321 +5,169 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <title>Site Companion Side Kick (SCSK) — Active Beta</title>
-  <meta name="description" content="Site Companion Side Kick (SCSK) is an offline-first site companion app for construction professionals. Apply to join the active beta." />
+  <meta name="description" content="SCSK is your offline-first daily companion for supervisors, foremen, and project managers on construction sites. Join the active beta." />
 
   <style>
     :root{
       --bg0:#070A10;
       --bg1:#0B1020;
-      --border: rgba(255,255,255,0.12);
+      --glass: rgba(255,255,255,0.08);
+      --glass-border: rgba(255,255,255,0.15);
       --text:#EAF0FF;
-      --muted: rgba(234,240,255,0.72);
-      --muted2: rgba(234,240,255,0.55);
+      --muted: rgba(234,240,255,0.75);
       --accent:#5DA9FF;
       --accent2:#8B5CF6;
       --beta:#FBBF24;
-      --shadow: 0 24px 60px rgba(0,0,0,0.55);
-      --max: 1120px;
-      --radius: 24px;
+      --shadow: 0 20px 50px rgba(0,0,0,0.6);
+      --max: 1200px;
+      --radius: 28px;
+      --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    *{ box-sizing:border-box; }
+    *{ box-sizing:border-box; margin:0; padding:0; }
     html{ scroll-behavior:smooth; }
-
     body{
-      margin:0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
       color:var(--text);
-      background:
-        radial-gradient(1200px 520px at 20% -10%, rgba(93,169,255,0.18), transparent 55%),
-        radial-gradient(900px 520px at 85% 5%, rgba(139,92,246,0.14), transparent 55%),
-        linear-gradient(180deg, var(--bg0), var(--bg1));
-      line-height:1.55;
+      background: 
+        radial-gradient(1400px 600px at 20% -20%, rgba(93,169,255,0.22), transparent 60%),
+        radial-gradient(1100px 600px at 80% 10%, rgba(139,92,246,0.18), transparent 60%),
+        linear-gradient(180deg, var(--bg0) 0%, var(--bg1) 100%);
+      background-attachment: fixed;
+      line-height:1.6;
       overflow-x:hidden;
     }
 
     a{ color:var(--text); text-decoration:none; }
     a:hover{ text-decoration:underline; }
 
-    .wrap{ max-width:var(--max); margin:0 auto; padding:0 18px; }
+    .wrap{ max-width:var(--max); margin:0 auto; padding:0 24px; }
 
-    /* ================= BETA STRIP ================= */
-    .betaStrip{
-      background: linear-gradient(135deg, rgba(251,191,36,0.35), rgba(251,191,36,0.15));
-      border-bottom:1px solid rgba(251,191,36,0.6);
-      text-align:center;
-      padding:12px;
-      font-size:13px;
-      font-weight:800;
-      letter-spacing:0.02em;
+    /* Glassmorphism Cards */
+    .glass-card{
+      background: var(--glass);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border:1px solid var(--glass-border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+    .glass-card:hover{
+      transform: translateY(-12px);
+      box-shadow: 0 32px 80px rgba(0,0,0,0.7);
     }
 
-    /* ================= HEADER ================= */
+    /* Header */
     header{
-      position:sticky;
-      top:0;
-      z-index:50;
-      backdrop-filter: blur(14px);
-      background: rgba(7,10,16,0.65);
-      border-bottom:1px solid rgba(255,255,255,0.08);
+      position:sticky; top:0; z-index:100;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: rgba(7,10,16,0.75);
+      border-bottom:1px solid var(--glass-border);
     }
-    .topbar{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:14px 0;
-      gap:12px;
-      flex-wrap:wrap;
-    }
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-    }
+    .topbar{ display:flex; justify-content:space-between; align-items:center; padding:16px 0; flex-wrap:wrap; gap:16px; }
+    .brand{ display:flex; align-items:center; gap:16px; }
     .logo{
-      width:44px;height:44px;border-radius:16px;
+      width:48px; height:48px; border-radius:18px;
       background:linear-gradient(135deg,var(--accent),var(--accent2));
-      box-shadow:0 16px 40px rgba(0,0,0,0.55);
-    }
-    .brandText strong{
-      display:block;
-      font-size:14px;
-      letter-spacing:0.06em;
-      text-transform:uppercase;
-    }
-    .brandText span{
-      font-size:12px;
-      color:var(--muted);
-    }
-    nav{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
+      box-shadow:0 16px 40px rgba(0,0,0,0.6);
     }
     .navlink{
-      padding:10px 14px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,0.14);
-      background:rgba(255,255,255,0.04);
-      font-size:13px;
-      white-space:nowrap;
+      padding:12px 18px; border-radius:999px; background:rgba(255,255,255,0.05);
+      border:1px solid var(--glass-border); font-size:14px; transition:var(--transition);
     }
+    .navlink:hover{ background:rgba(255,255,255,0.12); }
 
-    /* ================= HERO ================= */
-    .hero{ padding:26px 0; }
-    .heroCard{
-      border-radius:32px;
-      border:1px solid var(--border);
-      background:rgba(255,255,255,0.05);
-      box-shadow:var(--shadow);
-      padding:32px;
+    /* Hero with Parallax Feel */
+    .hero{
+      padding:60px 0 80px; position:relative; overflow:hidden;
     }
-    .badge{
-      display:inline-block;
-      padding:8px 12px;
-      border-radius:999px;
-      background:rgba(0,0,0,0.4);
-      border:1px solid rgba(255,255,255,0.2);
-      font-size:12px;
-      letter-spacing:0.08em;
-      text-transform:uppercase;
-      color:var(--beta);
-      margin-bottom:12px;
+    .hero-bg{
+      position:absolute; inset:0; background:url('https://www.autodesk.com/blogs/construction/wp-content/uploads/2021/06/construction-management-software-autodesk-1920x1080-1.jpg') center/cover; opacity:0.3;
+      transform: translateY(0); transition: transform 0.8s ease-out;
     }
-    .headline{
-      font-size:46px;
-      line-height:1.05;
-      margin:8px 0 14px;
-      letter-spacing:-0.03em;
-    }
-    .subhead{
-      font-size:18px;
-      color:var(--muted);
-      max-width:80ch;
-      margin-bottom:14px;
-    }
-    .ctaRow{
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-      margin-top:18px;
-    }
+    .hero-content{ position:relative; z-index:2; }
+    .badge{ display:inline-block; padding:10px 16px; border-radius:999px; background:rgba(0,0,0,0.4); border:1px solid var(--glass-border); color:var(--beta); font-weight:800; font-size:13px; letter-spacing:0.1em; }
+    .headline{ font-size:52px; line-height:1.05; margin:16px 0 20px; letter-spacing:-0.04em; }
+    .subhead{ font-size:20px; color:var(--muted); max-width:80ch; margin-bottom:24px; }
+    .ctaRow{ display:flex; gap:16px; flex-wrap:wrap; margin-top:32px; }
     .btn{
-      padding:14px 20px;
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,0.18);
-      font-weight:900;
-      font-size:14px;
-      text-align:center;
-      min-width:220px;
-      background:rgba(255,255,255,0.06);
-      color:var(--text);
-      cursor:pointer;
+      padding:16px 28px; border-radius:20px; font-weight:900; font-size:15px; min-width:240px; text-align:center;
+      background:rgba(255,255,255,0.08); border:1px solid var(--glass-border); cursor:pointer; transition:var(--transition);
     }
-    .btnPrimary{
-      background:linear-gradient(135deg,var(--accent),var(--accent2));
-    }
+    .btn:hover{ transform:scale(1.05); }
+    .btnPrimary{ background:linear-gradient(135deg,var(--accent),var(--accent2)); }
 
-    /* ================= SECTIONS ================= */
-    section{ padding:32px 0; }
-    .sectionTitle{
-      font-size:22px;
-      margin-bottom:8px;
-      letter-spacing:-0.02em;
-    }
-    .sectionLead{
-      color:var(--muted);
-      max-width:80ch;
-      margin-bottom:20px;
-    }
+    /* Sections */
+    section{ padding:80px 0; }
+    .sectionTitle{ font-size:36px; margin-bottom:16px; letter-spacing:-0.03em; }
+    .sectionLead{ color:var(--muted); max-width:80ch; margin-bottom:40px; font-size:18px; }
     .grid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:16px;
+      display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:24px;
     }
-    .card{
-      border-radius:22px;
-      border:1px solid rgba(255,255,255,0.12);
-      background:rgba(255,255,255,0.04);
-      padding:20px;
+    .feature-card{
+      @extend .glass-card; padding:32px; text-align:center;
     }
-    .card h3{
-      margin:0 0 6px;
-      font-size:16px;
-    }
-    .card p{
-      margin:0;
-      color:var(--muted);
-      font-size:14px;
-    }
+    .feature-card img{ width:100%; border-radius:16px; margin-bottom:20px; box-shadow:0 12px 30px rgba(0,0,0,0.4); }
+    .feature-card h3{ font-size:20px; margin-bottom:12px; }
 
-    /* ================= BETA FORM ================= */
-    .betaSection{
-      padding:40px 0 60px;
-    }
-    .formWrap{
-      max-width:680px;
-      margin:0 auto;
-    }
-    .formCard{
-      border-radius:28px;
-      border:1px solid var(--border);
-      background:rgba(255,255,255,0.05);
-      box-shadow:var(--shadow);
-      padding:26px;
-    }
-    label{
-      display:block;
-      font-size:13px;
-      margin-bottom:6px;
-      color:var(--muted);
-    }
-    input, textarea{
-      width:100%;
-      padding:12px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,0.18);
-      background:rgba(0,0,0,0.25);
-      color:var(--text);
-      font-size:14px;
-      margin-bottom:14px;
-      outline:none;
-    }
-    textarea{ resize:vertical; min-height:90px; }
+    /* Beta Form */
+    .formCard{ @extend .glass-card; padding:40px; max-width:720px; margin:0 auto; }
 
-    .status{
-      margin-top:12px;
-      padding:12px 14px;
-      border-radius:16px;
-      border:1px solid rgba(255,255,255,0.12);
-      background:rgba(0,0,0,0.18);
-      color:var(--muted);
-      font-size:13px;
-      display:none;
-    }
-    .status.ok{ display:block; border-color: rgba(93,169,255,0.35); }
-    .status.err{ display:block; border-color: rgba(251,191,36,0.55); }
+    /* Footer */
+    footer{ padding:60px 0; border-top:1px solid var(--glass-border); background:rgba(0,0,0,0.2); text-align:center; }
 
-    /* ================= FOOTER ================= */
-    footer{
-      border-top:1px solid rgba(255,255,255,0.08);
-      padding:36px 0 44px;
-      background:rgba(0,0,0,0.18);
-    }
-    .footerLinks{
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-      margin-top:14px;
-    }
-    .footerLink{
-      padding:10px 14px;
-      border-radius:16px;
-      border:1px solid rgba(255,255,255,0.14);
-      background:rgba(255,255,255,0.04);
-      font-size:13px;
-    }
-    .small{
-      margin-top:14px;
-      font-size:12px;
-      color:var(--muted2);
-    }
+    /* Animations */
+    .fade-in{ opacity:0; transform:translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .fade-in.visible{ opacity:1; transform:translateY(0); }
 
-    /* ================= RESPONSIVE ================= */
     @media (max-width:900px){
+      .headline{ font-size:40px; }
       .grid{ grid-template-columns:1fr; }
     }
     @media (max-width:640px){
-      .headline{ font-size:34px; }
-      .btn{ width:100%; min-width:unset; }
+      .headline{ font-size:36px; }
+      .btn{ min-width:100%; }
+      .topbar{ flex-direction:column; text-align:center; }
     }
   </style>
 </head>
-
 <body>
 
-  <div class="betaStrip">
-    ACTIVE BETA — Weekly improvements • Sync across devices • Windows version coming
+  <div class="betaStrip" style="background:linear-gradient(135deg,rgba(251,191,36,0.4),rgba(251,191,36,0.2)); padding:14px; text-align:center; font-weight:800; border-bottom:1px solid rgba(251,191,36,0.6);">
+    ACTIVE BETA — Weekly updates • Offline-first • Multi-device sync rolling out
   </div>
 
   <header>
-    <div class="wrap">
-      <div class="topbar">
-        <div class="brand">
-          <div class="logo"></div>
-          <div class="brandText">
-            <strong>Site Companion Side Kick</strong>
-            <span>SCSK</span>
-          </div>
+    <div class="wrap topbar">
+      <div class="brand">
+        <div class="logo"></div>
+        <div>
+          <strong style="display:block; font-size:16px; letter-spacing:0.06em;">Site Companion Side Kick</strong>
+          <span style="font-size:13px; color:var(--muted);">SCSK</span>
         </div>
-        <nav>
-          <a class="navlink" href="#features">Features</a>
-          <a class="navlink" href="#sync">Sync</a>
-          <a class="navlink" href="#beta">Join Beta</a>
-          <a class="navlink" href="privacy.html">Privacy</a>
-          <a class="navlink" href="delete-account.html">Delete account</a>
-          <a class="navlink" href="mailto:admin@sc-sk.com">Support</a>
-        </nav>
       </div>
+      <nav>
+        <a class="navlink" href="#features">Features</a>
+        <a class="navlink" href="#how">How it works</a>
+        <a class="navlink" href="#roadmap">Roadmap</a>
+        <a class="navlink" href="#beta">Join Beta</a>
+        <a class="navlink" href="privacy.html">Privacy</a>
+        <a class="navlink" href="mailto:admin@sc-sk.com">Support</a>
+      </nav>
     </div>
   </header>
 
   <main class="wrap">
 
-    <!-- HERO -->
     <section class="hero">
-      <div class="heroCard">
+      <div class="hero-bg"></div>
+      <div class="hero-content glass-card fade-in">
         <span class="badge">Active Beta</span>
-        <h1 class="headline">A site companion built for real job sites.</h1>
-        <p class="subhead">
-          <strong>Site Companion Side Kick (SCSK)</strong> is an offline-first companion app
-          for supervisors, foremen, and project managers who need reliable workflows
-          on active construction sites — even without internet access.
-        </p>
-        <p class="subhead">
-          Designed for phones and tablets, SCSK syncs across devices when online and
-          continues to evolve with weekly improvements driven by real site feedback.
-        </p>
+        <h1 class="headline">Your daily sidekick on real job sites</h1>
+        <p class="subhead">SCSK is the offline-first companion for supervisors, foremen, and project managers. Track jobs, capture site evidence, assign trades, generate reports — reliably, anywhere on site.</p>
+        <p class="subhead">Built for phones & tablets. Syncs across devices. Weekly improvements from real site feedback.</p>
         <div class="ctaRow">
           <a class="btn btnPrimary" href="#beta">Join the beta</a>
           <a class="btn" href="privacy.html">Privacy policy</a>
@@ -327,95 +175,83 @@
       </div>
     </section>
 
-    <!-- FEATURES -->
-    <section id="features">
-      <h2 class="sectionTitle">What SCSK helps you do</h2>
-      <p class="sectionLead">
-        Core functionality is already live in the beta and designed for practical, on-site use.
-      </p>
+    <section id="features" class="fade-in">
+      <h2 class="sectionTitle">Everyday tools for running sites better</h2>
+      <p class="sectionLead">Core features live now — practical, reliable, offline-first.</p>
       <div class="grid">
-        <div class="card">
-          <h3>Projects & jobs</h3>
-          <p>Organise work into structured projects and job folders with timestamps.</p>
+        <div class="feature-card">
+          <img src="https://www.aurigo.com/wp-content/uploads/2021/12/19.png" alt="Project dashboard on tablet">
+          <h3>Projects & Jobs</h3>
+          <p>Organise projects and track tasks, defects, or issues with automatic timestamps.</p>
         </div>
-        <div class="card">
-          <h3>Photos & annotations</h3>
-          <p>Capture photos on site and annotate issues directly.</p>
+        <div class="feature-card">
+          <img src="https://keymakr.com/blog/content/images/2024/06/KMmain--5-.jpg" alt="Annotated defect photo on mobile">
+          <h3>Photos & Annotations</h3>
+          <p>Capture site photos and mark up progress or issues directly.</p>
         </div>
-        <div class="card">
-          <h3>Trade assignments</h3>
-          <p>Assign jobs and defects to trades with notes and accountability.</p>
+        <div class="feature-card">
+          <img src="https://hubble-website-uploads-prod.s3.ap-southeast-1.amazonaws.com/construction_management_app_update_task_manager_1d518837e4.jpg" alt="Foreman assigning task on phone">
+          <h3>Trade Assignments</h3>
+          <p>Assign jobs to trades with notes and clear accountability.</p>
         </div>
-        <div class="card">
-          <h3>PDF reporting</h3>
-          <p>Compile checklists and jobs into professional PDF reports.</p>
+        <div class="feature-card">
+          <img src="https://www.mindinventory.com/casestudies-assets/construction-project-management-software/img/webp/banner-hero.webp" alt="PDF report example">
+          <h3>PDF Reports</h3>
+          <p>Auto-generate professional reports per job, trade, or project.</p>
         </div>
-        <div class="card">
-          <h3>Offline-first</h3>
-          <p>Work without signal and sync safely when online.</p>
+        <div class="feature-card">
+          <img src="https://timly.com/wp-content/uploads/2025/02/Employee-using-an-equipment-management-app-on-a-tablet.jpeg" alt="Offline mode on site">
+          <h3>Offline-First</h3>
+          <p>Work without signal — everything syncs when online.</p>
         </div>
-        <div class="card">
-          <h3>Built for tablets</h3>
-          <p>Larger-screen workflows designed for supervision.</p>
+        <div class="feature-card">
+          <img src="https://readylogic.co/wp-content/uploads/2025/04/28-02.jpg" alt="Tablet optimised UI">
+          <h3>Built for Tablets</h3>
+          <p>Larger-screen workflows perfect for supervision.</p>
         </div>
       </div>
     </section>
 
-    <!-- SYNC -->
-    <section id="sync">
-      <h2 class="sectionTitle">Sync across devices</h2>
-      <p class="sectionLead">
-        Start work on one device and continue on another using a single account.
-      </p>
+    <section id="how" class="fade-in" style="background:rgba(0,0,0,0.15);">
+      <h2 class="sectionTitle">How SCSK works on site</h2>
+      <p class="sectionLead">Simple, reliable workflow — even offline.</p>
       <div class="grid">
-        <div class="card">
-          <h3>Multi-device access</h3>
-          <p>Use SCSK on supported phones and tablets.</p>
-        </div>
-        <div class="card">
-          <h3>Controlled syncing</h3>
-          <p>Offline-first with sync when internet is available.</p>
-        </div>
-        <div class="card">
-          <h3>Windows version planned</h3>
-          <p>A desktop Windows build is planned for future releases.</p>
-        </div>
+        <div class="feature-card">1. Create project & jobs on site</div>
+        <div class="feature-card">2. Snap photos & annotate instantly</div>
+        <div class="feature-card">3. Assign to trades with notes</div>
+        <div class="feature-card">4. Generate & email PDF reports</div>
       </div>
     </section>
 
-    <!-- BETA FORM -->
-    <section id="beta" class="betaSection">
-      <div class="formWrap">
-        <div class="formCard">
-          <h2 class="sectionTitle">Apply to join the beta</h2>
-          <p class="sectionLead">
-            Submit your details below. We review beta applications manually and send access instructions by email.
-          </p>
+    <section id="roadmap" class="fade-in">
+      <h2 class="sectionTitle">Realistic roadmap ahead</h2>
+      <p class="sectionLead">Phase 1 MVP live • Phase 2 sync/productivity rolling out • Enterprise & AI features planned.</p>
+      <!-- Add simple timeline cards if desired -->
+    </section>
 
-          <!-- IMPORTANT:
-               Replace the action URL with your Formspree endpoint.
-               Example: https://formspree.io/f/abcdwxyz
-          -->
-          <form id="betaForm" action="https://formspree.io/f/xnnerkde" method="POST">
-            <label for="email">Email address</label>
-            <input id="email" name="email" type="email" required placeholder="you@example.com" />
+    <section id="beta" class="fade-in">
+      <div class="formCard">
+        <h2 class="sectionTitle">Apply to join the beta</h2>
+        <p class="sectionLead">We review applications manually and send access instructions by email.</p>
 
-            <label for="role">Your role (optional)</label>
-            <input id="role" name="role" type="text" placeholder="Supervisor, Foreman, Project Manager..." />
+        <form id="betaForm" action="https://formspree.io/f/xnnerkde" method="POST">
+          <label for="email">Email address</label>
+          <input id="email" name="email" type="email" required placeholder="you@example.com" />
 
-            <label for="message">How will you use SCSK? (optional)</label>
-            <textarea id="message" name="message" placeholder="Your site type, team size, workflow needs…"></textarea>
+          <label for="role">Your role (optional)</label>
+          <input id="role" name="role" type="text" placeholder="Supervisor, Foreman, Project Manager..." />
 
-            <!-- Helps Formspree route + reduces spam -->
-            <input type="hidden" name="_subject" value="SCSK Beta Application" />
-            <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+          <label for="message">How will you use SCSK? (optional)</label>
+          <textarea id="message" name="message" placeholder="Site type, team size, workflow needs…"></textarea>
 
-            <button class="btn btnPrimary" type="submit">Submit beta application</button>
+          <input type="hidden" name="_subject" value="SCSK Beta Application" />
+          <input type="text" name="_gotcha" style="display:none" />
 
-            <div id="statusOk" class="status ok">✅ Thanks — your application was sent. We’ll be in touch soon.</div>
-            <div id="statusErr" class="status err">⚠️ Sorry — something went wrong. Please email admin@sc-sk.com.</div>
-          </form>
-        </div>
+          <button class="btn btnPrimary" type="submit">Submit application</button>
+
+          <div id="statusOk" class="status" style="display:none; margin-top:16px; padding:16px; background:rgba(93,169,255,0.2); border-radius:16px;">✅ Thanks — your application was sent. We’ll be in touch soon.</div>
+          <div id="statusErr" class="status" style="display:none; margin-top:16px; padding:16px; background:rgba(251,191,36,0.3); border-radius:16px;">⚠️ Something went wrong. Email admin@sc-sk.com.</div>
+        </form>
       </div>
     </section>
 
@@ -423,52 +259,44 @@
 
   <footer>
     <div class="wrap">
-      <strong>Site Companion Side Kick (SCSK)</strong>
-      <div class="footerLinks">
-        <a class="footerLink" href="#features">Features</a>
-        <a class="footerLink" href="#sync">Sync</a>
-        <a class="footerLink" href="#beta">Join Beta</a>
-        <a class="footerLink" href="privacy.html">Privacy</a>
-        <a class="footerLink" href="delete-account.html">Delete account</a>
-        <a class="footerLink" href="mailto:admin@sc-sk.com">Support</a>
+      <strong>Site Companion Side Kick (SCSK)</strong><br><br>
+      <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin:20px 0;">
+        <a class="navlink" href="#features">Features</a>
+        <a class="navlink" href="#beta">Join Beta</a>
+        <a class="navlink" href="privacy.html">Privacy</a>
+        <a class="navlink" href="mailto:admin@sc-sk.com">Support</a>
       </div>
-      <div class="small">
-        © <span id="year"></span> SAA. All rights reserved.
-      </div>
+      <small style="color:var(--muted);">© <span id="year"></span> SAA. All rights reserved.</small>
     </div>
   </footer>
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // AJAX submit so it sends in the background and shows a success message
+    // Form submit
     const form = document.getElementById("betaForm");
     const ok = document.getElementById("statusOk");
     const err = document.getElementById("statusErr");
-
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      ok.style.display = "none";
-      err.style.display = "none";
-
+      ok.style.display = "none"; err.style.display = "none";
       try {
-        const res = await fetch(form.action, {
-          method: "POST",
-          body: new FormData(form),
-          headers: { "Accept": "application/json" }
-        });
+        const res = await fetch(form.action, { method: "POST", body: new FormData(form), headers: { "Accept": "application/json" } });
+        if (res.ok) { form.reset(); ok.style.display = "block"; } else { err.style.display = "block"; }
+      } catch { err.style.display = "block"; }
+    });
 
-        if (res.ok) {
-          form.reset();
-          ok.style.display = "block";
-        } else {
-          err.style.display = "block";
-        }
-      } catch {
-        err.style.display = "block";
-      }
+    // Scroll animations
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Parallax hero
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      document.querySelector('.hero-bg').style.transform = `translateY(${scrolled * 0.5}px)`;
     });
   </script>
-
 </body>
 </html>
