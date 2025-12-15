@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  <title>Terms of Service — Site Companion Side Kick (SCSK)</title>
+  <meta name="description" content="Terms of Service for Site Companion Side Kick (SCSK). Read our terms and conditions for using the construction management app.">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    :root {
+      --bg0: #070A10;
+      --bg1: #0B1020;
+      --glass: rgba(255,255,255,0.08);
+      --glass-border: rgba(255,255,255,0.15);
+      --text: #EAF0FF;
+      --muted: rgba(234,240,255,0.75);
+      --accent: #5DA9FF;
+      --accent2: #8B5CF6;
+      --warning: #FBBF24;
+      --max: 900px;
+      --radius: 20px;
+    }
+
+    html { 
+      scroll-behavior: smooth;
+      background: var(--bg1);
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      color: var(--text);
+      background: var(--bg0);
+      line-height: 1.7;
+      min-height: 100vh;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: none;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(180deg, var(--bg0) 0%, var(--bg1) 100%);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 16px; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7,10,16,0.95);
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text);
+    }
+    .brand:hover { text-decoration: none; }
+
+    .logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .logo svg { width: 22px; height: 22px; fill: #fff; }
+
+    .brand-text strong { display: block; font-size: 14px; }
+    .brand-text span { font-size: 11px; color: var(--muted); }
+
+    .nav-links { display: flex; gap: 6px; flex-wrap: wrap; }
+
+    .chip {
+      padding: 8px 14px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--glass-border);
+      font-size: 13px;
+      color: var(--text);
+    }
+    .chip:hover { background: rgba(255,255,255,0.1); text-decoration: none; }
+
+    main { padding: 32px 0 60px; }
+
+    .card {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .card-header {
+      padding: 28px 24px 20px;
+      background: rgba(0,0,0,0.2);
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    .kicker {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 6px;
+      background: rgba(93,169,255,0.15);
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+    }
+
+    .headline {
+      font-size: clamp(24px, 6vw, 36px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+
+    .meta { color: var(--muted); font-size: 13px; }
+    .meta strong { color: var(--text); }
+
+    .card-body { padding: 24px; }
+
+    .callout {
+      margin-bottom: 28px;
+      padding: 20px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(251,191,36,0.1), rgba(251,191,36,0.05));
+      border: 1px solid rgba(251,191,36,0.3);
+    }
+
+    .callout-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--warning);
+    }
+    .callout-title svg { width: 18px; height: 18px; fill: currentColor; flex-shrink: 0; }
+    .callout p { font-size: 14px; color: var(--muted); margin: 0; }
+
+    .toc {
+      margin-bottom: 28px;
+      padding: 20px;
+      border-radius: 14px;
+      background: rgba(0,0,0,0.2);
+      border: 1px solid var(--glass-border);
+    }
+
+    .toc-title {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 14px;
+    }
+
+    .toc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 6px 16px;
+    }
+
+    .toc a { font-size: 13px; color: var(--muted); padding: 4px 0; display: block; }
+    .toc a:hover { color: var(--accent); text-decoration: none; }
+    .toc-num { color: var(--accent); margin-right: 5px; font-weight: 500; }
+
+    h2 {
+      font-size: clamp(18px, 4vw, 22px);
+      font-weight: 600;
+      margin: 36px 0 14px;
+      padding-top: 20px;
+      border-top: 1px solid var(--glass-border);
+      scroll-margin-top: 70px;
+    }
+    h2:first-of-type { border-top: none; margin-top: 0; padding-top: 0; }
+
+    h3 { font-size: 16px; font-weight: 600; margin: 20px 0 10px; color: var(--text); }
+
+    p { color: var(--muted); font-size: 14px; margin: 10px 0; line-height: 1.7; }
+    p strong { color: var(--text); }
+
+    ul, ol { margin: 14px 0; padding-left: 20px; }
+    li { color: var(--muted); font-size: 14px; margin: 8px 0; line-height: 1.6; }
+    li strong { color: var(--text); }
+
+    .highlight {
+      margin: 20px 0;
+      padding: 16px;
+      border-radius: 10px;
+      background: rgba(93,169,255,0.08);
+      border-left: 3px solid var(--accent);
+    }
+    .highlight p { margin: 0; }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin: 20px 0;
+    }
+
+    .contact-card {
+      padding: 16px;
+      border-radius: 10px;
+      background: rgba(0,0,0,0.2);
+      border: 1px solid var(--glass-border);
+    }
+    .contact-card strong {
+      display: block;
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+    }
+    .contact-card a, .contact-card span { font-size: 14px; color: var(--text); word-break: break-all; }
+
+    footer {
+      padding: 32px 0;
+      text-align: center;
+      border-top: 1px solid var(--glass-border);
+      margin-top: 32px;
+    }
+
+    .footer-links {
+      margin-bottom: 14px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 6px 20px;
+    }
+    .footer-links a { color: var(--muted); font-size: 13px; }
+    .footer-links a:hover { color: var(--accent); text-decoration: none; }
+
+    footer p { color: var(--muted); font-size: 12px; }
+
+    @media (max-width: 600px) {
+      .topbar { justify-content: center; text-align: center; flex-direction: column; }
+      .nav-links { justify-content: center; width: 100%; }
+      .card-header { padding: 20px 16px 16px; }
+      .card-body { padding: 16px; }
+      .callout, .toc { padding: 16px; }
+      .toc-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      h2 { margin: 28px 0 12px; padding-top: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap topbar">
+      <a href="index.html" class="brand">
+        <div class="logo">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.18l6.9 3.45L12 11.09 5.1 7.63 12 4.18zM4 8.82l7 3.5v7.36l-7-3.5V8.82zm9 10.86v-7.36l7-3.5v7.36l-7 3.5z"/></svg>
+        </div>
+        <div class="brand-text">
+          <strong>Site Companion Side Kick</strong>
+          <span>SCSK</span>
+        </div>
+      </a>
+      <nav class="nav-links">
+        <a class="chip" href="index.html">Home</a>
+        <a class="chip" href="privacy.html">Privacy</a>
+        <a class="chip" href="support.html">Support</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <article class="card">
+      <div class="card-header">
+        <span class="kicker">Legal Document</span>
+        <h1 class="headline">Terms of Service</h1>
+        <p class="meta">Effective Date: <strong>15 December 2025</strong> · Version <strong>1.0</strong></p>
+      </div>
+
+      <div class="card-body">
+        <div class="callout">
+          <div class="callout-title">
+            <svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
+            Important Notice
+          </div>
+          <p>Please read these Terms of Service carefully before using SCSK. By downloading, installing, or using the app, you agree to be bound by these terms. If you do not agree, do not use the service.</p>
+        </div>
+
+        <div class="toc">
+          <div class="toc-title">Table of Contents</div>
+          <div class="toc-grid">
+            <a href="#acceptance"><span class="toc-num">1.</span> Acceptance of Terms</a>
+            <a href="#description"><span class="toc-num">2.</span> Service Description</a>
+            <a href="#beta"><span class="toc-num">3.</span> Beta Program</a>
+            <a href="#accounts"><span class="toc-num">4.</span> User Accounts</a>
+            <a href="#conduct"><span class="toc-num">5.</span> User Conduct</a>
+            <a href="#content"><span class="toc-num">6.</span> User Content</a>
+            <a href="#ip"><span class="toc-num">7.</span> Intellectual Property</a>
+            <a href="#disclaimers"><span class="toc-num">8.</span> Disclaimers</a>
+            <a href="#liability"><span class="toc-num">9.</span> Limitation of Liability</a>
+            <a href="#indemnity"><span class="toc-num">10.</span> Indemnification</a>
+            <a href="#termination"><span class="toc-num">11.</span> Termination</a>
+            <a href="#changes"><span class="toc-num">12.</span> Changes to Terms</a>
+            <a href="#law"><span class="toc-num">13.</span> Governing Law</a>
+            <a href="#contact"><span class="toc-num">14.</span> Contact Us</a>
+          </div>
+        </div>
+
+        <h2 id="acceptance">1. Acceptance of Terms</h2>
+        <p>These Terms of Service ("Terms") constitute a legally binding agreement between you ("User," "you," or "your") and SAA ("we," "us," or "our") governing your access to and use of the Site Companion Side Kick mobile application ("SCSK" or the "App") and any related services, websites, or platforms.</p>
+        <p>By downloading, installing, accessing, or using SCSK, you acknowledge that you have read, understood, and agree to be bound by these Terms and our <a href="privacy.html">Privacy Policy</a>. If you are using SCSK on behalf of an organisation, you represent that you have the authority to bind that organisation to these Terms.</p>
+        <p>If you do not agree to these Terms, you must not access or use SCSK.</p>
+
+        <h2 id="description">2. Service Description</h2>
+        <p>SCSK is a construction site management application designed for construction professionals including foremen, supervisors, project managers, and tradespeople. The App provides tools for:</p>
+        <ul>
+          <li>Project and job tracking and management</li>
+          <li>Photo documentation and site evidence capture</li>
+          <li>Contact and trade management</li>
+          <li>Calendar and scheduling functionality</li>
+          <li>Construction calculators and trade-specific tools</li>
+          <li>PDF report generation</li>
+          <li>Offline data storage with optional cloud synchronisation</li>
+        </ul>
+        <p>We reserve the right to modify, suspend, or discontinue any aspect of the Service at any time, with or without notice. We may also impose limits on certain features or restrict access to parts of the Service without liability.</p>
+
+        <h2 id="beta">3. Beta Program</h2>
+        <p>SCSK is currently offered as a beta product. By participating in the beta program, you acknowledge and agree to the following:</p>
+
+        <h3>3.1 Beta Nature</h3>
+        <ul>
+          <li>The App is in active development and may contain bugs, errors, or incomplete features</li>
+          <li>Features may change, be modified, or removed without notice</li>
+          <li>The App may not perform as expected in all circumstances</li>
+          <li>Data loss may occur despite our best efforts to prevent it</li>
+        </ul>
+
+        <h3>3.2 Feedback</h3>
+        <p>We welcome and encourage feedback from beta users. By providing feedback, suggestions, or ideas, you grant us a perpetual, irrevocable, royalty-free licence to use, modify, and incorporate such feedback into SCSK without any obligation to you.</p>
+
+        <h3>3.3 Beta Pricing</h3>
+        <p>The beta program is currently offered free of charge. We reserve the right to introduce paid features or subscription plans in the future. Beta participants will be notified of any pricing changes before they take effect.</p>
+
+        <h2 id="accounts">4. User Accounts</h2>
+
+        <h3>4.1 Account Creation</h3>
+        <p>To access certain features of SCSK, you may be required to create an account. When creating an account, you agree to:</p>
+        <ul>
+          <li>Provide accurate, current, and complete information</li>
+          <li>Maintain and update your information to keep it accurate</li>
+          <li>Maintain the security and confidentiality of your login credentials</li>
+          <li>Accept responsibility for all activities that occur under your account</li>
+          <li>Notify us immediately of any unauthorised use of your account</li>
+        </ul>
+
+        <h3>4.2 Account Eligibility</h3>
+        <p>You must be at least 18 years of age to create an account and use SCSK. By creating an account, you represent and warrant that you meet this age requirement.</p>
+
+        <h3>4.3 Account Termination</h3>
+        <p>We reserve the right to suspend or terminate your account at any time, for any reason, including but not limited to violation of these Terms. You may also delete your account at any time through the App settings or by contacting us.</p>
+
+        <h2 id="conduct">5. User Conduct</h2>
+        <p>You agree to use SCSK only for lawful purposes and in accordance with these Terms. You agree NOT to:</p>
+        <ul>
+          <li>Use the App for any illegal or unauthorised purpose</li>
+          <li>Violate any applicable laws, regulations, or third-party rights</li>
+          <li>Attempt to gain unauthorised access to the App, other accounts, or our systems</li>
+          <li>Interfere with or disrupt the App's functionality or infrastructure</li>
+          <li>Reverse engineer, decompile, or disassemble any part of the App</li>
+          <li>Use automated systems or software to extract data from the App</li>
+          <li>Transmit viruses, malware, or other harmful code</li>
+          <li>Impersonate any person or entity</li>
+          <li>Use the App to harass, abuse, or harm others</li>
+          <li>Share your account credentials with third parties</li>
+        </ul>
+
+        <h2 id="content">6. User Content</h2>
+
+        <h3>6.1 Ownership</h3>
+        <p>You retain ownership of all content you create, upload, or store using SCSK, including but not limited to project data, photos, notes, and documents ("User Content"). We do not claim ownership of your User Content.</p>
+
+        <h3>6.2 Licence Grant</h3>
+        <p>By using SCSK, you grant us a limited, non-exclusive licence to access, store, process, and transmit your User Content solely for the purpose of providing and improving the Service. This licence terminates when you delete your User Content or account.</p>
+
+        <h3>6.3 Responsibility</h3>
+        <p>You are solely responsible for your User Content and the consequences of sharing it. You represent and warrant that:</p>
+        <ul>
+          <li>You own or have the necessary rights to your User Content</li>
+          <li>Your User Content does not violate any third-party rights</li>
+          <li>Your User Content complies with all applicable laws</li>
+        </ul>
+
+        <h3>6.4 Backup</h3>
+        <p>While we implement measures to protect your data, you are responsible for maintaining your own backups of important User Content. We are not liable for any loss of User Content.</p>
+
+        <h2 id="ip">7. Intellectual Property</h2>
+
+        <h3>7.1 Our Rights</h3>
+        <p>SCSK and all associated intellectual property rights are owned by SAA. This includes but is not limited to:</p>
+        <ul>
+          <li>The App's source code, design, and architecture</li>
+          <li>Logos, trademarks, and brand elements</li>
+          <li>Documentation and written content</li>
+          <li>User interface designs and graphics</li>
+        </ul>
+
+        <h3>7.2 Limited Licence</h3>
+        <p>We grant you a limited, non-exclusive, non-transferable, revocable licence to use SCSK for your personal or internal business purposes, subject to these Terms. This licence does not include the right to:</p>
+        <ul>
+          <li>Modify, adapt, or create derivative works</li>
+          <li>Distribute, licence, or sell the App</li>
+          <li>Remove any proprietary notices or labels</li>
+          <li>Use our trademarks without written permission</li>
+        </ul>
+
+        <h2 id="disclaimers">8. Disclaimers</h2>
+        <div class="highlight">
+          <p><strong>SCSK IS PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED.</strong></p>
+        </div>
+        <p>To the maximum extent permitted by law, we disclaim all warranties, including but not limited to:</p>
+        <ul>
+          <li>Implied warranties of merchantability and fitness for a particular purpose</li>
+          <li>Warranties that the App will be uninterrupted, error-free, or secure</li>
+          <li>Warranties regarding the accuracy or reliability of any information obtained through the App</li>
+          <li>Warranties that defects will be corrected</li>
+        </ul>
+        <p>SCSK is a tool to assist with construction management. It is not a substitute for professional judgement, and you should not rely solely on the App for critical decisions affecting safety, compliance, or legal matters.</p>
+
+        <h2 id="liability">9. Limitation of Liability</h2>
+        <p>To the maximum extent permitted by applicable law:</p>
+        <ul>
+          <li>We shall not be liable for any indirect, incidental, special, consequential, or punitive damages</li>
+          <li>We shall not be liable for any loss of profits, data, business opportunities, or goodwill</li>
+          <li>Our total liability for any claims arising from these Terms or your use of SCSK shall not exceed the amount you paid us (if any) in the twelve (12) months preceding the claim</li>
+        </ul>
+        <p>Some jurisdictions do not allow the exclusion of certain warranties or limitation of liability, so some of the above limitations may not apply to you. In such cases, our liability will be limited to the maximum extent permitted by law.</p>
+
+        <h2 id="indemnity">10. Indemnification</h2>
+        <p>You agree to indemnify, defend, and hold harmless SAA and its officers, directors, employees, and agents from and against any claims, liabilities, damages, losses, and expenses (including reasonable legal fees) arising out of or related to:</p>
+        <ul>
+          <li>Your use of SCSK</li>
+          <li>Your violation of these Terms</li>
+          <li>Your violation of any third-party rights</li>
+          <li>Your User Content</li>
+        </ul>
+
+        <h2 id="termination">11. Termination</h2>
+
+        <h3>11.1 By You</h3>
+        <p>You may stop using SCSK at any time. You may also request deletion of your account and associated data by contacting us or using the in-app deletion feature.</p>
+
+        <h3>11.2 By Us</h3>
+        <p>We may suspend or terminate your access to SCSK at any time, with or without cause, and with or without notice. Reasons for termination may include:</p>
+        <ul>
+          <li>Violation of these Terms</li>
+          <li>Conduct that we determine is harmful to other users or our business</li>
+          <li>Extended periods of inactivity</li>
+          <li>Discontinuation of the Service</li>
+        </ul>
+
+        <h3>11.3 Effect of Termination</h3>
+        <p>Upon termination, your right to use SCSK will immediately cease. Provisions of these Terms that by their nature should survive termination will survive, including ownership, disclaimers, indemnity, and limitations of liability.</p>
+
+        <h2 id="changes">12. Changes to Terms</h2>
+        <p>We reserve the right to modify these Terms at any time. When we make changes:</p>
+        <ul>
+          <li>We will update the "Effective Date" at the top of this page</li>
+          <li>We will notify you through the App, by email, or other reasonable means</li>
+          <li>Material changes will be communicated at least 14 days before taking effect</li>
+        </ul>
+        <p>Your continued use of SCSK after changes become effective constitutes your acceptance of the revised Terms. If you do not agree to the changes, you must stop using the App.</p>
+
+        <h2 id="law">13. Governing Law</h2>
+        <p>These Terms shall be governed by and construed in accordance with the laws of New South Wales, Australia, without regard to its conflict of law provisions.</p>
+        <p>Any disputes arising from these Terms or your use of SCSK shall be subject to the exclusive jurisdiction of the courts of New South Wales, Australia. You agree to submit to the personal jurisdiction of such courts.</p>
+
+        <h3>13.1 Dispute Resolution</h3>
+        <p>Before initiating any legal proceedings, you agree to first contact us and attempt to resolve any dispute informally. We will endeavour to resolve complaints and disputes within 30 days.</p>
+
+        <h2 id="contact">14. Contact Us</h2>
+        <p>If you have any questions about these Terms of Service, please contact us:</p>
+
+        <div class="contact-grid">
+          <div class="contact-card">
+            <strong>Email</strong>
+            <a href="mailto:admin@sc-sk.com">admin@sc-sk.com</a>
+          </div>
+          <div class="contact-card">
+            <strong>Legal Inquiries</strong>
+            <a href="mailto:admin@sc-sk.com">legal@sc-sk.com</a>
+          </div>
+          <div class="contact-card">
+            <strong>Website</strong>
+            <a href="https://sc-sk.com">sc-sk.com</a>
+          </div>
+          <div class="contact-card">
+            <strong>Response Time</strong>
+            <span>Within 5 days</span>
+          </div>
+        </div>
+
+        <div class="highlight">
+          <p><strong>Acknowledgement:</strong> By using SCSK, you acknowledge that you have read, understood, and agree to be bound by these Terms of Service and our <a href="privacy.html">Privacy Policy</a>.</p>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+        <a href="support.html">Support</a>
+        <a href="mailto:admin@sc-sk.com">Contact</a>
+      </div>
+      <p>&copy; 2025 SAA. All rights reserved.</p>
+      <p style="margin-top:6px;">Site Companion Side Kick (SCSK) — Built for construction professionals.</p>
+    </div>
+  </footer>
+</body>
+</html>
