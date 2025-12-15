@@ -21,15 +21,31 @@
       --radius: 20px;
     }
 
-    html { scroll-behavior: smooth; }
+    html { 
+      scroll-behavior: smooth;
+      background: var(--bg1);
+    }
     
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
       color: var(--text);
-      background: linear-gradient(180deg, var(--bg0) 0%, var(--bg1) 100%);
-      background-attachment: fixed;
+      background: var(--bg0);
       line-height: 1.7;
       min-height: 100vh;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: none;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(180deg, var(--bg0) 0%, var(--bg1) 100%);
+      z-index: -1;
+      pointer-events: none;
     }
 
     a { color: var(--accent); text-decoration: none; }
@@ -275,7 +291,7 @@
       <nav class="nav-links">
         <a class="chip" href="index.html">Home</a>
         <a class="chip" href="terms.html">Terms</a>
-        <a class="chip" href="mailto:admin@sc-sk.com">Support</a>
+        <a class="chip" href="/cdn-cgi/l/email-protection#452421282c2b05362668362e6b262a28">Support</a>
       </nav>
     </div>
   </header>
@@ -499,11 +515,11 @@
         <div class="contact-grid">
           <div class="contact-card">
             <strong>Email</strong>
-            <a href="mailto:admin@sc-sk.com">admin@sc-sk.com</a>
+            <a href="/cdn-cgi/l/email-protection#147570797d7a54677739677f3a777b79"><span class="__cf_email__" data-cfemail="86e7e2ebefe8c6f5e5abf5eda8e5e9eb">[email&#160;protected]</span></a>
           </div>
           <div class="contact-card">
             <strong>Privacy Inquiries</strong>
-            <a href="mailto:privacy@sc-sk.com">privacy@sc-sk.com</a>
+            <a href="/cdn-cgi/l/email-protection#a6d6d4cfd0c7c5dfe6d5c58bd5cd88c5c9cb"><span class="__cf_email__" data-cfemail="2757554e5146445e6754440a544c0944484a">[email&#160;protected]</span></a>
           </div>
           <div class="contact-card">
             <strong>Website</strong>
@@ -511,7 +527,7 @@
           </div>
           <div class="contact-card">
             <strong>Response Time</strong>
-            <span>Within 5 days</span>
+            <span>Within 30 days</span>
           </div>
         </div>
 
@@ -529,12 +545,4 @@
       <div class="footer-links">
         <a href="index.html">Home</a>
         <a href="terms.html">Terms of Service</a>
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="mailto:admin@sc-sk.com">Contact</a>
-      </div>
-      <p>&copy; 2025 SAA. All rights reserved.</p>
-      <p style="margin-top:6px;">Site Companion Side Kick (SCSK) — Built for construction professionals.</p>
-    </div>
-  </footer>
-</body>
-</html>
+        <a href="priv
