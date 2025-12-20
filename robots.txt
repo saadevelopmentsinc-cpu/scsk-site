@@ -1,0 +1,18 @@
+# robots.txt for sc-sk.com
+# SCSK - Construction Site Management App
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://sc-sk.com/sitemap.xml
+
+# Allow all major search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
