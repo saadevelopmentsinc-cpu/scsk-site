@@ -1,0 +1,13 @@
+# wrangler.toml
+
+name = "scsk-site"
+main = "src/index.js"
+compatibility_date = "2025-12-30"
+
+kv_namespaces = [
+  { binding = "COUNTER_KV", id = "REPLACE_WITH_YOUR_KV_NAMESPACE_ID" }
+]
+
+[vars]
+START_AT = "9000"
+ALLOWED_ORIGINS = "https://sc-sk.com,https://www.sc-sk.com"
