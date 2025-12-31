@@ -842,6 +842,17 @@
       gap: 12px;
     }
     .footer-bottom small { font-size: 12px; color: var(--muted); }
+    .visitor-counter {
+      font-size: 13px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .visitor-counter #visitor-count {
+      color: var(--accent);
+      font-weight: 700;
+    }
 
     /* Mobile */
     @media (max-width: 900px) {
@@ -870,7 +881,8 @@
       .field-row { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr; gap: 28px; text-align: center; }
       .footer-brand p { max-width: 100%; }
-      .footer-bottom { justify-content: center; text-align: center; }
+      .footer-bottom { justify-content: center; text-align: center; flex-direction: column; }
+      .visitor-counter { justify-content: center; }
       .btn { width: 100%; }
       .support-section { padding: 60px 0; }
       .coffee-icon { width: 64px; height: 64px; }
@@ -1093,7 +1105,7 @@
             <input type="hidden" name="_subject" value="SCSK Beta Application">
             <input type="text" name="_gotcha" style="display:none">
             <div id="statusOk" class="status ok">🎉 Application received! We'll review and send access details soon.</div>
-            <div id="statusErr" class="status err">⚠️ Something went wrong — please email <a href="mailto:admin@sc-sk.com">admin@sc-sk.com</a></div>
+            <div id="statusErr" class="status err">⚠️ Something went wrong — please email <a href="/cdn-cgi/l/email-protection#c4a5a0a9adaa84b7a7e9b7afeaa7aba9"><span class="__cf_email__" data-cfemail="7011141d191e3003135d031b5e131f1d">[email&#160;protected]</span></a></div>
           </form>
         </div>
       </div>
@@ -1108,14 +1120,29 @@
           <p>The offline-first construction management app built for real job sites.</p>
         </div>
         <div class="footer-col"><h4>Product</h4><a href="#features">Features</a><a href="#platforms">Platforms</a><a href="#roadmap">Roadmap</a><a href="#beta">Join Beta</a></div>
-        <div class="footer-col"><h4>Resources</h4><a href="#faq">FAQ</a><a href="support.html">Support</a><a href="mailto:admin@sc-sk.com">Contact</a></div>
+        <div class="footer-col"><h4>Resources</h4><a href="#faq">FAQ</a><a href="support.html">Support</a><a href="/cdn-cgi/l/email-protection#08696c656166487b6b257b63266b6765">Contact</a></div>
         <div class="footer-col"><h4>Legal</h4><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Service</a><a href="delete-account.html">Delete Account</a></div>
       </div>
-      <div class="footer-bottom"><small>&copy; 2025 SAA. All rights reserved. Built for construction professionals.</small></div>
+      <div class="footer-bottom">
+        <small>&copy; 2025 SAA. All rights reserved. Built for construction professionals.</small>
+        <div class="visitor-counter">👷 <span id="visitor-count">...</span> site visits</div>
+      </div>
     </div>
   </footer>
 
   <script>
+    // Visitor Counter
+    fetch('https://api.countapi.xyz/hit/scsk-site/homepage')
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('visitor-count').textContent = data.value.toLocaleString();
+      })
+      .catch(() => {
+        document.getElementById('visitor-count').textContent = '—';
+      });
+  </script>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     // Lightbox functionality
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
@@ -1210,10 +1237,4 @@
       document.querySelectorAll('.status').forEach(s => s.classList.remove('show'));
       try {
         const res = await fetch(form.action, {method: 'POST', body: new FormData(form), headers: {'Accept': 'application/json'}});
-        if (res.ok) { form.reset(); inputs.forEach(f => f.parentElement.classList.remove('filled')); optional.classList.remove('show'); document.getElementById('statusOk').classList.add('show'); launchConfetti(); }
-        else { document.getElementById('statusErr').classList.add('show'); }
-      } catch (err) { document.getElementById('statusErr').classList.add('show'); }
-    });
-  </script>
-</body>
-</html>
+        if (res.ok) { form.reset(); inputs.forEach(f => f.parentElement.classList.remove('filled')); optional.classList.remove('show'); doc
