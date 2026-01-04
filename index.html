@@ -1874,19 +1874,34 @@
           const db = firebase.database();
           const counterRef = db.ref('website_counter');
           
-          // Check if already counted this session
-          if (!sessionStorage.getItem('counted')) {
-            counterRef.transaction((current) => {
-              return (current || 1199) + 1;
-            });
-            sessionStorage.setItem('counted', 'true');
-          }
-          
-          // Display the count
+          // Display the count (always listen)
           counterRef.on('value', (snapshot) => {
             const count = snapshot.val() || 1200;
             document.getElementById('visitor-count').textContent = count.toLocaleString();
+          }, (error) => {
+            console.error('Firebase read error:', error);
+            document.getElementById('visitor-count').textContent = '1,200';
           });
+          
+          // Increment if not counted this session
+          if (!sessionStorage.getItem('counted')) {
+            counterRef.once('value').then((snapshot) => {
+              const currentVal = snapshot.val();
+              if (currentVal === null) {
+                // Initialize counter if it doesn't exist
+                counterRef.set(1200).then(() => {
+                  console.log('Counter initialized to 1200');
+                  sessionStorage.setItem('counted', 'true');
+                }).catch(e => console.error('Init error:', e));
+              } else {
+                // Increment existing counter
+                counterRef.set(currentVal + 1).then(() => {
+                  console.log('Counter incremented to', currentVal + 1);
+                  sessionStorage.setItem('counted', 'true');
+                }).catch(e => console.error('Increment error:', e));
+              }
+            }).catch(e => console.error('Read error:', e));
+          }
         </script>
       </div>
     </div>
