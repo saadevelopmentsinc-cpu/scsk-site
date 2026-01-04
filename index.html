@@ -1699,7 +1699,7 @@
           </div>
           <div class="faq-item">
             <h3>Can I request features?</h3>
-            <p>Absolutely! Email admin@sc-sk.com or use the in-app feedback. Beta user requests directly influence our weekly development priorities.</p>
+            <p>Absolutely! Email <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d4b5b0b9bdba94a7b7f9a7bffab7bbb9">[email&#160;protected]</a> or use the in-app feedback. Beta user requests directly influence our weekly development priorities.</p>
           </div>
           <div class="faq-item">
             <h3>When is cloud sync coming?</h3>
@@ -1813,7 +1813,7 @@
             <input type="hidden" name="_subject" value="SCSK Beta Application">
             <input type="text" name="_gotcha" style="display:none">
             <div id="statusOk" class="status ok">🎉 Application received! We'll review and send access details within 24-48 hours.</div>
-            <div id="statusErr" class="status err">⚠️ Something went wrong — please email admin@sc-sk.com directly.</div>
+            <div id="statusErr" class="status err">⚠️ Something went wrong — please email <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3f5e5b5256517f4c5c124c54115c5052">[email&#160;protected]</a> directly.</div>
           </form>
         </div>
       </div>
@@ -1844,7 +1844,7 @@
           <a href="#faq">FAQ</a>
           <a href="#integrations">Integrations</a>
           <a href="support.html">Support</a>
-          <a href="mailto:admin@sc-sk.com">Contact</a>
+          <a href="/cdn-cgi/l/email-protection#c6a7a2abafa886b5a5ebb5ade8a5a9ab">Contact</a>
         </div>
         <div class="footer-col">
           <h4>Legal</h4>
@@ -1855,17 +1855,18 @@
       </div>
       <div class="footer-bottom">
         <small>&copy; 2025 SAA Developments Inc. All rights reserved. Built in Australia for construction professionals worldwide.</small>
-        <div class="visitor-counter">
-          <!-- Statcounter Visible Counter -->
-          <a href="https://statcounter.com/" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 6px; color: var(--muted); font-size: 12px;">
-            <img src="https://c.statcounter.com/13195562/0/84ac5488/1/" alt="visitor counter" style="border: none; height: 18px;">
-          </a>
+        <div class="visitor-counter" style="display: flex; align-items: center; gap: 8px; padding: 8px 16px; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 8px;">
+          <span style="font-size: 12px; color: var(--muted);">Visitors:</span>
+          <!-- Default Statcounter code for Scsk https://sc-sk.com -->
           <script type="text/javascript">
           var sc_project=13195562; 
-          var sc_invisible=1; 
+          var sc_invisible=0; 
           var sc_security="84ac5488"; 
+          var scJsHost = "https://";
+          document.write("<sc"+"ript type='text/javascript' src='" + scJsHost + "statcounter.com/counter/counter.js'></"+"script>");
           </script>
-          <script type="text/javascript" src="https://www.statcounter.com/counter/counter.js" async></script>
+          <noscript><div class="statcounter"><a title="free web stats" href="https://statcounter.com/" target="_blank"><img class="statcounter" src="https://c.statcounter.com/13195562/0/84ac5488/0/" alt="free web stats" referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
+          <!-- End of Statcounter Code -->
         </div>
       </div>
     </div>
@@ -1987,17 +1988,4 @@
         });
         if (res.ok) {
           form.reset();
-          inputs.forEach(f => f.parentElement.classList.remove('filled'));
-          optional.classList.remove('show');
-          document.getElementById('statusOk').classList.add('show');
-          launchConfetti();
-        } else {
-          document.getElementById('statusErr').classList.add('show');
-        }
-      } catch {
-        document.getElementById('statusErr').classList.add('show');
-      }
-    });
-  </script>
-</body>
-</html>
+          inputs.forEach(f => f.parentElement.classList.remo
