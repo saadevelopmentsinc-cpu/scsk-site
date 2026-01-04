@@ -2,32 +2,32 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://sc-sk.com/</loc>
-    <lastmod>2024-12-18</lastmod>
+    <lastmod>2025-01-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://sc-sk.com/privacy.html</loc>
-    <lastmod>2024-12-18</lastmod>
+    <lastmod>2025-01-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://sc-sk.com/terms.html</loc>
+    <lastmod>2025-01-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://sc-sk.com/support.html</loc>
-    <lastmod>2024-12-18</lastmod>
+    <lastmod>2025-01-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://sc-sk.com/terms.html</loc>
-    <lastmod>2024-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
     <loc>https://sc-sk.com/delete-account.html</loc>
-    <lastmod>2024-12-18</lastmod>
-    <changefreq>yearly</changefreq>
+    <lastmod>2025-01-04</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
 </urlset>
