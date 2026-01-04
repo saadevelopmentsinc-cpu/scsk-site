@@ -2023,4 +2023,17 @@
         });
         if (res.ok) {
           form.reset();
-          inputs.forEach(f => f.parentElement.classList.remo
+          inputs.forEach(f => f.parentElement.classList.remove('filled'));
+          optional.classList.remove('show');
+          document.getElementById('statusOk').classList.add('show');
+          launchConfetti();
+        } else {
+          document.getElementById('statusErr').classList.add('show');
+        }
+      } catch {
+        document.getElementById('statusErr').classList.add('show');
+      }
+    });
+  </script>
+</body>
+</html>
