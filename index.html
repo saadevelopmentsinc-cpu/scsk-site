@@ -1867,7 +1867,7 @@
           const firebaseConfig = {
             apiKey: "AIzaSyBku3RTNQD4H8qRFi4zNDL7OsdEDo3Zm-o",
             projectId: "scsk-construction-app-7a5ca",
-            databaseURL: "https://scsk-construction-app-7a5ca-default-rtdb.firebaseio.com"
+            databaseURL: "https://scsk-construction-app-7a5ca-default-rtdb.firebasedatabase.app"
           };
           
           firebase.initializeApp(firebaseConfig);
@@ -1883,25 +1883,21 @@
             document.getElementById('visitor-count').textContent = '1,200';
           });
           
-          // Increment if not counted this session
-          if (!sessionStorage.getItem('counted')) {
-            counterRef.once('value').then((snapshot) => {
-              const currentVal = snapshot.val();
-              if (currentVal === null) {
-                // Initialize counter if it doesn't exist
-                counterRef.set(1200).then(() => {
-                  console.log('Counter initialized to 1200');
-                  sessionStorage.setItem('counted', 'true');
-                }).catch(e => console.error('Init error:', e));
-              } else {
-                // Increment existing counter
-                counterRef.set(currentVal + 1).then(() => {
-                  console.log('Counter incremented to', currentVal + 1);
-                  sessionStorage.setItem('counted', 'true');
-                }).catch(e => console.error('Increment error:', e));
-              }
-            }).catch(e => console.error('Read error:', e));
-          }
+          // Increment on every page load
+          counterRef.once('value').then((snapshot) => {
+            const currentVal = snapshot.val();
+            if (currentVal === null) {
+              // Initialize counter if it doesn't exist
+              counterRef.set(1200).then(() => {
+                console.log('Counter initialized to 1200');
+              }).catch(e => console.error('Init error:', e));
+            } else {
+              // Increment existing counter
+              counterRef.set(currentVal + 1).then(() => {
+                console.log('Counter incremented to', currentVal + 1);
+              }).catch(e => console.error('Increment error:', e));
+            }
+          }).catch(e => console.error('Read error:', e));
         </script>
       </div>
     </div>
