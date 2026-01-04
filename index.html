@@ -1857,47 +1857,37 @@
         <small>&copy; 2025 SAA Developments Inc. All rights reserved. Built in Australia for construction professionals worldwide.</small>
         <div class="visitor-counter" style="display: flex; align-items: center; gap: 8px; padding: 6px 12px; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 6px; font-size: 12px; color: var(--muted);">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="opacity: 0.7;"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
-          <span><strong id="visitor-count" style="color: var(--accent);">...</strong> visitors</span>
+          <span><strong id="visitor-count" style="color: var(--accent);">1,200</strong> visitors</span>
         </div>
         
-        <!-- Firebase Visitor Counter -->
-        <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+        <!-- Firebase Visitor Counter using REST API -->
         <script>
-          const firebaseConfig = {
-            apiKey: "AIzaSyBku3RTNQD4H8qRFi4zNDL7OsdEDo3Zm-o",
-            projectId: "scsk-construction-app-7a5ca",
-            databaseURL: "https://scsk-construction-app-7a5ca-default-rtdb.firebasedatabase.app"
-          };
+          const FIREBASE_URL = 'https://scsk-construction-app-7a5ca-default-rtdb.firebaseio.com/website_counter.json';
           
-          firebase.initializeApp(firebaseConfig);
-          const db = firebase.database();
-          const counterRef = db.ref('website_counter');
-          
-          // Display the count (always listen)
-          counterRef.on('value', (snapshot) => {
-            const count = snapshot.val() || 1200;
-            document.getElementById('visitor-count').textContent = count.toLocaleString();
-          }, (error) => {
-            console.error('Firebase read error:', error);
-            document.getElementById('visitor-count').textContent = '1,200';
-          });
-          
-          // Increment on every page load
-          counterRef.once('value').then((snapshot) => {
-            const currentVal = snapshot.val();
-            if (currentVal === null) {
-              // Initialize counter if it doesn't exist
-              counterRef.set(1200).then(() => {
-                console.log('Counter initialized to 1200');
-              }).catch(e => console.error('Init error:', e));
-            } else {
-              // Increment existing counter
-              counterRef.set(currentVal + 1).then(() => {
-                console.log('Counter incremented to', currentVal + 1);
-              }).catch(e => console.error('Increment error:', e));
-            }
-          }).catch(e => console.error('Read error:', e));
+          // Get current count and display
+          fetch(FIREBASE_URL)
+            .then(r => r.json())
+            .then(count => {
+              if (count !== null) {
+                document.getElementById('visitor-count').textContent = count.toLocaleString();
+                // Increment
+                return fetch(FIREBASE_URL, {
+                  method: 'PUT',
+                  body: JSON.stringify(count + 1)
+                });
+              }
+            })
+            .then(() => {
+              // Fetch updated count
+              return fetch(FIREBASE_URL);
+            })
+            .then(r => r.json())
+            .then(count => {
+              if (count !== null) {
+                document.getElementById('visitor-count').textContent = count.toLocaleString();
+              }
+            })
+            .catch(e => console.error('Counter error:', e));
         </script>
       </div>
     </div>
