@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  
+  <title>Thanks! | SCSK - Site Companion Side Kick</title>
+  <meta name="description" content="Thank you for your submission to SCSK.">
+  <meta name="robots" content="noindex, nofollow">
+  
+  <meta name="theme-color" content="#050608">
+  <link rel="canonical" href="https://sc-sk.com/thanks.html">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg0: #050608;
+      --bg1: #0a0d14;
+      --glass: rgba(255,255,255,0.06);
+      --glass-border: rgba(255,255,255,0.12);
+      --text: #f0f4ff;
+      --muted: rgba(184,196,224,0.8);
+      --accent: #5DA9FF;
+      --accent2: #8B5CF6;
+      --success: #10B981;
+      --warning: #FBBF24;
+    }
+
+    html { 
+      scroll-behavior: smooth;
+      background: var(--bg1);
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: var(--text);
+      background: var(--bg0);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(180deg, var(--bg0) 0%, var(--bg1) 100%);
+      z-index: -1;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* Header */
+    header {
+      background: rgba(5,6,8,0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--glass-border);
+      padding: 16px 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text);
+    }
+    .brand:hover { text-decoration: none; }
+
+    .logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .logo svg { width: 22px; height: 22px; fill: white; }
+
+    .brand-text { display: flex; flex-direction: column; line-height: 1.2; }
+    .brand-text strong { font-size: 14px; font-weight: 700; }
+    .brand-text span { font-size: 11px; color: var(--muted); }
+
+    /* Main Content */
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px;
+    }
+
+    .thanks-card {
+      max-width: 620px;
+      width: 100%;
+      text-align: center;
+      padding: 48px 40px;
+      border-radius: 28px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--glass-border);
+    }
+
+    .thanks-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      animation: pop 0.5s ease-out;
+    }
+
+    .thanks-icon.mailing {
+      background: linear-gradient(135deg, var(--accent), #3b82f6);
+      box-shadow: 0 16px 48px rgba(93,169,255,0.3);
+    }
+
+    .thanks-icon.suggestion {
+      background: linear-gradient(135deg, var(--warning), #f59e0b);
+      box-shadow: 0 16px 48px rgba(251,191,36,0.3);
+    }
+
+    .thanks-icon.beta {
+      background: linear-gradient(135deg, var(--success), #059669);
+      box-shadow: 0 16px 48px rgba(16,185,129,0.3);
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0); opacity: 0; }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .thanks-card h1 {
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 16px;
+      animation: fadeUp 0.5s ease-out 0.2s both;
+    }
+
+    .thanks-card .lead {
+      font-size: 16px;
+      color: var(--muted);
+      margin-bottom: 28px;
+      line-height: 1.7;
+      animation: fadeUp 0.5s ease-out 0.3s both;
+    }
+
+    .what-next {
+      text-align: left;
+      background: rgba(0,0,0,0.3);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 28px;
+      animation: fadeUp 0.5s ease-out 0.4s both;
+    }
+
+    .what-next h3 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .what-next ul {
+      list-style: none;
+    }
+
+    .what-next li {
+      font-size: 14px;
+      color: var(--muted);
+      padding: 8px 0;
+      padding-left: 28px;
+      position: relative;
+    }
+
+    .what-next li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--success);
+      font-weight: bold;
+    }
+
+    .personal-note {
+      text-align: left;
+      background: rgba(93,169,255,0.08);
+      border: 1px solid rgba(93,169,255,0.2);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 28px;
+      animation: fadeUp 0.5s ease-out 0.5s both;
+    }
+
+    .personal-note p {
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+
+    .personal-note p:last-of-type {
+      margin-bottom: 20px;
+    }
+
+    .personal-note a {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+
+    .personal-note strong {
+      color: var(--accent);
+    }
+
+    .signature {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      padding-top: 8px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .signature span {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .signature strong {
+      font-size: 18px;
+      color: var(--text);
+    }
+
+    .signature .sig-title {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .fine-print {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 24px;
+      opacity: 0.7;
+      animation: fadeUp 0.5s ease-out 0.7s both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeUp 0.5s ease-out 0.6s both;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 15px;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+
+    .btn:hover { text-decoration: none; transform: translateY(-2px); }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: white;
+      box-shadow: 0 8px 24px rgba(93,169,255,0.3);
+    }
+    .btn-primary:hover { box-shadow: 0 12px 32px rgba(93,169,255,0.4); }
+
+    .btn-secondary {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      color: var(--text);
+    }
+    .btn-secondary:hover { border-color: var(--accent); }
+
+    .btn svg { width: 18px; height: 18px; fill: currentColor; }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 24px;
+      border-top: 1px solid var(--glass-border);
+    }
+
+    footer small {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* Confetti Canvas */
+    #confetti {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    /* Hidden by default */
+    .content-mailing,
+    .content-suggestion,
+    .content-beta,
+    .content-default { display: none; }
+
+    .content-mailing.active,
+    .content-suggestion.active,
+    .content-beta.active,
+    .content-default.active { display: block; }
+
+    @media (max-width: 500px) {
+      .thanks-card { padding: 32px 24px; }
+      .thanks-card h1 { font-size: 24px; }
+      .btn-group { flex-direction: column; }
+      .btn { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="confetti"></canvas>
+
+  <header>
+    <a href="index.html" class="brand">
+      <div class="logo">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.18l6.9 3.45L12 11.09 5.1 7.63 12 4.18zM4 8.82l7 3.5v7.36l-7-3.5V8.82zm9 10.86v-7.36l7-3.5v7.36l-7 3.5z"/></svg>
+      </div>
+      <div class="brand-text">
+        <strong>Site Companion Side Kick</strong>
+        <span>SCSK</span>
+      </div>
+    </a>
+  </header>
+
+  <main>
+    <div class="thanks-card">
+      
+      <!-- MAILING LIST CONTENT -->
+      <div class="content-mailing">
+        <div class="thanks-icon mailing">📬</div>
+        <h1>You're on the List!</h1>
+        <p class="lead">G'day! Thanks for joining the SCSK mailing list – you're now in the loop!</p>
+        
+        <div class="what-next">
+          <h3>What You Can Expect</h3>
+          <ul>
+            <li>Weekly development updates straight to your inbox</li>
+            <li>New feature announcements before anyone else</li>
+            <li>Early access to upcoming releases</li>
+            <li>Tips for getting the most out of SCSK</li>
+          </ul>
+        </div>
+
+        <div class="personal-note">
+          <p>We're building SCSK to solve real problems for construction professionals, and your interest means a lot. This isn't some faceless corporation – it's just me, a working site foreman, building tools I wish I had years ago.</p>
+          <p>Got questions in the meantime? Just shoot me an email at <a href="mailto:admin@sc-sk.com">admin@sc-sk.com</a> – I read and reply to every one.</p>
+          <div class="signature">
+            <span>Cheers,</span>
+            <strong>JB</strong>
+            <span class="sig-title">Builder & Developer, SCSK</span>
+          </div>
+        </div>
+
+        <div class="btn-group">
+          <a href="index.html#features" class="btn btn-primary">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            Explore Features
+          </a>
+          <a href="index.html#beta" class="btn btn-secondary">Join Beta</a>
+        </div>
+
+        <p class="fine-print">You're receiving this because you signed up at sc-sk.com. Unsubscribe anytime by emailing us with "unsubscribe".</p>
+      </div>
+
+      <!-- SUGGESTION CONTENT -->
+      <div class="content-suggestion">
+        <div class="thanks-icon suggestion">💡</div>
+        <h1>Idea Received!</h1>
+        <p class="lead">G'day! Thanks for taking the time to share your idea – we've received your suggestion and it's now on our radar.</p>
+        
+        <div class="what-next">
+          <h3>What Happens Next</h3>
+          <ul>
+            <li>Your suggestion goes straight to our development backlog</li>
+            <li>We review all submissions weekly</li>
+            <li>Popular requests get prioritised in our roadmap</li>
+            <li>If we build it, we'll let you know!</li>
+          </ul>
+        </div>
+
+        <div class="personal-note">
+          <p>SCSK is built <strong>BY a tradie, FOR tradies</strong> – so feedback like yours directly shapes what we work on next. No corporate roadmap committees here, just real problems getting real solutions.</p>
+          <p>Every feature in SCSK started as an idea from someone on site. Your suggestion could be next.</p>
+          <p>Keep the ideas coming – and if you want to chat more about your suggestion, hit me up at <a href="mailto:admin@sc-sk.com">admin@sc-sk.com</a>.</p>
+          <div class="signature">
+            <span>Cheers,</span>
+            <strong>JB</strong>
+            <span class="sig-title">Builder & Developer, SCSK</span>
+          </div>
+        </div>
+
+        <div class="btn-group">
+          <a href="index.html#roadmap" class="btn btn-primary">
+            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+            View Roadmap
+          </a>
+          <a href="index.html#updates-signup" class="btn btn-secondary">Join Mailing List</a>
+        </div>
+
+        <p class="fine-print">You're receiving this because you submitted a suggestion at sc-sk.com.</p>
+      </div>
+
+      <!-- BETA SIGNUP CONTENT -->
+      <div class="content-beta">
+        <div class="thanks-icon beta">🎉</div>
+        <h1>Application Received!</h1>
+        <p class="lead">G'day! Thanks for applying to join the SCSK beta – stoked to have you interested!</p>
+        
+        <div class="what-next">
+          <h3>What Happens Next</h3>
+          <ul>
+            <li>We manually review each application (usually within 24-48 hours)</li>
+            <li>You'll receive an email with your APK download link</li>
+            <li>Install the app and start putting it through its paces</li>
+            <li>Your feedback directly influences our weekly updates</li>
+          </ul>
+        </div>
+
+        <div class="personal-note">
+          <p>I manually review every beta application because I want to make sure SCSK gets into the hands of real construction professionals who'll actually use it and give honest feedback.</p>
+          <p>No automated approvals, no bots – just me making sure we build a community of tradies who want to help make this app the best it can be.</p>
+          <p>Questions while you wait? Drop me a line at <a href="mailto:admin@sc-sk.com">admin@sc-sk.com</a>. I'm usually covered in concrete dust, but I'll get back to you.</p>
+          <div class="signature">
+            <span>Cheers,</span>
+            <strong>JB</strong>
+            <span class="sig-title">Builder & Developer, SCSK</span>
+          </div>
+        </div>
+
+        <div class="btn-group">
+          <a href="index.html#features" class="btn btn-primary">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            Explore Features
+          </a>
+          <a href="index.html#faq" class="btn btn-secondary">Read FAQ</a>
+        </div>
+
+        <p class="fine-print">You're receiving this because you applied for beta access at sc-sk.com.</p>
+      </div>
+
+      <!-- DEFAULT/FALLBACK CONTENT -->
+      <div class="content-default">
+        <div class="thanks-icon mailing">✓</div>
+        <h1>Thanks!</h1>
+        <p class="lead">Your submission has been received. We appreciate you taking the time to reach out!</p>
+        <div class="btn-group">
+          <a href="index.html" class="btn btn-primary">
+            <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+            Back to Home
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <small>&copy; 2025 SAA Developments Inc. All rights reserved. | <a href="index.html">Back to SCSK</a></small>
+  </footer>
+
+  <script>
+    // Get the type from URL parameter
+    const params = new URLSearchParams(window.location.search);
+    const type = params.get('type');
+
+    // Show the appropriate content
+    const validTypes = ['mailing', 'suggestion', 'beta'];
+    const contentType = validTypes.includes(type) ? type : 'default';
+    document.querySelector(`.content-${contentType}`).classList.add('active');
+
+    // Confetti animation
+    function launchConfetti() {
+      const canvas = document.getElementById('confetti');
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      
+      let particles = [];
+      const colors = ['#5DA9FF', '#8B5CF6', '#FBBF24', '#10B981', '#EF4444'];
+      
+      for (let i = 0; i < 150; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height - canvas.height,
+          vx: Math.random() * 6 - 3,
+          vy: Math.random() * 3 + 2,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          size: Math.random() * 8 + 4,
+          rotation: Math.random() * 360,
+          rotationSpeed: Math.random() * 10 - 5
+        });
+      }
+
+      let frame = 0;
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        particles.forEach(p => {
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy += 0.1;
+          p.rotation += p.rotationSpeed;
+          
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate(p.rotation * Math.PI / 180);
+          ctx.fillStyle = p.color;
+          ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
+          ctx.restore();
+        });
+
+        frame++;
+        if (frame < 200 && particles.some(p => p.y < canvas.height + 50)) {
+          requestAnimationFrame(animate);
+        }
+      }
+      
+      animate();
+    }
+
+    // Launch confetti on page load
+    window.addEventListener('load', () => {
+      setTimeout(launchConfetti, 300);
+    });
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+      const canvas = document.getElementById('confetti');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
+</body>
+</html>
