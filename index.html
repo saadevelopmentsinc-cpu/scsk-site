@@ -1072,6 +1072,88 @@
       pointer-events: none;
     }
 
+    /* Updates Section - Mailing List & Suggestions */
+    .updates-section {
+      padding: 80px 0 100px;
+      background: linear-gradient(180deg, transparent 0%, rgba(93,169,255,0.03) 100%);
+    }
+
+    .updates-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .updates-card {
+      padding: 36px 28px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--glass-border);
+      transition: all 0.3s;
+    }
+    .updates-card:hover { border-color: rgba(93,169,255,0.3); }
+
+    .updates-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .updates-icon svg { width: 28px; height: 28px; fill: white; }
+    .mail-icon { background: linear-gradient(135deg, var(--accent), #3b82f6); }
+    .suggest-icon { background: linear-gradient(135deg, var(--warning), #f59e0b); }
+
+    .updates-card h3 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .updates-card > p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .inline-form {
+      display: flex;
+      gap: 12px;
+    }
+    .inline-form .field { flex: 1; }
+    .inline-btn {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      border: none;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+    .inline-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(93,169,255,0.3); }
+    .inline-btn svg { width: 22px; height: 22px; fill: currentColor; }
+
+    .suggest-btn {
+      background: linear-gradient(135deg, var(--warning), #f59e0b);
+      color: #000;
+    }
+    .suggest-btn:hover { box-shadow: 0 8px 20px rgba(251,191,36,0.3); }
+    .suggest-btn svg { fill: #000; }
+
+    @media (max-width: 700px) {
+      .updates-grid { grid-template-columns: 1fr; }
+    }
+
     /* Footer */
     footer {
       background: var(--bg0);
@@ -1164,8 +1246,8 @@
   </div>
 
   <div class="announcement">
-    <span class="announcement-badge">🚀 WEEKLY UPDATES</span>
-    <span>New features every week · v2.4 released Dec 30 · Photo annotations now live · Materials tracking added</span>
+    <span class="announcement-badge">ðŸš€ WEEKLY UPDATES</span>
+    <span>New features every week Â· v2.4 released Dec 30 Â· Photo annotations now live Â· Materials tracking added</span>
   </div>
 
   <header>
@@ -1216,8 +1298,8 @@
               </span>
             </div>
             <h1 class="headline">Your construction sidekick that <span class="headline-accent">actually works on site</span></h1>
-            <p class="subhead">SCSK is the offline-first app built by a site foreman for construction supervisors, foremen, and project managers. Track jobs, capture site evidence, assign trades, and generate professional reports — even in basements and dead zones.</p>
-            <p class="subhead" style="font-size: 14px; font-weight: 600; color: var(--accent);">🔧 New features every week. Built BY a tradie, FOR tradies.</p>
+            <p class="subhead">SCSK is the offline-first app built by a site foreman for construction supervisors, foremen, and project managers. Track jobs, capture site evidence, assign trades, and generate professional reports â€” even in basements and dead zones.</p>
+            <p class="subhead" style="font-size: 14px; font-weight: 600; color: var(--accent);">ðŸ”§ New features every week. Built BY a tradie, FOR tradies.</p>
             <div class="hero-features">
               <div class="hero-feature"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>100% Offline</div>
               <div class="hero-feature"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Weekly Updates</div>
@@ -1269,10 +1351,10 @@
             <svg viewBox="0 0 24 24"><path d="M21 10.12h-6.78l2.74-2.82c-2.73-2.7-7.15-2.8-9.88-.1-2.73 2.71-2.73 7.08 0 9.79s7.15 2.71 9.88 0C18.32 15.65 19 14.08 19 12.1h2c0 1.98-.88 4.55-2.64 6.29-3.51 3.48-9.21 3.48-12.72 0-3.5-3.47-3.53-9.11-.02-12.58s9.14-3.47 12.65 0L21 3v7.12z"/></svg>
           </div>
           <div class="updates-content">
-            <h3>🔥 New Features Every Week</h3>
+            <h3>ðŸ”¥ New Features Every Week</h3>
             <p>SCSK is actively developed with new features, improvements, and bug fixes released weekly. Your feedback directly shapes what gets built next. Join the beta to influence the roadmap.</p>
           </div>
-          <a href="#updates" class="updates-link">View Recent Updates →</a>
+          <a href="#updates" class="updates-link">View Recent Updates â†’</a>
         </div>
       </div>
     </section>
@@ -1306,21 +1388,21 @@
           <p class="section-lead">No more separate apps or mental math. Professional calculators for every trade, with more added regularly.</p>
         </div>
         <div class="calc-grid">
-          <div class="calc-card available"><div class="calc-icon">🔲</div><h4>Tile Coverage</h4><p>m² with waste %</p><div class="calc-status live">✓ LIVE</div></div>
-          <div class="calc-card available"><div class="calc-icon">🧱</div><h4>Brick Calculator</h4><p>Bricks per wall</p><div class="calc-status live">✓ LIVE</div></div>
-          <div class="calc-card available"><div class="calc-icon">🎨</div><h4>Paint Calculator</h4><p>Litres per room</p><div class="calc-status live">✓ LIVE</div></div>
-          <div class="calc-card available"><div class="calc-icon">🪨</div><h4>Concrete Volume</h4><p>m³ for slabs/footings</p><div class="calc-status live">✓ LIVE</div></div>
-          <div class="calc-card available"><div class="calc-icon">💧</div><h4>Waterproofing</h4><p>Membrane coverage</p><div class="calc-status live">✓ LIVE</div></div>
-          <div class="calc-card available"><div class="calc-icon">🔌</div><h4>Electrical Load</h4><p>Amps & circuit sizing</p><div class="calc-status live">✓ LIVE</div></div>
-          <div class="calc-card available"><div class="calc-icon">🚿</div><h4>Grout Calculator</h4><p>kg per tile area</p><div class="calc-status live">✓ LIVE</div></div>
-          <div class="calc-card available"><div class="calc-icon">🪜</div><h4>Stair Calculator</h4><p>Rise, run, headroom</p><div class="calc-status live">✓ LIVE</div></div>
-          <div class="calc-card available"><div class="calc-icon">🧪</div><h4>Sand & Cement</h4><p>Mix ratios</p><div class="calc-status live">✓ LIVE</div></div>
-          <div class="calc-card available"><div class="calc-icon">🔧</div><h4>Pipe Sizing</h4><p>Flow & diameter</p><div class="calc-status live">✓ LIVE</div></div>
-          <div class="calc-card available"><div class="calc-icon">📏</div><h4>Unit Converter</h4><p>Imperial ↔ Metric</p><div class="calc-status live">✓ LIVE</div></div>
-          <div class="calc-card coming"><div class="calc-icon">🪵</div><h4>Timber/Lumber</h4><p>Board feet & spans</p><div class="calc-status soon">COMING</div></div>
-          <div class="calc-card coming"><div class="calc-icon">🏗️</div><h4>Rebar Calculator</h4><p>Steel quantities</p><div class="calc-status soon">COMING</div></div>
-          <div class="calc-card coming"><div class="calc-icon">❄️</div><h4>HVAC Sizing</h4><p>BTU requirements</p><div class="calc-status soon">COMING</div></div>
-          <div class="calc-card coming"><div class="calc-icon">🌡️</div><h4>Insulation</h4><p>R-value coverage</p><div class="calc-status soon">COMING</div></div>
+          <div class="calc-card available"><div class="calc-icon">ðŸ”²</div><h4>Tile Coverage</h4><p>mÂ² with waste %</p><div class="calc-status live">âœ“ LIVE</div></div>
+          <div class="calc-card available"><div class="calc-icon">ðŸ§±</div><h4>Brick Calculator</h4><p>Bricks per wall</p><div class="calc-status live">âœ“ LIVE</div></div>
+          <div class="calc-card available"><div class="calc-icon">ðŸŽ¨</div><h4>Paint Calculator</h4><p>Litres per room</p><div class="calc-status live">âœ“ LIVE</div></div>
+          <div class="calc-card available"><div class="calc-icon">ðŸª¨</div><h4>Concrete Volume</h4><p>mÂ³ for slabs/footings</p><div class="calc-status live">âœ“ LIVE</div></div>
+          <div class="calc-card available"><div class="calc-icon">ðŸ’§</div><h4>Waterproofing</h4><p>Membrane coverage</p><div class="calc-status live">âœ“ LIVE</div></div>
+          <div class="calc-card available"><div class="calc-icon">ðŸ”Œ</div><h4>Electrical Load</h4><p>Amps & circuit sizing</p><div class="calc-status live">âœ“ LIVE</div></div>
+          <div class="calc-card available"><div class="calc-icon">ðŸš¿</div><h4>Grout Calculator</h4><p>kg per tile area</p><div class="calc-status live">âœ“ LIVE</div></div>
+          <div class="calc-card available"><div class="calc-icon">ðŸªœ</div><h4>Stair Calculator</h4><p>Rise, run, headroom</p><div class="calc-status live">âœ“ LIVE</div></div>
+          <div class="calc-card available"><div class="calc-icon">ðŸ§ª</div><h4>Sand & Cement</h4><p>Mix ratios</p><div class="calc-status live">âœ“ LIVE</div></div>
+          <div class="calc-card available"><div class="calc-icon">ðŸ”§</div><h4>Pipe Sizing</h4><p>Flow & diameter</p><div class="calc-status live">âœ“ LIVE</div></div>
+          <div class="calc-card available"><div class="calc-icon">ðŸ“</div><h4>Unit Converter</h4><p>Imperial â†” Metric</p><div class="calc-status live">âœ“ LIVE</div></div>
+          <div class="calc-card coming"><div class="calc-icon">ðŸªµ</div><h4>Timber/Lumber</h4><p>Board feet & spans</p><div class="calc-status soon">COMING</div></div>
+          <div class="calc-card coming"><div class="calc-icon">ðŸ—ï¸</div><h4>Rebar Calculator</h4><p>Steel quantities</p><div class="calc-status soon">COMING</div></div>
+          <div class="calc-card coming"><div class="calc-icon">â„ï¸</div><h4>HVAC Sizing</h4><p>BTU requirements</p><div class="calc-status soon">COMING</div></div>
+          <div class="calc-card coming"><div class="calc-icon">ðŸŒ¡ï¸</div><h4>Insulation</h4><p>R-value coverage</p><div class="calc-status soon">COMING</div></div>
         </div>
       </div>
     </section>
@@ -1336,39 +1418,39 @@
         <div class="coming-grid">
           <div class="coming-card">
             <span class="coming-badge">Q1 2025</span>
-            <h3><span>☁️</span> Cloud Sync</h3>
+            <h3><span>â˜ï¸</span> Cloud Sync</h3>
             <p>Multi-device sync so you can start on your phone, continue on your tablet, finish in the office. Seamless background sync when online.</p>
-            <span class="coming-eta">🔨 In development — ETA January 2025</span>
+            <span class="coming-eta">ðŸ”¨ In development â€” ETA January 2025</span>
           </div>
           <div class="coming-card">
             <span class="coming-badge">Q1 2025</span>
-            <h3><span>🔗</span> Procore Integration</h3>
+            <h3><span>ðŸ”—</span> Procore Integration</h3>
             <p>Two-way sync with Procore. Pull projects, push photos and reports. Work in SCSK, data flows to Procore automatically.</p>
-            <span class="coming-eta">🔨 In development — ETA February 2025</span>
+            <span class="coming-eta">ðŸ”¨ In development â€” ETA February 2025</span>
           </div>
           <div class="coming-card">
             <span class="coming-badge">Q1 2025</span>
-            <h3><span>💻</span> Windows Desktop</h3>
+            <h3><span>ðŸ’»</span> Windows Desktop</h3>
             <p>Full-featured Windows app for office work. Large screen optimised, keyboard shortcuts, bulk operations, report generation.</p>
-            <span class="coming-eta">🔨 In development — ETA January 2025</span>
+            <span class="coming-eta">ðŸ”¨ In development â€” ETA January 2025</span>
           </div>
           <div class="coming-card">
             <span class="coming-badge">Q2 2025</span>
-            <h3><span>👥</span> Team Accounts</h3>
+            <h3><span>ðŸ‘¥</span> Team Accounts</h3>
             <p>Share projects with your team. Role-based permissions (admin, supervisor, viewer). Activity feed shows who did what.</p>
-            <span class="coming-eta">📋 Planned — ETA Q2 2025</span>
+            <span class="coming-eta">ðŸ“‹ Planned â€” ETA Q2 2025</span>
           </div>
           <div class="coming-card">
             <span class="coming-badge">Q2 2025</span>
-            <h3><span>📍</span> Geofencing</h3>
+            <h3><span>ðŸ“</span> Geofencing</h3>
             <p>Auto-clock in when arriving at sites. Location-based job suggestions. Site boundary alerts for safety compliance.</p>
-            <span class="coming-eta">📋 Planned — ETA Q2 2025</span>
+            <span class="coming-eta">ðŸ“‹ Planned â€” ETA Q2 2025</span>
           </div>
           <div class="coming-card">
             <span class="coming-badge">Q2 2025</span>
-            <h3><span>📊</span> Advanced Reports</h3>
+            <h3><span>ðŸ“Š</span> Advanced Reports</h3>
             <p>Custom report templates with your branding. Scheduled automatic reports. Export to Excel, PDF, or email directly to clients.</p>
-            <span class="coming-eta">📋 Planned — ETA Q2 2025</span>
+            <span class="coming-eta">ðŸ“‹ Planned â€” ETA Q2 2025</span>
           </div>
         </div>
       </div>
@@ -1417,13 +1499,13 @@
         <div class="roadmap-timeline">
           <!-- Phase 1 - Complete -->
           <div class="roadmap-phase complete">
-            <div class="roadmap-marker">✓</div>
+            <div class="roadmap-marker">âœ“</div>
             <div class="roadmap-card">
               <div class="roadmap-header">
-                <span class="roadmap-label">PHASE 1 — COMPLETE</span>
+                <span class="roadmap-label">PHASE 1 â€” COMPLETE</span>
                 <span class="roadmap-eta">Launched December 2024</span>
               </div>
-              <h3>🎉 MVP Foundation</h3>
+              <h3>ðŸŽ‰ MVP Foundation</h3>
               <p>Core site companion with offline-first architecture. Stable foundation for everything else.</p>
               <div class="roadmap-features">
                 <div class="roadmap-feature done"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Project & job management</div>
@@ -1443,10 +1525,10 @@
             <div class="roadmap-marker">2</div>
             <div class="roadmap-card">
               <div class="roadmap-header">
-                <span class="roadmap-label">PHASE 2 — IN PROGRESS</span>
+                <span class="roadmap-label">PHASE 2 â€” IN PROGRESS</span>
                 <span class="roadmap-eta">Q1 2025 (Weekly releases)</span>
               </div>
-              <h3>🚀 Productivity & Sync</h3>
+              <h3>ðŸš€ Productivity & Sync</h3>
               <p>Enhanced productivity features and cloud sync. This is where we're focusing right now with weekly updates.</p>
               <div class="roadmap-features">
                 <div class="roadmap-feature done"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Photo annotations (draw, text, arrows)</div>
@@ -1466,10 +1548,10 @@
             <div class="roadmap-marker">3</div>
             <div class="roadmap-card">
               <div class="roadmap-header">
-                <span class="roadmap-label">PHASE 3 — PLANNED</span>
+                <span class="roadmap-label">PHASE 3 â€” PLANNED</span>
                 <span class="roadmap-eta">Q2-Q3 2025</span>
               </div>
-              <h3>👥 Teams & Collaboration</h3>
+              <h3>ðŸ‘¥ Teams & Collaboration</h3>
               <p>Multi-user support, company accounts, and real-time collaboration features for construction teams.</p>
               <div class="roadmap-features">
                 <div class="roadmap-feature planned"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></svg>Team/company accounts</div>
@@ -1487,10 +1569,10 @@
             <div class="roadmap-marker">4</div>
             <div class="roadmap-card">
               <div class="roadmap-header">
-                <span class="roadmap-label">PHASE 4 — FUTURE</span>
+                <span class="roadmap-label">PHASE 4 â€” FUTURE</span>
                 <span class="roadmap-eta">Q4 2025</span>
               </div>
-              <h3>🔗 Integrations Hub</h3>
+              <h3>ðŸ”— Integrations Hub</h3>
               <p>Connect SCSK with the tools you already use. Two-way sync with industry platforms.</p>
               <div class="roadmap-features">
                 <div class="roadmap-feature planned"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></svg>Aconex integration</div>
@@ -1506,10 +1588,10 @@
             <div class="roadmap-marker">5</div>
             <div class="roadmap-card">
               <div class="roadmap-header">
-                <span class="roadmap-label">PHASE 5 — VISION</span>
+                <span class="roadmap-label">PHASE 5 â€” VISION</span>
                 <span class="roadmap-eta">2026</span>
               </div>
-              <h3>🤖 AI & Automation</h3>
+              <h3>ðŸ¤– AI & Automation</h3>
               <p>Smart features that learn from your workflows and help you work faster.</p>
               <div class="roadmap-features">
                 <div class="roadmap-feature planned"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></svg>AI photo analysis (defect detection)</div>
@@ -1600,7 +1682,7 @@
               <span class="update-version">v2.0.0</span>
             </div>
             <div class="update-content">
-              <h4>🎉 Major Release: Public Beta Launch</h4>
+              <h4>ðŸŽ‰ Major Release: Public Beta Launch</h4>
               <p>SCSK public beta launches with core features: project management, job tracking, photo documentation, 19 trade categories, 11 calculators, PDF reports, and 100% offline operation.</p>
               <div class="update-tags">
                 <span class="update-tag">Launch</span>
@@ -1625,37 +1707,37 @@
         </div>
         <div class="integration-grid">
           <div class="integration-card coming">
-            <div class="integration-icon">🏗️</div>
+            <div class="integration-icon">ðŸ—ï¸</div>
             <h4>Procore</h4>
             <p>Sync projects, photos & reports</p>
             <div class="integration-status soon">Q1 2025</div>
           </div>
           <div class="integration-card coming">
-            <div class="integration-icon">📋</div>
+            <div class="integration-icon">ðŸ“‹</div>
             <h4>Aconex</h4>
             <p>Document management sync</p>
             <div class="integration-status planned">Q4 2025</div>
           </div>
           <div class="integration-card coming">
-            <div class="integration-icon">💰</div>
+            <div class="integration-icon">ðŸ’°</div>
             <h4>Xero</h4>
             <p>Accounting & invoicing</p>
             <div class="integration-status planned">Q4 2025</div>
           </div>
           <div class="integration-card coming">
-            <div class="integration-icon">📊</div>
+            <div class="integration-icon">ðŸ“Š</div>
             <h4>MYOB</h4>
             <p>Accounting integration</p>
             <div class="integration-status planned">Q4 2025</div>
           </div>
           <div class="integration-card coming">
-            <div class="integration-icon">📁</div>
+            <div class="integration-icon">ðŸ“</div>
             <h4>Google Drive</h4>
             <p>File backup & sync</p>
             <div class="integration-status planned">2025</div>
           </div>
           <div class="integration-card coming">
-            <div class="integration-icon">☁️</div>
+            <div class="integration-icon">â˜ï¸</div>
             <h4>Dropbox</h4>
             <p>Cloud storage backup</p>
             <div class="integration-status planned">2025</div>
@@ -1675,7 +1757,7 @@
         <div class="faq-grid">
           <div class="faq-item">
             <h3>How does offline mode work?</h3>
-            <p>SCSK stores all data locally first. Everything works without internet — create jobs, take photos, add notes. When you're back online, changes sync automatically in the background.</p>
+            <p>SCSK stores all data locally first. Everything works without internet â€” create jobs, take photos, add notes. When you're back online, changes sync automatically in the background.</p>
           </div>
           <div class="faq-item">
             <h3>How often are updates released?</h3>
@@ -1725,7 +1807,7 @@
             <svg viewBox="0 0 24 24"><path d="M2 21V19H20V21H2ZM20 8V5H18V8H20ZM20 3C20.53 3 21.04 3.21 21.41 3.59C21.79 3.96 22 4.47 22 5V8C22 8.53 21.79 9.04 21.41 9.41C21.04 9.79 20.53 10 20 10H18V11C18 12.06 17.58 13.08 16.83 13.83C16.08 14.58 15.06 15 14 15H8C6.94 15 5.92 14.58 5.17 13.83C4.42 13.08 4 12.06 4 11V4H18V3H20ZM16 5H6V11C6 11.53 6.21 12.04 6.59 12.41C6.96 12.79 7.47 13 8 13H14C14.53 13 15.04 12.79 15.41 12.41C15.79 12.04 16 11.53 16 11V5Z"/></svg>
           </div>
           <h2>Support Independent Development</h2>
-          <p>SCSK is built by a solo developer (who's also a working site foreman) passionate about creating practical tools for construction professionals. No VC funding, no corporate backing — just one person building software that solves real problems. Your support helps fund weekly development, server costs, and new features.</p>
+          <p>SCSK is built by a solo developer (who's also a working site foreman) passionate about creating practical tools for construction professionals. No VC funding, no corporate backing â€” just one person building software that solves real problems. Your support helps fund weekly development, server costs, and new features.</p>
           <a href="https://buymeacoffee.com/scsk" target="_blank" rel="noopener" class="coffee-btn">
             <svg viewBox="0 0 24 24"><path d="M2 21V19H20V21H2ZM20 8V5H18V8H20ZM20 3C20.53 3 21.04 3.21 21.41 3.59C21.79 3.96 22 4.47 22 5V8C22 8.53 21.79 9.04 21.41 9.41C21.04 9.79 20.53 10 20 10H18V11C18 12.06 17.58 13.08 16.83 13.83C16.08 14.58 15.06 15 14 15H8C6.94 15 5.92 14.58 5.17 13.83C4.42 13.08 4 12.06 4 11V4H18V3H20ZM16 5H6V11C6 11.53 6.21 12.04 6.59 12.41C6.96 12.79 7.47 13 8 13H14C14.53 13 15.04 12.79 15.41 12.41C15.79 12.04 16 11.53 16 11V5Z"/></svg>
             Buy Me a Coffee
@@ -1776,9 +1858,9 @@
                     <select name="company_size">
                       <option value=""></option>
                       <option>Just me</option>
-                      <option>2–10 people</option>
-                      <option>11–50 people</option>
-                      <option>51–200 people</option>
+                      <option>2â€“10 people</option>
+                      <option>11â€“50 people</option>
+                      <option>51â€“200 people</option>
                       <option>200+ people</option>
                     </select>
                     <label>Company Size</label>
@@ -1812,9 +1894,69 @@
             </div>
             <input type="hidden" name="_subject" value="SCSK Beta Application">
             <input type="text" name="_gotcha" style="display:none">
-            <div id="statusOk" class="status ok">🎉 Application received! We'll review and send access details within 24-48 hours.</div>
-            <div id="statusErr" class="status err">⚠️ Something went wrong — please email <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3f5e5b5256517f4c5c124c54115c5052">[email&#160;protected]</a> directly.</div>
+            <div id="statusOk" class="status ok">ðŸŽ‰ Application received! We'll review and send access details within 24-48 hours.</div>
+            <div id="statusErr" class="status err">âš ï¸ Something went wrong â€” please email <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3f5e5b5256517f4c5c124c54115c5052">[email&#160;protected]</a> directly.</div>
           </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mailing List & Suggestions -->
+    <section id="updates-signup" class="updates-section">
+      <div class="wrap">
+        <div class="updates-grid">
+          <!-- Mailing List -->
+          <div class="updates-card">
+            <div class="updates-icon mail-icon">
+              <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            </div>
+            <h3>Stay in the Loop</h3>
+            <p>Get weekly development updates, new feature announcements, and early access to upcoming releases. No spam, unsubscribe anytime.</p>
+            <form id="mailingForm" action="https://formspree.io/f/YOUR_MAILING_LIST_ID" method="POST">
+              <div class="inline-form">
+                <div class="field">
+                  <input type="email" name="email" required id="mail-email" placeholder=" ">
+                  <label for="mail-email">Email Address</label>
+                </div>
+                <button type="submit" class="inline-btn">
+                  <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+                </button>
+              </div>
+              <input type="hidden" name="_subject" value="SCSK Mailing List Signup">
+              <input type="text" name="_gotcha" style="display:none">
+              <div id="mailStatusOk" class="status ok">✓ You're on the list! Watch your inbox for updates.</div>
+              <div id="mailStatusErr" class="status err">Something went wrong – please try again.</div>
+            </form>
+          </div>
+
+          <!-- Feature Suggestions -->
+          <div class="updates-card">
+            <div class="updates-icon suggest-icon">
+              <svg viewBox="0 0 24 24"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm2.85 11.1l-.85.6V16h-4v-2.3l-.85-.6A4.997 4.997 0 017 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.63-.8 3.16-2.15 4.1z"/></svg>
+            </div>
+            <h3>Got Ideas?</h3>
+            <p>Your suggestions drive development. Tell us what features would make your job easier – we read every submission.</p>
+            <form id="suggestForm" action="https://formspree.io/f/YOUR_SUGGESTIONS_ID" method="POST">
+              <div class="formGrid">
+                <div class="field">
+                  <input type="email" name="email" required id="suggest-email" placeholder=" ">
+                  <label for="suggest-email">Email Address *</label>
+                </div>
+                <div class="field">
+                  <textarea name="suggestion" rows="3" required id="suggestion" placeholder=" "></textarea>
+                  <label for="suggestion">Your Feature Suggestion *</label>
+                </div>
+                <button type="submit" class="submitBtn suggest-btn">
+                  <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                  Send Suggestion
+                </button>
+              </div>
+              <input type="hidden" name="_subject" value="SCSK Feature Suggestion">
+              <input type="text" name="_gotcha" style="display:none">
+              <div id="suggestStatusOk" class="status ok">💡 Thanks! Your idea has been submitted.</div>
+              <div id="suggestStatusErr" class="status err">Something went wrong – please try again.</div>
+            </form>
+          </div>
         </div>
       </div>
     </section>
@@ -1837,6 +1979,7 @@
           <a href="#coming-soon">Coming Soon</a>
           <a href="#roadmap">Roadmap</a>
           <a href="#updates">Updates</a>
+          <a href="#updates-signup">Mailing List</a>
           <a href="#beta">Join Beta</a>
         </div>
         <div class="footer-col">
@@ -2021,6 +2164,50 @@
         }
       } catch(err) {
         document.getElementById('statusErr').classList.add('show');
+      }
+    });
+
+    // Mailing List Form
+    const mailingForm = document.getElementById('mailingForm');
+    mailingForm.addEventListener('submit', async e => {
+      e.preventDefault();
+      mailingForm.querySelectorAll('.status').forEach(s => s.classList.remove('show'));
+      try {
+        const res = await fetch(mailingForm.action, {
+          method: 'POST',
+          body: new FormData(mailingForm),
+          headers: {'Accept': 'application/json'}
+        });
+        if (res.ok) {
+          mailingForm.reset();
+          document.getElementById('mailStatusOk').classList.add('show');
+        } else {
+          document.getElementById('mailStatusErr').classList.add('show');
+        }
+      } catch(err) {
+        document.getElementById('mailStatusErr').classList.add('show');
+      }
+    });
+
+    // Feature Suggestions Form
+    const suggestForm = document.getElementById('suggestForm');
+    suggestForm.addEventListener('submit', async e => {
+      e.preventDefault();
+      suggestForm.querySelectorAll('.status').forEach(s => s.classList.remove('show'));
+      try {
+        const res = await fetch(suggestForm.action, {
+          method: 'POST',
+          body: new FormData(suggestForm),
+          headers: {'Accept': 'application/json'}
+        });
+        if (res.ok) {
+          suggestForm.reset();
+          document.getElementById('suggestStatusOk').classList.add('show');
+        } else {
+          document.getElementById('suggestStatusErr').classList.add('show');
+        }
+      } catch(err) {
+        document.getElementById('suggestStatusErr').classList.add('show');
       }
     });
   </script>
