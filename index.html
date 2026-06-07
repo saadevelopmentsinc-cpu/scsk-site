@@ -1125,11 +1125,425 @@
           opacity: 0.7;
         }
 
+        /* Bright 2026 refresh */
+        :root {
+          --bg0: #f4f9ff;
+          --bg1: #ffffff;
+          --glass: rgba(255,255,255,0.78);
+          --glass-border: rgba(25,70,120,0.13);
+          --text: #132238;
+          --muted: #536579;
+          --accent: #1677ff;
+          --accent2: #22c6b8;
+          --success: #11a36a;
+          --warning: #ffb020;
+          --danger: #e5484d;
+          --coffee: #ffdd38;
+          --radius: 18px;
+        }
+
+        html { background: #f4f9ff; }
+
+        body {
+          color: var(--text);
+          background:
+            radial-gradient(circle at 12% 8%, rgba(34,198,184,0.18), transparent 32%),
+            radial-gradient(circle at 88% 0%, rgba(255,176,32,0.22), transparent 28%),
+            linear-gradient(180deg, #f7fbff 0%, #eef7ff 42%, #ffffff 100%);
+        }
+
+        body::before {
+          background:
+            linear-gradient(rgba(19,34,56,0.035) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(19,34,56,0.035) 1px, transparent 1px);
+          background-size: 48px 48px;
+          mask-image: linear-gradient(180deg, rgba(0,0,0,0.55), transparent 64%);
+        }
+
+        .lightbox { background: rgba(10,18,30,0.92); }
+
+        .announcement {
+          background: linear-gradient(90deg, #0f9f72, #1677ff 55%, #7c3aed);
+          color: #ffffff;
+          border-bottom: 0;
+          box-shadow: 0 10px 30px rgba(22,119,255,0.18);
+        }
+
+        .announcement-badge {
+          background: #ffffff;
+          color: #08785a;
+          border-radius: 999px;
+        }
+
+        header {
+          background: rgba(255,255,255,0.88);
+          border-bottom: 1px solid rgba(25,70,120,0.12);
+          box-shadow: 0 12px 34px rgba(22,45,80,0.08);
+        }
+
+        .topbar { padding: 14px 0; }
+        .brand-text strong { color: #132238; }
+        .brand-text span { color: #5a6f84; }
+
+        .logo {
+          border-radius: 14px;
+          background: linear-gradient(135deg, #1677ff, #22c6b8);
+          box-shadow: 0 12px 26px rgba(22,119,255,0.28);
+        }
+
+        .navlink {
+          color: #4a5d72;
+          font-weight: 700;
+          border: 1px solid transparent;
+        }
+
+        .navlink:hover {
+          background: rgba(22,119,255,0.08);
+          color: #0d5fd6;
+          border-color: rgba(22,119,255,0.16);
+        }
+
+        .nav-cta {
+          color: #ffffff !important;
+          box-shadow: 0 10px 24px rgba(22,119,255,0.25);
+        }
+
+        .nav-coffee {
+          color: #332400 !important;
+          box-shadow: 0 10px 24px rgba(255,176,32,0.24);
+        }
+
+        .hero {
+          padding: 64px 0 82px;
+          overflow: hidden;
+        }
+
+        .hero::before {
+          content: '';
+          position: absolute;
+          inset: 18px 16px auto 16px;
+          height: calc(100% - 36px);
+          max-height: 720px;
+          border-radius: 34px;
+          background:
+            linear-gradient(135deg, rgba(255,255,255,0.92), rgba(220,244,255,0.88)),
+            radial-gradient(circle at 76% 22%, rgba(255,176,32,0.28), transparent 28%),
+            radial-gradient(circle at 12% 84%, rgba(34,198,184,0.2), transparent 32%);
+          border: 1px solid rgba(22,119,255,0.12);
+          box-shadow: 0 30px 80px rgba(22,45,80,0.14);
+          z-index: -1;
+        }
+
+        .hero-grid {
+          grid-template-columns: minmax(0, 0.92fr) minmax(420px, 1.08fr);
+          gap: 44px;
+        }
+
+        .badge {
+          border-radius: 999px;
+          background: #ffffff;
+          box-shadow: 0 8px 22px rgba(22,45,80,0.08);
+        }
+
+        .badge-beta {
+          background: #fff7df;
+          border-color: rgba(255,176,32,0.28);
+          color: #966300;
+        }
+
+        .badge-android {
+          background: #eafaf3;
+          border-color: rgba(17,163,106,0.22);
+          color: #08784e;
+        }
+
+        .badge-updates {
+          background: #eaf3ff;
+          border-color: rgba(22,119,255,0.22);
+          color: #0d5fd6;
+        }
+
+        .headline {
+          max-width: 790px;
+          color: #102036;
+          letter-spacing: 0;
+        }
+
+        .headline-accent {
+          color: transparent;
+          background: linear-gradient(90deg, #1677ff, #00a68f 55%, #ff9f1c);
+          -webkit-background-clip: text;
+          background-clip: text;
+        }
+
+        .subhead {
+          max-width: 680px;
+          color: #4e6378;
+        }
+
+        .hero-features {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 12px;
+          margin: 28px 0 24px;
+        }
+
+        .hero-feature {
+          color: #24384f;
+          background: rgba(255,255,255,0.75);
+          border: 1px solid rgba(22,119,255,0.1);
+          border-radius: 14px;
+          padding: 10px 12px;
+          box-shadow: 0 10px 22px rgba(22,45,80,0.06);
+        }
+
+        .hero-feature svg { fill: #0f9f72; }
+
+        .cta-row {
+          margin-top: 28px;
+          gap: 14px;
+        }
+
+        .btn {
+          border-radius: 14px;
+          color: #132238;
+          background: #ffffff;
+          border: 1px solid rgba(22,119,255,0.15);
+          box-shadow: 0 12px 26px rgba(22,45,80,0.08);
+        }
+
+        .btn:hover {
+          background: #f8fbff;
+          box-shadow: 0 16px 34px rgba(22,45,80,0.12);
+        }
+
+        .btn-primary {
+          color: #ffffff;
+          background: linear-gradient(135deg, #1677ff, #22c6b8);
+          box-shadow: 0 16px 34px rgba(22,119,255,0.28);
+        }
+
+        .btn-primary:hover {
+          box-shadow: 0 18px 42px rgba(22,119,255,0.34);
+        }
+
+        .hero-visual {
+          position: relative;
+          min-height: 460px;
+        }
+
+        .tablet-mockup {
+          max-width: 620px;
+          aspect-ratio: 16/11;
+          padding: 12px;
+          border-radius: 30px;
+          background: linear-gradient(145deg, #ffffff, #dff1ff);
+          border: 1px solid rgba(22,119,255,0.16);
+          box-shadow: 0 28px 70px rgba(22,45,80,0.20);
+          transform: rotate(1deg);
+        }
+
+        .tablet-mockup::before {
+          width: 60px;
+          height: 4px;
+          top: 8px;
+          right: 50%;
+          transform: translateX(50%);
+          background: rgba(19,34,56,0.18);
+        }
+
+        .tablet-screen {
+          background: #ffffff;
+          border-radius: 20px;
+          box-shadow: inset 0 0 0 1px rgba(22,119,255,0.10);
+        }
+
+        .tablet-screen img {
+          object-fit: cover;
+          filter: saturate(1.08) contrast(1.02);
+        }
+
+        .stats,
+        section[style*="rgba(0,0,0,0.2)"] {
+          background: rgba(255,255,255,0.58) !important;
+          border-top: 1px solid rgba(22,119,255,0.09);
+          border-bottom: 1px solid rgba(22,119,255,0.09);
+        }
+
+        .stats-grid {
+          background: #ffffff;
+          border: 1px solid rgba(22,119,255,0.12);
+          border-radius: 24px;
+          padding: 26px;
+          box-shadow: 0 22px 50px rgba(22,45,80,0.09);
+        }
+
+        .stat-value { color: #0d5fd6; }
+        .stat-label { color: #5c6e82; font-weight: 700; }
+
+        .section-kicker {
+          color: #0d5fd6;
+          background: #eaf3ff;
+          border-color: rgba(22,119,255,0.16);
+          border-radius: 999px;
+        }
+
+        .section-title {
+          color: #102036;
+          letter-spacing: 0;
+        }
+
+        .section-lead { color: #5a6f84; }
+
+        .updates-banner,
+        .feature-card,
+        .coming-card,
+        .calc-card,
+        .platform-card,
+        .roadmap-card,
+        .faq-item,
+        .beta-card {
+          background: rgba(255,255,255,0.88);
+          border-color: rgba(22,119,255,0.13);
+          box-shadow: 0 18px 46px rgba(22,45,80,0.08);
+        }
+
+        .updates-banner {
+          background:
+            linear-gradient(135deg, rgba(255,255,255,0.92), rgba(233,248,255,0.92)),
+            linear-gradient(90deg, rgba(22,119,255,0.08), rgba(34,198,184,0.08));
+        }
+
+        .updates-content p,
+        .feature-card > .feature-content > p,
+        .coming-card p,
+        .platform-card > p,
+        .roadmap-card > p,
+        .faq-item p {
+          color: #5a6f84;
+        }
+
+        .feature-card:hover,
+        .platform-card:hover,
+        .calc-card:hover {
+          border-color: rgba(22,119,255,0.34);
+          box-shadow: 0 24px 56px rgba(22,119,255,0.13);
+        }
+
+        .feature-image {
+          background: linear-gradient(135deg, #eaf3ff, #f6fbff);
+        }
+
+        .feature-icon,
+        .updates-icon,
+        .platform-card.active .platform-icon {
+          background: linear-gradient(135deg, #1677ff, #22c6b8);
+        }
+
+        .platform-grid { gap: 28px; }
+
+        #downloads .platform-card {
+          text-align: left;
+          padding: 34px;
+          position: relative;
+          overflow: hidden;
+        }
+
+        #downloads .platform-card::after {
+          content: '';
+          position: absolute;
+          right: -80px;
+          bottom: -90px;
+          width: 220px;
+          height: 220px;
+          border-radius: 50%;
+          background: rgba(34,198,184,0.14);
+        }
+
+        #downloads .platform-icon { margin: 0 0 18px; }
+
+        #downloads .btn {
+          margin-top: 22px;
+          width: 100%;
+        }
+
+        .workflow-strip {
+          padding: 0 0 40px;
+          margin-top: -32px;
+          position: relative;
+          z-index: 2;
+        }
+
+        .workflow-grid {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 18px;
+        }
+
+        .workflow-card {
+          background: rgba(255,255,255,0.9);
+          border: 1px solid rgba(22,119,255,0.13);
+          border-radius: 18px;
+          padding: 22px;
+          box-shadow: 0 18px 42px rgba(22,45,80,0.09);
+        }
+
+        .workflow-card strong {
+          display: block;
+          color: #102036;
+          font-size: 17px;
+          margin-bottom: 6px;
+        }
+
+        .workflow-card span {
+          display: block;
+          color: #5a6f84;
+          font-size: 14px;
+          line-height: 1.55;
+        }
+
+        .workflow-number {
+          display: inline-flex;
+          width: 34px;
+          height: 34px;
+          align-items: center;
+          justify-content: center;
+          border-radius: 12px;
+          color: #ffffff;
+          background: linear-gradient(135deg, #1677ff, #22c6b8);
+          font-weight: 800;
+          margin-bottom: 14px;
+        }
+
+        .roadmap-timeline::before {
+          background: linear-gradient(to bottom, #11a36a, #1677ff, #22c6b8, rgba(22,119,255,0.18));
+        }
+
+        .roadmap-phase.upcoming .roadmap-marker {
+          background: #ffffff;
+          border-color: rgba(22,119,255,0.18);
+        }
+
+        footer {
+          background: #102036;
+          color: #eaf3ff;
+        }
+
+        footer p,
+        footer a {
+          color: rgba(234,243,255,0.78);
+        }
+
         /* Mobile */
         @media (max-width: 900px) {
           .hero-grid { grid-template-columns: 1fr; gap: 40px; text-align: center; }
           .hero-visual { order: -1; }
           .hero-badges, .hero-features, .cta-row { justify-content: center; }
+          .hero-features { grid-template-columns: 1fr; }
+          .hero-visual { min-height: 0; }
+          .tablet-mockup { transform: none; max-width: 520px; }
+          .workflow-grid { grid-template-columns: 1fr; }
+          .workflow-strip { margin-top: 0; padding-top: 16px; }
           .stats-grid { grid-template-columns: repeat(2, 1fr); }
           .updates-banner { grid-template-columns: 1fr; text-align: center; }
           .updates-icon { margin: 0 auto; }
@@ -1262,13 +1676,35 @@
         </div>
     </section>
 
+    <section class="workflow-strip" aria-label="SCSK workflow">
+        <div class="wrap">
+            <div class="workflow-grid">
+                <div class="workflow-card">
+                    <div class="workflow-number">1</div>
+                    <strong>Set up the job</strong>
+                    <span>Create projects, add jobs, assign contacts, attach plans, and keep the site details in one place.</span>
+                </div>
+                <div class="workflow-card">
+                    <div class="workflow-number">2</div>
+                    <strong>Capture the work</strong>
+                    <span>Snap photos, annotate issues, track materials, run calculators, and keep notes while you are on site.</span>
+                </div>
+                <div class="workflow-card">
+                    <div class="workflow-number">3</div>
+                    <strong>Report and sync</strong>
+                    <span>Generate PDFs and keep Android and Windows moving together when you are signed into the same account.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Downloads Section -->
     <section id="downloads" style="padding: 60px 0; background:rgba(0,0,0,0.2);">
         <div class="wrap">
             <div class="section-header">
                 <div class="section-kicker"><svg viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>Downloads</div>
                 <h2 class="section-title">Get the Latest Beta</h2>
-                <p class="section-lead">Download the current Android APK or Windows installer. These links always point to the latest GitHub release assets.</p>
+                <p class="section-lead">Download the current Android APK or Windows installer from the v0.3.15 release.</p>
             </div>
             <div class="platform-grid">
                 <div class="platform-card active">
