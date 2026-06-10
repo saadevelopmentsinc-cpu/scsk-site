@@ -1,101 +1,2510 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
 
+    <!-- Primary Meta Tags -->
+    <title>SCSK - Construction Site Management App | Offline-First Job Tracking</title>
+    <meta name="title" content="SCSK - Construction Site Management App | Offline-First Job Tracking">
+  <meta name="description" content="SCSK is the offline-first construction site management app for supervisors, foremen, and project managers. Track projects, jobs, photos, documents, checklists, inventory, and teams across Android and Windows. Free beta available.">
+  <meta name="keywords" content="construction app, site management app, job tracking, tradie app, offline construction app, project management, construction software, site supervisor app, foreman app, building management, trade calculator, construction photos, project checklists, inventory management, construction team permissions">
+    <meta name="author" content="SAA Developments Inc">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://sc-sk.com/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sc-sk.com/">
+    <meta property="og:title" content="SCSK - Construction Site Management App">
+  <meta property="og:description" content="Track projects, jobs, photos, documents, checklists, inventory, and teams. Works offline. Android and Windows beta available.">
+    <meta property="og:image" content="https://sc-sk.com/Screenshot1.png">
+    <meta property="og:site_name" content="SCSK">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://sc-sk.com/">
+    <meta property="twitter:title" content="SCSK - Construction Site Management App">
+  <meta property="twitter:description" content="Track projects, jobs, photos, documents, checklists, inventory, and teams. Works offline. Android and Windows beta available.">
+    <meta property="twitter:image" content="https://sc-sk.com/Screenshot1.png">
+
+    <!-- Additional SEO -->
+    <meta name="theme-color" content="#050608">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="SCSK">
+
+    <!-- Geo Tags -->
+    <meta name="geo.region" content="AU">
+    <meta name="geo.placename" content="Australia">
+    <meta http-equiv="content-language" content="en-AU">
+    <link rel="alternate" hreflang="en" href="https://sc-sk.com/">
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        /* Lightbox */
+        .lightbox {
+          position: fixed;
+          inset: 0;
+          z-index: 9999;
+          background: rgba(0,0,0,0.95);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          opacity: 0;
+          visibility: hidden;
+          transition: opacity 0.3s, visibility 0.3s;
+          cursor: zoom-out;
+        }
+        .lightbox.active { opacity: 1; visibility: visible; }
+        .lightbox img {
+          max-width: 95%;
+          max-height: 95%;
+          object-fit: contain;
+          border-radius: 12px;
+          box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+          transform: scale(0.9);
+          transition: transform 0.3s;
+        }
+        .lightbox.active img { transform: scale(1); }
+        .lightbox-close {
+          position: absolute;
+          top: 20px;
+          right: 20px;
+          width: 44px;
+          height: 44px;
+          border-radius: 50%;
+          background: rgba(255,255,255,0.1);
+          border: 1px solid rgba(255,255,255,0.2);
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.2s;
+        }
+        .lightbox-close:hover { background: rgba(255,255,255,0.2); }
+        .lightbox-close svg { width: 24px; height: 24px; fill: white; }
+        .lightbox-nav {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          background: rgba(255,255,255,0.1);
+          border: 1px solid rgba(255,255,255,0.2);
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.2s;
+        }
+        .lightbox-nav:hover { background: rgba(255,255,255,0.2); }
+        .lightbox-nav svg { width: 28px; height: 28px; fill: white; }
+        .lightbox-prev { left: 20px; }
+        .lightbox-next { right: 20px; }
+        .lightbox-counter {
+          position: absolute;
+          bottom: 20px;
+          left: 50%;
+          transform: translateX(-50%);
+          font-size: 14px;
+          color: rgba(255,255,255,0.7);
+          background: rgba(0,0,0,0.5);
+          padding: 8px 16px;
+          border-radius: 20px;
+        }
+
+        :root {
+          --bg0: #050608;
+          --bg1: #0a0d14;
+          --glass: rgba(255,255,255,0.06);
+          --glass-border: rgba(255,255,255,0.12);
+          --text: #f0f4ff;
+          --muted: rgba(184,196,224,0.8);
+          --accent: #5DA9FF;
+          --accent2: #8B5CF6;
+          --success: #10B981;
+          --warning: #FBBF24;
+          --danger: #EF4444;
+          --coffee: #FFDD00;
+          --max: 1200px;
+          --radius: 20px;
+        }
+
+        html {
+          scroll-behavior: smooth;
+          background: var(--bg1);
+        }
+
+        body {
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+          color: var(--text);
+          background: var(--bg0);
+          line-height: 1.6;
+          overflow-x: hidden;
+          min-height: 100vh;
+          -webkit-overflow-scrolling: touch;
+          overscroll-behavior: none;
+        }
+
+        body::before {
+          content: '';
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: linear-gradient(180deg, var(--bg0) 0%, var(--bg1) 100%);
+          z-index: -1;
+          pointer-events: none;
+        }
+
+        a { color: inherit; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        .wrap { max-width: var(--max); margin: 0 auto; padding: 0 16px; }
+
+        /* Announcement Bar */
+        .announcement {
+          background: linear-gradient(135deg, rgba(16,185,129,0.2), rgba(93,169,255,0.2));
+          border-bottom: 1px solid rgba(16,185,129,0.3);
+          padding: 12px 16px;
+          text-align: center;
+          font-size: 13px;
+          font-weight: 600;
+        }
+        .announcement-badge {
+          background: var(--success);
+          color: var(--bg0);
+          padding: 3px 8px;
+          border-radius: 4px;
+          font-size: 10px;
+          font-weight: 800;
+          letter-spacing: 0.1em;
+          margin-right: 8px;
+          animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.7; }
+        }
+
+        /* Header */
+        header {
+          position: sticky;
+          top: 0;
+          z-index: 100;
+          background: rgba(5,6,8,0.95);
+          backdrop-filter: blur(20px);
+          border-bottom: 1px solid var(--glass-border);
+        }
+
+        .topbar {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 12px 0;
+          gap: 16px;
+          flex-wrap: wrap;
+        }
+
+        .brand {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+
+        .logo {
+          width: 42px;
+          height: 42px;
+          border-radius: 10px;
+          background: linear-gradient(135deg, var(--accent), var(--accent2));
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+        }
+        .logo svg { width: 22px; height: 22px; fill: #fff; }
+
+        .brand-text strong { display: block; font-size: 14px; }
+        .brand-text span { font-size: 11px; color: var(--muted); }
+
+        nav { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+
+        .navlink {
+          padding: 8px 14px;
+          border-radius: 8px;
+          font-size: 13px;
+          color: var(--muted);
+          transition: all 0.2s;
+        }
+        .navlink:hover { background: var(--glass); color: var(--text); text-decoration: none; }
+
+        .nav-cta {
+          background: linear-gradient(135deg, var(--accent), var(--accent2));
+          color: #fff !important;
+          font-weight: 600;
+        }
+
+        .nav-coffee {
+          background: var(--coffee);
+          color: #000 !important;
+          font-weight: 700;
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+        }
+        .nav-coffee:hover { background: #ffcc00; }
+        .nav-coffee svg { width: 16px; height: 16px; fill: currentColor; }
+
+        /* Hero */
+        .hero {
+          padding: 80px 0 100px;
+          position: relative;
+        }
+
+        .hero-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 60px;
+          align-items: center;
+        }
+
+        .hero-badges {
+          display: flex;
+          gap: 10px;
+          flex-wrap: wrap;
+          margin-bottom: 20px;
+        }
+
+        .badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 5px;
+          padding: 6px 12px;
+          border-radius: 6px;
+          font-size: 11px;
+          font-weight: 600;
+          letter-spacing: 0.04em;
+          text-transform: uppercase;
+        }
+        .badge-beta {
+          background: rgba(251,191,36,0.15);
+          border: 1px solid rgba(251,191,36,0.3);
+          color: var(--warning);
+        }
+        .badge-android {
+          background: rgba(16,185,129,0.15);
+          border: 1px solid rgba(16,185,129,0.3);
+          color: var(--success);
+        }
+        .badge-updates {
+          background: rgba(93,169,255,0.15);
+          border: 1px solid rgba(93,169,255,0.3);
+          color: var(--accent);
+          animation: pulse 2s infinite;
+        }
+        .badge svg { width: 12px; height: 12px; fill: currentColor; }
+
+        .headline {
+          font-size: clamp(36px, 6vw, 56px);
+          font-weight: 800;
+          line-height: 1.1;
+          letter-spacing: -0.03em;
+          margin-bottom: 24px;
+        }
+        .headline-accent { color: var(--accent); }
+
+        .subhead {
+          font-size: clamp(16px, 2vw, 19px);
+          color: var(--muted);
+          line-height: 1.7;
+          margin-bottom: 16px;
+        }
+
+        .hero-features {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 16px;
+          margin: 32px 0;
+        }
+        .hero-feature {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          font-size: 14px;
+          color: var(--muted);
+        }
+        .hero-feature svg { width: 20px; height: 20px; fill: var(--success); flex-shrink: 0; }
+
+        .cta-row {
+          display: flex;
+          gap: 12px;
+          flex-wrap: wrap;
+          margin-top: 36px;
+        }
+
+        .btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          padding: 16px 32px;
+          border-radius: 12px;
+          font-weight: 700;
+          font-size: 15px;
+          border: 1px solid var(--glass-border);
+          background: var(--glass);
+          transition: all 0.2s;
+        }
+        .btn:hover { background: rgba(255,255,255,0.1); text-decoration: none; transform: translateY(-2px); }
+        .btn svg { width: 18px; height: 18px; fill: currentColor; }
+
+        .btn-primary {
+          background: linear-gradient(135deg, var(--accent), var(--accent2));
+          border: none;
+          color: white;
+          box-shadow: 0 8px 24px rgba(93,169,255,0.3);
+        }
+        .btn-primary:hover {
+          box-shadow: 0 12px 32px rgba(93,169,255,0.4);
+        }
+
+        /* Tablet Mockup */
+        .hero-visual {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .tablet-mockup {
+          position: relative;
+          width: 100%;
+          max-width: 500px;
+          aspect-ratio: 4/3;
+          background: linear-gradient(145deg, #1a1d24, #0d0f14);
+          border-radius: 24px;
+          padding: 16px;
+          box-shadow: 0 40px 80px -20px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.1);
+        }
+        .tablet-mockup::before {
+          content: '';
+          position: absolute;
+          top: 50%;
+          right: 8px;
+          transform: translateY(-50%);
+          width: 4px;
+          height: 60px;
+          background: #2a2d34;
+          border-radius: 2px;
+        }
+        .tablet-screen {
+          width: 100%;
+          height: 100%;
+          background: #000;
+          border-radius: 12px;
+          overflow: hidden;
+        }
+        .tablet-screen img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: top center;
+        }
+
+        /* Stats */
+        .stats {
+          padding: 60px 0;
+          border-top: 1px solid var(--glass-border);
+          border-bottom: 1px solid var(--glass-border);
+          background: rgba(0,0,0,0.3);
+        }
+
+        .stats-grid {
+          display: grid;
+          grid-template-columns: repeat(5, 1fr);
+          gap: 24px;
+          text-align: center;
+        }
+
+        .stat-value {
+          font-size: clamp(28px, 5vw, 42px);
+          font-weight: 800;
+          color: var(--accent);
+          line-height: 1.1;
+        }
+        .stat-label {
+          font-size: 13px;
+          color: var(--muted);
+          margin-top: 6px;
+        }
+
+        /* Weekly Updates Banner */
+        .updates-banner {
+          background: linear-gradient(135deg, rgba(93,169,255,0.1), rgba(139,92,246,0.1));
+          border: 1px solid rgba(93,169,255,0.2);
+          border-radius: var(--radius);
+          padding: 32px;
+          margin: 60px 0;
+          display: grid;
+          grid-template-columns: auto 1fr auto;
+          gap: 24px;
+          align-items: center;
+        }
+        .updates-icon {
+          width: 64px;
+          height: 64px;
+          border-radius: 16px;
+          background: linear-gradient(135deg, var(--accent), var(--accent2));
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .updates-icon svg { width: 32px; height: 32px; fill: white; }
+        .updates-content h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+        .updates-content p { color: var(--muted); font-size: 14px; }
+        .updates-link {
+          padding: 12px 24px;
+          background: var(--glass);
+          border: 1px solid var(--glass-border);
+          border-radius: 10px;
+          font-weight: 600;
+          font-size: 14px;
+          transition: all 0.2s;
+        }
+        .updates-link:hover { background: rgba(255,255,255,0.1); text-decoration: none; }
+
+        /* Sections */
+        section { padding: 100px 0; }
+
+        .section-header {
+          text-align: center;
+          max-width: 700px;
+          margin: 0 auto 60px;
+        }
+
+        .section-kicker {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          padding: 6px 12px;
+          background: var(--glass);
+          border: 1px solid var(--glass-border);
+          border-radius: 6px;
+          font-size: 11px;
+          font-weight: 600;
+          color: var(--accent);
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          margin-bottom: 16px;
+        }
+        .section-kicker svg { width: 14px; height: 14px; fill: currentColor; }
+
+        .section-title {
+          font-size: clamp(32px, 5vw, 44px);
+          font-weight: 800;
+          letter-spacing: -0.03em;
+          margin-bottom: 16px;
+        }
+
+        .section-lead {
+          font-size: 17px;
+          color: var(--muted);
+          line-height: 1.7;
+        }
+
+        /* Feature Cards */
+        .features-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 20px;
+        }
+
+        .feature-card {
+          background: var(--glass);
+          border: 1px solid var(--glass-border);
+          border-radius: var(--radius);
+          overflow: hidden;
+          transition: all 0.3s;
+        }
+        .feature-card:hover {
+          border-color: rgba(255,255,255,0.2);
+          transform: translateY(-4px);
+        }
+
+        .feature-image {
+          height: 280px;
+          background: #000;
+          overflow: hidden;
+          cursor: zoom-in;
+        }
+        .feature-image img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          transition: transform 0.3s;
+        }
+        .feature-image:hover img { transform: scale(1.05); }
+
+        .feature-content { padding: 24px; }
+
+        .feature-icon {
+          width: 48px;
+          height: 48px;
+          border-radius: 12px;
+          background: linear-gradient(135deg, var(--accent), var(--accent2));
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 16px;
+        }
+        .feature-icon svg { width: 24px; height: 24px; fill: white; }
+
+        .feature-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 10px; }
+        .feature-card > .feature-content > p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+        /* Coming Soon Section */
+        .coming-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: 20px;
+        }
+
+        .coming-card {
+          background: var(--glass);
+          border: 1px solid var(--glass-border);
+          border-radius: var(--radius);
+          padding: 28px;
+          position: relative;
+          overflow: hidden;
+        }
+        .coming-card::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 3px;
+          background: linear-gradient(90deg, var(--warning), var(--accent));
+        }
+        .coming-card .coming-badge {
+          position: absolute;
+          top: 16px;
+          right: 16px;
+          padding: 4px 10px;
+          background: rgba(251,191,36,0.15);
+          border: 1px solid rgba(251,191,36,0.3);
+          border-radius: 4px;
+          font-size: 10px;
+          font-weight: 700;
+          color: var(--warning);
+          letter-spacing: 0.05em;
+        }
+        .coming-card h3 {
+          font-size: 18px;
+          font-weight: 700;
+          margin-bottom: 12px;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+        .coming-card h3 span { font-size: 24px; }
+        .coming-card p { font-size: 14px; color: var(--muted); line-height: 1.6; margin-bottom: 16px; }
+        .coming-eta {
+          font-size: 12px;
+          color: var(--accent);
+          font-weight: 600;
+        }
+
+        /* Trade Calculators */
+        .calc-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+          gap: 16px;
+        }
+        .calc-card {
+          background: var(--glass);
+          border: 1px solid var(--glass-border);
+          border-radius: 16px;
+          padding: 24px 16px;
+          text-align: center;
+          transition: all 0.3s;
+        }
+        .calc-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+        .calc-card.available { border-color: rgba(16,185,129,0.3); }
+        .calc-card.coming { opacity: 0.6; }
+        .calc-icon { font-size: 32px; margin-bottom: 12px; }
+        .calc-card h4 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+        .calc-card p { font-size: 11px; color: var(--muted); }
+        .calc-status {
+          margin-top: 8px;
+          font-size: 10px;
+          font-weight: 700;
+          letter-spacing: 0.05em;
+        }
+        .calc-status.live { color: var(--success); }
+        .calc-status.soon { color: var(--warning); }
+
+        /* Platform Cards */
+        .platform-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: 20px;
+        }
+
+        .platform-card {
+          background: var(--glass);
+          border: 1px solid var(--glass-border);
+          border-radius: var(--radius);
+          padding: 32px 24px;
+          text-align: center;
+          transition: all 0.3s;
+        }
+        .platform-card.active { border-color: var(--accent); }
+
+        .platform-icon {
+          width: 64px;
+          height: 64px;
+          margin: 0 auto 16px;
+          border-radius: 16px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .platform-icon svg { width: 32px; height: 32px; }
+        .platform-card.active .platform-icon { background: linear-gradient(135deg, var(--accent), var(--accent2)); }
+        .platform-card.active .platform-icon svg { fill: white; }
+        .platform-card:not(.active) .platform-icon { background: var(--glass); border: 1px solid var(--glass-border); }
+        .platform-card:not(.active) .platform-icon svg { fill: var(--muted); }
+
+        .platform-status {
+          display: inline-block;
+          padding: 4px 12px;
+          border-radius: 4px;
+          font-size: 11px;
+          font-weight: 600;
+          margin-bottom: 12px;
+        }
+        .status-available { background: rgba(16,185,129,0.15); color: var(--success); }
+        .status-soon { background: rgba(251,191,36,0.15); color: var(--warning); }
+        .status-planned { background: rgba(139,92,246,0.15); color: var(--accent2); }
+
+        .platform-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+        .platform-card > p { font-size: 14px; color: var(--muted); }
+
+        /* Roadmap Timeline */
+        .roadmap-timeline {
+          position: relative;
+          max-width: 900px;
+          margin: 0 auto;
+        }
+        .roadmap-timeline::before {
+          content: '';
+          position: absolute;
+          left: 24px;
+          top: 0;
+          bottom: 0;
+          width: 3px;
+          background: linear-gradient(to bottom, var(--success), var(--accent), var(--accent2), var(--glass-border));
+          border-radius: 2px;
+        }
+
+        .roadmap-phase {
+          position: relative;
+          padding-left: 72px;
+          padding-bottom: 48px;
+        }
+        .roadmap-phase:last-child { padding-bottom: 0; }
+
+        .roadmap-marker {
+          position: absolute;
+          left: 8px;
+          top: 0;
+          width: 36px;
+          height: 36px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 14px;
+          font-weight: 700;
+          z-index: 1;
+        }
+        .roadmap-phase.complete .roadmap-marker { background: var(--success); color: white; }
+        .roadmap-phase.active .roadmap-marker { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: white; animation: pulse 2s infinite; }
+        .roadmap-phase.upcoming .roadmap-marker { background: var(--glass); border: 2px solid var(--glass-border); color: var(--muted); }
+
+        .roadmap-card {
+          background: var(--glass);
+          border: 1px solid var(--glass-border);
+          border-radius: var(--radius);
+          padding: 28px;
+        }
+        .roadmap-phase.active .roadmap-card { border-color: var(--accent); box-shadow: 0 0 40px rgba(93,169,255,0.1); }
+
+        .roadmap-header {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          margin-bottom: 16px;
+          flex-wrap: wrap;
+        }
+        .roadmap-label {
+          padding: 4px 10px;
+          border-radius: 4px;
+          font-size: 11px;
+          font-weight: 700;
+          letter-spacing: 0.05em;
+        }
+        .roadmap-phase.complete .roadmap-label { background: rgba(16,185,129,0.15); color: var(--success); }
+        .roadmap-phase.active .roadmap-label { background: rgba(93,169,255,0.15); color: var(--accent); }
+        .roadmap-phase.upcoming .roadmap-label { background: var(--glass); color: var(--muted); }
+        .roadmap-eta { font-size: 13px; color: var(--muted); }
+
+        .roadmap-card h3 { font-size: 22px; font-weight: 700; margin-bottom: 12px; }
+        .roadmap-card > p { font-size: 15px; color: var(--muted); line-height: 1.7; margin-bottom: 20px; }
+
+        .roadmap-features {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+          gap: 12px;
+        }
+        .roadmap-feature {
+          display: flex;
+          align-items: flex-start;
+          gap: 10px;
+          font-size: 14px;
+          padding: 12px;
+          background: rgba(0,0,0,0.2);
+          border-radius: 10px;
+        }
+        .roadmap-feature svg { width: 18px; height: 18px; flex-shrink: 0; margin-top: 2px; }
+        .roadmap-feature.done svg { fill: var(--success); }
+        .roadmap-feature.progress svg { fill: var(--warning); }
+        .roadmap-feature.planned svg { fill: var(--muted); }
+
+        /* Recent Updates */
+        .updates-list {
+          max-width: 800px;
+          margin: 0 auto;
+        }
+        .update-item {
+          display: grid;
+          grid-template-columns: 100px 1fr;
+          gap: 24px;
+          padding: 24px 0;
+          border-bottom: 1px solid var(--glass-border);
+        }
+        .update-item:last-child { border-bottom: none; }
+        .update-date {
+          font-size: 13px;
+          color: var(--muted);
+          font-weight: 600;
+        }
+        .update-version {
+          display: inline-block;
+          padding: 2px 8px;
+          background: rgba(93,169,255,0.15);
+          border-radius: 4px;
+          font-size: 11px;
+          color: var(--accent);
+          font-weight: 700;
+          margin-top: 4px;
+        }
+        .update-content h4 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+        .update-content p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+        .update-tags { display: flex; gap: 6px; margin-top: 12px; flex-wrap: wrap; }
+        .update-tag {
+          padding: 3px 8px;
+          background: var(--glass);
+          border-radius: 4px;
+          font-size: 11px;
+          color: var(--muted);
+        }
+
+        /* Integration Cards */
+        .integration-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+          gap: 16px;
+        }
+        .integration-card {
+          background: var(--glass);
+          border: 1px solid var(--glass-border);
+          border-radius: 16px;
+          padding: 24px;
+          text-align: center;
+          transition: all 0.3s;
+        }
+        .integration-card:hover { border-color: var(--accent); }
+        .integration-card.available { border-color: rgba(16,185,129,0.3); }
+        .integration-card.coming { opacity: 0.7; }
+        .integration-icon { font-size: 36px; margin-bottom: 12px; }
+        .integration-card h4 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+        .integration-card p { font-size: 12px; color: var(--muted); }
+        .integration-status {
+          margin-top: 10px;
+          font-size: 10px;
+          font-weight: 700;
+          letter-spacing: 0.05em;
+        }
+        .integration-status.live { color: var(--success); }
+        .integration-status.soon { color: var(--warning); }
+        .integration-status.planned { color: var(--accent2); }
+
+        /* FAQ */
+        .faq-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+          gap: 20px;
+          max-width: 1000px;
+          margin: 0 auto;
+        }
+
+        .faq-item {
+          background: var(--glass);
+          border: 1px solid var(--glass-border);
+          border-radius: var(--radius);
+          padding: 24px;
+        }
+        .faq-item h3 {
+          font-size: 16px;
+          font-weight: 700;
+          margin-bottom: 12px;
+          display: flex;
+          align-items: flex-start;
+          gap: 10px;
+        }
+        .faq-item h3::before {
+          content: '?';
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 24px;
+          height: 24px;
+          border-radius: 6px;
+          background: linear-gradient(135deg, var(--accent), var(--accent2));
+          font-size: 12px;
+          flex-shrink: 0;
+        }
+        .faq-item p {
+          font-size: 14px;
+          color: var(--muted);
+          line-height: 1.7;
+          padding-left: 34px;
+        }
+
+        /* Support Section */
+        .support-section {
+          padding: 100px 0;
+          background: linear-gradient(135deg, rgba(255,221,0,0.08), rgba(255,221,0,0.02));
+          border-top: 1px solid rgba(255,221,0,0.2);
+          border-bottom: 1px solid rgba(255,221,0,0.2);
+        }
+
+        .support-content {
+          text-align: center;
+          max-width: 600px;
+          margin: 0 auto;
+        }
+
+        .coffee-icon {
+          width: 80px;
+          height: 80px;
+          margin: 0 auto 24px;
+          border-radius: 20px;
+          background: var(--coffee);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 16px 48px rgba(255,221,0,0.3);
+        }
+        .coffee-icon svg { width: 40px; height: 40px; fill: #000; }
+
+        .support-content h2 {
+          font-size: clamp(24px, 4vw, 32px);
+          font-weight: 800;
+          margin-bottom: 16px;
+        }
+
+        .support-content > p {
+          font-size: 16px;
+          color: var(--muted);
+          margin-bottom: 28px;
+          line-height: 1.7;
+        }
+
+        .coffee-btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          padding: 16px 36px;
+          border-radius: 12px;
+          font-weight: 700;
+          font-size: 16px;
+          background: var(--coffee);
+          color: #000;
+          transition: all 0.2s;
+          box-shadow: 0 8px 24px rgba(255,221,0,0.3);
+        }
+        .coffee-btn:hover {
+          background: #ffcc00;
+          transform: translateY(-2px);
+          box-shadow: 0 12px 32px rgba(255,221,0,0.4);
+          text-decoration: none;
+        }
+        .coffee-btn svg { width: 20px; height: 20px; fill: currentColor; }
+
+        /* Beta Form */
+        #beta { padding: 120px 0; position: relative; }
+
+        .formCard {
+          max-width: 600px;
+          margin: 0 auto;
+          padding: 48px 36px;
+          border-radius: 28px;
+          background: rgba(255,255,255,0.04);
+          border: 1px solid var(--glass-border);
+          position: relative;
+        }
+
+        .form-header { text-align: center; margin-bottom: 36px; }
+        .form-header h2 { font-size: 32px; font-weight: 800; margin-bottom: 12px; }
+        .form-header p { color: var(--muted); font-size: 15px; }
+
+        .formGrid { display: grid; gap: 18px; }
+
+        .field { position: relative; }
+        .field input, .field textarea, .field select {
+          width: 100%;
+          padding: 18px;
+          border-radius: 12px;
+          border: 1px solid var(--glass-border);
+          background: rgba(0,0,0,0.3);
+          color: var(--text);
+          font-size: 15px;
+          transition: all 0.2s;
+        }
+        .field input:focus, .field textarea:focus, .field select:focus {
+          outline: none;
+          border-color: var(--accent);
+          box-shadow: 0 0 0 3px rgba(93,169,255,0.1);
+        }
+        .field label {
+          position: absolute;
+          left: 18px;
+          top: 50%;
+          transform: translateY(-50%);
+          color: var(--muted);
+          font-size: 14px;
+          pointer-events: none;
+          transition: all 0.2s;
+        }
+        .field textarea ~ label { top: 18px; transform: none; }
+        .field input:focus ~ label,
+        .field input:not(:placeholder-shown) ~ label,
+        .field.filled label,
+        .field textarea:focus ~ label,
+        .field textarea:not(:placeholder-shown) ~ label {
+          top: -10px;
+          left: 12px;
+          font-size: 11px;
+          background: var(--bg0);
+          padding: 2px 6px;
+          border-radius: 4px;
+          color: var(--accent);
+        }
+        .field select { cursor: pointer; }
+        .field select option { background: var(--bg0); }
+
+        .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+        .optionalFields {
+          display: grid;
+          gap: 18px;
+          max-height: 0;
+          overflow: hidden;
+          opacity: 0;
+          transition: all 0.4s;
+        }
+        .optionalFields.show { max-height: 400px; opacity: 1; }
+
+        .submitBtn {
+          width: 100%;
+          padding: 18px;
+          border-radius: 12px;
+          border: none;
+          background: linear-gradient(135deg, var(--accent), var(--accent2));
+          color: white;
+          font-size: 16px;
+          font-weight: 700;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          transition: all 0.2s;
+          margin-top: 8px;
+        }
+        .submitBtn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(93,169,255,0.3); }
+        .submitBtn svg { width: 20px; height: 20px; fill: currentColor; }
+
+        .status {
+          margin-top: 20px;
+          padding: 16px;
+          border-radius: 12px;
+          font-size: 14px;
+          text-align: center;
+          display: none;
+        }
+        .status.show { display: block; }
+        .status.ok { background: rgba(16,185,129,0.15); color: var(--success); }
+        .status.err { background: rgba(239,68,68,0.15); color: var(--danger); }
+        .status a { color: inherit; text-decoration: underline; }
+
+        #confetti {
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+        }
+
+        /* Footer */
+        footer {
+          background: var(--bg0);
+          border-top: 1px solid var(--glass-border);
+          padding: 60px 0 30px;
+        }
+
+        .footer-grid {
+          display: grid;
+          grid-template-columns: 2fr 1fr 1fr 1fr;
+          gap: 40px;
+          margin-bottom: 40px;
+        }
+
+        .footer-brand .brand { margin-bottom: 16px; }
+        .footer-brand p { font-size: 14px; color: var(--muted); max-width: 280px; line-height: 1.6; }
+
+        .footer-col h4 {
+          font-size: 13px;
+          font-weight: 700;
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
+          margin-bottom: 16px;
+          color: var(--text);
+        }
+        .footer-col a {
+          display: block;
+          font-size: 14px;
+          color: var(--muted);
+          padding: 6px 0;
+          transition: color 0.2s;
+        }
+        .footer-col a:hover { color: var(--text); text-decoration: none; }
+
+        .footer-bottom {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding-top: 24px;
+          border-top: 1px solid var(--glass-border);
+          flex-wrap: wrap;
+          gap: 12px;
+        }
+        .footer-bottom small { font-size: 12px; color: var(--muted); }
+        .visitor-counter {
+          display: flex;
+          align-items: center;
+        }
+        .visitor-counter img {
+          height: 14px;
+          opacity: 0.7;
+        }
+
+        /* Bright 2026 refresh */
+        :root {
+          --bg0: #f4f9ff;
+          --bg1: #ffffff;
+          --glass: rgba(255,255,255,0.78);
+          --glass-border: rgba(25,70,120,0.13);
+          --text: #132238;
+          --muted: #536579;
+          --accent: #1677ff;
+          --accent2: #22c6b8;
+          --success: #11a36a;
+          --warning: #ffb020;
+          --danger: #e5484d;
+          --coffee: #ffdd38;
+          --radius: 18px;
+        }
+
+        html { background: #f4f9ff; }
+
+        body {
+          color: var(--text);
+          background:
+            radial-gradient(circle at 12% 8%, rgba(34,198,184,0.18), transparent 32%),
+            radial-gradient(circle at 88% 0%, rgba(255,176,32,0.22), transparent 28%),
+            linear-gradient(180deg, #f7fbff 0%, #eef7ff 42%, #ffffff 100%);
+        }
+
+        body::before {
+          background:
+            linear-gradient(rgba(19,34,56,0.035) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(19,34,56,0.035) 1px, transparent 1px);
+          background-size: 48px 48px;
+          mask-image: linear-gradient(180deg, rgba(0,0,0,0.55), transparent 64%);
+        }
+
+        .lightbox { background: rgba(10,18,30,0.92); }
+
+        .announcement {
+          background: linear-gradient(90deg, #0f9f72, #1677ff 55%, #7c3aed);
+          color: #ffffff;
+          border-bottom: 0;
+          box-shadow: 0 10px 30px rgba(22,119,255,0.18);
+        }
+
+        .announcement-badge {
+          background: #ffffff;
+          color: #08785a;
+          border-radius: 999px;
+        }
+
+        header {
+          background: rgba(255,255,255,0.88);
+          border-bottom: 1px solid rgba(25,70,120,0.12);
+          box-shadow: 0 12px 34px rgba(22,45,80,0.08);
+        }
+
+        .topbar { padding: 14px 0; }
+        .brand-text strong { color: #132238; }
+        .brand-text span { color: #5a6f84; }
+
+        .logo {
+          border-radius: 14px;
+          background: linear-gradient(135deg, #1677ff, #22c6b8);
+          box-shadow: 0 12px 26px rgba(22,119,255,0.28);
+        }
+
+        .navlink {
+          color: #4a5d72;
+          font-weight: 700;
+          border: 1px solid transparent;
+        }
+
+        .navlink:hover {
+          background: rgba(22,119,255,0.08);
+          color: #0d5fd6;
+          border-color: rgba(22,119,255,0.16);
+        }
+
+        .nav-cta {
+          color: #ffffff !important;
+          box-shadow: 0 10px 24px rgba(22,119,255,0.25);
+        }
+
+        .nav-coffee {
+          color: #332400 !important;
+          box-shadow: 0 10px 24px rgba(255,176,32,0.24);
+        }
+
+        .hero {
+          padding: 64px 0 82px;
+          overflow: hidden;
+        }
+
+        .hero::before {
+          content: '';
+          position: absolute;
+          inset: 18px 16px auto 16px;
+          height: calc(100% - 36px);
+          max-height: 720px;
+          border-radius: 34px;
+          background:
+            linear-gradient(135deg, rgba(255,255,255,0.92), rgba(220,244,255,0.88)),
+            radial-gradient(circle at 76% 22%, rgba(255,176,32,0.28), transparent 28%),
+            radial-gradient(circle at 12% 84%, rgba(34,198,184,0.2), transparent 32%);
+          border: 1px solid rgba(22,119,255,0.12);
+          box-shadow: 0 30px 80px rgba(22,45,80,0.14);
+          z-index: -1;
+        }
+
+        .hero-grid {
+          grid-template-columns: minmax(0, 0.92fr) minmax(420px, 1.08fr);
+          gap: 44px;
+        }
+
+        .badge {
+          border-radius: 999px;
+          background: #ffffff;
+          box-shadow: 0 8px 22px rgba(22,45,80,0.08);
+        }
+
+        .badge-beta {
+          background: #fff7df;
+          border-color: rgba(255,176,32,0.28);
+          color: #966300;
+        }
+
+        .badge-android {
+          background: #eafaf3;
+          border-color: rgba(17,163,106,0.22);
+          color: #08784e;
+        }
+
+        .badge-updates {
+          background: #eaf3ff;
+          border-color: rgba(22,119,255,0.22);
+          color: #0d5fd6;
+        }
+
+        .headline {
+          max-width: 790px;
+          color: #102036;
+          letter-spacing: 0;
+        }
+
+        .headline-accent {
+          color: transparent;
+          background: linear-gradient(90deg, #1677ff, #00a68f 55%, #ff9f1c);
+          -webkit-background-clip: text;
+          background-clip: text;
+        }
+
+        .subhead {
+          max-width: 680px;
+          color: #4e6378;
+        }
+
+        .hero-features {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 12px;
+          margin: 28px 0 24px;
+        }
+
+        .hero-feature {
+          color: #24384f;
+          background: rgba(255,255,255,0.75);
+          border: 1px solid rgba(22,119,255,0.1);
+          border-radius: 14px;
+          padding: 10px 12px;
+          box-shadow: 0 10px 22px rgba(22,45,80,0.06);
+        }
+
+        .hero-feature svg { fill: #0f9f72; }
+
+        .cta-row {
+          margin-top: 28px;
+          gap: 14px;
+        }
+
+        .btn {
+          border-radius: 14px;
+          color: #132238;
+          background: #ffffff;
+          border: 1px solid rgba(22,119,255,0.15);
+          box-shadow: 0 12px 26px rgba(22,45,80,0.08);
+        }
+
+        .btn:hover {
+          background: #f8fbff;
+          box-shadow: 0 16px 34px rgba(22,45,80,0.12);
+        }
+
+        .btn-primary {
+          color: #ffffff;
+          background: linear-gradient(135deg, #1677ff, #22c6b8);
+          box-shadow: 0 16px 34px rgba(22,119,255,0.28);
+        }
+
+        .btn-primary:hover {
+          box-shadow: 0 18px 42px rgba(22,119,255,0.34);
+        }
+
+        .hero-visual {
+          position: relative;
+          min-height: 460px;
+        }
+
+        .tablet-mockup {
+          max-width: 620px;
+          aspect-ratio: 16/11;
+          padding: 12px;
+          border-radius: 30px;
+          background: linear-gradient(145deg, #ffffff, #dff1ff);
+          border: 1px solid rgba(22,119,255,0.16);
+          box-shadow: 0 28px 70px rgba(22,45,80,0.20);
+          transform: rotate(1deg);
+        }
+
+        .tablet-mockup::before {
+          width: 60px;
+          height: 4px;
+          top: 8px;
+          right: 50%;
+          transform: translateX(50%);
+          background: rgba(19,34,56,0.18);
+        }
+
+        .tablet-screen {
+          background: #ffffff;
+          border-radius: 20px;
+          box-shadow: inset 0 0 0 1px rgba(22,119,255,0.10);
+        }
+
+        .tablet-screen img {
+          object-fit: cover;
+          filter: saturate(1.08) contrast(1.02);
+        }
+
+        .stats,
+        section[style*="rgba(0,0,0,0.2)"] {
+          background: rgba(255,255,255,0.58) !important;
+          border-top: 1px solid rgba(22,119,255,0.09);
+          border-bottom: 1px solid rgba(22,119,255,0.09);
+        }
+
+        .stats-grid {
+          background: #ffffff;
+          border: 1px solid rgba(22,119,255,0.12);
+          border-radius: 24px;
+          padding: 26px;
+          box-shadow: 0 22px 50px rgba(22,45,80,0.09);
+        }
+
+        .stat-value { color: #0d5fd6; }
+        .stat-label { color: #5c6e82; font-weight: 700; }
+
+        .section-kicker {
+          color: #0d5fd6;
+          background: #eaf3ff;
+          border-color: rgba(22,119,255,0.16);
+          border-radius: 999px;
+        }
+
+        .section-title {
+          color: #102036;
+          letter-spacing: 0;
+        }
+
+        .section-lead { color: #5a6f84; }
+
+        .updates-banner,
+        .feature-card,
+        .coming-card,
+        .calc-card,
+        .platform-card,
+        .roadmap-card,
+        .faq-item,
+        .beta-card {
+          background: rgba(255,255,255,0.88);
+          border-color: rgba(22,119,255,0.13);
+          box-shadow: 0 18px 46px rgba(22,45,80,0.08);
+        }
+
+        .updates-banner {
+          background:
+            linear-gradient(135deg, rgba(255,255,255,0.92), rgba(233,248,255,0.92)),
+            linear-gradient(90deg, rgba(22,119,255,0.08), rgba(34,198,184,0.08));
+        }
+
+        .updates-content p,
+        .feature-card > .feature-content > p,
+        .coming-card p,
+        .platform-card > p,
+        .roadmap-card > p,
+        .faq-item p {
+          color: #5a6f84;
+        }
+
+        .feature-card:hover,
+        .platform-card:hover,
+        .calc-card:hover {
+          border-color: rgba(22,119,255,0.34);
+          box-shadow: 0 24px 56px rgba(22,119,255,0.13);
+        }
+
+        .feature-image {
+          background: linear-gradient(135deg, #eaf3ff, #f6fbff);
+        }
+
+        .feature-icon,
+        .updates-icon,
+        .platform-card.active .platform-icon {
+          background: linear-gradient(135deg, #1677ff, #22c6b8);
+        }
+
+        .platform-grid { gap: 28px; }
+
+        #downloads .platform-card {
+          text-align: left;
+          padding: 34px;
+          position: relative;
+          overflow: hidden;
+        }
+
+        #downloads .platform-card::after {
+          content: '';
+          position: absolute;
+          right: -80px;
+          bottom: -90px;
+          width: 220px;
+          height: 220px;
+          border-radius: 50%;
+          background: rgba(34,198,184,0.14);
+        }
+
+        #downloads .platform-icon { margin: 0 0 18px; }
+
+        #downloads .btn {
+          margin-top: 22px;
+          width: 100%;
+        }
+
+        .workflow-strip {
+          padding: 0 0 40px;
+          margin-top: -32px;
+          position: relative;
+          z-index: 2;
+        }
+
+        .workflow-grid {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 18px;
+        }
+
+        .workflow-card {
+          background: rgba(255,255,255,0.9);
+          border: 1px solid rgba(22,119,255,0.13);
+          border-radius: 18px;
+          padding: 22px;
+          box-shadow: 0 18px 42px rgba(22,45,80,0.09);
+        }
+
+        .workflow-card strong {
+          display: block;
+          color: #102036;
+          font-size: 17px;
+          margin-bottom: 6px;
+        }
+
+        .workflow-card span {
+          display: block;
+          color: #5a6f84;
+          font-size: 14px;
+          line-height: 1.55;
+        }
+
+        .workflow-number {
+          display: inline-flex;
+          width: 34px;
+          height: 34px;
+          align-items: center;
+          justify-content: center;
+          border-radius: 12px;
+          color: #ffffff;
+          background: linear-gradient(135deg, #1677ff, #22c6b8);
+          font-weight: 800;
+          margin-bottom: 14px;
+        }
+
+        .roadmap-timeline::before {
+          background: linear-gradient(to bottom, #11a36a, #1677ff, #22c6b8, rgba(22,119,255,0.18));
+        }
+
+        .roadmap-phase.upcoming .roadmap-marker {
+          background: #ffffff;
+          border-color: rgba(22,119,255,0.18);
+        }
+
+        footer {
+          background: #102036;
+          color: #eaf3ff;
+        }
+
+        footer p,
+        footer a {
+          color: rgba(234,243,255,0.78);
+        }
+
+        /* Mobile */
+        @media (max-width: 900px) {
+          .hero-grid { grid-template-columns: 1fr; gap: 40px; text-align: center; }
+          .hero-visual { order: -1; }
+          .hero-badges, .hero-features, .cta-row { justify-content: center; }
+          .hero-features { grid-template-columns: 1fr; }
+          .hero-visual { min-height: 0; }
+          .tablet-mockup { transform: none; max-width: 520px; }
+          .workflow-grid { grid-template-columns: 1fr; }
+          .workflow-strip { margin-top: 0; padding-top: 16px; }
+          .stats-grid { grid-template-columns: repeat(2, 1fr); }
+          .updates-banner { grid-template-columns: 1fr; text-align: center; }
+          .updates-icon { margin: 0 auto; }
+          nav { display: none; }
+          .formCard { padding: 28px 20px; margin: 0 8px; }
+          .field-row { grid-template-columns: 1fr; }
+          .footer-grid { grid-template-columns: 1fr; gap: 28px; text-align: center; }
+          .footer-brand p { max-width: 100%; }
+          .footer-bottom { justify-content: center; text-align: center; flex-direction: column; }
+          .btn { width: 100%; }
+          .roadmap-timeline::before { left: 16px; }
+          .roadmap-phase { padding-left: 56px; }
+          .roadmap-marker { left: 0; width: 32px; height: 32px; font-size: 12px; }
+          .update-item { grid-template-columns: 1fr; gap: 12px; }
+        }
+    </style>
+</head>
+<body>
+<!-- Lightbox Modal -->
+<div class="lightbox" id="lightbox">
+    <button class="lightbox-close" aria-label="Close">
+        <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+    </button>
+    <button class="lightbox-nav lightbox-prev" aria-label="Previous">
+        <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+    </button>
+    <img id="lightbox-img" src="" alt="">
+    <button class="lightbox-nav lightbox-next" aria-label="Next">
+        <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+    </button>
+    <div class="lightbox-counter"><span id="lightbox-current">1</span> / <span id="lightbox-total">7</span></div>
+</div>
 
 <div class="announcement">
     <span class="announcement-badge">🚀 WEEKLY UPDATES</span>
-    <span>Latest beta v0.4.5 · Android and Windows active · Project checklists, inventory, team permissions, and cross-device sync improvements</span>
     <span>Latest beta v0.4.11 - Android and Windows active - Faster sync, project-linked notes, inventory allocations, team invites, and new trade tools</span>
 </div>
 
 <header>
+    <div class="wrap topbar">
+        <a href="#" class="brand">
+            <div class="logo">
+                <svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.18l6.9 3.45L12 11.09 5.1 7.63 12 4.18zM4 8.82l7 3.5v7.36l-7-3.5V8.82zm9 10.86v-7.36l7-3.5v7.36l-7 3.5z"/></svg>
+            </div>
+            <div class="brand-text">
+                <strong>Site Companion Side Kick</strong>
+                <span>SCSK</span>
+            </div>
+        </a>
+        <nav>
+            <a class="navlink" href="#features">Features</a>
+            <a class="navlink" href="#calculators">Calculators</a>
+            <a class="navlink" href="#coming-soon">Coming Soon</a>
+            <a class="navlink" href="#roadmap">Roadmap</a>
+            <a class="navlink" href="#updates">Updates</a>
+            <a class="navlink" href="#faq">FAQ</a>
+            <a class="navlink" href="support.html">Support</a>
+            <a class="navlink" href="#downloads">Downloads</a>
+            <a class="navlink nav-cta" href="#beta">Join Beta</a>
+            <a class="navlink nav-coffee" href="https://buymeacoffee.com/scsk" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24"><path d="M2 21V19H20V21H2ZM20 8V5H18V8H20ZM20 3C20.53 3 21.04 3.21 21.41 3.59C21.79 3.96 22 4.47 22 5V8C22 8.53 21.79 9.04 21.41 9.41C21.04 9.79 20.53 10 20 10H18V11C18 12.06 17.58 13.08 16.83 13.83C16.08 14.58 15.06 15 14 15H8C6.94 15 5.92 14.58 5.17 13.83C4.42 13.08 4 12.06 4 11V4H18V3H20ZM16 5H6V11C6 11.53 6.21 12.04 6.59 12.41C6.96 12.79 7.47 13 8 13H14C14.53 13 15.04 12.79 15.41 12.41C15.79 12.04 16 11.53 16 11V5Z"/></svg>
+                Coffee
+            </a>
+        </nav>
     </div>
-    <h1 class="headline">Your construction sidekick that <span class="headline-accent">actually works on site</span></h1>
-    <p class="subhead">SCSK is the offline-first app built by a site foreman for construction supervisors, foremen, and project managers. Track projects, jobs, documents, photos, checklists, inventory, and team work across Android and Windows.</p>
-    <p class="subhead" style="font-size: 14px; font-weight: 600; color: var(--accent);">Current beta v0.4.5. Built BY a tradie, FOR tradies.</p>
-    <p class="subhead" style="font-size: 14px; font-weight: 600; color: var(--accent);">Current beta v0.4.11. Built BY a tradie, FOR tradies.</p>
-    <div class="hero-features">
-        <div class="hero-feature"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>100% Offline</div>
-        <div class="hero-feature"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Weekly Updates</div>
-        <div class="hero-feature"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>PDF Reports</div>
-        <div class="hero-feature"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>15+ Calculators</div>
-        <div class="hero-feature"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>16+ Calculators</div>
-        <div class="hero-feature"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Project Checklists</div>
-        <div class="hero-feature"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Inventory & Materials</div>
-        <div class="hero-feature"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Team Permissions</div>
-        <div class="hero-feature"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Inventory & Materials</div>
-        <div class="hero-feature"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Team Permissions</div>
-        <div class="hero-feature"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Project-Linked Notes</div>
-    </div>
-    <div class="cta-row">
-        <a class="btn btn-primary" href="https://github.com/saadevelopmentsinc-cpu/scsk-releases/releases/download/Beta/SCSK-Android.apk">
+</header>
+
+<main>
+    <section class="hero">
+        <div class="wrap">
+            <div class="hero-grid">
+                <div class="hero-text">
+                    <div class="hero-badges">
+              <span class="badge badge-beta">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                Active Beta
+              </span>
+                        <span class="badge badge-android">
+                <svg viewBox="0 0 24 24"><path d="M6 18c0 .55.45 1 1 1h1v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h2v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h1c.55 0 1-.45 1-1V8H6v10z"/></svg>
+                Android Ready
+              </span>
+                        <span class="badge badge-android">
+                <svg viewBox="0 0 24 24"><path d="M20 18c1.1 0 1.99-.9 1.99-2L22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg>
+                Windows Ready
+              </span>
+                        <span class="badge badge-updates">
+                <svg viewBox="0 0 24 24"><path d="M21 10.12h-6.78l2.74-2.82c-2.73-2.7-7.15-2.8-9.88-.1-2.73 2.71-2.73 7.08 0 9.79s7.15 2.71 9.88 0C18.32 15.65 19 14.08 19 12.1h2c0 1.98-.88 4.55-2.64 6.29-3.51 3.48-9.21 3.48-12.72 0-3.5-3.47-3.53-9.11-.02-12.58s9.14-3.47 12.65 0L21 3v7.12z"/></svg>
+                Weekly Updates
+              </span>
+                    </div>
+                    <h1 class="headline">Your construction sidekick that <span class="headline-accent">actually works on site</span></h1>
+                    <p class="subhead">SCSK is the offline-first app built by a site foreman for construction supervisors, foremen, and project managers. Track projects, jobs, documents, photos, checklists, inventory, and team work across Android and Windows.</p>
+                    <p class="subhead" style="font-size: 14px; font-weight: 600; color: var(--accent);">Current beta v0.4.11. Built BY a tradie, FOR tradies.</p>
+                    <div class="hero-features">
+                        <div class="hero-feature"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>100% Offline</div>
+                        <div class="hero-feature"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Weekly Updates</div>
+                        <div class="hero-feature"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>PDF Reports</div>
+                        <div class="hero-feature"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>16+ Calculators</div>
+                        <div class="hero-feature"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Project Checklists</div>
+                        <div class="hero-feature"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Inventory & Materials</div>
+                        <div class="hero-feature"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Team Permissions</div>
+                        <div class="hero-feature"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Project-Linked Notes</div>
+                    </div>
+                    <div class="cta-row">
+                        <a class="btn btn-primary" href="https://github.com/saadevelopmentsinc-cpu/scsk-releases/releases/download/Beta/SCSK-Android.apk">
+                            <svg viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>
+                            Download Android APK
+                        </a>
+                        <a class="btn" href="https://github.com/saadevelopmentsinc-cpu/scsk-releases/releases/download/Beta/SCSK-Setup.exe">
+                            <svg viewBox="0 0 24 24"><path d="M20 18c1.1 0 1.99-.9 1.99-2L22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg>
+                            Download Windows
+                        </a>
+                        <a class="btn" href="#beta">
+                            <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                            Join the Free Beta
+                        </a>
+                        <a class="btn" href="#roadmap">
+                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l4.59-4.58L18 11l-6 6z"/></svg>
+                            See Development Roadmap
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="tablet-mockup">
+                        <div class="tablet-screen">
+                            <img src="Screenshot1.png" alt="SCSK Dashboard - Construction Site Management App">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="workflow-strip" aria-label="SCSK workflow">
+        <div class="wrap">
+            <div class="workflow-grid">
+                <div class="workflow-card">
+                    <div class="workflow-number">1</div>
+                    <strong>Set up the job</strong>
+                    <span>Create projects, add jobs, assign contacts, attach plans, and keep the site details in one place.</span>
+                </div>
+                <div class="workflow-card">
+                    <div class="workflow-number">2</div>
+                    <strong>Capture the work</strong>
+                    <span>Snap photos, annotate issues, track materials, run calculators, and keep notes while you are on site.</span>
+                </div>
+                <div class="workflow-card">
+                    <div class="workflow-number">3</div>
+                    <strong>Report and sync</strong>
+                    <span>Generate PDFs and keep Android and Windows moving together when you are signed into the same account.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Downloads Section -->
+    <section id="downloads" style="padding: 60px 0; background:rgba(0,0,0,0.2);">
+        <div class="wrap">
             <div class="section-header">
                 <div class="section-kicker"><svg viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>Downloads</div>
                 <h2 class="section-title">Get the Latest Beta</h2>
-                <p class="section-lead">Download the current Android APK or Windows installer from the Beta release.</p>
                 <p class="section-lead">Download the current v0.4.11 Android APK or Windows installer from the Beta release.</p>
             </div>
             <div class="platform-grid">
                 <div class="platform-card active">
-                    <div class="stat-item"><div class="stat-value">100%</div><div class="stat-label">Offline Capable</div></div>
-                    <div class="stat-item"><div class="stat-value">Weekly</div><div class="stat-label">Feature Updates</div></div>
-                    <div class="stat-item"><div class="stat-value">19</div><div class="stat-label">Trade Categories</div></div>
-                    <div class="stat-item"><div class="stat-value">15+</div><div class="stat-label">Trade Calculators</div></div>
-                    <div class="stat-item"><div class="stat-value">16+</div><div class="stat-label">Trade Calculators</div></div>
-                    <div class="stat-item"><div class="stat-value">$0</div><div class="stat-label">Data Sold</div></div>
+                    <div class="platform-icon"><svg viewBox="0 0 24 24"><path d="M6 18c0 .55.45 1 1 1h1v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h2v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h1c.55 0 1-.45 1-1V8H6v10z"/></svg></div>
+                    <span class="platform-status status-available">Android 6.0+</span>
+                    <h3>Android APK</h3>
+                    <p>Install the latest Android beta directly on phones, tablets, and foldables.</p>
+                    <a class="btn btn-primary" href="https://github.com/saadevelopmentsinc-cpu/scsk-releases/releases/download/Beta/SCSK-Android.apk">Download APK</a>
+                </div>
+                <div class="platform-card active">
+                    <div class="platform-icon"><svg viewBox="0 0 24 24"><path d="M20 18c1.1 0 1.99-.9 1.99-2L22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg></div>
+                    <span class="platform-status status-available">Windows 10/11</span>
+                    <h3>Windows Installer</h3>
+                    <p>Install the desktop beta for office workflows, larger screens, and document-heavy project work.</p>
+                    <a class="btn btn-primary" href="https://github.com/saadevelopmentsinc-cpu/scsk-releases/releases/download/Beta/SCSK-Setup.exe">Download Installer</a>
                 </div>
             </div>
-    </div>
-    <div class="features-grid">
-        <div class="feature-card"><div class="feature-image" data-img="Screenshot1.png" data-title="Smart Dashboard"><img src="Screenshot1.png" alt="SCSK Smart Dashboard"></div><div class="feature-content"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg></div><h3>Smart Dashboard</h3><p>Your command center. See project stats, pending jobs, weather, and quick actions at a glance. Customizable widgets show what matters to you.</p></div></div>
-        <div class="feature-card"><div class="feature-image" data-img="Screenshot2.png" data-title="Project Details"><img src="Screenshot2.png" alt="SCSK Project Details"></div><div class="feature-content"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg></div><h3>Project Management</h3><p>Complete project overview with jobs, photos, contacts, notes, files, and materials tracking. Everything organised in one place.</p></div></div>
-        <div class="feature-card"><div class="feature-image" data-img="Screenshot2.png" data-title="Project Details"><img src="Screenshot2.png" alt="SCSK Project Details"></div><div class="feature-content"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg></div><h3>Project Management</h3><p>Complete project overview with jobs, date ranges, photos, contacts, project-linked notes, files, and materials tracking. Everything organised in one place.</p></div></div>
-        <div class="feature-card"><div class="feature-image" data-img="Screenshot3.png" data-title="Projects Overview"><img src="Screenshot3.png" alt="SCSK Projects Overview"></div><div class="feature-content"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2z"/></svg></div><h3>Multi-Project View</h3><p>Manage unlimited projects. Filter by status, search instantly, see progress at a glance. Perfect for supervisors managing multiple sites.</p></div></div>
-        <div class="feature-card"><div class="feature-image" data-img="Screenshot4.png" data-title="Calendar - Day View"><img src="Screenshot4.png" alt="SCSK Calendar Day View"></div><div class="feature-content"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/></svg></div><h3>Multi-Day Calendar</h3><p>Day, week, and month views with multi-day job spanning like Google Calendar. Drag to reschedule. Color-coded by trade category.</p></div></div>
-        <div class="feature-card"><div class="feature-image" data-img="Screenshot5.png" data-title="Trade Calculators"><img src="Screenshot5.png" alt="SCSK Trade Calculators"></div><div class="feature-content"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg></div><h3>Trade Calculators</h3><p>15+ built-in calculators: tile, grout, paint, concrete, brick, waterproofing, electrical, pipe sizing, stairs, and more being added weekly.</p></div></div>
-        <div class="feature-card"><div class="feature-image" data-img="Screenshot5.png" data-title="Trade Calculators"><img src="Screenshot5.png" alt="SCSK Trade Calculators"></div><div class="feature-content"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg></div><h3>Trade Calculators</h3><p>16+ built-in calculators including tile adhesive, sand and cement bag counts, tile, grout, paint, concrete, brick, waterproofing, electrical, pipe sizing, stairs, and more.</p></div></div>
-        <div class="feature-card"><div class="feature-image" data-img="Screenshot6.png" data-title="Photo Documentation"><img src="Screenshot6.png" alt="SCSK Photo Documentation"></div><div class="feature-content"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg></div><h3>Photo Documentation</h3><p>Capture, annotate with arrows/text/drawings, and organise photos by job. Export professional photo reports as PDF. Works 100% offline.</p></div></div>
-        <div class="feature-card"><div class="feature-image" data-img="Screenshot7.png" data-title="Materials Tracking"><img src="Screenshot7.png" alt="SCSK Materials Tracking"></div><div class="feature-content"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1 0-2 .9-2 2v3.01c0 .72.43 1.34 1 1.69V20c0 1.1 1.1 2 2 2h14c.9 0 2-.9 2-2V8.7c.57-.35 1-.97 1-1.69V4c0-1.1-1-2-2-2zm-5 12H9v-2h6v2zm5-7H4V4h16v3z"/></svg></div><h3>Materials & Inventory</h3><p>Track materials, stock levels, suppliers, and job allocations. Colour-coded stock indicators help spot low, critical, and out-of-stock items quickly.</p></div></div>
-        <div class="feature-card"><div class="feature-image" data-img="Screenshot7.png" data-title="Materials Tracking"><img src="Screenshot7.png" alt="SCSK Materials Tracking"></div><div class="feature-content"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1 0-2 .9-2 2v3.01c0 .72.43 1.34 1 1.69V20c0 1.1 1.1 2 2 2h14c.9 0 2-.9 2-2V8.7c.57-.35 1-.97 1-1.69V4c0-1.1-1-2-2-2zm-5 12H9v-2h6v2zm5-7H4V4h16v3z"/></svg></div><h3>Materials & Inventory</h3><p>Track warehouse stock, suppliers, and grouped job allocations. Select inventory materials inside projects, adjust quantities inline, and spot low, critical, and out-of-stock items quickly.</p></div></div>
-        <div class="feature-card"><div class="feature-image" data-img="Screenshot2.png" data-title="Project Checklists"><img src="Screenshot2.png" alt="SCSK Project Checklists"></div><div class="feature-content"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-8 14H7v-2h4v2zm0-4H7v-2h4v2zm0-4H7V7h4v2zm6 8h-4v-2h4v2zm0-4h-4v-2h4v2zm0-4h-4V7h4v2z"/></svg></div><h3>Project Checklists</h3><p>Use built-in residential, commercial, and renovation templates or create custom checklists. Track progress, notes, custom items, and not-applicable items per project.</p></div></div>
-        <div class="feature-card"><div class="feature-image" data-img="Screenshot3.png" data-title="Team Permissions"><img src="Screenshot3.png" alt="SCSK Team Permissions"></div><div class="feature-content"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zM8 11c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5C15 14.17 10.33 13 8 13zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></div><h3>Team Management</h3><p>Invite team members and manage owner, admin, editor, and viewer permissions. Suspend, reactivate, or remove users as your crew changes.</p></div></div>
-        <div class="feature-card"><div class="feature-image" data-img="Screenshot1.png" data-title="Cross-Device Sync"><img src="Screenshot1.png" alt="SCSK Cross-Device Sync"></div><div class="feature-content"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M21 10.12h-6.78l2.74-2.82c-2.73-2.7-7.15-2.8-9.88-.1-2.73 2.71-2.73 7.08 0 9.79s7.15 2.71 9.88 0C18.32 15.65 19 14.08 19 12.1h2c0 1.98-.88 4.55-2.64 6.29-3.51 3.48-9.21 3.48-12.72 0-3.5-3.47-3.53-9.11-.02-12.58s9.14-3.47 12.65 0L21 3v7.12z"/></svg></div><h3>Cross-Device Sync</h3><p>Keep projects, jobs, photos, documents, plans, contacts, materials, and notes moving between Android and Windows when signed into the same account.</p></div></div>
-        <div class="feature-card"><div class="feature-image" data-img="Screenshot3.png" data-title="Team Permissions"><img src="Screenshot3.png" alt="SCSK Team Permissions"></div><div class="feature-content"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zM8 11c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5C15 14.17 10.33 13 8 13zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></div><h3>Team Management</h3><p>Invite team members, send email invites, and manage owner, admin, read/write, and read-only access. Pending invites are checked on launch for existing accounts.</p></div></div>
-        <div class="feature-card"><div class="feature-image" data-img="Screenshot1.png" data-title="Cross-Device Sync"><img src="Screenshot1.png" alt="SCSK Cross-Device Sync"></div><div class="feature-content"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M21 10.12h-6.78l2.74-2.82c-2.73-2.7-7.15-2.8-9.88-.1-2.73 2.71-2.73 7.08 0 9.79s7.15 2.71 9.88 0C18.32 15.65 19 14.08 19 12.1h2c0 1.98-.88 4.55-2.64 6.29-3.51 3.48-9.21 3.48-12.72 0-3.5-3.47-3.53-9.11-.02-12.58s9.14-3.47 12.65 0L21 3v7.12z"/></svg></div><h3>Cross-Device Sync</h3><p>Automatic launch sync keeps projects, notes, documents, plans, contacts, materials, and queued app data moving between Android and Windows when signed into the same account.</p></div></div>
-    </div>
-    </div>
-    </section>
-    <p class="section-lead">No more separate apps or mental math. Professional calculators for every trade, with more added regularly.</p>
-    </div>
-    <div class="calc-grid">
-        <div class="calc-card available"><div class="calc-icon">🔲</div><h4>Tile Coverage</h4><p>m² with waste %</p><div class="calc-status live">✓ LIVE</div></div>
-        <div class="calc-card available"><div class="calc-icon">🧱</div><h4>Brick Calculator</h4><p>Bricks per wall</p><div class="calc-status live">✓ LIVE</div></div>
-        <div class="calc-card available"><div class="calc-icon">🔲</div><h4>Tile Coverage</h4><p>m² with waste %</p><div class="calc-status live">✓ LIVE</div></div>
-        <div class="calc-card available"><div class="calc-icon">TA</div><h4>Tile Adhesive</h4><p>6, 8, 10 & 12mm notch</p><div class="calc-status live">✓ LIVE</div></div>
-        <div class="calc-card available"><div class="calc-icon">🧱</div><h4>Brick Calculator</h4><p>Bricks per wall</p><div class="calc-status live">✓ LIVE</div></div>
-        <div class="calc-card available"><div class="calc-icon">🎨</div><h4>Paint Calculator</h4><p>Litres per room</p><div class="calc-status live">✓ LIVE</div></div>
-        <div class="calc-card available"><div class="calc-icon">🪨</div><h4>Concrete Volume</h4><p>m³ for slabs/footings</p><div class="calc-status live">✓ LIVE</div></div>
-        <div class="calc-card available"><div class="calc-icon">💧</div><h4>Waterproofing</h4><p>Membrane coverage</p><div class="calc-status live">✓ LIVE</div></div>
-        <div class="calc-card available"><div class="calc-icon">🔌</div><h4>Electrical Load</h4><p>Amps & circuit sizing</p><div class="calc-status live">✓ LIVE</div></div>
-        <div class="calc-card available"><div class="calc-icon">🚿</div><h4>Grout Calculator</h4><p>kg per tile area</p><div class="calc-status live">✓ LIVE</div></div>
-        <div class="calc-card available"><div class="calc-icon">🪜</div><h4>Stair Calculator</h4><p>Rise, run, headroom</p><div class="calc-status live">✓ LIVE</div></div>
-        <div class="calc-card available"><div class="calc-icon">🧪</div><h4>Sand & Cement</h4><p>Mix ratios</p><div class="calc-status live">✓ LIVE</div></div>
-        <div class="calc-card available"><div class="calc-icon">🧪</div><h4>Sand & Cement</h4><p>Mix ratios & 20kg bags</p><div class="calc-status live">✓ LIVE</div></div>
-        <div class="calc-card available"><div class="calc-icon">🔧</div><h4>Pipe Sizing</h4><p>Flow & diameter</p><div class="calc-status live">✓ LIVE</div></div>
-        <div class="calc-card available"><div class="calc-icon">📏</div><h4>Unit Converter</h4><p>Imperial ↔ Metric</p><div class="calc-status live">✓ LIVE</div></div>
-        <div class="calc-card coming"><div class="calc-icon">🪵</div><h4>Timber/Lumber</h4><p>Board feet & spans</p><div class="calc-status soon">COMING</div></div>
-        <div class="roadmap-feature done"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Contact management</div>
-        <div class="roadmap-feature done"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>100% offline operation</div>
-        <div class="roadmap-feature done"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Multi-day calendar</div>
-        <div class="roadmap-feature done"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>15+ trade calculators</div>
-        <div class="roadmap-feature done"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>16+ trade calculators</div>
-    </div>
-    </div>
-    </div>
-    <div class="roadmap-card">
-        <div class="roadmap-header">
-            <span class="roadmap-label">PHASE 2 — COMPLETE</span>
-            <span class="roadmap-eta">Current beta v0.4.5</span>
-            <span class="roadmap-eta">Current beta v0.4.11</span>
         </div>
-        <h3>🚀 Productivity & Sync</h3>
-        <p>Enhanced productivity features, Windows support, and cross-device sync foundations for real project work.</p>
-        <span class="roadmap-eta">2026</span>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats">
+        <div class="wrap">
+            <div class="stats-grid">
+                <div class="stat-item"><div class="stat-value">100%</div><div class="stat-label">Offline Capable</div></div>
+                <div class="stat-item"><div class="stat-value">Weekly</div><div class="stat-label">Feature Updates</div></div>
+                <div class="stat-item"><div class="stat-value">19</div><div class="stat-label">Trade Categories</div></div>
+                <div class="stat-item"><div class="stat-value">16+</div><div class="stat-label">Trade Calculators</div></div>
+                <div class="stat-item"><div class="stat-value">$0</div><div class="stat-label">Data Sold</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Weekly Updates Banner -->
+    <section style="padding: 40px 0;">
+        <div class="wrap">
+            <div class="updates-banner">
+                <div class="updates-icon">
+                    <svg viewBox="0 0 24 24"><path d="M21 10.12h-6.78l2.74-2.82c-2.73-2.7-7.15-2.8-9.88-.1-2.73 2.71-2.73 7.08 0 9.79s7.15 2.71 9.88 0C18.32 15.65 19 14.08 19 12.1h2c0 1.98-.88 4.55-2.64 6.29-3.51 3.48-9.21 3.48-12.72 0-3.5-3.47-3.53-9.11-.02-12.58s9.14-3.47 12.65 0L21 3v7.12z"/></svg>
+                </div>
+                <div class="updates-content">
+                    <h3>🔥 New Features Every Week</h3>
+                    <p>SCSK is actively developed with new features, improvements, and bug fixes released weekly. Your feedback directly shapes what gets built next. Join the beta to influence the roadmap.</p>
+                </div>
+                <a href="#updates" class="updates-link">View Recent Updates →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features">
+        <div class="wrap">
+            <div class="section-header">
+                <div class="section-kicker"><svg viewBox="0 0 24 24"><path d="M22 9.24l-7.19-.62L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.63-7.03L22 9.24z"/></svg>Core Features</div>
+                <h2 class="section-title">Built for Real Job Sites</h2>
+                <p class="section-lead">Practical tools designed for day-to-day construction site management. No corporate bloat, just features that work.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card"><div class="feature-image" data-img="Screenshot1.png" data-title="Smart Dashboard"><img src="Screenshot1.png" alt="SCSK Smart Dashboard"></div><div class="feature-content"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg></div><h3>Smart Dashboard</h3><p>Your command center. See project stats, pending jobs, weather, and quick actions at a glance. Customizable widgets show what matters to you.</p></div></div>
+                <div class="feature-card"><div class="feature-image" data-img="Screenshot2.png" data-title="Project Details"><img src="Screenshot2.png" alt="SCSK Project Details"></div><div class="feature-content"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg></div><h3>Project Management</h3><p>Complete project overview with jobs, date ranges, photos, contacts, project-linked notes, files, and materials tracking. Everything organised in one place.</p></div></div>
+                <div class="feature-card"><div class="feature-image" data-img="Screenshot3.png" data-title="Projects Overview"><img src="Screenshot3.png" alt="SCSK Projects Overview"></div><div class="feature-content"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2z"/></svg></div><h3>Multi-Project View</h3><p>Manage unlimited projects. Filter by status, search instantly, see progress at a glance. Perfect for supervisors managing multiple sites.</p></div></div>
+                <div class="feature-card"><div class="feature-image" data-img="Screenshot4.png" data-title="Calendar - Day View"><img src="Screenshot4.png" alt="SCSK Calendar Day View"></div><div class="feature-content"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/></svg></div><h3>Multi-Day Calendar</h3><p>Day, week, and month views with multi-day job spanning like Google Calendar. Drag to reschedule. Color-coded by trade category.</p></div></div>
+                <div class="feature-card"><div class="feature-image" data-img="Screenshot5.png" data-title="Trade Calculators"><img src="Screenshot5.png" alt="SCSK Trade Calculators"></div><div class="feature-content"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg></div><h3>Trade Calculators</h3><p>16+ built-in calculators including tile adhesive, sand and cement bag counts, tile, grout, paint, concrete, brick, waterproofing, electrical, pipe sizing, stairs, and more.</p></div></div>
+                <div class="feature-card"><div class="feature-image" data-img="Screenshot6.png" data-title="Photo Documentation"><img src="Screenshot6.png" alt="SCSK Photo Documentation"></div><div class="feature-content"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg></div><h3>Photo Documentation</h3><p>Capture, annotate with arrows/text/drawings, and organise photos by job. Export professional photo reports as PDF. Works 100% offline.</p></div></div>
+                <div class="feature-card"><div class="feature-image" data-img="Screenshot7.png" data-title="Materials Tracking"><img src="Screenshot7.png" alt="SCSK Materials Tracking"></div><div class="feature-content"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1 0-2 .9-2 2v3.01c0 .72.43 1.34 1 1.69V20c0 1.1 1.1 2 2 2h14c.9 0 2-.9 2-2V8.7c.57-.35 1-.97 1-1.69V4c0-1.1-1-2-2-2zm-5 12H9v-2h6v2zm5-7H4V4h16v3z"/></svg></div><h3>Materials & Inventory</h3><p>Track warehouse stock, suppliers, and grouped job allocations. Select inventory materials inside projects, adjust quantities inline, and spot low, critical, and out-of-stock items quickly.</p></div></div>
+                <div class="feature-card"><div class="feature-image" data-img="Screenshot2.png" data-title="Project Checklists"><img src="Screenshot2.png" alt="SCSK Project Checklists"></div><div class="feature-content"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-8 14H7v-2h4v2zm0-4H7v-2h4v2zm0-4H7V7h4v2zm6 8h-4v-2h4v2zm0-4h-4v-2h4v2zm0-4h-4V7h4v2z"/></svg></div><h3>Project Checklists</h3><p>Use built-in residential, commercial, and renovation templates or create custom checklists. Track progress, notes, custom items, and not-applicable items per project.</p></div></div>
+                <div class="feature-card"><div class="feature-image" data-img="Screenshot3.png" data-title="Team Permissions"><img src="Screenshot3.png" alt="SCSK Team Permissions"></div><div class="feature-content"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zM8 11c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5C15 14.17 10.33 13 8 13zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></div><h3>Team Management</h3><p>Invite team members, send email invites, and manage owner, admin, read/write, and read-only access. Pending invites are checked on launch for existing accounts.</p></div></div>
+                <div class="feature-card"><div class="feature-image" data-img="Screenshot1.png" data-title="Cross-Device Sync"><img src="Screenshot1.png" alt="SCSK Cross-Device Sync"></div><div class="feature-content"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M21 10.12h-6.78l2.74-2.82c-2.73-2.7-7.15-2.8-9.88-.1-2.73 2.71-2.73 7.08 0 9.79s7.15 2.71 9.88 0C18.32 15.65 19 14.08 19 12.1h2c0 1.98-.88 4.55-2.64 6.29-3.51 3.48-9.21 3.48-12.72 0-3.5-3.47-3.53-9.11-.02-12.58s9.14-3.47 12.65 0L21 3v7.12z"/></svg></div><h3>Cross-Device Sync</h3><p>Automatic launch sync keeps projects, notes, documents, plans, contacts, materials, and queued app data moving between Android and Windows when signed into the same account.</p></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trade Calculators Section -->
+    <section id="calculators" style="background:rgba(0,0,0,0.2);">
+        <div class="wrap">
+            <div class="section-header">
+                <div class="section-kicker"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-4 14h-2v-4H9V7h2v4h2V7h2v10z"/></svg>Trade Tools</div>
+                <h2 class="section-title">Built-In Trade Calculators</h2>
+                <p class="section-lead">No more separate apps or mental math. Professional calculators for every trade, with more added regularly.</p>
+            </div>
+            <div class="calc-grid">
+                <div class="calc-card available"><div class="calc-icon">🔲</div><h4>Tile Coverage</h4><p>m² with waste %</p><div class="calc-status live">✓ LIVE</div></div>
+                <div class="calc-card available"><div class="calc-icon">TA</div><h4>Tile Adhesive</h4><p>6, 8, 10 & 12mm notch</p><div class="calc-status live">✓ LIVE</div></div>
+                <div class="calc-card available"><div class="calc-icon">🧱</div><h4>Brick Calculator</h4><p>Bricks per wall</p><div class="calc-status live">✓ LIVE</div></div>
+                <div class="calc-card available"><div class="calc-icon">🎨</div><h4>Paint Calculator</h4><p>Litres per room</p><div class="calc-status live">✓ LIVE</div></div>
+                <div class="calc-card available"><div class="calc-icon">🪨</div><h4>Concrete Volume</h4><p>m³ for slabs/footings</p><div class="calc-status live">✓ LIVE</div></div>
+                <div class="calc-card available"><div class="calc-icon">💧</div><h4>Waterproofing</h4><p>Membrane coverage</p><div class="calc-status live">✓ LIVE</div></div>
+                <div class="calc-card available"><div class="calc-icon">🔌</div><h4>Electrical Load</h4><p>Amps & circuit sizing</p><div class="calc-status live">✓ LIVE</div></div>
+                <div class="calc-card available"><div class="calc-icon">🚿</div><h4>Grout Calculator</h4><p>kg per tile area</p><div class="calc-status live">✓ LIVE</div></div>
+                <div class="calc-card available"><div class="calc-icon">🪜</div><h4>Stair Calculator</h4><p>Rise, run, headroom</p><div class="calc-status live">✓ LIVE</div></div>
+                <div class="calc-card available"><div class="calc-icon">🧪</div><h4>Sand & Cement</h4><p>Mix ratios & 20kg bags</p><div class="calc-status live">✓ LIVE</div></div>
+                <div class="calc-card available"><div class="calc-icon">🔧</div><h4>Pipe Sizing</h4><p>Flow & diameter</p><div class="calc-status live">✓ LIVE</div></div>
+                <div class="calc-card available"><div class="calc-icon">📏</div><h4>Unit Converter</h4><p>Imperial ↔ Metric</p><div class="calc-status live">✓ LIVE</div></div>
+                <div class="calc-card coming"><div class="calc-icon">🪵</div><h4>Timber/Lumber</h4><p>Board feet & spans</p><div class="calc-status soon">COMING</div></div>
+                <div class="calc-card coming"><div class="calc-icon">🏗️</div><h4>Rebar Calculator</h4><p>Steel quantities</p><div class="calc-status soon">COMING</div></div>
+                <div class="calc-card coming"><div class="calc-icon">❄️</div><h4>HVAC Sizing</h4><p>BTU requirements</p><div class="calc-status soon">COMING</div></div>
+                <div class="calc-card coming"><div class="calc-icon">🌡️</div><h4>Insulation</h4><p>R-value coverage</p><div class="calc-status soon">COMING</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coming Soon Section -->
+    <section id="coming-soon">
+        <div class="wrap">
+            <div class="section-header">
+                <div class="section-kicker"><svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm4.2 14.2L11 13V7h1.5v5.2l4.5 2.7-.8 1.3z"/></svg>Coming Soon</div>
+                <h2 class="section-title">Features in Active Development</h2>
+                <p class="section-lead">These features are being built right now based on beta user feedback. Join the beta to influence priorities.</p>
+            </div>
+            <div class="coming-grid">
+                <div class="coming-card">
+                    <span class="coming-badge">2026</span>
+                    <h3><span>🔗</span> Procore Integration</h3>
+                    <p>Two-way sync with Procore. Pull projects, push photos and reports. Work in SCSK, data flows to Procore automatically.</p>
+                    <span class="coming-eta">🔨 In development</span>
+                </div>
+                <div class="coming-card">
+                    <span class="coming-badge">2026</span>
+                    <h3><span>📦</span> Aconex Integration</h3>
+                    <p>Connect document registers, drawings, and project files so site documents can flow between SCSK and Aconex.</p>
+                    <span class="coming-eta">📋 Planned</span>
+                </div>
+                <div class="coming-card">
+                    <span class="coming-badge">2026</span>
+                    <h3><span>🍎</span> iOS & iPadOS</h3>
+                    <p>Apple device support for site teams using iPhone and iPad, following the Android and Windows beta work.</p>
+                    <span class="coming-eta">📋 Beta pipeline in progress</span>
+                </div>
+                <div class="coming-card">
+                    <span class="coming-badge">2026</span>
+                    <h3><span>📋</span> Advanced Checklists</h3>
+                    <p>Template sharing, conditional checklist items, and richer approval flows for project quality and handover work.</p>
+                    <span class="coming-eta">📋 Planned</span>
+                </div>
+                <div class="coming-card">
+                    <span class="coming-badge">2026</span>
+                    <h3><span>📊</span> Advanced Reports</h3>
+                    <p>Custom report templates with your branding, richer exports, and faster reporting for clients and internal teams.</p>
+                    <span class="coming-eta">📋 Planned</span>
+                </div>
+                <div class="coming-card">
+                    <span class="coming-badge">Future</span>
+                    <h3><span>🤖</span> AI & Automation</h3>
+                    <p>Smart scheduling suggestions, faster job creation, and photo-assisted workflows once the core field tools are stable.</p>
+                    <span class="coming-eta">💡 Research</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platforms Section -->
+    <section id="platforms" style="background:rgba(0,0,0,0.2);">
+        <div class="wrap">
+            <div class="section-header">
+                <div class="section-kicker"><svg viewBox="0 0 24 24"><path d="M4 6h18V4H4c-1.1 0-2 .9-2 2v11H0v3h14v-3H4V6z"/></svg>Platforms</div>
+                <h2 class="section-title">Use SCSK Wherever You Work</h2>
+                <p class="section-lead">Android and Windows are active in beta now, with iOS and iPadOS next in the pipeline.</p>
+            </div>
+            <div class="platform-grid">
+                <div class="platform-card active">
+                    <div class="platform-icon"><svg viewBox="0 0 24 24"><path d="M6 18c0 .55.45 1 1 1h1v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h2v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h1c.55 0 1-.45 1-1V8H6v10z"/></svg></div>
+                    <span class="platform-status status-available">Available Now</span>
+                    <h3>Android</h3>
+                    <p>Optimised for tablets, phones & foldables. Android 6.0+. Weekly updates via Google Play beta.</p>
+                </div>
+                <div class="platform-card active">
+                    <div class="platform-icon"><svg viewBox="0 0 24 24"><path d="M20 18c1.1 0 1.99-.9 1.99-2L22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg></div>
+                    <span class="platform-status status-available">Available Now</span>
+                    <h3>Windows</h3>
+                    <p>Full desktop experience for office work and site containers. Large screen optimised with bulk project and document workflows.</p>
+                </div>
+                <div class="platform-card">
+                    <div class="platform-icon"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg></div>
+                    <span class="platform-status status-planned">2026</span>
+                    <h3>iOS & iPadOS</h3>
+                    <p>Apple device support is in progress. iPhone and iPad are next after the Android and Windows beta stabilisation work.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Development Roadmap Section -->
+    <section id="roadmap">
+        <div class="wrap">
+            <div class="section-header">
+                <div class="section-kicker"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l4.59-4.58L18 11l-6 6z"/></svg>Development Roadmap</div>
+                <h2 class="section-title">Where We're Headed</h2>
+                <p class="section-lead">Transparent, phased development driven by real user feedback. Your input shapes what gets built next.</p>
+            </div>
+
+            <div class="roadmap-timeline">
+                <!-- Phase 1 - Complete -->
+                <div class="roadmap-phase complete">
+                    <div class="roadmap-marker">✓</div>
+                    <div class="roadmap-card">
+                        <div class="roadmap-header">
+                            <span class="roadmap-label">PHASE 1 — COMPLETE</span>
+                            <span class="roadmap-eta">Launched December 2024</span>
+                        </div>
+                        <h3>🎉 MVP Foundation</h3>
+                        <p>Core site companion with offline-first architecture. Stable foundation for everything else.</p>
+                        <div class="roadmap-features">
+                            <div class="roadmap-feature done"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Project & job management</div>
+                            <div class="roadmap-feature done"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Photo documentation</div>
+                            <div class="roadmap-feature done"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>19 trade categories</div>
+                            <div class="roadmap-feature done"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>PDF report generation</div>
+                            <div class="roadmap-feature done"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Contact management</div>
+                            <div class="roadmap-feature done"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>100% offline operation</div>
+                            <div class="roadmap-feature done"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Multi-day calendar</div>
+                            <div class="roadmap-feature done"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>16+ trade calculators</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phase 2 - Complete -->
+                <div class="roadmap-phase complete">
+                    <div class="roadmap-marker">✓</div>
+                    <div class="roadmap-card">
+                        <div class="roadmap-header">
+                            <span class="roadmap-label">PHASE 2 — COMPLETE</span>
+                            <span class="roadmap-eta">Current beta v0.4.11</span>
+                        </div>
+                        <h3>🚀 Productivity & Sync</h3>
+                        <p>Enhanced productivity features, Windows support, and cross-device sync foundations for real project work.</p>
+                        <div class="roadmap-features">
+                            <div class="roadmap-feature done"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Photo annotations (draw, text, arrows)</div>
+                            <div class="roadmap-feature done"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Materials tracking per job</div>
+                            <div class="roadmap-feature done"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>PDF viewer with annotations</div>
+                            <div class="roadmap-feature done"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Project files & documents</div>
+                            <div class="roadmap-feature done"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Android to Windows sync improvements</div>
+                            <div class="roadmap-feature done"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Windows desktop app</div>
+                            <div class="roadmap-feature done"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Additional calculators</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phase 3 -->
+                <div class="roadmap-phase upcoming">
+                    <div class="roadmap-marker">3</div>
+                    <div class="roadmap-card">
+                        <div class="roadmap-header">
+                            <span class="roadmap-label">PHASE 3 — ACTIVE BETA</span>
+                            <span class="roadmap-eta">2026</span>
+                        </div>
+                        <h3>👥 Teams & Field Operations</h3>
+                        <p>Team permissions, checklists, inventory allocations, project-linked notes, and field workflows are the current focus while sync keeps improving.</p>
+                        <div class="roadmap-features">
+                            <div class="roadmap-feature done"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Team/company accounts</div>
+                            <div class="roadmap-feature done"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Role-based permissions</div>
+                            <div class="roadmap-feature done"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Project checklist templates</div>
+                            <div class="roadmap-feature done"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Inventory stock tracking</div>
+                            <div class="roadmap-feature done"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Documents, plans & notes sync hardening</div>
+                            <div class="roadmap-feature done"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Grouped inventory allocations</div>
+                            <div class="roadmap-feature planned"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></svg>Subcontractor portal</div>
+                            <div class="roadmap-feature planned"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></svg>Custom company branding</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phase 4 -->
+                <div class="roadmap-phase upcoming">
+                    <div class="roadmap-marker">4</div>
+                    <div class="roadmap-card">
+                        <div class="roadmap-header">
+                            <span class="roadmap-label">PHASE 4 — FUTURE</span>
+                            <span class="roadmap-eta">2026</span>
+                        </div>
+                        <h3>🔗 Integrations Hub</h3>
+                        <p>Connect SCSK with the tools you already use. Two-way sync with industry platforms.</p>
+                        <div class="roadmap-features">
+                            <div class="roadmap-feature planned"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></svg>Aconex integration</div>
+                            <div class="roadmap-feature planned"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></svg>Xero/MYOB accounting</div>
+                            <div class="roadmap-feature planned"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></svg>Google Workspace sync</div>
+                            <div class="roadmap-feature planned"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></svg>Microsoft 365 sync</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phase 5 -->
+                <div class="roadmap-phase upcoming">
+                    <div class="roadmap-marker">5</div>
+                    <div class="roadmap-card">
+                        <div class="roadmap-header">
+                            <span class="roadmap-label">PHASE 5 — VISION</span>
+                            <span class="roadmap-eta">2026</span>
+                        </div>
+                        <h3>🤖 AI & Automation</h3>
+                        <p>Smart features that learn from your workflows and help you work faster.</p>
+                        <div class="roadmap-features">
+                            <div class="roadmap-feature planned"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></svg>AI photo analysis (defect detection)</div>
+                            <div class="roadmap-feature planned"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></svg>Voice-to-job creation</div>
+                            <div class="roadmap-feature planned"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></svg>Smart scheduling suggestions</div>
+                            <div class="roadmap-feature planned"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></svg>Predictive analytics</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recent Updates Section -->
+    <section id="updates" style="background:rgba(0,0,0,0.2);">
+        <div class="wrap">
+            <div class="section-header">
+                <div class="section-kicker"><svg viewBox="0 0 24 24"><path d="M21 10.12h-6.78l2.74-2.82c-2.73-2.7-7.15-2.8-9.88-.1-2.73 2.71-2.73 7.08 0 9.79s7.15 2.71 9.88 0C18.32 15.65 19 14.08 19 12.1h2c0 1.98-.88 4.55-2.64 6.29-3.51 3.48-9.21 3.48-12.72 0-3.5-3.47-3.53-9.11-.02-12.58s9.14-3.47 12.65 0L21 3v7.12z"/></svg>Recent Updates</div>
+                <h2 class="section-title">Weekly Development Progress</h2>
+                <p class="section-lead">New features, improvements, and bug fixes released every week. Here's what's new.</p>
+            </div>
+            <div class="updates-list">
+                <div class="update-item">
+                    <div>
+                        <div class="update-date">Jun 10, 2026</div>
+                        <span class="update-version">v0.4.11</span>
+                    </div>
+                    <div class="update-content">
+                        <h4>Faster Sync, Project Notes & Inventory Controls</h4>
+                        <p>Added project-linked notes, automatic launch sync, faster queued data sync, inventory stock summaries, grouped job allocations, warehouse stock, inventory-backed project materials, inline material quantity controls, job date ranges, sand and cement bag counts, and the new tile adhesive calculator. Team invite email delivery and read/write delete permissions were also tightened up.</p>
+                        <div class="update-tags">
+                            <span class="update-tag">Sync</span>
+                            <span class="update-tag">Notes</span>
+                            <span class="update-tag">Inventory</span>
+                            <span class="update-tag">Calculators</span>
+                            <span class="update-tag">Teams</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="update-item">
+                    <div>
+                        <div class="update-date">Jun 2026</div>
+                        <span class="update-version">v0.3.14</span>
+                    </div>
+                    <div class="update-content">
+                        <h4>Project Checklists & Inventory</h4>
+                        <p>Built-in residential, commercial, and renovation checklist templates, custom templates, per-project progress tracking, inventory stock levels, supplier linking, and job material allocation.</p>
+                        <div class="update-tags">
+                            <span class="update-tag">Checklists</span>
+                            <span class="update-tag">Inventory</span>
+                            <span class="update-tag">Materials</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="update-item">
+                    <div>
+                        <div class="update-date">May 2026</div>
+                        <span class="update-version">v0.3.13</span>
+                    </div>
+                    <div class="update-content">
+                        <h4>Team Management & Permissions</h4>
+                        <p>Role-based access for owners, admins, editors, and viewers. Invite, suspend, reactivate, or remove members with read/write controls.</p>
+                        <div class="update-tags">
+                            <span class="update-tag">Teams</span>
+                            <span class="update-tag">Permissions</span>
+                            <span class="update-tag">Accounts</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="update-item">
+                    <div>
+                        <div class="update-date">May 2026</div>
+                        <span class="update-version">v0.3.12</span>
+                    </div>
+                    <div class="update-content">
+                        <h4>Windows Performance & Photo Sync</h4>
+                        <p>Reduced memory usage during sync, added download timeouts, improved photo sync stability, and restored direct download fallback on Windows.</p>
+                        <div class="update-tags">
+                            <span class="update-tag">Windows</span>
+                            <span class="update-tag">Performance</span>
+                            <span class="update-tag">Photos</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="update-item">
+                    <div>
+                        <div class="update-date">2026</div>
+                        <span class="update-version">Beta</span>
+                    </div>
+                    <div class="update-content">
+                        <h4>Android, Windows & iOS Progress</h4>
+                        <p>Android beta continues through Google Play, Windows builds are active for desktop workflows, and the iOS submission pipeline has been established.</p>
+                        <div class="update-tags">
+                            <span class="update-tag">Beta</span>
+                            <span class="update-tag">Android</span>
+                            <span class="update-tag">Windows</span>
+                            <span class="update-tag">iOS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Integrations Section -->
+    <section id="integrations">
+        <div class="wrap">
+            <div class="section-header">
+                <div class="section-kicker"><svg viewBox="0 0 24 24"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg>Integrations</div>
+                <h2 class="section-title">Connect Your Tools</h2>
+                <p class="section-lead">SCSK works with the platforms you already use. More integrations coming based on user requests.</p>
+            </div>
+            <div class="integration-grid">
+                <div class="integration-card coming">
+                    <div class="integration-icon">🏗️</div>
+                    <h4>Procore</h4>
+                    <p>Sync projects, photos & reports</p>
+                    <div class="integration-status soon">2026</div>
+                </div>
+                <div class="integration-card coming">
+                    <div class="integration-icon">📋</div>
+                    <h4>Aconex</h4>
+                    <p>Document management sync</p>
+                    <div class="integration-status planned">2026</div>
+                </div>
+                <div class="integration-card coming">
+                    <div class="integration-icon">💰</div>
+                    <h4>Xero</h4>
+                    <p>Accounting & invoicing</p>
+                    <div class="integration-status planned">2026</div>
+                </div>
+                <div class="integration-card coming">
+                    <div class="integration-icon">📊</div>
+                    <h4>MYOB</h4>
+                    <p>Accounting integration</p>
+                    <div class="integration-status planned">2026</div>
+                </div>
+                <div class="integration-card coming">
+                    <div class="integration-icon">📁</div>
+                    <h4>Google Drive</h4>
+                    <p>File backup & sync</p>
+                    <div class="integration-status planned">2026</div>
+                </div>
+                <div class="integration-card coming">
+                    <div class="integration-icon">☁️</div>
+                    <h4>Dropbox</h4>
+                    <p>Cloud storage backup</p>
+                    <div class="integration-status planned">2026</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" style="background:rgba(0,0,0,0.2);">
+        <div class="wrap">
+            <div class="section-header">
+                <div class="section-kicker"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg>FAQ</div>
+                <h2 class="section-title">Common Questions</h2>
+                <p class="section-lead">Everything you need to know about SCSK.</p>
+            </div>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h3>How does offline mode work?</h3>
+                    <p>SCSK stores all data locally first. Everything works without internet — create jobs, take photos, add notes. When you're back online, changes sync automatically in the background.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>How often are updates released?</h3>
+                    <p>We release new features and improvements every week. Bug fixes come even faster. Beta users get updates via Google Play as soon as they're ready.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Is my data secure?</h3>
+                    <p>Yes. Data is encrypted on your device and during sync. We use Firebase (Google infrastructure) with enterprise-grade security. We never sell your data.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>What's included in the beta?</h3>
+                    <p>Full access to project and job management, photos and annotations, documents and plans, checklists, inventory, contacts, team permissions, PDF reports, and trade calculators.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Will it work on my device?</h3>
+                    <p>Android 6.0+ is supported for phones, tablets, and foldables. Windows 10 and Windows 11 are active in beta. iOS and iPadOS are in progress.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>How much will it cost?</h3>
+                    <p>Beta is free. We're finalising pricing based on feedback. Beta users will get special founding member pricing when we launch paid tiers.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Can I request features?</h3>
+                    <p>Absolutely! Email <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d4b5b0b9bdba94a7b7f9a7bffab7bbb9">[email&#160;protected]</a> or use the in-app feedback. Beta user requests directly influence our weekly development priorities.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Does sync work across devices?</h3>
+                    <p>Yes. Sign in with the same account to sync projects, jobs, photos, documents, plans, contacts, materials, notes, and checklist data across supported devices. Sync reliability is still being hardened during beta.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Can my team use it?</h3>
+                    <p>Yes. Team management is available with owner, admin, editor, and viewer roles, plus member invite, suspend, reactivate, remove, and read/write permission controls.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Who's building this?</h3>
+                    <p>SCSK is built by a solo developer who's also a working site foreman. Real construction experience, real problems, practical solutions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support Section -->
+    <section class="support-section">
+        <div class="wrap">
+            <div class="support-content">
+                <div class="coffee-icon">
+                    <svg viewBox="0 0 24 24"><path d="M2 21V19H20V21H2ZM20 8V5H18V8H20ZM20 3C20.53 3 21.04 3.21 21.41 3.59C21.79 3.96 22 4.47 22 5V8C22 8.53 21.79 9.04 21.41 9.41C21.04 9.79 20.53 10 20 10H18V11C18 12.06 17.58 13.08 16.83 13.83C16.08 14.58 15.06 15 14 15H8C6.94 15 5.92 14.58 5.17 13.83C4.42 13.08 4 12.06 4 11V4H18V3H20ZM16 5H6V11C6 11.53 6.21 12.04 6.59 12.41C6.96 12.79 7.47 13 8 13H14C14.53 13 15.04 12.79 15.41 12.41C15.79 12.04 16 11.53 16 11V5Z"/></svg>
+                </div>
+                <h2>Support Independent Development</h2>
+                <p>SCSK is built by a solo developer (who's also a working site foreman) passionate about creating practical tools for construction professionals. No VC funding, no corporate backing — just one person building software that solves real problems. Your support helps fund weekly development, server costs, and new features.</p>
+                <a href="https://buymeacoffee.com/scsk" target="_blank" rel="noopener" class="coffee-btn">
+                    <svg viewBox="0 0 24 24"><path d="M2 21V19H20V21H2ZM20 8V5H18V8H20ZM20 3C20.53 3 21.04 3.21 21.41 3.59C21.79 3.96 22 4.47 22 5V8C22 8.53 21.79 9.04 21.41 9.41C21.04 9.79 20.53 10 20 10H18V11C18 12.06 17.58 13.08 16.83 13.83C16.08 14.58 15.06 15 14 15H8C6.94 15 5.92 14.58 5.17 13.83C4.42 13.08 4 12.06 4 11V4H18V3H20ZM16 5H6V11C6 11.53 6.21 12.04 6.59 12.41C6.96 12.79 7.47 13 8 13H14C14.53 13 15.04 12.79 15.41 12.41C15.79 12.04 16 11.53 16 11V5Z"/></svg>
+                    Buy Me a Coffee
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Beta Sign Up -->
+    <section id="beta">
+        <div class="wrap">
+            <div class="formCard">
+                <canvas id="confetti"></canvas>
+                <div class="form-header">
+                    <h2>Join the Active Beta</h2>
+                    <p>Manual review for construction professionals. Approved users get immediate Android access. Your feedback shapes weekly updates.</p>
+                </div>
+                <form id="betaForm" action="https://formspree.io/f/xnnerkde" method="POST">
+                    <div class="formGrid">
+                        <div class="field">
+                            <input type="email" name="email" required id="email" placeholder=" ">
+                            <label for="email">Email Address *</label>
+                        </div>
+                        <div class="field-row">
+                            <div class="field">
+                                <input type="text" name="name" id="name" placeholder=" ">
+                                <label for="name">Your Name</label>
+                            </div>
+                            <div class="field">
+                                <select name="role" id="role">
+                                    <option value=""></option>
+                                    <option>Site Foreman</option>
+                                    <option>Supervisor</option>
+                                    <option>Project Manager</option>
+                                    <option>Site Manager</option>
+                                    <option>Tradesperson</option>
+                                    <option>Subcontractor</option>
+                                    <option>Builder/Owner</option>
+                                    <option>Safety Officer</option>
+                                    <option>Other</option>
+                                </select>
+                                <label for="role">Your Role</label>
+                            </div>
+                        </div>
+                        <div class="optionalFields" id="optional">
+                            <div class="field-row">
+                                <div class="field">
+                                    <select name="company_size">
+                                        <option value=""></option>
+                                        <option>Just me</option>
+                                        <option>2–10 people</option>
+                                        <option>11–50 people</option>
+                                        <option>51–200 people</option>
+                                        <option>200+ people</option>
+                                    </select>
+                                    <label>Company Size</label>
+                                </div>
+                                <div class="field">
+                                    <select name="trade">
+                                        <option value=""></option>
+                                        <option>General Construction</option>
+                                        <option>Residential</option>
+                                        <option>Commercial</option>
+                                        <option>Civil/Infrastructure</option>
+                                        <option>Renovation/Fitout</option>
+                                        <option>Tiling</option>
+                                        <option>Waterproofing</option>
+                                        <option>Electrical</option>
+                                        <option>Plumbing</option>
+                                        <option>Other</option>
+                                    </select>
+                                    <label>Primary Trade</label>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <textarea name="usage" rows="3" placeholder=" "></textarea>
+                                <label>What problems are you hoping SCSK solves?</label>
+                            </div>
+                        </div>
+                        <button type="submit" class="submitBtn">
+                            <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                            Submit Application
+                        </button>
+                    </div>
+                    <input type="hidden" name="_subject" value="SCSK Beta Application">
+                    <input type="text" name="_gotcha" style="display:none">
+                    <div id="statusOk" class="status ok">🎉 Application received! We'll review and send access details within 24-48 hours.</div>
+                    <div id="statusErr" class="status err">⚠️ Something went wrong — please email <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3f5e5b5256517f4c5c124c54115c5052">[email&#160;protected]</a> directly.</div>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="wrap">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="#" class="brand">
+                    <div class="logo"><svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.18l6.9 3.45L12 11.09 5.1 7.63 12 4.18zM4 8.82l7 3.5v7.36l-7-3.5V8.82zm9 10.86v-7.36l7-3.5v7.36l-7 3.5z"/></svg></div>
+                    <div class="brand-text"><strong>Site Companion Side Kick</strong><span>SCSK</span></div>
+                </a>
+                <p>The offline-first construction management app built for real job sites. New features every week. Built BY a tradie, FOR tradies.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Product</h4>
+                <a href="#features">Features</a>
+                <a href="#calculators">Calculators</a>
+                <a href="#coming-soon">Coming Soon</a>
+                <a href="#roadmap">Roadmap</a>
+                <a href="#updates">Updates</a>
+                <a href="#beta">Join Beta</a>
+            </div>
+            <div class="footer-col">
+                <h4>Resources</h4>
+                <a href="#faq">FAQ</a>
+                <a href="#integrations">Integrations</a>
+                <a href="support.html">Support</a>
+                <a href="/cdn-cgi/l/email-protection#c6a7a2abafa886b5a5ebb5ade8a5a9ab">Contact</a>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="delete-account.html">Delete Account</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+        <small>&copy; 2026 SAA Developments Inc. All rights reserved. Built in Australia for construction professionals worldwide.</small>
+            <div class="visitor-counter" style="display: flex; align-items: center; gap: 8px; padding: 6px 12px; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 6px; font-size: 12px; color: var(--muted);">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="opacity: 0.7;"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+                <span><strong id="visitor-count" style="color: var(--accent);">1,200</strong> visitors</span>
+            </div>
+
+            <!-- Counter.dev Analytics (dashboard stats) -->
+            <script src="https://cdn.counter.dev/script.js" data-id="ac651b38-44cc-4c84-a249-269f4f3982f4" data-utcoffset="11"></script>
+
+            <!-- Firebase Visitor Counter using REST API -->
+            <script>
+                const FIREBASE_URL = 'https://scsk-construction-app-7a5ca-default-rtdb.firebaseio.com/website_counter.json';
+
+                // Get current count and display
+                fetch(FIREBASE_URL)
+                  .then(r => r.json())
+                  .then(count => {
+                    if (count !== null) {
+                      document.getElementById('visitor-count').textContent = count.toLocaleString();
+                      // Increment
+                      return fetch(FIREBASE_URL, {
+                        method: 'PUT',
+                        body: JSON.stringify(count + 1)
+                      });
+                    }
+                  })
+                  .then(() => {
+                    // Fetch updated count
+                    return fetch(FIREBASE_URL);
+                  })
+                  .then(r => r.json())
+                  .then(count => {
+                    if (count !== null) {
+                      document.getElementById('visitor-count').textContent = count.toLocaleString();
+                    }
+                  })
+                  .catch(e => console.error('Counter error:', e));
+            </script>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Lightbox functionality
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCurrent = document.getElementById('lightbox-current');
+    const lightboxTotal = document.getElementById('lightbox-total');
+    const featureImages = document.querySelectorAll('.feature-image[data-img]');
+    let currentIndex = 0;
+    const images = Array.from(featureImages).map(el => ({ src: el.dataset.img, title: el.dataset.title }));
+
+    lightboxTotal.textContent = images.length;
+
+    featureImages.forEach((el, index) => {
+      el.addEventListener('click', () => {
+        currentIndex = index;
+        openLightbox();
+      });
+    });
+
+    function openLightbox() {
+      lightboxImg.src = images[currentIndex].src;
+      lightboxImg.alt = images[currentIndex].title;
+      lightboxCurrent.textContent = currentIndex + 1;
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function nextImage() {
+      currentIndex = (currentIndex + 1) % images.length;
+      lightboxImg.src = images[currentIndex].src;
+      lightboxImg.alt = images[currentIndex].title;
+      lightboxCurrent.textContent = currentIndex + 1;
+    }
+
+    function prevImage() {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      lightboxImg.src = images[currentIndex].src;
+      lightboxImg.alt = images[currentIndex].title;
+      lightboxCurrent.textContent = currentIndex + 1;
+    }
+
+    document.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+    document.querySelector('.lightbox-next').addEventListener('click', (e) => { e.stopPropagation(); nextImage(); });
+    document.querySelector('.lightbox-prev').addEventListener('click', (e) => { e.stopPropagation(); prevImage(); });
+
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('active')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') nextImage();
+      if (e.key === 'ArrowLeft') prevImage();
+    });
+
+    // Form handling
+    const form = document.getElementById('betaForm');
+    const optional = document.getElementById('optional');
+    const inputs = form.querySelectorAll('input, textarea, select');
+    inputs.forEach(field => {
+      field.addEventListener('input', () => {
+        const parent = field.parentElement;
+        if (field.value) parent.classList.add('filled');
+        else parent.classList.remove('filled');
+        if (form.querySelector('#email').value.trim()) optional.classList.add('show');
+      });
+      if (field.value) field.parentElement.classList.add('filled');
+    });
+
+    function launchConfetti() {
+      const canvas = document.getElementById('confetti');
+      const ctx = canvas.getContext('2d');
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+      let particles = [];
+      for (let i = 0; i < 100; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height - canvas.height,
+          vx: Math.random() * 4 - 2,
+          vy: Math.random() * 4 + 2,
+          color: ['#5DA9FF', '#8B5CF6', '#FBBF24', '#10B981'][Math.floor(Math.random() * 4)],
+          size: Math.random() * 5 + 2
+        });
+      }
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy += 0.1;
+          ctx.fillStyle = p.color;
+          ctx.fillRect(p.x, p.y, p.size, p.size);
+        });
+        if (particles.some(p => p.y < canvas.height)) requestAnimationFrame(animate);
+      }
+      animate();
+    }
+
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      document.querySelectorAll('.status').forEach(s => s.classList.remove('show'));
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: {'Accept': 'application/json'}
+        });
+        if (res.ok) {
+          form.reset();
+          inputs.forEach(f => f.parentElement.classList.remove('filled'));
+          optional.classList.remove('show');
+          document.getElementById('statusOk').classList.add('show');
+          launchConfetti();
+        } else {
+          document.getElementById('statusErr').classList.add('show');
+        }
+      } catch(err) {
+        document.getElementById('statusErr').classList.add('show');
+      }
+    });
+</script>
+</body>
+</html>
