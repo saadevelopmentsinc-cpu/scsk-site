@@ -291,7 +291,7 @@
           letter-spacing: 0.04em;
           text-transform: uppercase;
         }
-        .badge-beta {
+        .badge-release {
           background: rgba(251,191,36,0.15);
           border: 1px solid rgba(251,191,36,0.3);
           color: var(--warning);
@@ -959,8 +959,8 @@
         }
         .coffee-btn svg { width: 20px; height: 20px; fill: currentColor; }
 
-        /* Beta Form */
-        #beta { padding: 120px 0; position: relative; }
+        /* Access Form */
+        #access { padding: 120px 0; position: relative; }
 
         .formCard {
           max-width: 600px;
@@ -1245,7 +1245,7 @@
           box-shadow: 0 8px 22px rgba(22,45,80,0.08);
         }
 
-        .badge-beta {
+        .badge-release {
           background: #fff7df;
           border-color: rgba(255,176,32,0.28);
           color: #966300;
@@ -1402,7 +1402,7 @@
         .platform-card,
         .roadmap-card,
         .faq-item,
-        .beta-card {
+        .access-card {
           background: rgba(255,255,255,0.88);
           border-color: rgba(22,119,255,0.13);
           box-shadow: 0 18px 46px rgba(22,45,80,0.08);
@@ -1618,7 +1618,7 @@
             <div class="hero-grid">
                 <div class="hero-text">
                     <div class="hero-badges">
-              <span class="badge badge-beta">
+              <span class="badge badge-release">
                 <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
                 Production Release
               </span>
@@ -1653,7 +1653,7 @@
                             <svg viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>
                             Get on Google Play
                         </a>
-                        <a class="btn" href="https://github.com/saadevelopmentsinc-cpu/scsk-releases/releases/download/Beta/SCSK-Setup.exe">
+                        <a class="btn" href="https://github.com/saadevelopmentsinc-cpu/scsk-releases/releases/download/v1.1.0/SCSK-Setup.exe">
                             <svg viewBox="0 0 24 24"><path d="M20 18c1.1 0 1.99-.9 1.99-2L22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg>
                             Download Windows
                         </a>
@@ -1715,14 +1715,14 @@
                     <h3>Android App</h3>
                     <p>Install SCSK from Google Play on phones, tablets, and foldables. Phones are ideal for quick capture on site; tablets give the app more room for project views, reports, and daily coordination.</p>
                     <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.saa.scsk_app">Open Google Play</a>
-                    <a class="btn" href="https://github.com/saadevelopmentsinc-cpu/scsk-releases/releases/download/Beta/SCSK-Android.apk">Download APK</a>
+                    <a class="btn" href="https://github.com/saadevelopmentsinc-cpu/scsk-releases/releases/download/v1.1.0/SCSK-Android.apk">Download APK</a>
                 </div>
                 <div class="platform-card active">
                     <div class="platform-icon"><svg viewBox="0 0 24 24"><path d="M20 18c1.1 0 1.99-.9 1.99-2L22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg></div>
                     <span class="platform-status status-available">Windows 10/11</span>
                     <h3>Windows Installer</h3>
                     <p>Install the Windows desktop app for office workflows, larger screens, and document-heavy project work. It is the best fit for planning, reporting, and managing more complex project records.</p>
-                    <a class="btn btn-primary" href="https://github.com/saadevelopmentsinc-cpu/scsk-releases/releases/download/Beta/SCSK-Setup.exe">Download Installer</a>
+                    <a class="btn btn-primary" href="https://github.com/saadevelopmentsinc-cpu/scsk-releases/releases/download/v1.1.0/SCSK-Setup.exe">Download Installer</a>
                 </div>
             </div>
         </div>
@@ -2218,7 +2218,7 @@
     </section>
 
     <!-- Access Request -->
-    <section id="beta">
+    <section id="access">
         <div class="wrap">
             <div class="formCard">
                 <canvas id="confetti"></canvas>
@@ -2226,7 +2226,7 @@
                     <h2>Get SCSK Access</h2>
                     <p>Use the Android release on Google Play or contact us for Windows access, support, and feedback.</p>
                 </div>
-                <form id="betaForm" action="https://formspree.io/f/xnnerkde" method="POST">
+                <form id="accessForm" action="https://formspree.io/f/xnnerkde" method="POST">
                     <div class="formGrid">
                         <div class="field">
                             <input type="email" name="email" required id="email" placeholder=" ">
@@ -2442,7 +2442,7 @@
     });
 
     // Form handling
-    const form = document.getElementById('betaForm');
+    const form = document.getElementById('accessForm');
     const optional = document.getElementById('optional');
     const inputs = form.querySelectorAll('input, textarea, select');
     inputs.forEach(field => {

@@ -129,7 +129,7 @@
       box-shadow: 0 16px 48px rgba(251,191,36,0.3);
     }
 
-    .thanks-icon.beta {
+    .thanks-icon.access {
       background: linear-gradient(135deg, var(--success), #059669);
       box-shadow: 0 16px 48px rgba(16,185,129,0.3);
     }
@@ -323,12 +323,12 @@
     /* Hidden by default */
     .content-mailing,
     .content-suggestion,
-    .content-beta,
+    .content-access,
     .content-default { display: none; }
 
     .content-mailing.active,
     .content-suggestion.active,
-    .content-beta.active,
+    .content-access.active,
     .content-default.active { display: block; }
 
     @media (max-width: 500px) {
@@ -388,7 +388,7 @@
             <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
             Explore Features
           </a>
-          <a href="index.html#beta" class="btn btn-secondary">Join Beta</a>
+          <a href="index.html#access" class="btn btn-secondary">Get Access</a>
         </div>
 
         <p class="fine-print">You're receiving this because you signed up at sc-sk.com. Unsubscribe anytime by emailing us with "unsubscribe".</p>
@@ -432,11 +432,11 @@
         <p class="fine-print">You're receiving this because you submitted a suggestion at sc-sk.com.</p>
       </div>
 
-      <!-- BETA SIGNUP CONTENT -->
-      <div class="content-beta">
-        <div class="thanks-icon beta">🎉</div>
-        <h1>Application Received!</h1>
-        <p class="lead">G'day! Thanks for applying to join the SCSK beta – stoked to have you interested!</p>
+      <!-- ACCESS REQUEST CONTENT -->
+      <div class="content-access">
+        <div class="thanks-icon access">🎉</div>
+        <h1>Access Request Received!</h1>
+        <p class="lead">G'day! Thanks for requesting SCSK access – stoked to have you interested!</p>
         
         <div class="what-next">
           <h3>What Happens Next</h3>
@@ -450,7 +450,7 @@
         </div>
 
         <div class="personal-note">
-          <p>I manually review every beta application because I want to make sure SCSK gets into the hands of real construction professionals who'll actually use it and give honest feedback.</p>
+          <p>I manually review every access request because I want to make sure SCSK gets into the hands of real construction professionals who'll actually use it and give honest feedback.</p>
           <p>No automated approvals, no bots – just me making sure we build a community of tradies who want to help make this app the best it can be.</p>
           <p>Questions while you wait? Drop me a line at <a href="mailto:admin@sc-sk.com">admin@sc-sk.com</a>. I'm usually covered in concrete dust, but I'll get back to you.</p>
           <div class="signature">
@@ -468,7 +468,7 @@
           <a href="index.html#faq" class="btn btn-secondary">Read FAQ</a>
         </div>
 
-        <p class="fine-print">You're receiving this because you applied for beta access at sc-sk.com.</p>
+        <p class="fine-print">You're receiving this because you requested SCSK access at sc-sk.com.</p>
       </div>
 
       <!-- DEFAULT/FALLBACK CONTENT -->
@@ -497,7 +497,7 @@
     const type = params.get('type');
 
     // Show the appropriate content
-    const validTypes = ['mailing', 'suggestion', 'beta'];
+    const validTypes = ['mailing', 'suggestion', 'access'];
     const contentType = validTypes.includes(type) ? type : 'default';
     document.querySelector(`.content-${contentType}`).classList.add('active');
 
