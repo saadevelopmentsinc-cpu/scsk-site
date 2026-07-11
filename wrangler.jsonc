@@ -2,6 +2,10 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "scsk-counter",
   "compatibility_date": "2026-06-07",
+  "workers_dev": true,
+  "routes": [
+    "sc-sk.com/*"
+  ],
   "observability": {
     "enabled": true
   },
