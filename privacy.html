@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    <title>Privacy Policy — Site Companion Side Kick (SCSK)</title>
+    <meta name="description" content="Privacy Policy for Site Companion Side Kick (SCSK). Learn what data we collect, how it's used, your rights, and your choices.">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+          --bg0: #070A10;
+          --bg1: #0B1020;
+          --glass: rgba(255,255,255,0.08);
+          --glass-border: rgba(255,255,255,0.15);
+          --text: #EAF0FF;
+          --muted: rgba(234,240,255,0.75);
+          --accent: #5DA9FF;
+          --accent2: #8B5CF6;
+          --max: 900px;
+          --radius: 20px;
+        }
+
+        html {
+          scroll-behavior: smooth;
+          background: var(--bg1);
+        }
+
+        body {
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+          color: var(--text);
+          background: var(--bg0);
+          line-height: 1.7;
+          min-height: 100vh;
+          -webkit-overflow-scrolling: touch;
+          overscroll-behavior: none;
+        }
+
+        body::before {
+          content: '';
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: linear-gradient(180deg, var(--bg0) 0%, var(--bg1) 100%);
+          z-index: -1;
+          pointer-events: none;
+        }
+
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        .wrap { max-width: var(--max); margin: 0 auto; padding: 0 16px; }
+
+        header {
+          position: sticky;
+          top: 0;
+          z-index: 100;
+          background: rgba(7,10,16,0.95);
+          border-bottom: 1px solid var(--glass-border);
+        }
+
+        .topbar {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 12px 0;
+          gap: 12px;
+          flex-wrap: wrap;
+        }
+
+        .brand {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          text-decoration: none;
+          color: var(--text);
+        }
+
+        .logo {
+          width: 40px;
+          height: 40px;
+          border-radius: 10px;
+          background: linear-gradient(135deg, var(--accent), var(--accent2));
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+        }
+        .logo svg { width: 22px; height: 22px; fill: #fff; }
+
+        .brand-text strong { display: block; font-size: 14px; }
+        .brand-text span { font-size: 11px; color: var(--muted); }
+
+        .nav-links { display: flex; gap: 6px; flex-wrap: wrap; }
+
+        .chip {
+          padding: 8px 14px;
+          border-radius: 8px;
+          background: rgba(255,255,255,0.05);
+          border: 1px solid var(--glass-border);
+          font-size: 13px;
+          color: var(--text);
+        }
+        .chip:hover { background: rgba(255,255,255,0.1); text-decoration: none; }
+
+        main { padding: 32px 0 60px; }
+
+        .card {
+          background: var(--glass);
+          border: 1px solid var(--glass-border);
+          border-radius: var(--radius);
+          overflow: hidden;
+        }
+
+        .card-header {
+          padding: 28px 24px 20px;
+          background: rgba(0,0,0,0.2);
+          border-bottom: 1px solid var(--glass-border);
+        }
+
+        .kicker {
+          display: inline-block;
+          padding: 5px 10px;
+          border-radius: 6px;
+          background: rgba(93,169,255,0.15);
+          font-size: 10px;
+          font-weight: 600;
+          color: var(--accent);
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+          margin-bottom: 12px;
+        }
+
+        .headline {
+          font-size: clamp(24px, 6vw, 36px);
+          font-weight: 700;
+          letter-spacing: -0.02em;
+          margin-bottom: 10px;
+        }
+
+        .meta { color: var(--muted); font-size: 13px; }
+        .meta strong { color: var(--text); }
+
+        .card-body { padding: 24px; }
+
+        .callout {
+          margin-bottom: 28px;
+          padding: 20px;
+          border-radius: 14px;
+          background: linear-gradient(135deg, rgba(93,169,255,0.1), rgba(139,92,246,0.08));
+          border: 1px solid var(--glass-border);
+        }
+
+        .callout-title {
+          font-size: 15px;
+          font-weight: 600;
+          margin-bottom: 14px;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+        .callout-title svg { width: 18px; height: 18px; fill: var(--accent); flex-shrink: 0; }
+
+        .callout ul { margin: 0; padding-left: 18px; }
+        .callout li { margin: 8px 0; font-size: 14px; color: var(--text); }
+        .callout li strong { color: var(--accent); }
+
+        .toc {
+          margin-bottom: 28px;
+          padding: 20px;
+          border-radius: 14px;
+          background: rgba(0,0,0,0.2);
+          border: 1px solid var(--glass-border);
+        }
+
+        .toc-title {
+          font-size: 11px;
+          font-weight: 600;
+          color: var(--muted);
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+          margin-bottom: 14px;
+        }
+
+        .toc-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+          gap: 6px 16px;
+        }
+
+        .toc a { font-size: 13px; color: var(--muted); padding: 4px 0; display: block; }
+        .toc a:hover { color: var(--accent); text-decoration: none; }
+        .toc-num { color: var(--accent); margin-right: 5px; font-weight: 500; }
+
+        h2 {
+          font-size: clamp(18px, 4vw, 22px);
+          font-weight: 600;
+          margin: 36px 0 14px;
+          padding-top: 20px;
+          border-top: 1px solid var(--glass-border);
+          scroll-margin-top: 70px;
+        }
+        h2:first-of-type { border-top: none; margin-top: 0; padding-top: 0; }
+
+        h3 { font-size: 16px; font-weight: 600; margin: 20px 0 10px; color: var(--text); }
+
+        p { color: var(--muted); font-size: 14px; margin: 10px 0; line-height: 1.7; }
+        p strong { color: var(--text); }
+
+        ul, ol { margin: 14px 0; padding-left: 20px; }
+        li { color: var(--muted); font-size: 14px; margin: 8px 0; line-height: 1.6; }
+        li strong { color: var(--text); }
+
+        .highlight {
+          margin: 20px 0;
+          padding: 16px;
+          border-radius: 10px;
+          background: rgba(93,169,255,0.08);
+          border-left: 3px solid var(--accent);
+        }
+        .highlight p { margin: 0; }
+
+        .contact-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 12px;
+          margin: 20px 0;
+        }
+
+        .contact-card {
+          padding: 16px;
+          border-radius: 10px;
+          background: rgba(0,0,0,0.2);
+          border: 1px solid var(--glass-border);
+        }
+        .contact-card strong {
+          display: block;
+          font-size: 11px;
+          color: var(--muted);
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          margin-bottom: 6px;
+        }
+        .contact-card a, .contact-card span { font-size: 14px; color: var(--text); word-break: break-all; }
+
+        footer {
+          padding: 32px 0;
+          text-align: center;
+          border-top: 1px solid var(--glass-border);
+          margin-top: 32px;
+        }
+
+        .footer-links {
+          margin-bottom: 14px;
+          display: flex;
+          justify-content: center;
+          flex-wrap: wrap;
+          gap: 6px 20px;
+        }
+        .footer-links a { color: var(--muted); font-size: 13px; }
+
+        footer p { color: var(--muted); font-size: 12px; }
+
+        @media (max-width: 600px) {
+          .topbar { justify-content: center; text-align: center; }
+          .brand { justify-content: center; }
+          .nav-links { justify-content: center; width: 100%; }
+          .card-header { padding: 20px 16px 16px; }
+          .card-body { padding: 16px; }
+          .callout, .toc { padding: 16px; }
+          .toc-grid { grid-template-columns: 1fr; }
+          .contact-grid { grid-template-columns: 1fr; }
+          h2 { margin: 28px 0 12px; padding-top: 16px; }
+        }
+    </style>
+    <link rel="stylesheet" href="legal-premium.css">
+</head>
+<body>
+<header>
+    <div class="wrap topbar">
+        <a href="index.html" class="brand">
+            <div class="logo">
+                <svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.18l6.9 3.45L12 11.09 5.1 7.63 12 4.18zM4 8.82l7 3.5v7.36l-7-3.5V8.82zm9 10.86v-7.36l7-3.5v7.36l-7 3.5z"/></svg>
+            </div>
+            <div class="brand-text">
+                <strong>Site Companion Side Kick</strong>
+                <span>SCSK</span>
+            </div>
+        </a>
+        <nav class="nav-links">
+            <a class="chip" href="index.html">Home</a>
+            <a class="chip" href="terms.html">Terms</a>
+            <a class="chip" href="support.html">Support</a>
+        </nav>
+    </div>
+</header>
+
+<main class="wrap">
+    <article class="card">
+        <div class="card-header">
+            <span class="kicker">Legal Document</span>
+            <h1 class="headline">Privacy Policy</h1>
+            <p class="meta">Last updated: <strong>22 July 2026</strong> · Policy version <strong>1.2</strong></p>
+        </div>
+
+        <div class="card-body">
+            <div class="callout">
+                <div class="callout-title">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    Our Commitment to Your Privacy
+                </div>
+                <ul>
+                    <li><strong>Purpose-built for professionals:</strong> SCSK is designed as your practical daily companion on construction sites, not a data harvesting platform.</li>
+                    <li><strong>Permission-conscious:</strong> We only request device permissions when you actively use features that require them.</li>
+                    <li><strong>Your data stays yours:</strong> We never sell, rent, trade, or monetise your personal information, project information, or site data. We do not sell data—ever.</li>
+                    <li><strong>No routine human access:</strong> SAA Developments Inc. does not routinely view, read, browse, or manually inspect your project data, photos, documents, contacts, notes, or other user-created content. SCSK processes this information automatically to provide the features you choose to use.</li>
+                    <li><strong>Secure cloud storage:</strong> When cloud sync is enabled, synced data is stored using Google Firebase services, including Cloud Firestore, and protected through Firebase Authentication and user- and role-based Firestore Security Rules.</li>
+                    <li><strong>You're in control:</strong> Cloud syncing is entirely optional—you decide what data leaves your device.</li>
+                    <li><strong>Transparent practices:</strong> This policy explains exactly what we collect, why, and how you can manage it.</li>
+                </ul>
+            </div>
+
+            <div class="toc">
+                <div class="toc-title">Table of Contents</div>
+                <div class="toc-grid">
+                    <a href="#scope"><span class="toc-num">1.</span> Scope & Application</a>
+                    <a href="#collect"><span class="toc-num">2.</span> Information We Collect</a>
+                    <a href="#use"><span class="toc-num">3.</span> How We Use Information</a>
+                    <a href="#legal"><span class="toc-num">4.</span> Legal Basis for Processing</a>
+                    <a href="#sharing"><span class="toc-num">5.</span> Information Sharing</a>
+                    <a href="#retention"><span class="toc-num">6.</span> Data Retention</a>
+                    <a href="#security"><span class="toc-num">7.</span> Security Measures</a>
+                    <a href="#rights"><span class="toc-num">8.</span> Your Rights & Choices</a>
+                    <a href="#international"><span class="toc-num">9.</span> International Transfers</a>
+                    <a href="#children"><span class="toc-num">10.</span> Children's Privacy</a>
+                    <a href="#thirdparty"><span class="toc-num">11.</span> Third-Party Services</a>
+                    <a href="#changes"><span class="toc-num">12.</span> Policy Updates</a>
+                    <a href="#contact"><span class="toc-num">13.</span> Contact Us</a>
+                </div>
+            </div>
+
+            <h2 id="scope">1. Scope & Application</h2>
+            <p>This Privacy Policy ("Policy") governs the collection, use, storage, and disclosure of personal information by SAA Developments Inc. ("we," "us," or "our") in connection with the Site Companion Side Kick mobile application ("SCSK" or the "App") and any related services, websites, or platforms we operate.</p>
+            <p>By downloading, installing, or using SCSK, you acknowledge that you have read, understood, and agree to the practices described in this Policy. If you do not agree with any aspect of this Policy, please do not use our services.</p>
+            <p>This Policy applies to all users of SCSK, including construction professionals, tradespeople, project managers, and any other individuals who interact with our services.</p>
+
+            <h2 id="collect">2. Information We Collect</h2>
+            <p>We collect information to provide, maintain, and improve SCSK's functionality. The types of information we collect depend on how you use the App and the features you choose to enable.</p>
+
+            <h3>2.1 Information You Provide Directly</h3>
+            <ul>
+                <li><strong>Account Information:</strong> When you create an account, we collect your email address, display name, and authentication credentials. You may optionally provide additional profile details such as your trade specialty, company name, or profile photo.</li>
+                <li><strong>Project & Job Data:</strong> Information you enter about your construction projects, including project names, addresses, client details, job descriptions, task lists, schedules, and status updates.</li>
+                <li><strong>Contact Information:</strong> Details of clients, subcontractors, suppliers, and other contacts you add to the App, including names, phone numbers, email addresses, and company affiliations.</li>
+                <li><strong>Media Content:</strong> Photos, documents, drawings, annotations, and any other files you capture or upload through the App to document your work on site.</li>
+                <li><strong>Notes & Communications:</strong> Quick notes, voice memos, transcriptions, and any text-based content you create within the App.</li>
+                <li><strong>Calculations & Measurements:</strong> Data entered into our construction calculators, including dimensions, quantities, and material specifications.</li>
+            </ul>
+
+            <h3>2.2 Information Collected Automatically</h3>
+            <ul>
+                <li><strong>Device Information:</strong> Device type, operating system version, unique device identifiers, app version, and general hardware specifications necessary for compatibility and support.</li>
+                <li><strong>Usage Analytics:</strong> Information about how you interact with the App, including features used, screens viewed, session duration, and interaction patterns. This data is collected in aggregate form to improve the user experience.</li>
+                <li><strong>Crash & Performance Data:</strong> Technical diagnostics including crash reports, error logs, and performance metrics to identify and resolve issues that affect app stability.</li>
+                <li><strong>Network Information:</strong> Connection type (WiFi, mobile data) and sync status to optimise offline functionality and data synchronisation.</li>
+            </ul>
+
+            <h3>2.3 Information Collected with Your Permission</h3>
+            <ul>
+                <li><strong>Location Data:</strong> With your explicit consent, we may collect precise or approximate location data to enable features such as geofencing reminders, site-based task prompts, and location tagging for photos.</li>
+                <li><strong>Camera & Microphone Access:</strong> Required only when you choose to capture photos, record voice notes, or use related documentation features.</li>
+                <li><strong>Calendar Integration:</strong> If you choose to sync with your device calendar, we access calendar data solely to display and coordinate scheduling information within the App.</li>
+                <li><strong>Sensor Data:</strong> Compass and accelerometer data when using our level and orientation tools, processed locally on your device.</li>
+            </ul>
+
+            <h2 id="use">3. How We Use Your Information</h2>
+            <p>We use the information we collect for the following purposes:</p>
+
+            <h3>3.1 Core Service Delivery</h3>
+            <ul>
+                <li>Providing and operating SCSK's features and functionality</li>
+                <li>Enabling project management, job tracking, and documentation capabilities</li>
+                <li>Generating reports, exports, and summaries you request</li>
+                <li>Synchronising your data across devices when you enable cloud sync</li>
+                <li>Processing calculations and providing construction-related tools</li>
+            </ul>
+
+            <h3>3.2 Service Improvement</h3>
+            <ul>
+                <li>Analysing usage patterns to enhance features and user experience</li>
+                <li>Identifying and fixing bugs, crashes, and performance issues</li>
+                <li>Developing new features based on user needs and feedback</li>
+                <li>Optimising app performance for construction site conditions</li>
+            </ul>
+
+            <h3>3.3 Communication</h3>
+            <ul>
+                <li>Sending service-related notifications and updates</li>
+                <li>Responding to your support requests and inquiries</li>
+                <li>Providing important security or account-related alerts</li>
+                <li>Delivering optional feature announcements (with your consent)</li>
+            </ul>
+
+            <h3>3.4 Security & Compliance</h3>
+            <ul>
+                <li>Protecting against fraud, abuse, and unauthorised access</li>
+                <li>Enforcing our Terms of Service and other policies</li>
+                <li>Complying with applicable legal obligations</li>
+            </ul>
+
+            <h2 id="legal">4. Legal Basis for Processing</h2>
+            <p>We process your personal information based on the following legal grounds:</p>
+            <ul>
+                <li><strong>Contractual Necessity:</strong> Processing required to provide you with SCSK's services as outlined in our Terms of Service.</li>
+                <li><strong>Legitimate Interests:</strong> Processing necessary for our legitimate business interests, such as improving our services, ensuring security, and preventing fraud.</li>
+                <li><strong>Consent:</strong> Where required by law, we obtain your explicit consent before collecting or processing certain types of information, such as precise location data.</li>
+                <li><strong>Legal Obligations:</strong> Processing necessary to comply with applicable laws, regulations, or legal processes.</li>
+            </ul>
+
+            <h2 id="sharing">5. Information Sharing & Disclosure</h2>
+            <p><strong>We never sell customer data.</strong> SAA Developments Inc. does not sell, rent, trade, license, or provide your personal information or user-created content to data brokers or advertisers. Your information is not used to build advertising profiles. Information is disclosed only in the limited circumstances described below.</p>
+
+            <h3>5.1 Our Access to Your Content</h3>
+            <p>We do not personally access or inspect your user-created content as part of normal business operations. Access is controlled by authentication and authorisation rules and is intended for you and the team members you authorise. Exceptionally, a limited amount of information may be accessed by specifically authorised personnel only when you expressly request support, when necessary to investigate a security or abuse incident, to maintain the service, or when required by law. Any such access must be limited to what is necessary for that purpose.</p>
+
+            <h3>5.2 Service Providers</h3>
+            <p>We engage trusted third-party service providers to perform functions on our behalf, including:</p>
+            <ul>
+                <li><strong>Google Firebase and Cloud Firestore:</strong> Authenticated cloud data storage and synchronisation</li>
+                <li><strong>Firebase Authentication:</strong> Account verification and secure sign-in</li>
+                <li><strong>Analytics Providers:</strong> Anonymised usage analysis to improve the App</li>
+            </ul>
+
+            <h3>5.3 Your Explicit Sharing</h3>
+            <p>When you choose to export, share, or transmit data from the App (such as generating a report to send to a client), you control that sharing and the recipients you select.</p>
+
+            <h3>5.4 Legal Requirements</h3>
+            <p>We may disclose information when we believe in good faith that disclosure is necessary to comply with applicable law, protect our rights, or respond to lawful requests from public authorities.</p>
+
+            <h3>5.5 Business Transfers</h3>
+            <p>In the event of a merger, acquisition, or sale of assets, your information may be transferred as part of that transaction. We will notify you of any such change.</p>
+
+            <h2 id="retention">6. Data Retention</h2>
+            <p>We retain your information for as long as necessary to provide our services and fulfil the purposes described in this Policy. Specific retention periods include:</p>
+            <ul>
+                <li><strong>Active Account Data:</strong> Retained while your account remains active and for a reasonable period thereafter to allow for reactivation.</li>
+                <li><strong>Project & Job Data:</strong> Retained until you delete it or close your account.</li>
+                <li><strong>Usage Analytics:</strong> Retained in aggregate, anonymised form indefinitely for service improvement purposes.</li>
+                <li><strong>Backup Data:</strong> May persist in backup systems for up to 90 days after deletion from active systems.</li>
+            </ul>
+            <p>You may request deletion of your data at any time, subject to legal retention requirements.</p>
+
+            <h2 id="security">7. Security Measures</h2>
+            <p>When you enable cloud sync, SCSK stores synced application data using Google Firebase services, including Cloud Firestore. Access from the app is protected through Firebase Authentication and Firestore Security Rules that restrict records according to the signed-in user, ownership, organisation membership, and assigned team permissions.</p>
+
+            <h3>7.1 Technical Safeguards</h3>
+            <ul>
+                <li><strong>Encryption:</strong> Firebase transmits data using HTTPS and encrypts Cloud Firestore and Firebase Authentication data at rest.</li>
+                <li><strong>Authentication:</strong> Firebase Authentication identifies the signed-in account before protected cloud records can be requested.</li>
+                <li><strong>User- and role-based controls:</strong> SCSK's Firestore Security Rules limit reads and writes using account ownership, organisation membership, and assigned team permissions.</li>
+                <li><strong>Secure infrastructure:</strong> Synced records are hosted through Google Firebase rather than on a personally operated database or device.</li>
+            </ul>
+
+            <h3>7.2 Operational Safeguards</h3>
+            <ul>
+                <li>SAA Developments Inc. does not routinely view or manually inspect user-created content</li>
+                <li>Exceptional access is limited to specifically authorised personnel and a necessary support, security, maintenance, or legal purpose</li>
+                <li>Staff are trained on privacy and security best practices</li>
+                <li>Incident response procedures are in place to address potential breaches</li>
+            </ul>
+
+            <div class="highlight">
+                <p><strong>Important:</strong> While we strive to protect your information, no method of transmission or storage is 100% secure. We cannot guarantee absolute security. We encourage you to use strong passwords and keep your account credentials confidential.</p>
+            </div>
+
+            <h2 id="rights">8. Your Rights & Choices</h2>
+            <p>You have several rights regarding your personal information:</p>
+
+            <h3>8.1 Access & Portability</h3>
+            <p>You may request a copy of the personal information we hold about you in a structured, machine-readable format.</p>
+
+            <h3>8.2 Correction</h3>
+            <p>You can update or correct your account information directly within the App, or contact us to request corrections.</p>
+
+            <h3>8.3 Deletion</h3>
+            <p>You may request deletion of your personal information. We will comply unless we have a legitimate reason or legal obligation to retain certain data.</p>
+
+            <h3>8.4 Withdraw Consent</h3>
+            <p>Where we rely on your consent for processing, you may withdraw that consent at any time.</p>
+
+            <h3>8.5 Device Permissions</h3>
+            <p>You can control app permissions (camera, location, microphone, etc.) through your device's settings at any time.</p>
+
+            <h3>8.6 Exercising Your Rights</h3>
+            <p>To exercise any of these rights, please contact us using the details provided in Section 13.</p>
+
+            <h2 id="international">9. International Data Transfers</h2>
+            <p>SCSK is operated from Australia. If you access our services from outside Australia, please be aware that your information may be transferred to, stored, and processed in Australia or other countries where our service providers operate.</p>
+            <p>When transferring data internationally, we implement appropriate safeguards including standard contractual clauses and data processing agreements.</p>
+
+            <h2 id="children">10. Children's Privacy</h2>
+            <p>SCSK is designed for professional construction use and is not intended for use by individuals under the age of 18. We do not knowingly collect personal information from children.</p>
+            <p>If we become aware that we have collected personal information from a child, we will delete such information promptly.</p>
+
+            <h2 id="thirdparty">11. Third-Party Services & Links</h2>
+            <p>SCSK may integrate with or contain links to third-party services. This Privacy Policy applies only to SCSK and does not govern third-party services.</p>
+            <p>We encourage you to review the privacy policies of any third-party services you access through SCSK.</p>
+
+            <h2 id="changes">12. Changes to This Policy</h2>
+            <p>We may update this Privacy Policy from time to time. When we make material changes:</p>
+            <ul>
+                <li>We will update the "Effective Date" at the top of this Policy</li>
+                <li>We will notify you through the App, by email, or other appropriate means</li>
+                <li>For significant changes affecting your rights, we may request your acknowledgment</li>
+            </ul>
+            <p>Your continued use of SCSK after any changes indicates your acceptance of the updated Policy.</p>
+
+            <h2 id="contact">13. Contact Us</h2>
+            <p>If you have any questions, concerns, or requests regarding this Privacy Policy, please contact us:</p>
+
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <strong>Email</strong>
+                    <a href="mailto:admin@sc-sk.com">admin@sc-sk.com</a>
+                </div>
+                <div class="contact-card">
+                    <strong>Privacy Inquiries</strong>
+                    <a href="mailto:privacy@sc-sk.com">privacy@sc-sk.com</a>
+                </div>
+                <div class="contact-card">
+                    <strong>Website</strong>
+                    <a href="https://sc-sk.com">sc-sk.com</a>
+                </div>
+                <div class="contact-card">
+                    <strong>Response Time</strong>
+                    <span>Within 30 days</span>
+                </div>
+            </div>
+
+            <p>We take your privacy concerns seriously and will respond to all inquiries in a timely manner.</p>
+
+            <div class="highlight">
+                <p><strong>Complaints:</strong> If you are not satisfied with our response, you may lodge a complaint with your local data protection authority. In Australia, this is the Office of the Australian Information Commissioner (OAIC) at <a href="https://www.oaic.gov.au">www.oaic.gov.au</a>.</p>
+            </div>
+        </div>
+    </article>
+</main>
+
+<footer>
+    <div class="wrap">
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="terms.html">Terms of Service</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Service</a>
+            <a href="support.html">Support</a>
+            <a href="mailto:admin@sc-sk.com">Contact</a>
+        </div>
+        <div class="footer-social" aria-label="Follow SCSK">
+            <a href="https://www.linkedin.com/in/saa-d-23a308394/" target="_blank" rel="noopener noreferrer" aria-label="Follow SCSK on LinkedIn">in</a>
+            <a href="https://x.com/SaaDevelopments" target="_blank" rel="noopener noreferrer" aria-label="Follow SCSK on X">X</a>
+            <a href="https://www.facebook.com/profile.php?id=61585844445780" target="_blank" rel="noopener noreferrer" aria-label="Follow SCSK on Facebook">f</a>
+        </div>
+        <p>&copy; 2026 SAA Developments Inc. All rights reserved.</p>
+        <p style="margin-top:6px;">Site Companion Side Kick (SCSK) — Built for construction professionals.</p>
+    </div>
+</footer>
+<script src="legal-premium.js"></script>
+</body>
+</html>

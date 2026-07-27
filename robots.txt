@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sc-sk.com/sitemap.xml
