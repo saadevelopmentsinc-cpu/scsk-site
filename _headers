@@ -1,0 +1,28 @@
+/
+  Link: <https://sc-sk.com/>; rel="canonical"
+
+/index.html
+  Link: <https://sc-sk.com/>; rel="canonical"
+
+/privacy.html
+  Link: <https://sc-sk.com/privacy.html>; rel="canonical"
+
+/terms.html
+  Link: <https://sc-sk.com/terms.html>; rel="canonical"
+
+/support.html
+  Link: <https://sc-sk.com/support.html>; rel="canonical"
+
+/subscriptions.html
+  Link: <https://sc-sk.com/subscriptions.html>; rel="canonical"
+
+/delete-account.html
+  Link: <https://sc-sk.com/delete-account.html>; rel="canonical"
+
+/thanks.html
+  Link: <https://sc-sk.com/thanks.html>; rel="canonical"
+  X-Robots-Tag: noindex, follow
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
