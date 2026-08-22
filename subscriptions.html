@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
   <title>SCSK Plans — Construction Field Operations</title>
-  <meta name="description" content="Choose an SCSK plan for Android and Windows. Connect projects, jobs, field evidence, cloud sync, exports and team access in one construction operations system.">
-  <link rel="canonical" href="https://sc-sk.com/subscriptions.html">
+  <meta name="description" content="Choose an SCSK plan for iPhone, iPad, Android and Windows. Subscribe on the website or through the App Store, and connect projects, jobs, field evidence, cloud sync, exports and team access.">
+  <link rel="canonical" href="https://sc-sk.com/subscriptions">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://sc-sk.com/subscriptions.html">
+  <meta property="og:url" content="https://sc-sk.com/subscriptions">
   <meta property="og:title" content="SCSK Plans — Construction, under control.">
-  <meta property="og:description" content="Plans for individual construction professionals and teams across Android and Windows.">
+  <meta property="og:description" content="Plans for construction professionals and teams on iPhone, iPad, Android and Windows, available through the website or App Store.">
   <meta property="og:image" content="https://sc-sk.com/og-banner-v2.png">
   <meta property="og:image" content="https://sc-sk.com/Screenshot1.png">
   <meta name="theme-color" content="#050608">
@@ -55,6 +55,7 @@
       gap: 16px;
       padding: 12px 0;
       flex-wrap: wrap;
+      position: relative;
     }
     .brand { display: flex; align-items: center; gap: 10px; color: var(--text); }
     .logo {
@@ -71,6 +72,23 @@
     .brand strong { display: block; font-size: 14px; }
     .brand span { display: block; color: var(--muted); font-size: 11px; }
     nav { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .menu-toggle {
+      display: none;
+      width: 42px;
+      height: 42px;
+      padding: 0;
+      border: 1px solid var(--border);
+      background: var(--panel);
+      color: var(--text);
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+    }
+    .menu-toggle span { display: block; width: 18px; height: 1px; background: currentColor; transition: 0.25s; }
+    header.menu-open .menu-toggle span:first-child { transform: translateY(3px) rotate(45deg); }
+    header.menu-open .menu-toggle span:last-child { transform: translateY(-3px) rotate(-45deg); }
     .navlink {
       padding: 8px 14px;
       border-radius: 8px;
@@ -165,19 +183,14 @@
     .hero-panel-body { padding: 20px; }
     .hero-panel-body h2 { font-size: 20px; margin-bottom: 8px; }
     .hero-panel-body p { color: var(--muted); }
-    .billing-band {
-      padding: 26px 0;
-      border-bottom: 1px solid var(--border);
-      background: rgba(0,0,0,0.18);
-    }
-    .billing-row {
+    .pricing-controls {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 16px;
+      gap: 18px;
       flex-wrap: wrap;
+      margin: 24px 0 34px;
     }
-    .billing-row p { color: var(--muted); max-width: 720px; }
+    .pricing-controls p { color: var(--muted); font-size: 14px; }
     .billing-toggle {
       display: inline-grid;
       grid-template-columns: 1fr 1fr;
@@ -273,7 +286,7 @@
     .compare, .setup { padding: 38px 0; }
     .info-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 16px;
     }
     .info-card {
@@ -350,25 +363,35 @@
       .plan-grid { grid-template-columns: 1fr; }
       .billing-toggle { width: 100%; }
       .billing-toggle button { min-width: 0; }
+      .pricing-controls { align-items: stretch; }
       .btn { width: 100%; }
       .checkout-form { grid-template-columns: 1fr; }
-      nav { width: 100%; }
-      .navlink { padding-left: 10px; padding-right: 10px; }
+      .topbar { flex-wrap: nowrap; }
+      .menu-toggle { display: inline-flex; margin-left: auto; flex: 0 0 auto; }
+      nav { display: none; position: absolute; top: calc(100% + 1px); left: 0; right: 0; width: 100%; padding: 10px; background: #171a18; border: 1px solid var(--border); box-shadow: 0 24px 50px rgba(0,0,0,0.35); }
+      header.menu-open nav { display: grid; }
+      .navlink { width: 100%; padding: 13px 12px; border-bottom: 1px solid var(--border); }
+      .navlink:last-child { border-bottom: 0; }
     }
   </style>
   <link rel="stylesheet" href="subscriptions-premium.css">
+  <link rel="stylesheet" href="/safety-lime-theme.css">
 </head>
 <body>
-<header>
+<header id="siteHeader">
   <div class="wrap topbar">
-    <a class="brand" href="index.html">
+    <a class="brand" href="/">
       <div class="logo"><svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.18l6.9 3.45L12 11.09 5.1 7.63 12 4.18zM4 8.82l7 3.5v7.36l-7-3.5V8.82zm9 10.86v-7.36l7-3.5v7.36l-7 3.5z"/></svg></div>
       <div><strong>Site Companion Side Kick</strong><span>SCSK</span></div>
     </a>
-    <nav>
-      <a class="navlink" href="index.html#product">Product</a>
-      <a class="navlink" href="index.html#platforms">Platforms</a>
-      <a class="navlink" href="support.html">Support</a>
+    <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open navigation" aria-controls="siteNav" aria-expanded="false"><span></span><span></span></button>
+    <nav id="siteNav">
+      <a class="navlink" href="/#product">Product</a>
+      <a class="navlink" href="/#workflow">Workflow</a>
+      <a class="navlink" href="/#platforms">Platforms</a>
+      <a class="navlink" href="#plans">Pricing</a>
+      <a class="navlink" href="/manual">Manual</a>
+      <a class="navlink" href="/support">Support</a>
       <a class="navlink nav-cta" href="#plans">Choose Plan</a>
     </nav>
   </div>
@@ -380,13 +403,13 @@
       <div>
         <div class="eyebrow">SCSK plans · Prices in AUD</div>
         <h1>Serious software for the way you work.</h1>
-        <p class="lead">Choose the operating level that fits your business—from one construction professional to a multi-site team. Every paid plan connects Android and Windows with the field tools SCSK is built around.</p>
+        <p class="lead">Choose the operating level that fits your business—from one construction professional to a multi-site team. SCSK connects iPhone, iPad, Android and Windows with the field tools it is built around.</p>
         <div class="hero-actions">
           <a class="btn btn-primary" href="#plans">
             <svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45C4.52 15.37 5.48 17 7 17h12v-2H7l1.1-2h7.45c.75 0 1.41-.41 1.75-1.03L21 5H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
             View Plans
           </a>
-          <a class="btn" href="https://github.com/saadevelopmentsinc-cpu/scsk-releases/releases/download/v1.2.0/SCSK-Setup.exe" target="_blank" rel="noopener">Download Windows</a>
+          <a class="btn" href="https://github.com/saadevelopmentsinc-cpu/scsk-releases/releases/download/v1.6.13/SCSK-Setup.exe" target="_blank" rel="noopener">Windows v1.6.13</a>
         </div>
       </div>
       <div class="hero-panel">
@@ -399,21 +422,19 @@
     </div>
   </section>
 
-  <section class="billing-band">
-    <div class="wrap billing-row">
-      <p><strong>Annual billing saves 20%.</strong> Prices are in AUD. Android users can still subscribe through Google Play; this page is for direct website purchases, especially Windows users.</p>
-      <div class="billing-toggle" aria-label="Billing period">
-        <button class="active" type="button" data-billing="monthly">Monthly</button>
-        <button type="button" data-billing="annual">Annual</button>
-      </div>
-    </div>
-  </section>
-
   <section class="plans" id="plans">
     <div class="wrap">
       <div class="section-head">
         <h2>Invest in a cleaner way to run the work.</h2>
-        <p>Every paid plan includes Android and Windows access, cloud sync, exports, trade calculators, offline-first operation and an ad-free workspace.</p>
+        <p>Every paid plan includes iPhone, iPad, Android and Windows access, cloud sync, exports, trade calculators, offline-first operation and an ad-free workspace.</p>
+      </div>
+
+      <div class="pricing-controls">
+        <div class="billing-toggle" aria-label="Billing period">
+          <button class="active" type="button" data-billing="monthly">Monthly</button>
+          <button type="button" data-billing="annual">Annual</button>
+        </div>
+        <p><strong>Website annual billing saves 20%.</strong> The prices below are AUD totals for PayPal checkout. You can subscribe here on the website and use the same SCSK account across supported platforms. iPhone and iPad users can also subscribe inside SCSK through the App Store, while Android users can subscribe through Google Play. Store prices are localized and may differ from the AUD website price below.</p>
       </div>
 
       <div class="plan-grid">
@@ -421,8 +442,8 @@
           <span class="popular">Popular</span>
           <h3>Solo Pro</h3>
           <p class="plan-note">Full access for one user across up to 3 devices.</p>
-          <div class="price" data-monthly="$12.99" data-annual="$124.70"><strong>$12.99</strong><span>/mo</span></div>
-          <div class="annual-note" data-annual-note="Save $31.18 yearly"></div>
+          <div class="price" data-monthly="$14.99" data-annual="$143.90"><strong>$14.99</strong><span>/mo</span></div>
+          <div class="annual-note" data-annual-note="Save $35.98 yearly"></div>
           <ul class="features">
             <li><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Unlimited projects and jobs</li>
             <li><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Photo documentation and annotation</li>
@@ -476,7 +497,7 @@
       </div>
 
       <div class="starter">
-        <strong>Starter is still free.</strong> It includes 1 project, 2 jobs, limited tools, single-device local storage, and ads. Upgrade when you need sync, exports, unlimited jobs, or team access.
+        <strong>Starter is still free.</strong> It includes 1 project, 2 jobs, limited tools and single-device local storage. Starter remains local-only on iOS and iPadOS, but the Apple build has no ads; Android Starter remains ad-supported. Upgrade when you need sync, exports, unlimited jobs or team access.
       </div>
       <div id="checkoutPanel" class="checkout-panel" aria-live="polite">
         <h3>Continue to PayPal</h3>
@@ -502,6 +523,10 @@
         <p>You can subscribe in Google Play or use the same account after buying through the website once billing is connected.</p>
       </div>
       <div class="info-card">
+        <h3>iOS and iPadOS users</h3>
+        <p>Subscribe here on the website or inside SCSK through the App Store. If you subscribe through Apple, you can restore the purchase inside the app using the same Apple account.</p>
+      </div>
+      <div class="info-card">
         <h3>Teams</h3>
         <p>Team plans support shared projects, member permissions, and admin controls for supervisors and office staff.</p>
       </div>
@@ -520,10 +545,11 @@
   <div class="wrap footer-row">
     <small>&copy; 2026 SAA Developments Inc. All rights reserved.</small>
     <div class="footer-links">
-      <a href="index.html">Home</a>
-      <a href="support.html">Support</a>
-      <a href="privacy.html">Privacy</a>
-      <a href="terms.html">Terms</a>
+      <a href="/">Home</a>
+      <a href="/manual">User Manual</a>
+      <a href="/support">Support</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
     </div>
     <div class="footer-social" aria-label="Follow SCSK">
       <a href="https://www.linkedin.com/in/saa-d-23a308394/" target="_blank" rel="noopener noreferrer" aria-label="Follow SCSK on LinkedIn">in</a>
@@ -534,6 +560,22 @@
 </footer>
 
 <script>
+  const siteHeader = document.getElementById("siteHeader");
+  const menuToggle = document.getElementById("menuToggle");
+  const closeMenu = () => {
+    siteHeader.classList.remove("menu-open");
+    menuToggle.setAttribute("aria-expanded", "false");
+    menuToggle.setAttribute("aria-label", "Open navigation");
+  };
+  menuToggle.addEventListener("click", () => {
+    const isOpen = siteHeader.classList.toggle("menu-open");
+    menuToggle.setAttribute("aria-expanded", String(isOpen));
+    menuToggle.setAttribute("aria-label", isOpen ? "Close navigation" : "Open navigation");
+  });
+  document.querySelectorAll("#siteNav a").forEach(link => link.addEventListener("click", closeMenu));
+  window.addEventListener("keydown", event => { if (event.key === "Escape") closeMenu(); });
+  window.addEventListener("resize", () => { if (window.innerWidth > 640) closeMenu(); }, { passive: true });
+
   const checkoutEndpoint = "https://us-central1-scsk-construction-app-7a5ca.cloudfunctions.net/createWebsitePayPalSubscriptionCheckout";
   const planNames = {
     solo_pro: "Solo Pro",

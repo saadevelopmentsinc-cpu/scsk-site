@@ -1,0 +1,610 @@
+/* SCSK Safety Lime theme — colour and surface overrides only. */
+:root {
+  --ink: #11120e !important;
+  --charcoal: #171912 !important;
+  --panel: #1b1d16 !important;
+  --panel2: #24271b !important;
+  --paper: #11120e !important;
+  --surface: #1b1d16 !important;
+  --surface2: #24271b !important;
+  --bg: #11120e !important;
+  --line: #3f4425 !important;
+  --text: #fbf9ea !important;
+  --ivory: #fbf9ea !important;
+  --white: #fbf9ea !important;
+  --muted: #b4b7aa !important;
+  --brass: #dfff34 !important;
+  --brass2: #ecff86 !important;
+  --brass-bright: #ecff86 !important;
+  --brand: #dfff34 !important;
+  --brand2: #ecff86 !important;
+  --green: #dfff34 !important;
+  --navy: #171912 !important;
+  --warning: #ff8a58 !important;
+}
+
+html,
+body {
+  background: #11120e !important;
+  color: #fbf9ea !important;
+}
+
+::selection {
+  background: #dfff34 !important;
+  color: #11120e !important;
+}
+
+:focus-visible {
+  outline-color: #dfff34 !important;
+}
+
+.progress,
+.reading-progress {
+  background: linear-gradient(90deg, #b8d72a, #dfff34, #ecff86) !important;
+  box-shadow: 0 0 18px rgba(223, 255, 52, .42) !important;
+}
+
+/* Shared navigation and footer surfaces. */
+.nav.scrolled,
+.nav.open,
+header,
+.site-header,
+.topbar {
+  background: rgba(17, 18, 14, .95) !important;
+  border-color: #3f4425 !important;
+}
+
+.brand-sub,
+.brand small,
+.brand:after {
+  color: #aeb2a3 !important;
+}
+
+.nav-links,
+.nav-links a,
+.navlink,
+.site-header nav a {
+  color: #c9ccbf !important;
+}
+
+.nav-links a:hover,
+.navlink:hover,
+.site-header nav a:hover,
+.site-header nav a.active,
+.footer-links a:hover,
+footer a:hover {
+  color: #ecff86 !important;
+}
+
+.menu-toggle {
+  background: #1b1d16 !important;
+  border-color: #4a5128 !important;
+  color: #fbf9ea !important;
+}
+
+footer,
+.footer-row,
+.footer-inner {
+  background: #11120e !important;
+  border-color: #3f4425 !important;
+  color: #aeb2a3 !important;
+}
+
+footer a,
+.footer-links a,
+.footer-inner a,
+.footer-col a {
+  color: #c9ccbf !important;
+}
+
+.social-link,
+.footer-social a {
+  background: transparent !important;
+  border-color: #4a5128 !important;
+  color: #fbf9ea !important;
+}
+
+.social-link:hover,
+.footer-social a:hover {
+  background: #dfff34 !important;
+  border-color: #dfff34 !important;
+  color: #11120e !important;
+}
+
+/* Shared interactive elements. */
+.btn,
+.contact-email,
+.search-box button,
+.checkout-btn,
+button[type="submit"] {
+  border-color: #59622b !important;
+}
+
+.btn-primary,
+.nav-cta,
+.contact-email,
+.search-box button,
+.checkout-btn,
+button[type="submit"] {
+  background: #dfff34 !important;
+  border-color: #dfff34 !important;
+  color: #11120e !important;
+}
+
+.btn-primary:hover,
+.nav-cta:hover,
+.contact-email:hover,
+.search-box button:hover,
+.checkout-btn:hover,
+button[type="submit"]:hover {
+  background: #ecff86 !important;
+  border-color: #ecff86 !important;
+  color: #11120e !important;
+}
+
+.btn:not(.btn-primary):not(.nav-cta):not(.checkout-btn) {
+  background: transparent !important;
+  color: #fbf9ea !important;
+}
+
+.btn:not(.btn-primary):not(.nav-cta):not(.checkout-btn):hover {
+  border-color: #dfff34 !important;
+  color: #ecff86 !important;
+}
+
+input,
+textarea,
+select,
+.field input,
+.field textarea,
+.search-box,
+.search-panel select {
+  background: #15170f !important;
+  border-color: #4a5128 !important;
+  color: #fbf9ea !important;
+}
+
+input:focus,
+textarea:focus,
+select:focus,
+.field input:focus,
+.field textarea:focus {
+  border-color: #dfff34 !important;
+  box-shadow: 0 0 0 3px rgba(223, 255, 52, .13) !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #7f8475 !important;
+}
+
+/* Homepage. */
+.hero {
+  background: radial-gradient(circle at 82% 8%, rgba(223, 255, 52, .14), transparent 29%), linear-gradient(135deg, #0e0f0b 0%, #171912 68%, #252a16 100%) !important;
+  border-color: #3f4425 !important;
+}
+
+.hero-glow,
+.spotlight {
+  background: rgba(223, 255, 52, .08) !important;
+}
+
+.eyebrow,
+.hero-kicker,
+.preview-kicker,
+.feature-index,
+.step-no,
+.chapter-number,
+.contents-label,
+.kicker,
+.section-kicker,
+.setup .section-head h2:before {
+  color: #ecff86 !important;
+}
+
+.eyebrow:before {
+  background: #dfff34 !important;
+}
+
+.hero .eyebrow,
+.hero-kicker,
+.chip {
+  background: transparent !important;
+  border-color: #59622b !important;
+  box-shadow: none !important;
+}
+
+.hero .eyebrow,
+.hero-kicker {
+  border-width: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.hero h1 span,
+.section-head h2 span,
+.statement-copy p span,
+.community-copy h2 span,
+.final h2 span,
+.pf-best,
+.metric,
+.text-link:after,
+summary:after,
+.community-promise,
+.checkout-selection,
+.annual-note,
+h1 em {
+  color: #dfff34 !important;
+}
+
+.hero-lead,
+.lead,
+.micro,
+.section-head p,
+.feature-copy p,
+.platform-copy > p,
+.platform-note,
+.community-copy > p,
+.feedback-step p,
+details p,
+.final p,
+.proof-item span,
+.tile p,
+.assurance-card p,
+.hero-copy,
+.chapter-summary,
+.section-lead {
+  color: #b4b7aa !important;
+}
+
+.ios-launch {
+  background: rgba(35, 39, 23, .92) !important;
+  border-color: rgba(223, 255, 52, .5) !important;
+}
+
+.ios-launch-badge,
+.contact-icon,
+.resource-icon,
+.faq-num,
+.timeline-step .num,
+.popular,
+.status-pill {
+  background: #dfff34 !important;
+  color: #11120e !important;
+}
+
+.ios-launch-link,
+.ios-launch-copy strong,
+.community-promise {
+  color: #ecff86 !important;
+}
+
+.blueprint,
+.tile-visual,
+.tour-orbit,
+.tour-orbit:before,
+.tour-orbit:after {
+  border-color: rgba(223, 255, 52, .32) !important;
+}
+
+.blueprint {
+  background: repeating-linear-gradient(90deg, transparent 0 79px, rgba(223, 255, 52, .07) 80px), repeating-linear-gradient(0deg, transparent 0 79px, rgba(223, 255, 52, .07) 80px) !important;
+}
+
+.float-card,
+.tour-chip {
+  background: rgba(27, 29, 22, .95) !important;
+  border-color: #4a5128 !important;
+}
+
+.status-dot,
+.community-promise:before {
+  background: #dfff34 !important;
+  box-shadow: 0 0 0 6px rgba(223, 255, 52, .12) !important;
+}
+
+.proof,
+.feature-showcase,
+.platforms,
+.final,
+.experience,
+.capabilities,
+.faq,
+.community,
+.assurance,
+.statement,
+.workflow {
+  background: #11120e !important;
+  color: #fbf9ea !important;
+  border-color: #3f4425 !important;
+}
+
+.statement,
+.workflow,
+.assurance,
+.experience {
+  background: #171912 !important;
+}
+
+.statement .number {
+  color: #2a2f18 !important;
+}
+
+.statement-copy p,
+.workflow h2,
+.workflow h3,
+.assurance h2,
+.assurance h3,
+.experience h2,
+.experience h3 {
+  color: #fbf9ea !important;
+}
+
+.workflow p,
+.step p,
+.assurance .section-head p,
+.experience .section-head p,
+.tour-note,
+.tour-tab,
+.tour-tab small {
+  color: #b4b7aa !important;
+}
+
+.steps,
+.step,
+.step-line,
+.feature-row,
+.tile,
+.platform-wrap,
+.platform-list,
+.platform-item,
+.assurance-grid,
+.assurance-card,
+.community-panel,
+.feedback-loop,
+.feedback-step,
+.faq-list,
+details,
+.final-box,
+.experience-stage,
+.tour-tab,
+.tour-screen {
+  border-color: #3f4425 !important;
+}
+
+.feature-row,
+.tile,
+.platform-wrap,
+.assurance-card,
+.community-panel,
+.final-box,
+.experience-stage,
+.tour-screen {
+  background: #1b1d16 !important;
+}
+
+.feature-media,
+.platform-collage,
+.feedback-loop,
+.tour-nav {
+  background: #24271b !important;
+}
+
+.feature-media:after {
+  background: linear-gradient(135deg, transparent 40%, rgba(223, 255, 52, .12)) !important;
+}
+
+.step-line:after {
+  background: #dfff34 !important;
+}
+
+.check-lines span:before,
+.features li:before {
+  color: #dfff34 !important;
+}
+
+.tour-tab.active,
+.tour-tab.active strong,
+.tour-tab strong {
+  color: #fbf9ea !important;
+}
+
+.tour-kicker,
+.tour-tab.active {
+  color: #dfff34 !important;
+}
+
+.community-panel,
+.final-box {
+  background: radial-gradient(circle at 14% 18%, rgba(223, 255, 52, .13), transparent 34%), #1b1d16 !important;
+}
+
+/* Plans, support, legal, deletion and feedback portal pages. */
+.plans,
+.compare,
+.setup,
+section,
+.portal,
+.manual-layout {
+  background-color: #11120e !important;
+  color: #fbf9ea !important;
+}
+
+.plan-card,
+.info-card,
+.contact-card,
+.resource-card,
+.faq-card,
+.faq-item,
+.tips-card,
+.card,
+.form-card,
+.timeline,
+.portal-aside,
+.feedback-form,
+.panel,
+.status-box,
+.search-panel,
+.term,
+.no-results {
+  background: #1b1d16 !important;
+  border-color: #464d27 !important;
+  color: #fbf9ea !important;
+  box-shadow: none !important;
+}
+
+.plan-card.featured,
+.checkout-panel,
+.response-banner,
+.callout,
+.starter {
+  background: #24271b !important;
+  border-color: #67732f !important;
+  color: #fbf9ea !important;
+}
+
+.plan-card h3,
+.plan-card .price strong,
+.plan-card.featured h3,
+.plan-card.featured .price strong,
+.section-title,
+.section-head h2,
+.contact-card h3,
+.resource-card h3,
+.faq-card h3,
+.faq-item h3,
+.tips-card h3,
+.card h2,
+.card h3,
+.form-card h3,
+.info-card h4,
+.timeline-title,
+.headline,
+.toc-title {
+  color: #fbf9ea !important;
+}
+
+.plan-note,
+.price span,
+.features li,
+.starter,
+.checkout-panel p,
+.info-card p,
+.contact-card p,
+.resource-card p,
+.faq-card p,
+.faq-item p,
+.tips-card p,
+.card p,
+.card li,
+.meta,
+.privacy-note,
+.required-note,
+.optional,
+.fallback,
+.form-footer,
+.promise,
+.step p,
+.status-box p {
+  color: #b4b7aa !important;
+}
+
+.plan-card > .btn,
+.plan-card.featured > .btn,
+.btn-danger {
+  background: #dfff34 !important;
+  border-color: #dfff34 !important;
+  color: #11120e !important;
+}
+
+.billing-toggle {
+  background: #24271b !important;
+  border-color: #4a5128 !important;
+}
+
+.billing-toggle button {
+  color: #b4b7aa !important;
+}
+
+.billing-toggle button.active {
+  background: #dfff34 !important;
+  color: #11120e !important;
+}
+
+.toc-num,
+.highlight,
+.callout-title,
+.contact-email,
+.deleted,
+.retained {
+  color: #dfff34 !important;
+}
+
+.callout.warning {
+  background: #271d12 !important;
+  border-color: #ff8a58 !important;
+}
+
+/* Manual. */
+.manual-layout,
+.manual-copy {
+  background: #11120e !important;
+}
+
+.contents a {
+  color: #b4b7aa !important;
+}
+
+.contents a span {
+  color: #818675 !important;
+}
+
+.contents a:hover,
+.contents a.active {
+  background: #24271b !important;
+  border-left-color: #dfff34 !important;
+  color: #fbf9ea !important;
+}
+
+.chapter,
+.term {
+  border-color: #3f4425 !important;
+}
+
+.manual-section p,
+.term dd {
+  color: #b4b7aa !important;
+}
+
+.callout {
+  border-left-color: #dfff34 !important;
+}
+
+.back-link,
+.chapter-number,
+.contents-label {
+  color: #dfff34 !important;
+}
+
+.no-results button {
+  background: #dfff34 !important;
+  color: #11120e !important;
+}
+
+@media (max-width: 1000px) {
+  .nav-links {
+    background: rgba(17, 18, 14, .99) !important;
+    border-color: #3f4425 !important;
+  }
+}
+
+@media print {
+  html,
+  body,
+  .manual-layout,
+  .manual-copy,
+  .chapter {
+    background: #fff !important;
+    color: #000 !important;
+  }
+}

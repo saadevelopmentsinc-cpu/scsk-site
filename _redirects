@@ -1,9 +1,15 @@
-/index.html  /  301
-/home.html   /  301
+# Cloudflare Pages redirect rules
+# https://developers.cloudflare.com/pages/configuration/redirects/
+#
+# NOTE: _redirects matches on PATH ONLY. Hostname-level rules (e.g. redirecting
+# www.sc-sk.com to the apex) do NOT work here and must be configured as a
+# Cloudflare Redirect Rule in the dashboard, or by detaching www from the Pages
+# project. Do not re-add a www rule to this file; it silently does nothing.
+#
+# Pages already 308s /foo.html -> /foo automatically, so no rules are needed
+# for extension stripping.
 
-/privacy       /privacy.html         301
-/terms         /terms.html           301
-/support       /support.html         301
-/subscriptions /subscriptions.html   301
-/delete-account /delete-account.html 301
-/thanks        /thanks.html          301
+# INDEX1.HTML is a retired draft of the homepage that is still deployed.
+# Redirect it so it cannot be indexed as near-duplicate homepage content.
+/INDEX1.HTML / 301
+/index1.html / 301

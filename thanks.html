@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
   <title>Welcome to SCSK - Activate Your Subscription</title>
   <meta name="description" content="Your SCSK PayPal subscription payment is complete. Set the email that will become your app login and activate your paid tier.">
-  <link rel="canonical" href="https://sc-sk.com/thanks.html">
+  <link rel="canonical" href="https://sc-sk.com/thanks">
   <meta name="theme-color" content="#050608">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -181,18 +181,20 @@
       nav { width: 100%; }
     }
   </style>
+  <link rel="stylesheet" href="/safety-lime-theme.css">
 </head>
 <body>
 <header>
   <div class="wrap topbar">
-    <a class="brand" href="index.html">
+    <a class="brand" href="/">
       <div class="logo"><svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.18l6.9 3.45L12 11.09 5.1 7.63 12 4.18zM4 8.82l7 3.5v7.36l-7-3.5V8.82zm9 10.86v-7.36l7-3.5v7.36l-7 3.5z"/></svg></div>
       <div><strong>Site Companion Side Kick</strong><span>SCSK</span></div>
     </a>
     <nav>
-      <a class="navlink" href="index.html#downloads">Downloads</a>
-      <a class="navlink" href="subscriptions.html">Subscriptions</a>
-      <a class="navlink" href="support.html">Support</a>
+      <a class="navlink" href="/#platforms">Platforms</a>
+      <a class="navlink" href="/subscriptions">Subscriptions</a>
+      <a class="navlink" href="/manual">Manual</a>
+      <a class="navlink" href="/support">Support</a>
     </nav>
   </div>
 </header>
@@ -209,7 +211,7 @@
         <div class="step">
           <span>1</span>
           <h2>Open SCSK</h2>
-          <p>Install or open the Windows or Android app.</p>
+          <p>Install or open SCSK on iPhone, iPad, Android or Windows. A website subscription activates against your SCSK login email; purchases made through the App Store can be restored inside the Apple app.</p>
         </div>
         <div class="step">
           <span>2</span>
@@ -233,8 +235,8 @@
         <strong>Ready to activate.</strong> Enter the email and password you want to use for your SCSK login.
       </div>
       <div class="actions">
-        <a class="btn btn-primary" href="https://github.com/saadevelopmentsinc-cpu/scsk-releases/releases/download/v1.2.0/SCSK-Setup.exe" target="_blank" rel="noopener">Download Windows</a>
-        <a class="btn" href="support.html">Contact Support</a>
+        <a class="btn btn-primary" href="https://github.com/saadevelopmentsinc-cpu/scsk-releases/releases/download/v1.6.13/SCSK-Setup.exe" target="_blank" rel="noopener">Windows v1.6.13</a>
+        <a class="btn" href="/support">Contact Support</a>
       </div>
     </section>
   </div>
@@ -244,9 +246,10 @@
   <div class="wrap footer-row">
     <small>&copy; 2026 SAA Developments Inc. All rights reserved.</small>
     <div class="footer-links">
-      <a href="index.html">Home</a>
-      <a href="privacy.html">Privacy</a>
-      <a href="terms.html">Terms</a>
+      <a href="/">Home</a>
+      <a href="/manual">User Manual</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
     </div>
     <div class="footer-social" aria-label="Follow SCSK">
       <a href="https://www.linkedin.com/in/saa-d-23a308394/" target="_blank" rel="noopener noreferrer" aria-label="Follow SCSK on LinkedIn">in</a>
@@ -272,11 +275,18 @@
     statusEl.innerHTML = message;
   }
 
-  function finishActivation(email) {
+  function finishActivation(email, signInHint) {
     if (activationKey) {
       window.localStorage.setItem(activationKey, email || "complete");
     }
     form.hidden = true;
+    if (signInHint) {
+      // Existing federated account: no password was set, so do not tell the
+      // user their login is ready. Redirecting would hide this, so stay put.
+      setStatus("<strong>Subscription activated.</strong> " + signInHint);
+      window.history.replaceState({}, "", "thanks.html?activated=true");
+      return;
+    }
     setStatus("<strong>Thank you. Your SCSK login is active.</strong> You can close this page and sign in to the app.");
     window.history.replaceState({}, "", "thanks.html?activated=true");
     window.setTimeout(() => {
@@ -320,7 +330,19 @@
         throw new Error(payload.message || "Activation is still processing.");
       }
 
-      if (payload.activated && payload.claimed) {
+      var providers = payload.existingSignInProviders || [];
+      var federated = providers.filter(function (id) { return id !== "password"; });
+      if (payload.activated && federated.length && providers.indexOf("password") === -1) {
+        var names = federated.map(function (id) {
+          if (id === "google.com") return "Google";
+          if (id === "apple.com") return "Apple";
+          return id.replace(".com", "");
+        }).join(" or ");
+        finishActivation(payload.email || email,
+          "This email already has a " + names + " login, so the password you " +
+          "entered was not used. Your subscription is linked to that account — " +
+          "open SCSK and sign in with " + names + ".");
+      } else if (payload.activated && payload.claimed) {
         finishActivation(payload.email || email);
       } else if (payload.activated) {
         finishActivation(payload.email || email);

@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.saa.scsk_app",
+      "sha256_cert_fingerprints": [
+        "FE:ED:86:06:57:1F:DB:FF:04:C1:67:FE:70:37:5F:C5:21:08:2F:0C:E3:6B:30:CB:29:AD:50:12:27:CB:65:D5"
+      ]
+    }
+  }
+]
