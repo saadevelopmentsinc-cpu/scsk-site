@@ -87,4 +87,23 @@ All five pages:
 
 ## Deployment
 
-The site is deployed from the GitHub repository through Cloudflare Pages. Changes committed to the deployment branch should be checked on the live site after Cloudflare completes the build/deployment.
+The production Cloudflare Pages project is `scsk-current-site`, and its production branch is `main`.
+
+Production must only be deployed from this repository's clean, pushed `main` branch. Do not run a raw `wrangler pages deploy` command from the app repository or another checkout: Wrangler can attach the wrong source commit and replace the correct website with stale files.
+
+Use the guarded deployment command:
+
+```powershell
+.\scripts\deploy-production.ps1 -ConfirmProduction
+```
+
+The script fails closed unless all of the following are true:
+
+- The Git origin is `saadevelopmentsinc-cpu/scsk-site`.
+- The checked-out branch is `main`.
+- `HEAD` exactly matches `origin/main`.
+- Tracked files are clean.
+- The redesigned screenshot references and required assets are present.
+- Legacy `Screenshot1.png` through `Screenshot7.png` homepage references are absent.
+
+It deploys a clean Git archive, attaches the exact commit SHA to Cloudflare, publishes a `deployment-manifest.json`, and verifies that `sc-sk.com` reports that same repository and commit. GitHub Actions repeats the screenshot-source checks on every push and pull request to `main`.

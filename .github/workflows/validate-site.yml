@@ -1,0 +1,34 @@
+name: Validate production site source
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Require redesigned screenshot set
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -q 'assets/screenshots/dashboard-desktop.webp' index.html
+          if grep -Eq 'Screenshot[1-7]\.png' index.html; then
+            echo 'Legacy homepage screenshot references are not allowed.' >&2
+            exit 1
+          fi
+          test -f assets/screenshots/dashboard-desktop.webp
+          test -f assets/screenshots/dashboard-mobile.webp
+          test -f assets/screenshots/projects-desktop.webp
+          test -f assets/screenshots/projects-mobile.webp
+          test -f assets/screenshots/work-desktop.webp
+          test -f assets/screenshots/work-mobile.webp
+          test -f assets/screenshots/calendar-landscape.webp
+          test -f assets/screenshots/project-details-mobile.webp
+          test -f assets/screenshots/project-photos-mobile.webp
+          test -f assets/screenshots/jobs-mobile.webp
+          test -f assets/screenshots/reports-mobile.webp
+          test -f assets/screenshots/materials-mobile.webp
