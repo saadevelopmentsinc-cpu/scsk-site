@@ -111,7 +111,7 @@ try {
   } | ConvertTo-Json
   Set-Content -LiteralPath (Join-Path $stagingPath 'deployment-manifest.json') -Value $manifest -Encoding utf8
 
-  & npx wrangler pages deploy $stagingPath `
+  & npx --yes wrangler@latest pages deploy $stagingPath `
     --project-name $projectName `
     --branch $productionBranch `
     --commit-hash $commit `
